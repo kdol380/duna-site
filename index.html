@@ -961,13 +961,13 @@ footer{ background:var(--areia); color:var(--grafite-60); padding:70px 0 36px; p
 
 <!-- ===================== SACOLA / CARRINHO ===================== -->
 <div class="cart-overlay" id="cartOverlay"></div>
-<aside class="cart" id="cart" aria-label="Seu pedido">
+<aside class="cart" id="cart" aria-label="Meu pedido">
   <div class="cart-head">
     <div>
-      <p class="eyebrow">Duna · Seu pedido</p>
-      <h3>Sacola</h3>
+      <p class="eyebrow">Duna Fragrâncias</p>
+      <h3>Meu pedido</h3>
     </div>
-    <button class="cart-close" id="cartClose" aria-label="Fechar sacola">&times;</button>
+    <button class="cart-close" id="cartClose" aria-label="Fechar">&times;</button>
   </div>
   <div class="cart-body" id="cartBody"></div>
   <div class="cart-foot" id="cartFoot">
@@ -981,7 +981,7 @@ footer{ background:var(--areia); color:var(--grafite-60); padding:70px 0 36px; p
 </aside>
 
 <!-- Botão flutuante da sacola -->
-<button class="cart-float" id="cartFloat" aria-label="Ver sacola">
+<button class="cart-float" id="cartFloat" aria-label="Ver meu pedido">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 7h12l-1 13H7L6 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg>
   <span class="cart-count" id="cartCount">0</span>
 </button>
@@ -1239,7 +1239,7 @@ function renderCart(){
   if(itens.length===0){
     cartBody.innerHTML = `<div class="cart-empty">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 7h12l-1 13H7L6 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg>
-      Sua sacola está vazia.<br>Adicione suas fragrâncias favoritas.</div>`;
+      Seu pedido está vazio.<br>Adicione suas fragrâncias favoritas.</div>`;
     cartFoot.classList.add("hidden");
     return;
   }
