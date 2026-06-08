@@ -304,14 +304,25 @@ header.nav.scrolled .nav-logo .emblem{ height:32px; }
 /* =====================================================================
    COLEÇÃO — filtros + cards olfativos
    ===================================================================== */
-.filters{ display:flex; flex-wrap:wrap; gap:11px; justify-content:center; margin-bottom:54px; }
+.filters{ display:flex; flex-direction:column; align-items:center; gap:16px; margin-bottom:48px; }
+.filter-group{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
+.filter-label{ font-family:var(--sans); font-size:.6rem; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--ouro-fundo); width:100%; text-align:center; margin-bottom:3px; }
+.filter-secondary{ margin-top:10px; padding-top:20px; border-top:1px solid var(--areia); width:100%; max-width:720px; }
+.filter-secondary .filter-label{ color:var(--grafite-45); }
+.filter-secondary .chip{ font-size:.64rem; padding:7px 15px; }
 .chip{
-  font-family:var(--sans); font-size:.72rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase;
-  padding:9px 20px; border-radius:40px; border:1px solid var(--areia); color:var(--grafite-60);
+  font-family:var(--sans); font-size:.72rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+  padding:9px 19px; border-radius:40px; border:1px solid var(--areia); color:var(--grafite-60);
   background:var(--branco-puro); transition:all .3s var(--ease);
 }
 .chip:hover{ border-color:var(--ouro-claro); color:var(--ouro-fundo); }
 .chip.active{ background:var(--grafite); color:var(--branco-q); border-color:var(--grafite); }
+.filter-secondary .chip.active{ background:var(--ouro); border-color:var(--ouro); color:var(--branco-puro); }
+.grid-empty{ grid-column:1/-1; text-align:center; color:var(--grafite-60); padding:50px 0;
+  font-family:var(--serif); font-size:1.25rem; }
+.grid-reset{ color:var(--ouro-fundo); border-bottom:1px solid var(--ouro-fundo); font-family:var(--sans);
+  font-size:.78rem; letter-spacing:.05em; margin-left:6px; }
 
 .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:26px; }
 
@@ -889,48 +900,48 @@ const CONFIG = {
            real do frasco no lugar do desenho. Ex de uso comentado abaixo.
    ===================================================================== */
 const PERFUMES = [
-  { nome:"Noite Âmbar", inspiracao:"inspiração oriental amadeirada", familia:"Amadeirado",
+  { nome:"Noite Âmbar", inspiracao:"inspiração oriental amadeirada", familia:"Amadeirado", genero:"Masculino", periodo:"Noite",
     ocasiao:"noite", intensidade:"marcante", preco:189, tamanho:"100 ml · EDP", selo:"Para a noite",
     notas:{ topo:"Pimenta · Bergamota", coracao:"Âmbar · Patchouli", fundo:"Baunilha · Oud" },
     accent:"#7a4a1e", desc:"Quente e sedutor, com um rastro de âmbar e oud que dura a noite inteira.",
     /* foto:"assets/frasco-noite-ambar.png"  ← descomente e ponha a foto na pasta assets/ */ },
 
-  { nome:"Dunas de Ouro", inspiracao:"inspiração gourmand luxuosa", familia:"Gourmand",
+  { nome:"Dunas de Ouro", inspiracao:"inspiração gourmand luxuosa", familia:"Gourmand", genero:"Unissex", periodo:"Versátil",
     ocasiao:"especial", intensidade:"potente", preco:219, tamanho:"100 ml · EDP", selo:"Assinatura",
     notas:{ topo:"Maçã · Canela", coracao:"Caramelo · Flor de Laranjeira", fundo:"Baunilha · Madeiras" },
     accent:"#b07a2a", desc:"Doce, opulento e viciante. A fragrância para ser lembrado em ocasiões especiais." },
 
-  { nome:"Rosa Tahir", inspiracao:"inspiração floral sofisticada", familia:"Floral",
+  { nome:"Rosa Tahir", inspiracao:"inspiração floral sofisticada", familia:"Floral", genero:"Feminino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:179, tamanho:"100 ml · EDP", selo:"Feminino",
     notas:{ topo:"Lichia · Ruibarbo", coracao:"Rosa Turca · Peônia", fundo:"Almíscar Branco · Cashmeran" },
     accent:"#a8506b", desc:"Floral elegante e atemporal — sofisticado do escritório ao jantar." },
 
-  { nome:"Oud Real", inspiracao:"inspiração oud árabe", familia:"Amadeirado",
+  { nome:"Oud Real", inspiracao:"inspiração oud árabe", familia:"Amadeirado", genero:"Masculino", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:259, tamanho:"100 ml · EDP", selo:"Edição nobre",
     notas:{ topo:"Açafrão · Especiarias", coracao:"Oud · Rosa", fundo:"Couro · Âmbar" },
     accent:"#5e3b16", desc:"O oud em sua forma mais nobre. Presença imponente, profundamente árabe." },
 
-  { nome:"Brisa Cítrica", inspiracao:"inspiração fresca aquática", familia:"Cítrico",
+  { nome:"Brisa Cítrica", inspiracao:"inspiração fresca aquática", familia:"Cítrico", genero:"Unissex", periodo:"Dia",
     ocasiao:"dia", intensidade:"suave", preco:159, tamanho:"100 ml · EDP", selo:"Dia a dia",
     notas:{ topo:"Bergamota · Limão Siciliano", coracao:"Gengibre · Notas Marinhas", fundo:"Cedro · Almíscar" },
     accent:"#3f7a86", desc:"Limpo, fresco e versátil. A escolha leve para o dia a dia sem perder a classe." },
 
-  { nome:"Cashmere Branco", inspiracao:"inspiração almiscarada suave", familia:"Floral",
+  { nome:"Cashmere Branco", inspiracao:"inspiração almiscarada suave", familia:"Floral", genero:"Feminino", periodo:"Dia",
     ocasiao:"dia", intensidade:"suave", preco:169, tamanho:"100 ml · EDP", selo:"Aconchego",
     notas:{ topo:"Pera · Flor de Cerejeira", coracao:"Jasmim · Íris", fundo:"Almíscar · Cashmere" },
     accent:"#9a8f7a", desc:"Aveludado e aconchegante. Aquela fragrância que abraça de pertinho." },
 
-  { nome:"Sultão", inspiracao:"inspiração especiada oriental", familia:"Amadeirado",
+  { nome:"Sultão", inspiracao:"inspiração especiada oriental", familia:"Amadeirado", genero:"Masculino", periodo:"Noite",
     ocasiao:"noite", intensidade:"marcante", preco:199, tamanho:"100 ml · EDP", selo:"Masculino",
     notas:{ topo:"Cardamomo · Pimenta Rosa", coracao:"Tabaco · Canela", fundo:"Sândalo · Fava Tonka" },
     accent:"#6b4420", desc:"Masculino, especiado e confiante. Domina o ambiente com classe." },
 
-  { nome:"Vanille Nuit", inspiracao:"inspiração baunilha gourmand", familia:"Gourmand",
+  { nome:"Vanille Nuit", inspiracao:"inspiração baunilha gourmand", familia:"Gourmand", genero:"Feminino", periodo:"Noite",
     ocasiao:"noite", intensidade:"marcante", preco:189, tamanho:"100 ml · EDP", selo:"Para a noite",
     notas:{ topo:"Café · Cardamomo", coracao:"Baunilha Bourbon · Praliné", fundo:"Sândalo · Âmbar" },
     accent:"#7c5a2c", desc:"Baunilha cremosa com café e âmbar. Doce na medida, marcante na lembrança." },
 
-  { nome:"Lumière", inspiracao:"inspiração floral cítrica", familia:"Cítrico",
+  { nome:"Lumière", inspiracao:"inspiração floral cítrica", familia:"Cítrico", genero:"Feminino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:175, tamanho:"100 ml · EDP", selo:"Feminino",
     notas:{ topo:"Toranja · Néroli", coracao:"Jasmim · Magnólia", fundo:"Almíscar · Cedro Branco" },
     accent:"#c79a3a", desc:"Luminoso e radiante. Cítrico-floral que ilumina qualquer dia." }
@@ -989,23 +1000,34 @@ function bottleSVG(accent){
    ===================================================================== */
 const grid = document.getElementById("grid");
 const filtersWrap = document.getElementById("filters");
-const familias = ["Todos", ...Array.from(new Set(PERFUMES.map(p=>p.familia)))];
-let filtroAtivo = "Todos";
 
-filtersWrap.innerHTML = familias.map((f,i)=>
-  `<button class="chip ${i===0?'active':''}" data-fam="${f}">${f}</button>`).join("");
+// famílias olfativas presentes no catálogo (filtro secundário)
+const familiasUnicas = Array.from(new Set(PERFUMES.map(p=>p.familia)));
+
+// grupos de filtro: Gênero e Ocasião (principais) + Família (secundário/descritivo)
+const GRUPOS = [
+  { key:"genero",  label:"Gênero",          opts:["Todos","Masculino","Feminino","Unissex"] },
+  { key:"periodo", label:"Ocasião",         opts:["Todas","Dia","Noite","Versátil"] },
+  { key:"familia", label:"Família olfativa", opts:["Todas", ...familiasUnicas], secondary:true }
+];
+const sel = { genero:"Todos", periodo:"Todas", familia:"Todas" };
+
+filtersWrap.innerHTML = GRUPOS.map(g=>`
+  <div class="filter-group ${g.secondary?'filter-secondary':''}" data-group="${g.key}">
+    <span class="filter-label">${g.label}</span>
+    ${g.opts.map((o,i)=>`<button class="chip ${i===0?'active':''}" data-val="${o}">${o}</button>`).join("")}
+  </div>`).join("");
 
 function cardHTML(p,i){
-  const isArabe = p.intensidade==="potente" || p.intensidade==="marcante";
   return `
-  <article class="card reveal" data-d="${(i%4)+1}" data-fam="${p.familia}">
+  <article class="card reveal" data-d="${(i%4)+1}">
     <div class="card-corner"><span></span><span></span><span></span><span></span></div>
     <div class="card-top">
-      <span class="card-pill ${isArabe?'pill-solid':'pill-line'}">${p.selo}</span>
-      <span class="card-pill pill-line">${p.familia}</span>
+      <span class="card-pill pill-solid">${p.genero}</span>
+      <span class="card-pill pill-line">${p.periodo}</span>
     </div>
     <div class="bottle">${frascoVisual(p)}</div>
-    <p class="card-fam">${p.inspiracao}</p>
+    <p class="card-fam">${p.familia} · ${p.inspiracao}</p>
     <h3 class="card-name">${p.nome}</h3>
     <dl class="notes">
       <div class="note-row"><dt>Topo</dt><dd>${p.notas.topo}</dd></div>
@@ -1025,21 +1047,44 @@ function cardHTML(p,i){
   </article>`;
 }
 
+// um perfume passa nos filtros? (Versátil aparece tanto em Dia quanto em Noite)
+function passaFiltros(p){
+  const okGenero = sel.genero==="Todos" || p.genero===sel.genero;
+  let okPeriodo;
+  if(sel.periodo==="Todas")          okPeriodo = true;
+  else if(sel.periodo==="Versátil")  okPeriodo = p.periodo==="Versátil";
+  else                               okPeriodo = (p.periodo===sel.periodo || p.periodo==="Versátil");
+  const okFamilia = sel.familia==="Todas" || p.familia===sel.familia;
+  return okGenero && okPeriodo && okFamilia;
+}
+
 function renderGrid(){
-  const list = filtroAtivo==="Todos" ? PERFUMES : PERFUMES.filter(p=>p.familia===filtroAtivo);
-  grid.innerHTML = list.map(cardHTML).join("");
-  // reativa o reveal nos novos cards
+  const list = PERFUMES.filter(passaFiltros);
+  grid.innerHTML = list.length
+    ? list.map(cardHTML).join("")
+    : `<p class="grid-empty">Nenhuma fragrância com esses filtros.<button class="grid-reset">limpar filtros</button></p>`;
   grid.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
 }
 
+function resetFiltros(){
+  sel.genero="Todos"; sel.periodo="Todas"; sel.familia="Todas";
+  filtersWrap.querySelectorAll(".filter-group").forEach(fg=>
+    fg.querySelectorAll(".chip").forEach((c,i)=>c.classList.toggle("active", i===0)));
+  renderGrid();
+}
+
+// clique nos chips: ativa só dentro do próprio grupo e re-filtra
 filtersWrap.addEventListener("click", e=>{
   const btn = e.target.closest(".chip");
   if(!btn) return;
-  filtersWrap.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
-  btn.classList.add("active");
-  filtroAtivo = btn.dataset.fam;
+  const grupo = btn.closest(".filter-group").dataset.group;
+  sel[grupo] = btn.dataset.val;
+  btn.closest(".filter-group").querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c===btn));
   renderGrid();
 });
+
+// botão "limpar filtros" do estado vazio
+grid.addEventListener("click", e=>{ if(e.target.closest(".grid-reset")) resetFiltros(); });
 
 /* =====================================================================
    🧭  QUIZ
