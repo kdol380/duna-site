@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Coleção · Duna Fragrâncias — Árabes, Designer e Nicho</title>
+<meta name="description" content="A coleção completa da Duna Fragrâncias: perfumes árabes, designer e de nicho. Filtre por gênero, ocasião e família olfativa. Pedido fácil pelo WhatsApp, entrega para todo o Brasil." />
+
+<link rel="icon" type="image/png" href="assets/logo-emblem.png" />
+<meta property="og:title" content="Coleção · Duna Fragrâncias" />
+<meta property="og:description" content="Árabes, designer e nicho — a coleção completa, com filtros. Peça pelo WhatsApp." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-light">
+
+<!-- ===================== PRÉ-LOADER ===================== -->
+<div id="preloader">
+  <img class="pre-lockup" src="assets/logo-lockup.png" alt="Duna Fragrâncias" />
+  <div class="pre-bar"></div>
+  <div class="pre-sub">Perfumaria</div>
+</div>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <a href="index.html" class="nav-logo" aria-label="Duna Fragrâncias — início">
+    <img class="emblem" src="assets/logo-emblem.png" alt="" />
+    <span class="lockcol">
+      <img class="word" src="assets/logo-duna-word.png" alt="Duna Fragrâncias" />
+      <span class="s">Fragrâncias</span>
+    </span>
+  </a>
+  <nav class="nav-links">
+    <a href="catalogo.html">Coleção</a>
+    <a href="index.html#quiz">Descubra seu perfume</a>
+    <a href="index.html#essencia">A Duna</a>
+    <a href="index.html#pedir">Como pedir</a>
+  </nav>
+  <a class="btn-wa-nav" id="waNav" href="#" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.1-.5 0a6.5 6.5 0 01-1.9-1.2 7.3 7.3 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4a.4.4 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1A5 5 0 009 12.5a11 11 0 004.2 3.7c.6.2 1 .4 1.4.5a3.3 3.3 0 001.5.1c.5-.1 1.4-.6 1.6-1.1s.2-1 .1-1.1z"/></svg>
+    WhatsApp
+  </a>
+  <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</header>
+
+<!-- ===================== GAVETA MOBILE ===================== -->
+<div class="mm-overlay" id="mmOverlay"></div>
+<aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <img class="mm-emblem" src="assets/logo-emblem.png" alt="" />
+  <div class="mm-tag">Duna · Fragrâncias</div>
+  <nav>
+    <a href="catalogo.html">Coleção</a>
+    <a href="index.html#quiz">Descubra seu perfume</a>
+    <a href="index.html#essencia">A Duna</a>
+    <a href="index.html#pedir">Como pedir</a>
+  </nav>
+  <a class="mm-wa" id="waMobile" href="#" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.1-.5 0a6.5 6.5 0 01-1.9-1.2 7.3 7.3 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4a.4.4 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1A5 5 0 009 12.5a11 11 0 004.2 3.7c.6.2 1 .4 1.4.5a3.3 3.3 0 001.5.1c.5-.1 1.4-.6 1.6-1.1s.2-1 .1-1.1z"/></svg>
+    Pedir pelo WhatsApp
+  </a>
+  <a class="mm-ig" href="https://instagram.com/duna.fragrancias" target="_blank" rel="noopener">@duna.fragrancias</a>
+</aside>
+
+<!-- ===================== CABEÇALHO DA PÁGINA ===================== -->
+<section class="cat-header">
+  <div class="wrap">
+    <p class="crumb"><a href="index.html">Início</a> &nbsp;/&nbsp; Coleção</p>
+    <h1>Toda a <span class="gold">coleção</span></h1>
+    <p>Árabes, designer e nicho num só lugar. Filtre por gênero, ocasião e família olfativa — e monte seu pedido.</p>
+    <span class="cat-count" id="catCount">—</span>
+  </div>
+</section>
+
+<!-- ===================== CATÁLOGO ===================== -->
+<section class="cat-main">
+  <div class="wrap">
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="index.html" class="nav-logo">
+          <img class="emblem" src="assets/logo-emblem.png" alt="" />
+          <span class="lockcol">
+            <img class="word" src="assets/logo-duna-word.png" alt="Duna Fragrâncias" />
+            <span class="s">Fragrâncias</span>
+          </span>
+        </a>
+        <p>Perfumaria premium: árabes, designer e nicho. Presença que dura. Entrega para todo o Brasil.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Navegue</h5>
+        <a href="catalogo.html">Coleção</a>
+        <a href="index.html#quiz">Descubra seu perfume</a>
+        <a href="index.html#essencia">A Duna</a>
+        <a href="index.html#pedir">Como pedir</a>
+      </div>
+      <div class="foot-col">
+        <h5>Atendimento</h5>
+        <a href="#" id="waFoot1" target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
+        <a href="index.html#pedir">Dúvidas frequentes</a>
+        <a href="index.html#pedir">Entrega & prazos</a>
+        <a href="index.html#pedir">Trocas</a>
+      </div>
+      <div class="foot-col">
+        <h5>Siga</h5>
+        <a href="https://instagram.com/duna.fragrancias" target="_blank" rel="noopener">Instagram @duna.fragrancias</a>
+        <a href="#" id="waFoot2" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 Duna Fragrâncias · Todos os direitos reservados.</p>
+      <div class="diamond"><i></i></div>
+      <p>Curadoria honesta de fragrâncias · árabes, designer e nicho.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== MEU PEDIDO ===================== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart" id="cart" aria-label="Meu pedido">
+  <div class="cart-head">
+    <div>
+      <p class="eyebrow">Duna Fragrâncias</p>
+      <h3>Meu pedido</h3>
+    </div>
+    <button class="cart-close" id="cartClose" aria-label="Fechar">&times;</button>
+  </div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-foot" id="cartFoot">
+    <div class="cart-total"><span>Total estimado</span><strong id="cartTotal">R$ 0</strong></div>
+    <a class="btn btn-gold cart-send" id="cartSend" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm4.4 12c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.1-.5 0a6.5 6.5 0 01-1.9-1.2 7.3 7.3 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4a.4.4 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1A5 5 0 009 12.5a11 11 0 004.2 3.7c1.6.6 1.9.5 2.3.5s1.4-.6 1.6-1.1.2-1 .1-1.1z"/></svg>
+      Finalizar no WhatsApp
+    </a>
+    <button class="cart-continue" id="cartContinue">← Continuar comprando</button>
+  </div>
+</aside>
+
+<button class="cart-float" id="cartFloat" aria-label="Ver meu pedido">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 7h12l-1 13H7L6 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg>
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.1-.5 0a6.5 6.5 0 01-1.9-1.2 7.3 7.3 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4a.4.4 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1A5 5 0 009 12.5a11 11 0 004.2 3.7c.6.2 1 .4 1.4.5a3.3 3.3 0 001.5.1c.5-.1 1.4-.6 1.6-1.1s.2-1 .1-1.1z"/></svg>
+</a>
+
+<script defer src="app.js"></script>
+</body>
+</html>
