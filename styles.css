@@ -650,6 +650,239 @@ footer{ background:var(--areia); color:var(--grafite-60); padding:70px 0 36px; p
   .foot-bottom{ justify-content:center; text-align:center; }
 }
 
+/* =====================================================================
+   ✨ MELHORIAS v2 — fundos animados, interações e micro-detalhes
+   ===================================================================== */
+
+/* ---------- Scrollbar da marca ---------- */
+html{ scrollbar-color:var(--ouro) var(--branco-q); scrollbar-width:thin; }
+::-webkit-scrollbar{ width:11px; }
+::-webkit-scrollbar-track{ background:var(--branco-q); }
+::-webkit-scrollbar-thumb{ background:linear-gradient(var(--ouro-claro),var(--ouro));
+  border-radius:8px; border:3px solid var(--branco-q); }
+
+/* ---------- Foco visível + toque ---------- */
+a:focus-visible, button:focus-visible{ outline:2px solid var(--ouro); outline-offset:3px; border-radius:4px; }
+a, button{ touch-action:manipulation; }
+
+/* números tabulares em preços */
+.card-price, .ci-price, .cart-total strong, .r-price{ font-variant-numeric:tabular-nums; }
+
+/* ---------- Barra de progresso de leitura ---------- */
+.scroll-progress{
+  position:fixed; top:0; left:0; right:0; height:2px; z-index:1001;
+  background:linear-gradient(90deg,var(--ouro-fundo),var(--ouro-claro));
+  transform:scaleX(0); transform-origin:left; pointer-events:none;
+}
+
+/* ---------- Aurora dourada do hero ---------- */
+.hero-aurora{ position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
+.hero-aurora i{ position:absolute; border-radius:50%; filter:blur(70px); opacity:.30; will-change:transform; }
+.hero-aurora i:nth-child(1){ width:46vw; height:46vw; left:-8vw; top:-12vw;
+  background:radial-gradient(circle, rgba(205,171,99,.6), transparent 65%);
+  animation:aur1 16s ease-in-out infinite alternate; }
+.hero-aurora i:nth-child(2){ width:38vw; height:38vw; right:-6vw; top:8vh;
+  background:radial-gradient(circle, rgba(176,138,60,.55), transparent 60%);
+  animation:aur2 21s ease-in-out infinite alternate; }
+.hero-aurora i:nth-child(3){ width:32vw; height:32vw; left:30vw; bottom:-10vw;
+  background:radial-gradient(circle, rgba(133,102,41,.5), transparent 60%);
+  animation:aur1 26s ease-in-out -8s infinite alternate; }
+@keyframes aur1{ from{ transform:translate3d(0,0,0) scale(1); } to{ transform:translate3d(6vw,4vh,0) scale(1.18); } }
+@keyframes aur2{ from{ transform:translate3d(0,0,0) scale(1.1); } to{ transform:translate3d(-5vw,6vh,0) scale(.92); } }
+
+/* ---------- Canvas de poeira de ouro ---------- */
+.fx-dust{ position:absolute; inset:0; z-index:3; pointer-events:none; }
+.cat-header{ position:relative; overflow:hidden; }
+.cat-header .fx-dust{ z-index:1; }
+.cat-header::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(60% 80% at 70% 0%, rgba(205,171,99,.22), transparent 60%);
+  animation:catGlow 9s ease-in-out infinite alternate;
+}
+@keyframes catGlow{ from{ opacity:.45; transform:translateX(0); } to{ opacity:1; transform:translateX(-6%); } }
+
+/* ---------- Texto dourado com shimmer ---------- */
+.hero h1 .gold, .section-head h2 .gold, .cat-header h1 .gold, .essence-copy h2 .gold{
+  background-size:220% 100%;
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:goldShine 7s linear infinite;
+}
+.hero h1 .gold{
+  background-image:linear-gradient(110deg,#CDAB63 20%,#F0DCA8 38%,#CDAB63 52%,#B08A3C 70%,#CDAB63 85%);
+}
+.section-head h2 .gold, .cat-header h1 .gold, .essence-copy h2 .gold{
+  background-image:linear-gradient(110deg,#A8812F 20%,#CDAB63 42%,#856629 58%,#B08A3C 78%,#A8812F 92%);
+}
+@keyframes goldShine{ to{ background-position:-220% 0; } }
+
+/* ---------- Sheen nos botões dourados ---------- */
+.btn{ position:relative; overflow:hidden; }
+.btn-gold::after, .btn-gold-lg::after, .btn-wa-nav::after{
+  content:""; position:absolute; top:-10%; bottom:-10%; left:-45%; width:34%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:skewX(-20deg) translateX(0); transition:transform .7s var(--ease);
+  pointer-events:none;
+}
+.btn-wa-nav{ position:relative; overflow:hidden; }
+.btn-gold:hover::after, .btn-gold-lg:hover::after, .btn-wa-nav:hover::after{ transform:skewX(-20deg) translateX(460%); }
+.btn:active{ transform:translateY(-1px) scale(.97); }
+
+/* ---------- Marquee com bordas esfumadas ---------- */
+.trust .marquee{
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+
+/* ---------- Fundo do quiz: brilho de areia em movimento ---------- */
+.quiz::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(115deg,transparent 30%,rgba(205,171,99,.14) 46%,transparent 62%);
+  background-size:260% 100%;
+  animation:sandShine 10s linear infinite;
+}
+@keyframes sandShine{ from{ background-position:130% 0; } to{ background-position:-130% 0; } }
+
+/* botão voltar do quiz */
+.quiz-back{
+  display:none; align-items:center; gap:8px; margin:24px auto 0;
+  font-family:var(--sans); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--grafite-45); transition:color .3s;
+}
+.quiz-back.show{ display:flex; }
+.quiz-back svg{ width:15px; height:15px; }
+.quiz-back:hover{ color:var(--ouro-fundo); }
+
+/* ---------- Cards: tilt 3D + brilho que segue o mouse ---------- */
+.card{ cursor:pointer; will-change:transform; transform-style:preserve-3d; }
+.card:hover .card-name{ color:var(--ouro-fundo); }
+.card-name{ transition:color .35s var(--ease); }
+.card-glare{
+  position:absolute; inset:0; z-index:5; pointer-events:none; opacity:0;
+  background:radial-gradient(420px circle at var(--gx,50%) var(--gy,30%), rgba(255,244,214,.5), transparent 46%);
+  mix-blend-mode:soft-light; transition:opacity .4s var(--ease);
+}
+.card:hover .card-glare{ opacity:1; }
+
+/* gleam que varre o frasco */
+.bottle{ position:relative; }
+.bottle::after{
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:0;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);
+  background-size:300% 100%; background-position:140% 0;
+  transition:background-position .9s var(--ease), opacity .3s;
+}
+.card:hover .bottle::after{ background-position:-40% 0; opacity:1; }
+
+/* ---------- Quick View (modal de detalhes) ---------- */
+.qv-overlay{
+  position:fixed; inset:0; z-index:1050; background:rgba(22,20,16,.58);
+  -webkit-backdrop-filter:blur(7px); backdrop-filter:blur(7px);
+  opacity:0; visibility:hidden; transition:opacity .45s var(--ease), visibility .45s;
+}
+.qv-overlay.open{ opacity:1; visibility:visible; }
+.qv{
+  position:fixed; inset:0; z-index:1060; display:flex; align-items:center; justify-content:center;
+  padding:22px; pointer-events:none;
+}
+.qv-card{
+  pointer-events:none; width:min(880px,100%); max-height:88svh; overflow:auto;
+  background:var(--branco-puro); border:1px solid var(--areia); border-radius:8px;
+  display:grid; grid-template-columns:340px 1fr; position:relative;
+  opacity:0; visibility:hidden; transform:translateY(28px) scale(.96);
+  transition:opacity .5s var(--ease-out), transform .5s var(--ease-out), visibility .5s;
+  box-shadow:0 40px 90px -30px rgba(22,20,16,.55);
+}
+.qv.open .qv-card{ opacity:1; visibility:visible; transform:none; pointer-events:auto; }
+.qv-close{
+  position:absolute; top:14px; right:18px; z-index:6;
+  font-size:2rem; line-height:1; color:var(--grafite-45); transition:color .3s, transform .3s;
+  width:44px; height:44px; display:flex; align-items:center; justify-content:center;
+}
+.qv-close:hover{ color:var(--ouro); transform:rotate(90deg); }
+.qv-left{
+  position:relative; background:linear-gradient(160deg,#F6F0E1,#ECE0C8);
+  display:flex; align-items:center; justify-content:center; padding:48px 36px;
+  min-height:380px; overflow:hidden;
+}
+.qv-left::before{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(70% 60% at 50% 38%, rgba(205,171,99,.3), transparent 70%);
+  animation:catGlow 7s ease-in-out infinite alternate;
+}
+.qv-left .qv-pill{ position:absolute; top:18px; left:18px; z-index:3; }
+.qv-bottle{ position:relative; z-index:2; height:260px; animation:qvFloat 5s ease-in-out infinite; }
+.qv-bottle svg{ height:100%; width:auto; }
+.qv-bottle img{ height:100%; width:auto; object-fit:contain; filter:drop-shadow(0 18px 34px rgba(38,34,28,.3)); }
+@keyframes qvFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
+.qv-right{ padding:46px 44px 40px; }
+.qv-name{ font-family:var(--serif); font-size:clamp(2rem,4vw,2.8rem); line-height:1.02; margin:8px 0 2px; color:var(--grafite); }
+.qv-insp{ font-family:var(--serif); font-style:italic; color:var(--grafite-45); margin-bottom:14px; }
+.qv-desc{ color:var(--grafite-60); font-size:1.02rem; max-width:420px; }
+.qv-right .notes{ margin:20px 0 8px; }
+.qv-meta{ display:flex; align-items:baseline; justify-content:space-between; gap:14px; margin:14px 0 22px; }
+.qv-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+.qv-actions .btn{ font-size:.76rem; padding:14px 24px; }
+.btn-line-dark{ border:1px solid var(--ouro); color:var(--ouro-fundo); }
+.btn-line-dark:hover{ background:var(--ouro); color:var(--branco-puro); transform:translateY(-2px); }
+.btn-line-dark svg{ width:16px; height:16px; }
+
+/* ---------- Toast "adicionado ao pedido" ---------- */
+.toast{
+  position:fixed; left:50%; bottom:26px; z-index:1200;
+  transform:translate(-50%,160%); opacity:0; visibility:hidden;
+  display:flex; align-items:center; gap:13px;
+  background:var(--grafite); color:var(--branco-q);
+  border:1px solid rgba(205,171,99,.4); border-radius:50px;
+  padding:13px 20px; font-family:var(--sans); font-size:.86rem;
+  box-shadow:0 18px 44px rgba(22,20,16,.4);
+  transition:transform .55s var(--ease-out), opacity .45s, visibility .55s;
+  max-width:min(92vw,460px);
+}
+.toast.show{ transform:translate(-50%,0); opacity:1; visibility:visible; }
+.toast .t-check{
+  flex:0 0 24px; width:24px; height:24px; border-radius:50%; background:var(--ouro);
+  display:flex; align-items:center; justify-content:center;
+}
+.toast .t-check svg{ width:13px; height:13px; }
+.toast b{ color:var(--ouro-claro); font-weight:500; }
+.toast .t-view{
+  flex:0 0 auto; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ouro-claro); border-bottom:1px solid currentColor; padding-bottom:2px;
+  transition:color .3s; white-space:nowrap;
+}
+.toast .t-view:hover{ color:var(--branco-q); }
+
+/* ---------- Voltar ao topo ---------- */
+.to-top{
+  position:fixed; bottom:24px; left:24px; z-index:840;
+  width:46px; height:46px; border-radius:50%;
+  border:1px solid rgba(176,138,60,.45);
+  background:rgba(246,240,225,.88);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  color:var(--ouro-fundo);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; visibility:hidden; transform:translateY(14px);
+  transition:all .4s var(--ease);
+}
+.to-top.show{ opacity:1; visibility:visible; transform:none; }
+.to-top:hover{ background:var(--ouro); color:#fff; transform:translateY(-3px); }
+.to-top svg{ width:18px; height:18px; }
+
+/* ---------- Chips com feedback de toque ---------- */
+.chip:active, .quiz-opt:active{ transform:scale(.96); }
+
+/* ---------- Responsivo das novidades ---------- */
+@media (max-width:760px){
+  .qv-card{ grid-template-columns:1fr; max-height:90svh; }
+  .qv-left{ min-height:250px; padding:34px 24px; }
+  .qv-bottle{ height:170px; }
+  .qv-right{ padding:28px 24px 30px; }
+  .qv-actions .btn{ flex:1; justify-content:center; }
+  .to-top{ bottom:20px; left:16px; width:42px; height:42px; }
+  .toast{ bottom:18px; width:max-content; }
+}
+
 /* Acessibilidade: respeita reduced-motion */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important;
@@ -658,4 +891,7 @@ footer{ background:var(--areia); color:var(--grafite-60); padding:70px 0 36px; p
   .hero-bg img,.hero-bg video,.dune{ transform:none !important; }
   #heroVideo{ display:none; }   /* sem movimento: troca vídeo pela imagem */
   #heroImg{ display:block; }
+  .hero-aurora, .fx-dust{ display:none; }
+  .hero h1 .gold, .section-head h2 .gold, .cat-header h1 .gold, .essence-copy h2 .gold{
+    background:none; -webkit-text-fill-color:currentColor; }
 }

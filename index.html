@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Duna Fragrâncias · Perfumes Árabes, Designer e Nicho</title>
 <meta name="description" content="Perfumaria premium: perfumes árabes, designer e de nicho num só lugar. Presença que se sente à distância, curadoria honesta e pedido fácil pelo WhatsApp. Entrega para todo o Brasil." />
+<meta name="theme-color" content="#2a1f12" />
 
 <!-- Favicon: emblema oficial da Duna -->
 <link rel="icon" type="image/png" href="assets/logo-emblem.png" />
@@ -79,6 +80,9 @@
     <img src="assets/hero-cinematic.png" alt="" id="heroImg" />
   </div>
   <div class="hero-veil"></div>
+
+  <!-- aurora dourada animada -->
+  <div class="hero-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
 
   <!-- camadas de duna em parallax -->
   <div class="dune dune-1" data-speed="0.18">
@@ -204,6 +208,11 @@
           <button class="quiz-restart" id="rRestart">↺ Refazer o teste</button>
         </div>
       </div>
+
+      <button class="quiz-back" id="quizBack" aria-label="Voltar à pergunta anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Voltar
+      </button>
     </div>
   </div>
 </section>
@@ -225,7 +234,7 @@
       </div>
 
       <div class="essence-frame reveal" data-d="2">
-        <img src="assets/dunes-bg.png" alt="Dunas douradas — identidade Duna Fragrâncias" />
+        <img src="assets/dunes-bg.png" alt="Dunas douradas — identidade Duna Fragrâncias" loading="lazy" />
         <div class="veil"></div>
         <div class="frame-corners"><span></span><span></span><span></span><span></span></div>
         <div class="emblem-wrap">
