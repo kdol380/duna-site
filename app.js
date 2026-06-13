@@ -24,78 +24,77 @@ const PERFUMES = [
   { nome:"Club de Nuit Intense Man", marca:"Armaf", inspiracao:"inspiração amadeirada frutada esfumada", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:275, tamanho:"105 ml · EDT", selo:"Ícone",
     notas:{ topo:"Abacaxi · Limão · Cassis", coracao:"Bétula · Jasmim · Rosa", fundo:"Âmbar · Almíscar · Baunilha" },
-    accent:"#5a5238", desc:"O fenômeno árabe: abacaxi esfumado sobre madeiras nobres. Presença viril e elegante que rende elogios o dia inteiro.",
-    /* foto:"assets/club-de-nuit-intense.png"  ← descomente e ponha a foto na pasta assets/ */ },
+    accent:"#5a5238", foto:"assets/p-club-intense.jpg", desc:"O fenômeno árabe: abacaxi esfumado sobre madeiras nobres. Presença viril e elegante que rende elogios o dia inteiro." },
 
   { nome:"Club de Nuit Maleka", marca:"Armaf", inspiracao:"inspiração floral amadeirada", familia:"Floral", genero:"Feminino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:335, tamanho:"100 ml · EDP", selo:"Para a noite",
     notas:{ topo:"Açafrão · Lichia · Bergamota", coracao:"Rosa · Jasmim · Gerânio", fundo:"Oud · Sândalo · Baunilha" },
-    accent:"#9e4a63", desc:"Uma rainha em forma de perfume: rosa luxuosa e açafrão sobre madeiras. Feminino marcante e sofisticado." },
+    accent:"#9e4a63", foto:"assets/p-club-maleka.jpg", desc:"Uma rainha em forma de perfume: rosa luxuosa e açafrão sobre madeiras. Feminino marcante e sofisticado." },
 
   { nome:"Odyssey Homme White Edition", marca:"Armaf", inspiracao:"inspiração fresca amadeirada", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:235, tamanho:"100 ml · EDP", selo:"Versátil",
     notas:{ topo:"Maçã Verde · Bergamota · Abacaxi", coracao:"Gerânio · Lavanda · Rosa", fundo:"Âmbar · Almíscar · Madeiras" },
-    accent:"#7a8a93", desc:"Fresco, limpo e moderno. Frutado-amadeirado que veste bem do trabalho ao fim de tarde." },
+    accent:"#7a8a93", foto:"assets/p-odyssey-white.jpg", desc:"Fresco, limpo e moderno. Frutado-amadeirado que veste bem do trabalho ao fim de tarde." },
 
   { nome:"Turathi Blue", marca:"Afnan", inspiracao:"inspiração aromática fresca", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
     ocasiao:"dia", intensidade:"equilibrado", preco:285, tamanho:"90 ml · EDP", selo:"Fresco",
     notas:{ topo:"Abacaxi · Bergamota · Limão", coracao:"Lavanda · Gerânio · Jasmim", fundo:"Patchouli · Âmbar · Almíscar" },
-    accent:"#2f5a73", desc:"Azul, vibrante e arejado. Frescor cítrico com fundo amadeirado — coringa para o dia a dia." },
+    accent:"#2f5a73", foto:"assets/p-turathi-blue.jpg", desc:"Azul, vibrante e arejado. Frescor cítrico com fundo amadeirado — coringa para o dia a dia." },
 
   { nome:"Turathi Electric", marca:"Afnan", inspiracao:"inspiração fresca adocicada", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
     ocasiao:"dia", intensidade:"equilibrado", preco:295, tamanho:"90 ml · EDP", selo:"Novidade",
     notas:{ topo:"Bergamota · Maçã · Hortelã", coracao:"Lavanda · Gerânio · Especiarias", fundo:"Âmbar · Almíscar · Madeiras" },
-    accent:"#2d6c8c", desc:"Energia em frasco: fresco com um toque doce e elétrico. Jovem, versátil e com boa projeção." },
+    accent:"#2d6c8c", foto:"assets/p-turathi-electric.jpg", desc:"Energia em frasco: fresco com um toque doce e elétrico. Jovem, versátil e com boa projeção." },
 
   { nome:"Vulcan Feu", marca:"French Avenue", inspiracao:"inspiração amadeirada especiada", familia:"Amadeirado", genero:"Masculino", periodo:"Noite",
     ocasiao:"noite", intensidade:"marcante", preco:375, tamanho:"100 ml · EDP", selo:"Masculino",
     notas:{ topo:"Especiarias · Bergamota · Pimenta", coracao:"Lavanda · Gerânio · Canela", fundo:"Âmbar · Madeiras · Baunilha" },
-    accent:"#8a3b1e", desc:"Quente e magnético como o fogo. Especiarias e madeiras âmbar para noites de presença marcante." },
+    accent:"#8a3b1e", foto:"assets/p-vulcan-feu.jpg", desc:"Quente e magnético como o fogo. Especiarias e madeiras âmbar para noites de presença marcante." },
 
   { nome:"Thunder", marca:"French Avenue", inspiracao:"inspiração aromática amadeirada", familia:"Amadeirado", genero:"Masculino", periodo:"Noite",
     ocasiao:"noite", intensidade:"marcante", preco:365, tamanho:"100 ml · EDP", selo:"Marcante",
     notas:{ topo:"Bergamota · Pimenta Rosa · Cardamomo", coracao:"Lavanda · Gerânio · Sálvia", fundo:"Âmbar · Cedro · Patchouli" },
-    accent:"#4a4a6a", desc:"Tempestade contida: aromático intenso com madeiras âmbar. Confiante e impossível de ignorar." },
+    accent:"#4a4a6a", foto:"assets/p-thunder.jpg", desc:"Tempestade contida: aromático intenso com madeiras âmbar. Confiante e impossível de ignorar." },
 
   { nome:"Fakhar (Gold)", marca:"Lattafa", inspiracao:"inspiração floral frutada", familia:"Floral", genero:"Feminino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:265, tamanho:"100 ml · EDP", selo:"Feminino",
     notas:{ topo:"Frutas · Bergamota · Pera", coracao:"Jasmim · Rosa · Flor de Laranjeira", fundo:"Baunilha · Almíscar · Madeiras" },
-    accent:"#c2a24e", desc:"Floral frutado luminoso e elegante. Doçura suave e refinada, do escritório ao jantar." },
+    accent:"#c2a24e", foto:"assets/p-fakhar-gold.jpg", desc:"Floral frutado luminoso e elegante. Doçura suave e refinada, do escritório ao jantar." },
 
   { nome:"Fakhar (Black)", marca:"Lattafa", inspiracao:"inspiração amadeirada especiada", familia:"Amadeirado", genero:"Masculino", periodo:"Noite",
     ocasiao:"noite", intensidade:"marcante", preco:230, tamanho:"100 ml · EDP", selo:"Masculino",
     notas:{ topo:"Maçã · Canela · Especiarias", coracao:"Lavanda · Gerânio · Noz-moscada", fundo:"Âmbar · Baunilha · Madeiras" },
-    accent:"#3a322a", desc:"Especiado, âmbar e viciante. Masculino quente com ótima fixação para a noite." },
+    accent:"#3a322a", foto:"assets/p-fakhar-black.jpg", desc:"Especiado, âmbar e viciante. Masculino quente com ótima fixação para a noite." },
 
   { nome:"Nebras Pride", marca:"Lattafa", inspiracao:"inspiração âmbar adocicada", familia:"Gourmand", genero:"Unissex", periodo:"Versátil",
     ocasiao:"noite", intensidade:"marcante", preco:265, tamanho:"100 ml · EDP", selo:"Doce",
     notas:{ topo:"Frutas · Especiarias · Bergamota", coracao:"Flores · Canela · Âmbar", fundo:"Baunilha · Almíscar · Madeiras" },
-    accent:"#9a6a2a", desc:"Âmbar doce e acolhedor, com brilho frutado. Unissex envolvente que aquece a pele." },
+    accent:"#9a6a2a", foto:"assets/p-nebras.jpg", desc:"Âmbar doce e acolhedor, com brilho frutado. Unissex envolvente que aquece a pele." },
 
   { nome:"Zimaya Tiramisu Caramel", marca:"Lattafa", inspiracao:"inspiração gourmand", familia:"Gourmand", genero:"Unissex", periodo:"Noite",
     ocasiao:"noite", intensidade:"marcante", preco:265, tamanho:"100 ml · EDP", selo:"Gourmand",
     notas:{ topo:"Café · Caramelo", coracao:"Tiramisù · Creme · Baunilha", fundo:"Fava Tonka · Madeiras · Almíscar" },
-    accent:"#8a5a2c", desc:"Uma sobremesa vestível: café, caramelo e creme de tiramisù. Doce, cremoso e absurdamente convidativo." },
+    accent:"#8a5a2c", foto:"assets/p-zimaya-tiramisu.jpg", desc:"Uma sobremesa vestível: café, caramelo e creme de tiramisù. Doce, cremoso e absurdamente convidativo." },
 
   { nome:"Delilah", marca:"Maison Alhambra", inspiracao:"inspiração floral frutada", familia:"Floral", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:245, tamanho:"100 ml · EDP", selo:"Feminino",
     notas:{ topo:"Lichia · Ruibarbo · Bergamota", coracao:"Rosa Turca · Peônia", fundo:"Baunilha · Almíscar · Cashmeran" },
-    accent:"#b06a85", desc:"Floral rosado, doce e radiante. Feminino moderno e elogiadíssimo — sofisticado em qualquer ocasião." },
+    accent:"#b06a85", foto:"assets/p-delilah.jpg", desc:"Floral rosado, doce e radiante. Feminino moderno e elogiadíssimo — sofisticado em qualquer ocasião." },
 
   { nome:"Salvo", marca:"Maison Alhambra", inspiracao:"inspiração fresca especiada", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
     ocasiao:"dia", intensidade:"equilibrado", preco:195, tamanho:"100 ml · EDP", selo:"Coringa",
     notas:{ topo:"Bergamota · Pimenta · Limão", coracao:"Lavanda · Gerânio · Pimenta de Sichuan", fundo:"Ambroxan · Cedro · Labdano" },
-    accent:"#3a6a8a", desc:"Fresco, picante e seguro. O versátil que agrada todo mundo — do dia ao trabalho, sempre limpo." },
+    accent:"#3a6a8a", foto:"assets/p-salvo.jpg", desc:"Fresco, picante e seguro. O versátil que agrada todo mundo — do dia ao trabalho, sempre limpo." },
 
   { nome:"Alpine Man Sport", marca:"Maison Alhambra", inspiracao:"inspiração fresca aquática", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"suave", preco:225, tamanho:"100 ml · EDP", selo:"Dia a dia",
     notas:{ topo:"Bergamota · Maçã · Notas Marinhas", coracao:"Gerânio · Jasmim · Especiarias", fundo:"Almíscar · Cedro · Âmbar" },
-    accent:"#3f7a6a", desc:"Esportivo e revigorante. Frescor aquático leve para o calor e o uso de todo dia." },
+    accent:"#3f7a6a", foto:"assets/p-alpine-sport.jpg", desc:"Esportivo e revigorante. Frescor aquático leve para o calor e o uso de todo dia." },
 
   { nome:"Rayhaan Elixir", marca:"Rasasi", inspiracao:"inspiração âmbar adocicada", familia:"Gourmand", genero:"Unissex", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:315, tamanho:"100 ml · EDP", selo:"Assinatura",
     notas:{ topo:"Frutas · Açafrão · Especiarias", coracao:"Rosa · Âmbar · Flores", fundo:"Baunilha · Oud · Madeiras" },
-    accent:"#7a3a2a", desc:"Elixir oriental rico e opulento. Âmbar doce e especiarias com presença que não passa despercebida." }
+    accent:"#7a3a2a", foto:"assets/p-rayhaan-elixir.jpg", desc:"Elixir oriental rico e opulento. Âmbar doce e especiarias com presença que não passa despercebida." }
 ];
 
 /* =====================================================================

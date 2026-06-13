@@ -823,6 +823,9 @@ a, button{ touch-action:manipulation; }
 .qv-bottle{ position:relative; z-index:2; height:260px; animation:qvFloat 5s ease-in-out infinite; }
 .qv-bottle svg{ height:100%; width:auto; }
 .qv-bottle img{ height:100%; width:auto; object-fit:contain; filter:drop-shadow(0 18px 34px rgba(38,34,28,.3)); }
+/* foto de produto no modal: azulejo branco arredondado (some o fundo branco/serve transparências) */
+.qv-bottle:has(img){ background:#fff; border-radius:12px; padding:18px; box-shadow:0 20px 44px -22px rgba(38,34,28,.5); }
+.qv-bottle:has(img) img{ filter:none; }
 @keyframes qvFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
 .qv-right{ padding:46px 44px 40px; }
 .qv-name{ font-family:var(--serif); font-size:clamp(2rem,4vw,2.8rem); line-height:1.02; margin:8px 0 2px; color:var(--grafite); }
