@@ -757,6 +757,15 @@ a, button{ touch-action:manipulation; }
 .card{ cursor:pointer; will-change:transform; transform-style:preserve-3d; }
 .card:hover .card-name{ color:var(--ouro-fundo); }
 .card-name{ transition:color .35s var(--ease); }
+
+/* marca acima do nome do perfume */
+.card-brand{ font-family:var(--sans); font-size:.6rem; font-weight:600; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--ouro-fundo); text-align:center; margin-top:2px; }
+
+/* selo "Sob consulta" no lugar do preço */
+.preco-consulta{ font-family:var(--sans); font-size:.82rem; font-weight:500; letter-spacing:.04em;
+  color:var(--ouro-fundo); white-space:nowrap; }
+.qv-meta .preco-consulta{ font-size:1rem; }
 .card-glare{
   position:absolute; inset:0; z-index:5; pointer-events:none; opacity:0;
   background:radial-gradient(420px circle at var(--gx,50%) var(--gy,30%), rgba(255,244,214,.5), transparent 46%);
