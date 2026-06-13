@@ -1,0 +1,5 @@
+# Configuração do Netlify para a Duna Fragrâncias
+# Site estático (HTML/CSS/JS puro) — sem etapa de build, publica a raiz do repositório.
+[build]
+  publish = "."
+  command = ""
