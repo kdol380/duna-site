@@ -742,11 +742,15 @@ if(_pre && _preSeen){
   _pre.classList.add("done");
 }else if(_pre){
   document.body.classList.add("no-scroll");
-  window.addEventListener("load", ()=>{
-    setTimeout(()=>{
-      _pre.classList.add("done");
-      document.body.classList.remove("no-scroll");
-      try{ sessionStorage.setItem("duna_pre","1"); }catch(e){}
-    }, 1000);
-  });
+  let _preDone = false;
+  const hidePre = ()=>{
+    if(_preDone) return; _preDone = true;
+    _pre.classList.add("done");
+    document.body.classList.remove("no-scroll");
+    try{ sessionStorage.setItem("duna_pre","1"); }catch(e){}
+  };
+  // mostra a marca por ~1,1s e sai — NÃO espera o vídeo/imagens (evita travar em conexão lenta)
+  setTimeout(hidePre, 1100);
+  // rede de segurança: se algo travar, garante a saída de qualquer forma
+  setTimeout(hidePre, 4000);
 }
