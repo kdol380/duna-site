@@ -753,6 +753,30 @@ a, button{ touch-action:manipulation; }
 .quiz-back svg{ width:15px; height:15px; }
 .quiz-back:hover{ color:var(--ouro-fundo); }
 
+/* Quiz v2 — pergunta de gênero (3 opções) + alternativas no resultado */
+.quiz-opts-3{ grid-template-columns:repeat(3,1fr); }
+.r-alts{ margin-top:30px; padding-top:24px; border-top:1px solid var(--areia); }
+.r-alts-title{ font-family:var(--sans); font-size:.66rem; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--ouro-fundo); margin-bottom:16px; }
+.r-alts-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.r-alt{ display:flex; align-items:center; gap:12px; text-align:left; padding:12px 14px;
+  border:1px solid var(--areia); border-radius:6px; background:var(--branco-q); cursor:pointer;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s, background .3s; }
+.r-alt:hover{ border-color:var(--ouro-claro); background:#FBF6E9; transform:translateY(-2px);
+  box-shadow:0 12px 24px -16px rgba(176,138,60,.5); }
+.r-alt-bottle{ flex:0 0 46px; width:46px; height:62px; display:flex; align-items:center; justify-content:center; }
+.r-alt-bottle svg{ height:100%; width:auto; }
+.r-alt-bottle img{ height:62px; width:auto; object-fit:contain; }
+.r-alt-info{ display:flex; flex-direction:column; min-width:0; gap:1px; }
+.r-alt-brand{ font-family:var(--sans); font-size:.54rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ouro-fundo); }
+.r-alt-name{ font-family:var(--serif); font-size:1.12rem; color:var(--grafite); line-height:1.1;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+.r-alt-price{ font-family:var(--serif); font-weight:700; color:var(--ouro-fundo); font-size:.95rem; }
+@media (max-width:560px){
+  .quiz-opts-3{ grid-template-columns:1fr; }
+  .r-alts-grid{ grid-template-columns:1fr; }
+}
+
 /* ---------- Cards: tilt 3D + brilho que segue o mouse ---------- */
 .card{ cursor:pointer; will-change:transform; transform-style:preserve-3d; }
 .card:hover .card-name{ color:var(--ouro-fundo); }

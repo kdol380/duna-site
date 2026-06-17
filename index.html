@@ -153,13 +153,23 @@
       <div class="diamond"><i></i></div>
       <p class="eyebrow">Recomendação Personalizada</p>
       <h2>Descubra <span class="gold">seu perfume</span></h2>
-      <p>Três perguntas rápidas. No fim, a fragrância da Duna com a sua cara — pronta pra pedir.</p>
+      <p>Quatro perguntas rápidas. No fim, a fragrância da Duna com a sua cara — e mais duas opções que combinam.</p>
     </div>
 
     <div class="quiz-card reveal">
-      <div class="quiz-progress" id="quizProgress"><i class="on"></i><i></i><i></i></div>
+      <div class="quiz-progress" id="quizProgress"><i class="on"></i><i></i><i></i><i></i></div>
 
       <div class="quiz-step active" data-step="0">
+        <h3 class="quiz-q">Pra quem é?</h3>
+        <p class="quiz-hint">A fragrância principal é para</p>
+        <div class="quiz-opts quiz-opts-3">
+          <button class="quiz-opt" data-key="gen" data-val="Masculino"><b>Para ele</b><span>Perfumes masculinos</span></button>
+          <button class="quiz-opt" data-key="gen" data-val="Feminino"><b>Para ela</b><span>Perfumes femininos</span></button>
+          <button class="quiz-opt" data-key="gen" data-val="Tanto faz"><b>Tanto faz</b><span>Aberto a unissex</span></button>
+        </div>
+      </div>
+
+      <div class="quiz-step" data-step="1">
         <h3 class="quiz-q">Para qual ocasião?</h3>
         <p class="quiz-hint">Onde essa fragrância vai te acompanhar</p>
         <div class="quiz-opts">
@@ -170,7 +180,7 @@
         </div>
       </div>
 
-      <div class="quiz-step" data-step="1">
+      <div class="quiz-step" data-step="2">
         <h3 class="quiz-q">Qual intensidade você prefere?</h3>
         <p class="quiz-hint">O quanto você quer ser notado</p>
         <div class="quiz-opts">
@@ -181,7 +191,7 @@
         </div>
       </div>
 
-      <div class="quiz-step" data-step="2">
+      <div class="quiz-step" data-step="3">
         <h3 class="quiz-q">Qual família te atrai?</h3>
         <p class="quiz-hint">O universo de notas que mais te agrada</p>
         <div class="quiz-opts">
@@ -207,6 +217,7 @@
           </a>
           <button class="quiz-restart" id="rRestart">↺ Refazer o teste</button>
         </div>
+        <div class="r-alts" id="rAlts"></div>
       </div>
 
       <button class="quiz-back" id="quizBack" aria-label="Voltar à pergunta anterior">

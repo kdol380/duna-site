@@ -398,7 +398,7 @@ if(cartEl){
    ===================================================================== */
 const steps = document.querySelectorAll(".quiz-step");
 if(steps.length){
-  const answers = { occ:null, int:null, fam:null };
+  const answers = { gen:null, occ:null, int:null, fam:null };
   let stepIdx = 0;
   const progress = document.querySelectorAll("#quizProgress i");
   const resultBox = document.getElementById("quizResult");
@@ -432,21 +432,36 @@ if(steps.length){
     updateBack();
   });
 
+  const ESCALA = ["suave","equilibrado","marcante","potente"];
+  function scorePerfume(p){
+    let s = 0;
+    // 1) gênero — filtro mais forte
+    if(answers.gen === "Tanto faz")      s += 2;                 // sem preferência: bônus leve a todos
+    else if(p.genero === answers.gen)    s += 6;                 // bate exatamente
+    else if(p.genero === "Unissex")      s += 4;                 // unissex serve pra qualquer escolha
+    else                                 s -= 5;                 // gênero oposto: penaliza forte (sem zerar)
+    // 2) família olfativa
+    if(p.familia === answers.fam)        s += 5;
+    // 3) intensidade (exata + proximidade)
+    const d = Math.abs(ESCALA.indexOf(p.intensidade) - ESCALA.indexOf(answers.int));
+    if(d===0) s += 3; else if(d===1) s += 1.5; else if(d===2) s += 0.5;
+    // 4) ocasião
+    if(p.ocasiao === answers.occ)        s += 2;
+    if((answers.occ==="dia" || answers.occ==="trabalho") && p.periodo==="Versátil") s += 0.5;
+    return s;
+  }
+
   function mostrarResultado(){
-    let best=null, bestScore=-1;
-    PERFUMES.forEach(p=>{
-      let s=0;
-      if(p.familia===answers.fam) s+=3;
-      if(p.intensidade===answers.int) s+=2;
-      if(p.ocasiao===answers.occ) s+=1;
-      const escala=["suave","equilibrado","marcante","potente"];
-      const d=Math.abs(escala.indexOf(p.intensidade)-escala.indexOf(answers.int));
-      if(d===1) s+=1;
-      if(s>bestScore){ bestScore=s; best=p; }
-    });
+    const ranked = PERFUMES
+      .map((p,i)=>({ p, s:scorePerfume(p), i }))
+      .sort((a,b)=> b.s - a.s || a.i - b.i);   // empate: mantém ordem do catálogo
+    const best = ranked[0].p;
+    const alts = ranked.slice(1,3).map(r=>r.p);
+
     steps.forEach(st=>st.classList.remove("active"));
     resultBox.classList.add("active");
     updateBack();
+
     document.getElementById("rBottle").innerHTML = frascoVisual(best);
     document.getElementById("rFam").textContent = (best.marca ? best.marca + " · " : "") + best.familia + " · " + best.selo;
     document.getElementById("rName").textContent = best.nome;
@@ -455,11 +470,33 @@ if(steps.length){
     document.getElementById("rWa").href = waLink(
       `Olá, Duna! Fiz o teste no site e o resultado foi o *${nomeCompleto(best)}* (${best.tamanho})${temPreco(best) ? " — R$ " + best.preco : ""}. Quero saber mais! 🌙`
     );
+
+    // alternativas que também combinam
+    const altBox = document.getElementById("rAlts");
+    if(altBox){
+      altBox.innerHTML = `<p class="r-alts-title">Você também pode gostar</p>
+        <div class="r-alts-grid">` + alts.map(p=>`
+          <button class="r-alt" data-qv="${p.nome}" aria-label="Ver ${nomeCompleto(p)}">
+            <span class="r-alt-bottle">${frascoVisual(p)}</span>
+            <span class="r-alt-info">
+              ${p.marca ? `<span class="r-alt-brand">${p.marca}</span>` : ""}
+              <span class="r-alt-name">${p.nome}</span>
+              <span class="r-alt-price">${precoTxt(p)}</span>
+            </span>
+          </button>`).join("") + `</div>`;
+    }
   }
+
+  // clicar numa alternativa abre os detalhes (quick-view)
+  const altBox = document.getElementById("rAlts");
+  if(altBox) altBox.addEventListener("click", e=>{
+    const b = e.target.closest("[data-qv]");
+    if(b && typeof openQuickView === "function") openQuickView(b.dataset.qv);
+  });
 
   const rRestart = document.getElementById("rRestart");
   if(rRestart) rRestart.addEventListener("click", ()=>{
-    stepIdx=0; answers.occ=answers.int=answers.fam=null;
+    stepIdx=0; answers.gen=answers.occ=answers.int=answers.fam=null;
     resultBox.classList.remove("active");
     steps.forEach((st,i)=>st.classList.toggle("active", i===0));
     progress.forEach((i,idx)=>i.classList.toggle("on", idx===0));
