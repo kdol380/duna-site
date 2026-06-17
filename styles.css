@@ -813,6 +813,22 @@ a, button{ touch-action:manipulation; }
 .preco-consulta{ font-family:var(--sans); font-size:.82rem; font-weight:500; letter-spacing:.04em;
   color:var(--ouro-fundo); white-space:nowrap; }
 .qv-meta .preco-consulta{ font-size:1rem; }
+
+/* card mais limpo: dica "Ver detalhes" no hover/foco */
+.card-fam{ margin-bottom:2px; }
+.card-hint{ display:block; text-align:center; margin-top:10px;
+  font-family:var(--sans); font-size:.58rem; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--grafite-45); opacity:0; transform:translateY(4px);
+  transition:opacity .35s var(--ease), transform .35s var(--ease), color .35s; }
+.card:hover .card-hint, .card:focus-visible .card-hint{ opacity:1; transform:none; color:var(--ouro-fundo); }
+
+/* quick-view: pirâmide de notas (topo→coração→fundo) revela em cascata ao abrir */
+.qv .qv-right .note-row{ opacity:0; transform:translateY(10px); }
+.qv.open .qv-right .note-row{ animation:noteIn .5s var(--ease-out) forwards; }
+.qv.open .qv-right .note-row:nth-child(1){ animation-delay:.16s; }
+.qv.open .qv-right .note-row:nth-child(2){ animation-delay:.29s; }
+.qv.open .qv-right .note-row:nth-child(3){ animation-delay:.42s; }
+@keyframes noteIn{ to{ opacity:1; transform:none; } }
 .card-glare{
   position:absolute; inset:0; z-index:5; pointer-events:none; opacity:0;
   background:radial-gradient(420px circle at var(--gx,50%) var(--gy,30%), rgba(255,244,214,.5), transparent 46%);
@@ -953,4 +969,6 @@ a, button{ touch-action:manipulation; }
   .hero-aurora, .fx-dust{ display:none; }
   .hero h1 .gold, .section-head h2 .gold, .cat-header h1 .gold, .essence-copy h2 .gold{
     background:none; -webkit-text-fill-color:currentColor; }
+  .qv .qv-right .note-row{ opacity:1 !important; transform:none !important; }
+  .card-hint{ opacity:1; transform:none; }
 }

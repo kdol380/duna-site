@@ -218,17 +218,13 @@ function cardHTML(p,i){
     <div class="card-corner"><span></span><span></span><span></span><span></span></div>
     <div class="card-top">
       <span class="card-pill pill-solid">${p.genero}</span>
-      <span class="card-pill pill-line">${p.periodo}</span>
+      <span class="card-pill pill-line">${p.familia}</span>
     </div>
     <div class="bottle">${frascoVisual(p)}</div>
     ${p.marca ? `<p class="card-brand">${p.marca}</p>` : ""}
     <h3 class="card-name">${p.nome}</h3>
-    <p class="card-fam">${p.familia} · ${p.inspiracao}</p>
-    <dl class="notes">
-      <div class="note-row"><dt>Topo</dt><dd>${p.notas.topo}</dd></div>
-      <div class="note-row"><dt>Coração</dt><dd>${p.notas.coracao}</dd></div>
-      <div class="note-row"><dt>Fundo</dt><dd>${p.notas.fundo}</dd></div>
-    </dl>
+    <p class="card-fam">${p.inspiracao}</p>
+    <span class="card-hint">Ver detalhes</span>
     <div class="card-foot">
       <div class="card-meta">
         <span class="card-size">${p.tamanho}</span>
