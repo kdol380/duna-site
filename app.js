@@ -113,6 +113,22 @@ function precoTxt(p){ return temPreco(p) ? `R$ ${p.preco}` : "valor a combinar";
 // nome com marca, para mensagens
 function nomeCompleto(p){ return p.marca ? `${p.marca} ${p.nome}` : p.nome; }
 
+/* pirâmide olfativa visual: 3 faixas (topo→coração→fundo) com notas em chips */
+function chipsNotas(str){
+  return (str||"").split("·").map(n=>n.trim()).filter(Boolean)
+    .map(n=>`<span class="note-chip">${n}</span>`).join("");
+}
+function piramideHTML(p){
+  const tier = (cls,label,notas)=>`
+    <div class="pyr-tier ${cls}">
+      <span class="pyr-label">${label}</span>
+      <span class="pyr-notes">${chipsNotas(notas)}</span>
+    </div>`;
+  return tier("pyr-top","Topo", p.notas.topo)
+       + tier("pyr-heart","Coração", p.notas.coracao)
+       + tier("pyr-base","Fundo", p.notas.fundo);
+}
+
 function waProduto(p){
   return waLink(`Olá, Duna! Tenho interesse no *${nomeCompleto(p)}* (${p.tamanho}) — ${precoTxt(p)}. Ainda está disponível? 🌙`);
 }
@@ -633,7 +649,7 @@ qvWrap.innerHTML = `
         <h3 class="qv-name" id="qvName"></h3>
         <p class="qv-insp" id="qvInsp"></p>
         <p class="qv-desc" id="qvDesc"></p>
-        <dl class="notes" id="qvNotes"></dl>
+        <div class="qv-pyramid" id="qvNotes" aria-label="Pirâmide olfativa"></div>
         <div class="qv-meta">
           <span class="card-size" id="qvSize"></span>
           <span class="card-price" id="qvPrice"></span>
@@ -668,10 +684,7 @@ function openQuickView(nome){
   document.getElementById("qvName").textContent = p.nome;
   document.getElementById("qvInsp").textContent = p.inspiracao;
   document.getElementById("qvDesc").textContent = p.desc;
-  document.getElementById("qvNotes").innerHTML = `
-    <div class="note-row"><dt>Topo</dt><dd>${p.notas.topo}</dd></div>
-    <div class="note-row"><dt>Coração</dt><dd>${p.notas.coracao}</dd></div>
-    <div class="note-row"><dt>Fundo</dt><dd>${p.notas.fundo}</dd></div>`;
+  document.getElementById("qvNotes").innerHTML = piramideHTML(p);
   document.getElementById("qvSize").textContent = p.tamanho;
   document.getElementById("qvPrice").innerHTML = precoHTML(p);
   document.getElementById("qvWa").href = waProduto(p);
