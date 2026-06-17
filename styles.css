@@ -753,6 +753,29 @@ a, button{ touch-action:manipulation; }
 .quiz-back svg{ width:15px; height:15px; }
 .quiz-back:hover{ color:var(--ouro-fundo); }
 
+/* Catálogo — barra de busca + ordenação */
+.cat-toolbar{ display:flex; gap:14px; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; margin-bottom:26px; }
+.cat-search{ position:relative; flex:1 1 320px; max-width:460px; }
+.cat-search svg{ position:absolute; left:16px; top:50%; transform:translateY(-50%);
+  width:17px; height:17px; color:var(--ouro-fundo); pointer-events:none; }
+.cat-search input{ width:100%; font-family:var(--sans); font-size:.92rem; color:var(--grafite);
+  background:var(--branco-puro); border:1px solid var(--areia); border-radius:44px;
+  padding:13px 18px 13px 44px; transition:border-color .3s, box-shadow .3s; }
+.cat-search input::placeholder{ color:var(--grafite-45); }
+.cat-search input:focus{ outline:none; border-color:var(--ouro-claro); box-shadow:0 0 0 3px rgba(205,171,99,.18); }
+.cat-sort{ display:inline-flex; align-items:center; gap:10px; font-family:var(--sans);
+  font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ouro-fundo); }
+.cat-sort select{ font-family:var(--sans); font-size:.86rem; letter-spacing:normal; text-transform:none;
+  color:var(--grafite); background:var(--branco-puro); border:1px solid var(--areia); border-radius:30px;
+  padding:11px 16px; cursor:pointer; transition:border-color .3s; }
+.cat-sort select:focus{ outline:none; border-color:var(--ouro-claro); }
+@media (max-width:620px){
+  .cat-search{ flex-basis:100%; max-width:none; }
+  .cat-sort{ width:100%; justify-content:space-between; }
+  .cat-sort select{ flex:1; margin-left:12px; }
+}
+
 /* Quiz v2 — pergunta de gênero (3 opções) + alternativas no resultado */
 .quiz-opts-3{ grid-template-columns:repeat(3,1fr); }
 .r-alts{ margin-top:30px; padding-top:24px; border-top:1px solid var(--areia); }

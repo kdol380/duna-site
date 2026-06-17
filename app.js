@@ -176,6 +176,23 @@ const GRUPOS = [
   { key:"familia", label:"Família olfativa", opts:["Todas", ...familiasUnicas], secondary:true }
 ];
 const sel = { genero:"Todos", periodo:"Todas", familia:"Todas" };
+let busca = "";          // texto da busca (normalizado)
+let ordem = "padrao";    // ordenação atual
+
+// normaliza p/ busca sem acento e sem caixa
+function normaliza(s){ return (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""); }
+function passaBusca(p){
+  if(!busca) return true;
+  const alvo = normaliza([p.nome, p.marca, p.familia, p.inspiracao, p.notas.topo, p.notas.coracao, p.notas.fundo].join(" "));
+  return busca.split(/\s+/).every(t => alvo.includes(t));
+}
+function ordenar(list){
+  const arr = list.slice();
+  if(ordem==="preco-asc")       arr.sort((a,b)=> (temPreco(a)?a.preco:Infinity) - (temPreco(b)?b.preco:Infinity));
+  else if(ordem==="preco-desc") arr.sort((a,b)=> (temPreco(b)?b.preco:-Infinity) - (temPreco(a)?a.preco:-Infinity));
+  else if(ordem==="nome")       arr.sort((a,b)=> nomeCompleto(a).localeCompare(nomeCompleto(b), "pt"));
+  return arr;
+}
 
 if(filtersWrap){
   filtersWrap.innerHTML = GRUPOS.map(g=>`
@@ -238,28 +255,42 @@ function passaFiltros(p){
 
 function renderGrid(){
   if(!grid) return;
-  let list = PERFUMES.filter(passaFiltros);
+  let list = ordenar(PERFUMES.filter(passaFiltros).filter(passaBusca));
+  const total = list.length;
   const lim = parseInt(grid.dataset.limit||"0", 10);   // prévia da home
   if(lim>0) list = list.slice(0, lim);
 
   grid.innerHTML = list.length
     ? list.map(cardHTML).join("")
-    : `<p class="grid-empty">Nenhuma fragrância com esses filtros.<button class="grid-reset">limpar filtros</button></p>`;
+    : `<p class="grid-empty">Nenhuma fragrância ${busca ? "para essa busca" : "com esses filtros"}.<button class="grid-reset">limpar tudo</button></p>`;
   grid.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
 
   if(countEl){
-    const tot = PERFUMES.filter(passaFiltros).length;
-    countEl.textContent = tot + (tot===1 ? " fragrância" : " fragrâncias");
+    countEl.textContent = total + (total===1 ? " fragrância" : " fragrâncias");
   }
 }
 
 function resetFiltros(){
-  if(!filtersWrap) return;
   sel.genero="Todos"; sel.periodo="Todas"; sel.familia="Todas";
-  filtersWrap.querySelectorAll(".filter-group").forEach(fg=>
+  busca=""; ordem="padrao";
+  const bi=document.getElementById("catSearch"); if(bi) bi.value="";
+  const os=document.getElementById("catSort"); if(os) os.value="padrao";
+  if(filtersWrap) filtersWrap.querySelectorAll(".filter-group").forEach(fg=>
     fg.querySelectorAll(".chip").forEach((c,i)=>c.classList.toggle("active", i===0)));
   renderGrid();
 }
+
+/* busca + ordenação (só existem na página de catálogo) */
+const buscaInput = document.getElementById("catSearch");
+if(buscaInput){
+  let _bt;
+  buscaInput.addEventListener("input", ()=>{
+    clearTimeout(_bt);
+    _bt = setTimeout(()=>{ busca = normaliza(buscaInput.value.trim()); renderGrid(); }, 180);
+  });
+}
+const ordemSel = document.getElementById("catSort");
+if(ordemSel) ordemSel.addEventListener("change", ()=>{ ordem = ordemSel.value; renderGrid(); });
 
 if(grid){
   // botão "limpar filtros" do estado vazio

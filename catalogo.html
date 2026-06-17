@@ -80,6 +80,21 @@
 <!-- ===================== CATÁLOGO ===================== -->
 <section class="cat-main">
   <div class="wrap">
+    <div class="cat-toolbar">
+      <div class="cat-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
+        <input type="search" id="catSearch" placeholder="Buscar por nome, marca ou nota…" aria-label="Buscar perfume" autocomplete="off" />
+      </div>
+      <label class="cat-sort">
+        <span>Ordenar</span>
+        <select id="catSort" aria-label="Ordenar a coleção por">
+          <option value="padrao">Relevância</option>
+          <option value="preco-asc">Menor preço</option>
+          <option value="preco-desc">Maior preço</option>
+          <option value="nome">Nome (A–Z)</option>
+        </select>
+      </label>
+    </div>
     <div class="filters" id="filters"></div>
     <div class="grid" id="grid"></div>
   </div>
