@@ -635,6 +635,10 @@ if(burger && mobileMenu && mmOverlay){
 const mq = document.getElementById("marquee");
 if(mq) mq.innerHTML += mq.innerHTML;
 
+// carrossel de depoimentos: duplica os cards p/ loop contínuo
+const proofTrack = document.getElementById("proofTrack");
+if(proofTrack) proofTrack.innerHTML += proofTrack.innerHTML;
+
 /* =====================================================================
    🔔  TOAST — confirmação ao adicionar ao pedido
    ===================================================================== */
