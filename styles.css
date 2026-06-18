@@ -832,8 +832,10 @@ a, button{ touch-action:manipulation; }
 .pyr-label{ display:block; font-family:var(--sans); font-size:.55rem; letter-spacing:.26em;
   text-transform:uppercase; color:var(--ouro-fundo); margin-bottom:8px; }
 .pyr-notes{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
-.note-chip{ font-family:var(--serif); font-size:.95rem; color:var(--grafite); line-height:1;
-  background:var(--branco-puro); border:1px solid var(--areia); border-radius:30px; padding:5px 12px; }
+.note-chip{ display:inline-flex; align-items:center; gap:6px; font-family:var(--serif); font-size:.95rem;
+  color:var(--grafite); line-height:1; background:var(--branco-puro); border:1px solid var(--areia);
+  border-radius:30px; padding:5px 13px 5px 9px; }
+.note-chip svg{ width:14px; height:14px; color:var(--ouro); flex:0 0 auto; }
 
 /* revela em cascata ao abrir o quick-view */
 .qv .qv-pyramid .pyr-tier{ opacity:0; transform:translateY(10px); }

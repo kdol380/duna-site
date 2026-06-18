@@ -113,10 +113,35 @@ function precoTxt(p){ return temPreco(p) ? `R$ ${p.preco}` : "valor a combinar";
 // nome com marca, para mensagens
 function nomeCompleto(p){ return p.marca ? `${p.marca} ${p.nome}` : p.nome; }
 
-/* pirâmide olfativa visual: 3 faixas (topo→coração→fundo) com notas em chips */
+/* ícones SVG por categoria olfativa (line-art dourado, sem emoji) */
+const IC = {
+  citrus:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17M6 6l12 12M18 6 6 18"/></svg>`,
+  fruta:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 8.5C10.6 6.7 7.8 6.8 6.6 8.7 5 11.3 6 17 9 19c1 .7 2 .3 3-.2 1 .5 2 .9 3 .2 3-2 4-7.7 2.4-10.3-1.2-1.9-4-2-5.4-.2z"/><path d="M12 8.5V5.5c0-1 .8-2 2-2"/></svg>`,
+  flor:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="7.6" r="3"/><circle cx="12" cy="16.4" r="3"/><circle cx="7.6" cy="12" r="3"/><circle cx="16.4" cy="12" r="3"/></svg>`,
+  erva:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M5 19C5 11 11 6 19 6c0 8-6 13-14 13z"/><path d="M5 19c3.5-4.5 7-7 11-8.5"/></svg>`,
+  spice:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 3v18M5 6l14 12M19 6 5 18"/></svg>`,
+  wood:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6"/></svg>`,
+  doce:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="12" rx="8.5" ry="5.5"/><path d="M4.5 10.5c3.5 1.8 11.5 1.8 15 3.5"/></svg>`,
+  ambar:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5c3.8 4.8 5.8 7.8 5.8 10.5a5.8 5.8 0 01-11.6 0c0-2.7 2-5.7 5.8-10.5z"/></svg>`,
+  aqua:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 14c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg>`
+};
+function notaIcone(nota){
+  const N = normaliza(nota), has = (...ks)=>ks.some(k=>N.includes(k));
+  if(has("aquat","marinh","salin"))                                                              return IC.aqua;
+  if(has("pimenta","cardamomo","gengibre","canela","noz","acafrao","anis","especiar","cravo","elemi")) return IC.spice;
+  if(has("rosa","jasmim","peonia","lirio","iris","tuberosa","violeta","flor","laranjeira","magnolia","neroli","gardenia","geranio")) return IC.flor;
+  if(has("lavanda","salvia","hortela","menta","alecrim","manjericao"))                            return IC.erva;
+  if(has("limao","bergamota","toranja","tangerina","lima","citr"))                                return IC.citrus;
+  if(has("abacaxi","maca","pera","lichia","manga","ruibarbo","cassis","fruta","pessego","framboesa","groselha")) return IC.fruta;
+  if(has("cedro","sandalo","madeira","amadeirad","patchouli","vetiver","betula","cipreste","oud","musgo")) return IC.wood;
+  if(has("baunilha","caramelo","praline","mel","cacau","acucar","tonka","cumarina","uisque","creme","cafe","tiramisu","chocolate")) return IC.doce;
+  return IC.ambar; // âmbar, ambroxan, ambargris, labdano, benjoim, almíscar, cashmeran, couro, incenso…
+}
+
+/* pirâmide olfativa visual: 3 faixas (topo→coração→fundo) com notas em chips + ícone */
 function chipsNotas(str){
   return (str||"").split("·").map(n=>n.trim()).filter(Boolean)
-    .map(n=>`<span class="note-chip">${n}</span>`).join("");
+    .map(n=>`<span class="note-chip">${notaIcone(n)}<span>${n}</span></span>`).join("");
 }
 function piramideHTML(p){
   const tier = (cls,label,notas)=>`
