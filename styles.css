@@ -433,8 +433,10 @@ body.page-light .nav-burger span{ background:var(--grafite); }
 .quiz-result{ display:none; text-align:center; animation:fadeUp .7s var(--ease-out); }
 .quiz-result.active{ display:block; }
 .quiz-result .eyebrow{ color:var(--ouro-fundo); }
-.quiz-result .r-bottle{ height:150px; margin:14px auto 10px; }
-.quiz-result .r-bottle svg{ height:100%; }
+.quiz-result .r-bottle{ height:170px; margin:14px auto 10px; display:flex; align-items:center; justify-content:center; }
+.quiz-result .r-bottle svg{ height:100%; width:auto; }
+.quiz-result .r-bottle img{ height:100%; width:auto; max-width:80%; object-fit:contain;
+  filter:drop-shadow(0 12px 22px rgba(38,34,28,.22)); }
 .quiz-result h3{ font-family:var(--serif); font-size:2.6rem; color:var(--grafite); margin:6px 0; }
 .quiz-result .r-fam{ color:var(--ouro-fundo); letter-spacing:.2em; text-transform:uppercase; font-size:.72rem; }
 .quiz-result .r-desc{ color:var(--grafite-60); max-width:440px; margin:16px auto 8px; font-family:var(--serif); font-size:1.15rem; }
