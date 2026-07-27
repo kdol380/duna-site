@@ -72,7 +72,7 @@
   <div class="wrap">
     <p class="crumb"><a href="index.html">Início</a> &nbsp;/&nbsp; Coleção</p>
     <h1>Toda a <span class="gold">coleção</span></h1>
-    <p>Árabes, designer e nicho num só lugar. Filtre por gênero, ocasião e família olfativa — e monte seu pedido.</p>
+    <p>Perfumes selecionados e novidades de cuidado pessoal, organizados para você encontrar o que procura com facilidade.</p>
     <span class="cat-count" id="catCount">—</span>
   </div>
 </section>
@@ -80,6 +80,22 @@
 <!-- ===================== CATÁLOGO ===================== -->
 <section class="cat-main">
   <div class="wrap">
+    <div class="dept-switch" aria-label="Categorias da coleção">
+      <button class="dept-card active" type="button" data-dept="perfumes" aria-pressed="true">
+        <span class="dept-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor"><path d="M11 11h10l2 4v11H9V15l2-4Z"/><path d="M13 11V7h6v4M14 7V4h4v3"/><path d="M12 17h8v6h-8z"/></svg>
+        </span>
+        <span><b>Perfumes</b><small>28 fragrâncias</small></span>
+      </button>
+      <button class="dept-card" type="button" data-dept="skincare" aria-pressed="false">
+        <span class="dept-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor"><path d="M12 9h8l1 17H11l1-17Z"/><path d="M13 9V5h6v4M12 15h9"/><path d="M16 18c2 2 2 4 0 6-2-2-2-4 0-6Z"/></svg>
+        </span>
+        <span><b>Skincare</b><small>6 produtos</small></span>
+      </button>
+    </div>
+
+    <div id="perfumePanel">
     <div class="cat-toolbar">
       <div class="cat-search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
@@ -97,6 +113,47 @@
     </div>
     <div class="filters" id="filters"></div>
     <div class="grid" id="grid"></div>
+    </div>
+
+    <div class="skincare-intro" id="skincarePanel" hidden>
+      <span class="skin-orbit" aria-hidden="true"></span>
+      <p class="eyebrow">Nova curadoria Duna</p>
+      <h2>Ritual de <span class="gold">skincare</span></h2>
+      <p>Cuidados selecionados para complementar sua rotina, em uma coleção própria e separada das fragrâncias.</p>
+      <div class="skin-grid">
+        <article class="skin-card">
+          <div class="skin-photo"><img src="assets/s-dr-althea-345-relief-cream.jpg" alt="Dr. Althea 345 Relief Cream" /></div>
+          <p class="skin-brand">Dr. Althea</p><h3>345 Relief Cream</h3>
+          <p>Creme calmante e hidratante · 50 ml</p><strong class="skin-price">R$ 330</strong><a class="skin-wa" data-product="Dr. Althea 345 Relief Cream" href="#">Pedir pelo WhatsApp</a>
+        </article>
+        <article class="skin-card">
+          <div class="skin-photo"><img src="assets/s-celimax-retinal-shot.jpg" alt="Celimax Retinal Shot Tightening Booster" /></div>
+          <p class="skin-brand">Celimax</p><h3>Retinal Shot Tightening Booster</h3>
+          <p>Sérum firmador com retinal · 15 ml</p><strong class="skin-price">R$ 180</strong><a class="skin-wa" data-product="Celimax Retinal Shot Tightening Booster" href="#">Pedir pelo WhatsApp</a>
+        </article>
+        <article class="skin-card">
+          <div class="skin-photo"><img src="assets/s-medicube-deep-vita-c.webp" alt="Medicube Deep Vita C Capsule Cream" /></div>
+          <p class="skin-brand">Medicube</p><h3>Deep Vita C Capsule Cream</h3>
+          <p>Creme facial com vitamina C · 55 g</p><strong class="skin-price">R$ 230</strong><a class="skin-wa" data-product="Medicube Deep Vita C Capsule Cream" href="#">Pedir pelo WhatsApp</a>
+        </article>
+        <article class="skin-card">
+          <div class="skin-photo"><img src="assets/s-medicube-zero-pore-pad.webp" alt="Medicube Zero Pore Pad" /></div>
+          <p class="skin-brand">Medicube</p><h3>Zero Pore Pad</h3>
+          <p>Discos esfoliantes AHA e BHA · 70 unidades</p><strong class="skin-price">R$ 220</strong><a class="skin-wa" data-product="Medicube Zero Pore Pad" href="#">Pedir pelo WhatsApp</a>
+        </article>
+        <article class="skin-card">
+          <div class="skin-photo"><img src="assets/s-medicube-pdrn-pink-serum.jpg" alt="Medicube PDRN Pink Peptide Serum" /></div>
+          <p class="skin-brand">Medicube</p><h3>PDRN Pink Peptide Serum</h3>
+          <p>Sérum com PDRN e peptídeos · 30 ml</p><strong class="skin-price">R$ 210</strong><a class="skin-wa" data-product="Medicube PDRN Pink Peptide Serum" href="#">Pedir pelo WhatsApp</a>
+        </article>
+        <article class="skin-card is-soldout">
+          <span class="skin-soldout">Esgotado</span>
+          <div class="skin-photo"><img src="assets/s-numbuzin-no9-essence.jpg" alt="Numbuzin No.9 NAD Bio Lifting Essence" /></div>
+          <p class="skin-brand">Numbuzin</p><h3>No.9 NAD Bio Lifting Essence</h3>
+          <p>Essência firmadora · 50 ml</p><strong class="skin-price"><s>R$ 220</s> · Esgotado</strong><a class="skin-wa" data-product="Numbuzin No.9 NAD Bio Lifting Essence — avise-me quando voltar" href="#">Avise-me quando voltar</a>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
