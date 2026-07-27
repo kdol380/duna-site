@@ -27,17 +27,17 @@ const PERFUMES = [
     accent:"#5a5238", foto:"assets/p-club-intense-new.jpg", desc:"O fenômeno árabe: abacaxi esfumado sobre bétula e madeiras. Projeção e fixação enormes — presença que rende elogios o dia inteiro." },
 
   { nome:"Club de Nuit Maleka", marca:"Armaf", inspiracao:"frutado elegante", familia:"Floral", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:335, tamanho:"100 ml · EDP", selo:"Para ela",
+    ocasiao:"especial", intensidade:"marcante", preco:335, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:false,
     notas:{ topo:"Lichia · Bergamota · Pimenta Rosa", coracao:"Íris", fundo:"Praliné · Ambroxan · Sândalo" },
     accent:"#9e4a63", foto:"assets/p-club-maleka.jpg", desc:"Floral-frutado luminoso e moderno: lichia e pimenta rosa sobre íris e praliné. Feminino elegante, do dia à noite." },
 
   { nome:"Odyssey Homme White Edition", marca:"Armaf", inspiracao:"aromático fresco-doce", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"trabalho", intensidade:"equilibrado", preco:235, tamanho:"100 ml · EDP", selo:"Versátil",
+    ocasiao:"trabalho", intensidade:"equilibrado", preco:235, tamanho:"100 ml · EDP", selo:"Versátil", disponivel:false,
     notas:{ topo:"Pimenta Rosa · Cardamomo · Hortelã", coracao:"Sálvia · Notas Aquáticas · Abacaxi", fundo:"Baunilha · Âmbar · Cedro" },
     accent:"#7a8a93", foto:"assets/p-odyssey-white.jpg", desc:"Fresco e doce na medida: especiarias suaves sobre baunilha e madeiras âmbar. Aromático moderno que veste bem em qualquer estação." },
 
   { nome:"Turathi Blue", marca:"Afnan", inspiracao:"aquático fresco", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"dia", intensidade:"equilibrado", preco:285, tamanho:"90 ml · EDP", selo:"Fresco",
+    ocasiao:"dia", intensidade:"equilibrado", preco:285, tamanho:"90 ml · EDP", selo:"Fresco", disponivel:false,
     notas:{ topo:"Bergamota · Toranja · Gengibre", coracao:"Hortelã · Âmbar · Notas Amadeiradas", fundo:"Almíscar · Patchouli · Especiarias" },
     accent:"#2f5a73", foto:"assets/p-turathi-blue.jpg", desc:"Azul, frio e arejado: cítricos e gengibre com fundo amadeirado e almíscar. Coringa fresco para o dia a dia e o calor." },
 
@@ -67,12 +67,12 @@ const PERFUMES = [
     accent:"#3a322a", foto:"assets/p-fakhar-black-new.webp", desc:"Maçã e ervas aromáticas sobre madeiras âmbar — fresco-amadeirado, moderno e elegante. Coringa masculino de ótimo custo." },
 
   { nome:"Nebras Pride", marca:"Lattafa", inspiracao:"baunilha e cacau", familia:"Gourmand", genero:"Unissex", periodo:"Versátil",
-    ocasiao:"noite", intensidade:"marcante", preco:265, tamanho:"100 ml · EDP", selo:"Doce",
+    ocasiao:"noite", intensidade:"marcante", preco:265, tamanho:"100 ml · EDP", selo:"Doce", disponivel:false,
     notas:{ topo:"Frutas Vermelhas · Tangerina", coracao:"Baunilha · Cacau · Rosa", fundo:"Açúcar · Fava Tonka · Âmbar · Almíscar" },
     accent:"#9a6a2a", foto:"assets/p-nebras.jpg", desc:"Baunilha cremosa com cacau e frutas vermelhas. Gourmand doce e aconchegante, com fixação longa." },
 
   { nome:"Zimaya Tiramisu Caramel", marca:"Lattafa", inspiracao:"caramelo cremoso", familia:"Gourmand", genero:"Unissex", periodo:"Noite",
-    ocasiao:"noite", intensidade:"marcante", preco:265, tamanho:"100 ml · EDP", selo:"Gourmand",
+    ocasiao:"noite", intensidade:"marcante", preco:265, tamanho:"100 ml · EDP", selo:"Gourmand", disponivel:false,
     notas:{ topo:"Caramelo", coracao:"Mel · Cumarina · Notas Amadeiradas", fundo:"Baunilha · Uísque · Almíscar" },
     accent:"#8a5a2c", foto:"assets/p-zimaya-tiramisu.jpg", desc:"Sobremesa vestível: caramelo e mel com um toque de uísque sobre baunilha. Doce, cremoso e convidativo." },
 
@@ -87,12 +87,12 @@ const PERFUMES = [
     accent:"#3a6a8a", foto:"assets/p-salvo.jpg", desc:"Fresco, picante e potente: bergamota e ambroxan no estilo coringa. Agrada todo mundo, do dia ao trabalho." },
 
   { nome:"Alpine Homme Sport", marca:"Maison Alhambra", inspiracao:"cítrico esportivo", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
-    ocasiao:"dia", intensidade:"suave", preco:225, tamanho:"100 ml · EDP", selo:"Dia a dia",
+    ocasiao:"dia", intensidade:"suave", preco:225, tamanho:"100 ml · EDP", selo:"Dia a dia", disponivel:false,
     notas:{ topo:"Tangerina · Hortelã · Cipreste · Sálvia", coracao:"Cedro · Pimenta", fundo:"Fava Tonka · Almíscar · Sândalo" },
     accent:"#3f7a6a", foto:"assets/p-alpine-sport.jpg", desc:"Esportivo e revigorante: tangerina e hortelã sobre cedro e almíscar. Frescor leve para o calor e o uso de todo dia." },
 
   { nome:"Rayhaan Elixir", marca:"Rayhaan", inspiracao:"lavanda e baunilha", familia:"Gourmand", genero:"Unissex", periodo:"Noite",
-    ocasiao:"especial", intensidade:"potente", preco:315, tamanho:"100 ml · EDP", selo:"Assinatura",
+    ocasiao:"especial", intensidade:"potente", preco:315, tamanho:"100 ml · EDP", selo:"Assinatura", disponivel:false,
     notas:{ topo:"Hortelã · Bergamota", coracao:"Lavanda · Benjoim", fundo:"Baunilha · Fava Tonka" },
     accent:"#7a3a2a", foto:"assets/p-rayhaan-elixir.jpg", desc:"Lavanda e baunilha cremosa com mel de benjoim — doce, aromático e potente. Assinatura marcante para a noite." },
 
@@ -147,7 +147,7 @@ const PERFUMES = [
     accent:"#201f21", foto:"assets/p-rayhaan-obsidian.jpg", desc:"Íris elegante e atalcada sobre couro, oud e madeiras cremosas. Sofisticado para encontros e ocasiões especiais." },
 
   { nome:"Aquatica", marca:"Rayhaan", inspiracao:"lima, coco e rum", familia:"Gourmand", genero:"Masculino", periodo:"Dia",
-    ocasiao:"dia", intensidade:"equilibrado", preco:380, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"dia", intensidade:"equilibrado", preco:380, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     notas:{ topo:"Lima · Leite de Coco · Bergamota · Tangerina", coracao:"Cana-de-açúcar · Jasmim · Hibisco · Gardênia", fundo:"Rum · Almíscar · Fava Tonka · Patchouli" },
     accent:"#40aeb6", foto:"assets/p-rayhaan-aquatica.webp", desc:"Lima vibrante e coco cremoso com cana-de-açúcar e rum. Tropical, diferente e feito para dias de sol." },
 
