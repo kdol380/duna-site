@@ -152,7 +152,7 @@ const PERFUMES = [
     accent:"#40aeb6", foto:"assets/p-rayhaan-aquatica.webp", desc:"Lima vibrante e coco cremoso com cana-de-açúcar e rum. Tropical, diferente e feito para dias de sol." },
 
   { nome:"Azul", marca:"Rayhaan", inspiracao:"cítrico aquático minimalista", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
-    ocasiao:"dia", intensidade:"suave", preco:360, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"dia", intensidade:"suave", preco:360, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     notas:{ topo:"Bergamota · Limão", coracao:"Flor de Toranja", fundo:"Calone · Sândalo" },
     accent:"#1d6584", foto:"assets/p-rayhaan-azul.jpg", desc:"Limão e bergamota em uma construção limpa, aquática e amadeirada. Refrescante, direto e perfeito para calor intenso." },
 
