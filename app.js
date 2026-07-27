@@ -229,6 +229,8 @@ function waProduto(p){
   const el = document.getElementById(id);
   if(el) el.href = waLink(CONFIG.msgGeral);
 });
+const waSpecial = document.getElementById("waSpecial");
+if(waSpecial) waSpecial.href = waLink("Olá, Duna! Quero cotar uma encomenda especial. O perfume/marca que procuro é: ");
 
 /* =====================================================================
    🧴  FRASCO — foto do produto ou SVG line-art dourado

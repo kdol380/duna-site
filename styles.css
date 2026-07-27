@@ -379,11 +379,31 @@ header.nav.scrolled .nav-logo .emblem{ height:32px; }
 }
 .cat-main .filters{ margin-bottom:40px; }
 
+/* página exclusiva de skincare */
+.skincare-page{max-width:1180px;min-height:0;margin:0 auto;padding:72px 7%;}
+.skincare-page .skin-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+.skincare-page::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.34) 49%,transparent 63%);transform:translateX(-100%);animation:skinSheen 9s ease-in-out infinite;}
+@keyframes skinSheen{0%,65%{transform:translateX(-100%)}85%,100%{transform:translateX(100%)}}
+
+/* encomendas especiais — destaque logo após o hero */
+.special-order{padding:64px 0;background:var(--branco-q);overflow:hidden;}
+.special-order-card{position:relative;display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:36px;padding:38px 44px;border:1px solid rgba(205,171,99,.35);background:linear-gradient(120deg,#191611 0%,#2a2419 58%,#3d321d 100%);box-shadow:0 26px 70px rgba(38,30,18,.18);overflow:hidden;}
+.special-order-card::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 15%,rgba(205,171,99,.2),transparent 32%);pointer-events:none;}
+.special-order-art{position:relative;width:130px;height:130px;display:grid;place-items:center;color:var(--ouro-claro);z-index:1;}
+.special-order-art svg{width:65px;stroke-width:1;filter:drop-shadow(0 0 18px rgba(205,171,99,.3));}
+.so-ring{position:absolute;border:1px solid rgba(205,171,99,.27);border-radius:50%;animation:soPulse 4.5s ease-in-out infinite;}.so-ring-1{inset:5px}.so-ring-2{inset:22px;animation-delay:-2.2s}
+@keyframes soPulse{50%{transform:scale(1.08);opacity:.45}}
+.special-order-copy{position:relative;z-index:1;max-width:670px}.special-order-copy .eyebrow{color:var(--ouro-claro);margin-bottom:8px}.special-order-copy h2{color:var(--branco-q);font-size:clamp(2rem,3.6vw,3.35rem);font-weight:500}.special-order-copy h2 em{color:var(--ouro-claro);font-weight:500}.special-order-copy>p:not(.eyebrow){color:rgba(246,240,225,.7);max-width:650px;margin-top:13px;font-size:.93rem}.special-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.special-tags span{padding:5px 11px;border:1px solid rgba(205,171,99,.28);color:rgba(246,240,225,.74);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase}.special-order-btn{position:relative;z-index:1;white-space:nowrap;min-width:230px;justify-content:center}.special-order-btn svg{width:18px;margin-left:8px}
+@media(max-width:980px){.special-order-card{grid-template-columns:110px 1fr}.special-order-btn{grid-column:2;justify-self:start}.special-order-art{width:105px;height:105px}}
+@media(max-width:640px){.skincare-page{padding:50px 20px}.skincare-page .skin-grid{grid-template-columns:1fr}.special-order{padding:38px 0}.special-order-card{grid-template-columns:1fr;padding:34px 26px;text-align:center;gap:20px}.special-order-art{margin:auto}.special-order-copy>p:not(.eyebrow){font-size:.86rem}.special-tags{justify-content:center}.special-order-btn{grid-column:1;justify-self:stretch;min-width:0}}
+
 /* página de fundo claro no topo (catálogo): navbar sempre legível */
 body.page-light .nav{ background:rgba(246,240,225,.92); border-bottom:1px solid rgba(176,138,60,.22);
   -webkit-backdrop-filter:blur(14px) saturate(1.1); backdrop-filter:blur(14px) saturate(1.1); padding:13px 28px; }
 body.page-light .nav-links a{ color:var(--grafite-60); }
 body.page-light .nav-links a:hover{ color:var(--grafite); }
+body.page-light .nav-links a[aria-current="page"]{color:var(--ouro-fundo);}
+body.page-light .nav-links a[aria-current="page"]::after{transform:scaleX(1);}
 body.page-light .nav-logo .s{ color:var(--ouro-fundo); }
 body.page-light .nav-burger span{ background:var(--grafite); }
 
