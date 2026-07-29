@@ -22,7 +22,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 // preco: null  →  mostra "Sob consulta" (troque pelo valor, ex: preco:199, quando tiver os preços)
 const PERFUMES = [
   { nome:"Club de Nuit Intense Man", marca:"Armaf", inspiracao:"frutado esfumado", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"potente", preco:250, tamanho:"105 ml · EDT", selo:"Ícone",
+    ocasiao:"especial", intensidade:"potente", preco:250, tamanho:"105 ml · EDT", selo:"Ícone", disponivel:false,
     notas:{ topo:"Abacaxi · Limão · Cassis · Maçã", coracao:"Bétula · Jasmim · Rosa", fundo:"Almíscar · Ambargris · Patchouli · Baunilha" },
     accent:"#5a5238", foto:"assets/p-club-intense-new.jpg", desc:"O fenômeno árabe: abacaxi esfumado sobre bétula e madeiras. Projeção e fixação enormes — presença que rende elogios o dia inteiro." },
 
@@ -77,12 +77,12 @@ const PERFUMES = [
     accent:"#8a5a2c", foto:"assets/p-zimaya-tiramisu.jpg", desc:"Sobremesa vestível: caramelo e mel com um toque de uísque sobre baunilha. Doce, cremoso e convidativo." },
 
   { nome:"Delilah", marca:"Maison Alhambra", inspiracao:"rosa e ruibarbo", familia:"Floral", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:250, tamanho:"100 ml · EDP", selo:"Para ela",
+    ocasiao:"especial", intensidade:"marcante", preco:250, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:false,
     notas:{ topo:"Ruibarbo · Lichia · Bergamota", coracao:"Rosa Turca · Peônia · Lírio", fundo:"Almíscar Branco · Cashmeran · Baunilha" },
     accent:"#b06a85", foto:"assets/p-delilah.jpg", desc:"Floral-frutado rosado e radiante: ruibarbo e lichia sobre rosa e baunilha. Feminino elogiadíssimo e versátil." },
 
   { nome:"Salvo", marca:"Maison Alhambra", inspiracao:"fresco especiado", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"dia", intensidade:"marcante", preco:195, tamanho:"100 ml · EDP", selo:"Coringa",
+    ocasiao:"dia", intensidade:"marcante", preco:195, tamanho:"100 ml · EDP", selo:"Coringa", disponivel:false,
     notas:{ topo:"Bergamota", coracao:"Lavanda · Pimenta de Sichuan · Anis Estrelado · Noz-moscada", fundo:"Ambroxan · Baunilha" },
     accent:"#3a6a8a", foto:"assets/p-salvo.jpg", desc:"Fresco, picante e potente: bergamota e ambroxan no estilo coringa. Agrada todo mundo, do dia ao trabalho." },
 
@@ -137,7 +137,7 @@ const PERFUMES = [
     accent:"#d8d4c9", foto:"assets/p-maahir-honor.jpg", desc:"Cítricos, hortelã e ervas aromáticas com acabamento limpo de almíscar, cedro e âmbar. Refinado e muito fresco." },
 
   { nome:"Sabah Al Ward", marca:"Al Wataniah", inspiracao:"floral gourmand com cacau", familia:"Floral", genero:"Feminino", periodo:"Noite",
-    ocasiao:"especial", intensidade:"marcante", preco:190, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"especial", intensidade:"marcante", preco:190, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     notas:{ topo:"Pimenta Rosa · Tangerina", coracao:"Cacau · Flor de Laranjeira · Jasmim Sambac", fundo:"Baunilha · Fava Tonka · Patchouli" },
     accent:"#8b2448", foto:"assets/p-sabah-al-ward.jpg", desc:"Jasmim e flor de laranjeira ganham profundidade com cacau, baunilha e tonka. Feminino, doce e marcante." },
 
