@@ -57,7 +57,7 @@ const PERFUMES = [
     accent:"#4a4a6a", foto:"assets/p-thunder.jpg", desc:"Íris aveludada e levemente empoeirada sobre baunilha e madeiras. Elegante, cremoso e sofisticado — ótima presença." },
 
   { nome:"Fakhar (Gold)", marca:"Lattafa", inspiracao:"tuberosa amadeirada", familia:"Floral", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"trabalho", intensidade:"equilibrado", preco:265, tamanho:"100 ml · EDP", selo:"Para ela",
+    ocasiao:"trabalho", intensidade:"equilibrado", preco:265, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:false,
     notas:{ topo:"Tuberosa · Notas Salinas", coracao:"Âmbar · Fava Tonka · Cashmeran", fundo:"Cedro · Vetiver · Labdano" },
     accent:"#c2a24e", foto:"assets/p-fakhar-gold-new.webp", desc:"Tuberosa cremosa com toque salino sobre âmbar e madeiras. Feminino moderno, macio e sofisticado." },
 
