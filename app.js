@@ -298,10 +298,16 @@ function passaBusca(p){
 }
 function ordenar(list){
   const arr = list.slice();
-  if(ordem==="padrao")          arr.sort((a,b)=> Number(b.selo==="Novo") - Number(a.selo==="Novo"));
-  else if(ordem==="preco-asc")  arr.sort((a,b)=> (temPreco(a)?a.preco:Infinity) - (temPreco(b)?b.preco:Infinity));
-  else if(ordem==="preco-desc") arr.sort((a,b)=> (temPreco(b)?b.preco:-Infinity) - (temPreco(a)?a.preco:-Infinity));
-  else if(ordem==="nome")       arr.sort((a,b)=> nomeCompleto(a).localeCompare(nomeCompleto(b), "pt"));
+  arr.sort((a,b)=>{
+    // Produtos disponíveis sempre aparecem antes dos esgotados.
+    const estoque = Number(estaDisponivel(b)) - Number(estaDisponivel(a));
+    if(estoque) return estoque;
+    if(ordem==="padrao")          return Number(b.selo==="Novo") - Number(a.selo==="Novo");
+    if(ordem==="preco-asc")       return (temPreco(a)?a.preco:Infinity) - (temPreco(b)?b.preco:Infinity);
+    if(ordem==="preco-desc")      return (temPreco(b)?b.preco:-Infinity) - (temPreco(a)?a.preco:-Infinity);
+    if(ordem==="nome")            return nomeCompleto(a).localeCompare(nomeCompleto(b), "pt");
+    return 0;
+  });
   return arr;
 }
 
