@@ -32,7 +32,7 @@ const PERFUMES = [
     accent:"#9e4a63", foto:"assets/p-club-maleka.jpg", desc:"Floral-frutado luminoso e moderno: lichia e pimenta rosa sobre íris e praliné. Feminino elegante, do dia à noite." },
 
   { nome:"Odyssey Homme White Edition", marca:"Armaf", inspiracao:"aromático fresco-doce", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"trabalho", intensidade:"equilibrado", preco:235, tamanho:"100 ml · EDP", selo:"Versátil", disponivel:false,
+    ocasiao:"trabalho", intensidade:"equilibrado", preco:270, tamanho:"100 ml · EDP", selo:"Versátil",
     notas:{ topo:"Pimenta Rosa · Cardamomo · Hortelã", coracao:"Sálvia · Notas Aquáticas · Abacaxi", fundo:"Baunilha · Âmbar · Cedro" },
     accent:"#7a8a93", foto:"assets/p-odyssey-white.jpg", desc:"Fresco e doce na medida: especiarias suaves sobre baunilha e madeiras âmbar. Aromático moderno que veste bem em qualquer estação." },
 
@@ -82,7 +82,7 @@ const PERFUMES = [
     accent:"#b06a85", foto:"assets/p-delilah.jpg", desc:"Floral-frutado rosado e radiante: ruibarbo e lichia sobre rosa e baunilha. Feminino elogiadíssimo e versátil." },
 
   { nome:"Salvo", marca:"Maison Alhambra", inspiracao:"fresco especiado", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"dia", intensidade:"marcante", preco:195, tamanho:"100 ml · EDP", selo:"Coringa", disponivel:false,
+    ocasiao:"dia", intensidade:"marcante", preco:200, tamanho:"100 ml · EDP", selo:"Coringa",
     notas:{ topo:"Bergamota", coracao:"Lavanda · Pimenta de Sichuan · Anis Estrelado · Noz-moscada", fundo:"Ambroxan · Baunilha" },
     accent:"#3a6a8a", foto:"assets/p-salvo.jpg", desc:"Fresco, picante e potente: bergamota e ambroxan no estilo coringa. Agrada todo mundo, do dia ao trabalho." },
 
@@ -92,7 +92,7 @@ const PERFUMES = [
     accent:"#3f7a6a", foto:"assets/p-alpine-sport.jpg", desc:"Esportivo e revigorante: tangerina e hortelã sobre cedro e almíscar. Frescor leve para o calor e o uso de todo dia." },
 
   { nome:"Rayhaan Elixir", marca:"Rayhaan", inspiracao:"lavanda e baunilha", familia:"Gourmand", genero:"Unissex", periodo:"Noite",
-    ocasiao:"especial", intensidade:"potente", preco:315, tamanho:"100 ml · EDP", selo:"Assinatura", disponivel:false,
+    ocasiao:"especial", intensidade:"potente", preco:290, tamanho:"100 ml · EDP", selo:"Assinatura",
     notas:{ topo:"Hortelã · Bergamota", coracao:"Lavanda · Benjoim", fundo:"Baunilha · Fava Tonka" },
     accent:"#7a3a2a", foto:"assets/p-rayhaan-elixir.jpg", desc:"Lavanda e baunilha cremosa com mel de benjoim — doce, aromático e potente. Assinatura marcante para a noite." },
 
@@ -147,7 +147,7 @@ const PERFUMES = [
     accent:"#201f21", foto:"assets/p-rayhaan-obsidian.jpg", desc:"Íris elegante e atalcada sobre couro, oud e madeiras cremosas. Sofisticado para encontros e ocasiões especiais." },
 
   { nome:"Aquatica", marca:"Rayhaan", inspiracao:"lima, coco e rum", familia:"Gourmand", genero:"Masculino", periodo:"Dia",
-    ocasiao:"dia", intensidade:"equilibrado", preco:380, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
+    ocasiao:"dia", intensidade:"equilibrado", preco:380, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Lima · Leite de Coco · Bergamota · Tangerina", coracao:"Cana-de-açúcar · Jasmim · Hibisco · Gardênia", fundo:"Rum · Almíscar · Fava Tonka · Patchouli" },
     accent:"#40aeb6", foto:"assets/p-rayhaan-aquatica.webp", desc:"Lima vibrante e coco cremoso com cana-de-açúcar e rum. Tropical, diferente e feito para dias de sol." },
 
@@ -159,7 +159,37 @@ const PERFUMES = [
   { nome:"Delilah Blanc", marca:"Maison Alhambra", inspiracao:"floral branco cremoso", familia:"Floral", genero:"Feminino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:250, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Bergamota · Laranja · Pêssego", coracao:"Tuberosa · Jasmim · Néroli", fundo:"Baunilha · Almíscar Branco · Sândalo" },
-    accent:"#d9d7d0", foto:"assets/p-delilah-blanc.webp", desc:"Floral branco limpo e cremoso, com cítricos suaves e fundo de baunilha, almíscar e sândalo. Elegante e confortável." }
+    accent:"#d9d7d0", foto:"assets/p-delilah-blanc.webp", desc:"Floral branco limpo e cremoso, com cítricos suaves e fundo de baunilha, almíscar e sândalo. Elegante e confortável." },
+
+  { nome:"Sabah Al Ward Sugar", marca:"Al Wataniah", inspiracao:"frutas vermelhas e baunilha", familia:"Gourmand", genero:"Feminino", periodo:"Versátil",
+    ocasiao:"especial", intensidade:"marcante", preco:180, tamanho:"100 ml · EDP", selo:"Novo",
+    notas:{ topo:"Morango · Framboesa · Mirtilo · Cassis · Cereja", coracao:"Jasmim · Violeta", fundo:"Almíscar · Pétalas de Rosa · Baunilha · Musgo de Carvalho · Âmbar · Cashmeran · Patchouli" },
+    accent:"#d98e9e", foto:"assets/p-sabah-sugar.webp", desc:"Um floral gourmand jovem e feminino, com um coquetel suculento de frutas vermelhas, flores delicadas e fundo cremoso de baunilha e almíscar." },
+
+  { nome:"Atheeri", marca:"Lattafa", inspiracao:"floral orvalhado e cremoso", familia:"Floral", genero:"Feminino", periodo:"Dia",
+    ocasiao:"trabalho", intensidade:"equilibrado", preco:430, tamanho:"100 ml · EDP", selo:"Novo",
+    notas:{ topo:"Flor de Maracujá · Gotas de Orvalho", coracao:"Orquídea · Jasmim", fundo:"Baunilha · Amberwood" },
+    accent:"#c79635", foto:"assets/p-atheeri.webp", desc:"Floral etéreo e luminoso: flores úmidas pelo orvalho encontram orquídea, jasmim e uma base macia de baunilha e madeiras âmbar." },
+
+  { nome:"Tharwah Gold", marca:"Lattafa Pride", inspiracao:"lavanda, flores brancas e baunilha", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+    ocasiao:"especial", intensidade:"marcante", preco:390, tamanho:"100 ml · EDP", selo:"Novo",
+    notas:{ topo:"Lavanda · Bergamota", coracao:"Flor de Laranjeira · Jasmim", fundo:"Baunilha · Vetiver · Âmbar" },
+    accent:"#d5a33e", foto:"assets/p-tharwah-gold.jpg", desc:"Doce floral sofisticado, com lavanda e bergamota sobre flores brancas e uma base quente de baunilha, âmbar e vetiver." },
+
+  { nome:"B.A.D Femme", marca:"Maison Alhambra", inspiracao:"café, flores brancas e praliné", familia:"Gourmand", genero:"Feminino", periodo:"Noite",
+    ocasiao:"especial", intensidade:"potente", preco:170, tamanho:"100 ml · EDP", selo:"Novo",
+    notas:{ topo:"Bergamota · Amêndoa · Café · Limão", coracao:"Tuberosa · Flor de Laranjeira · Jasmim Sambac · Rosa Búlgara · Íris", fundo:"Fava Tonka · Baunilha · Almíscar · Cacau · Praliné · Sândalo · Cashmeran · Âmbar · Patchouli · Cedro · Canela" },
+    accent:"#42321f", foto:"assets/p-bad-femme.webp", desc:"Gourmand floral intenso: café e amêndoa abrem caminho para flores brancas, praliné, cacau e baunilha. Sensual e marcante para a noite." },
+
+  { nome:"Pink Eclipse", marca:"Maison Alhambra", inspiracao:"floral frutado ambarado", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+    ocasiao:"trabalho", intensidade:"equilibrado", preco:315, tamanho:"100 ml · EDP", selo:"Novo",
+    notas:{ topo:"Pera · Bergamota · Tangerina", coracao:"Flor de Laranjeira · Jasmim · Néroli", fundo:"Baunilha · Almíscar · Âmbar · Benjoim" },
+    accent:"#da8fa5", foto:"assets/p-pink-eclipse.webp", desc:"Feminino moderno e luminoso, com frutas cítricas, flores brancas e um fundo doce e confortável de baunilha, âmbar e benjoim." },
+
+  { nome:"Hawas for Him", marca:"Rasasi", inspiracao:"aquático frutado e especiado", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
+    ocasiao:"dia", intensidade:"marcante", preco:230, tamanho:"100 ml · EDP", selo:"Novo",
+    notas:{ topo:"Maçã · Bergamota · Limão · Canela", coracao:"Notas Aquáticas · Ameixa · Flor de Laranjeira · Cardamomo", fundo:"Ambargris · Almíscar · Madeira Flutuante · Patchouli" },
+    accent:"#6f79a4", foto:"assets/p-hawas-for-him.webp", desc:"Ícone aquático masculino, combina cítricos, maçã e canela com ameixa, notas marinhas e madeiras. Fresco, potente e extremamente versátil." }
 ];
 
 /* =====================================================================
