@@ -1,7 +1,7 @@
 # Guia de atualização do site Duna Fragrâncias
 
-- **Responsável final:** Josué
-- **Execução:** colaboradora com apoio do Codex
+- **Responsáveis autorizados:** Josué e Isac (`@isacrezendemarques380`)
+- **Execução:** Josué ou Isac com apoio do Codex
 - **Última atualização:** 11/08/2026
 **Revisão:** sempre que o catálogo ou a forma de publicação mudar
 
@@ -15,7 +15,7 @@ Este processo cobre alterações de perfumes, skincare, preços, disponibilidade
 
 Não cobre compartilhamento de senhas, cobrança do Netlify, compra ou configuração de domínio e mudanças comerciais sem confirmação do responsável.
 
-## O que a colaboradora precisa
+## O que cada responsável precisa
 
 1. Uma conta própria no GitHub.
 2. Aceitar o convite para o repositório `kdol380/duna-site`.
@@ -26,13 +26,13 @@ Nunca compartilhe senhas ou códigos de acesso. Cada pessoa usa sua própria con
 
 ## Responsabilidades
 
-| Etapa | Colaboradora | Codex | Josué | Netlify |
+| Etapa | Isac | Codex | Josué | Netlify |
 |---|---|---|---|---|
-| Informar a mudança | Responsável | Ajuda a identificar dados faltantes | Pode solicitar ou confirmar | — |
+| Informar a mudança | Pode solicitar | Ajuda a identificar dados faltantes | Pode solicitar | — |
 | Alterar o site | Acompanha | Executa e verifica | — | — |
-| Conferir preço e estoque | Primeira conferência | Mostra exatamente o que mudou | Aprovação final | — |
-| Aprovar a publicação | — | Prepara o Pull Request | Responsável final | — |
-| Colocar no ar | — | — | Aprova a integração | Publica automaticamente depois de conectado ao GitHub |
+| Conferir preço e estoque | Autorizado | Mostra exatamente o que mudou | Autorizado | — |
+| Aprovar a publicação | Autorizado | Prepara o Pull Request | Autorizado | — |
+| Colocar no ar | Aprova a integração | — | Aprova a integração | Publica automaticamente depois de conectado ao GitHub |
 
 ## Fluxo simples
 
@@ -43,7 +43,7 @@ Codex atualiza uma branch separada
         ↓
 Codex testa e envia para revisão no GitHub
         ↓
-Josué confere o link de teste do Netlify
+Josué ou Isac confere o link de teste do Netlify
         ↓
 Aprovação e publicação no site oficial
 ```
@@ -74,7 +74,7 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 
 ### 1. Abrir e sincronizar
 
-**Quem:** colaboradora com apoio do Codex
+**Quem:** Josué ou Isac com apoio do Codex
 
 **Quando:** antes de toda atualização
 
@@ -84,7 +84,7 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 
 ### 2. Informar os dados
 
-**Quem:** colaboradora
+**Quem:** Josué ou Isac
 
 **Quando:** depois da sincronização
 
@@ -104,7 +104,7 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 
 ### 4. Enviar para revisão
 
-**Quem:** Codex com autorização da colaboradora
+**Quem:** Codex com autorização de quem solicitou a atualização
 
 **Quando:** depois dos testes
 
@@ -114,7 +114,7 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 
 ### 5. Aprovar e publicar
 
-**Quem:** Josué
+**Quem:** Josué ou Isac
 
 **Quando:** depois de conferir o Pull Request e a prévia
 

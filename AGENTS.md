@@ -7,6 +7,7 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 - Este repositório é a fonte oficial do site Duna Fragrâncias.
 - O site é estático: HTML, CSS e JavaScript, sem etapa de build.
 - A branch de produção é `main`. Depois que o deploy contínuo estiver conectado, o Netlify publicará essa branch.
+- Josué e o colaborador `@isacrezendemarques380` estão autorizados a revisar e integrar atualizações.
 - Mudanças de colaboradores devem ser feitas em uma branch própria e enviadas por Pull Request.
 - Nunca envie diretamente para `main` quando houver outra pessoa revisando o trabalho.
 
@@ -64,7 +65,7 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
    - preço, estoque, busca, filtros e botão do WhatsApp afetados;
    - visualização em celular e desktop quando houver mudança visual.
 6. Explique claramente o que mudou e o que foi verificado.
-7. Quando autorizado a enviar a atualização, faça commit na branch, envie ao GitHub e abra um Pull Request. Aguarde revisão antes de integrar à `main`.
+7. Quando autorizado a enviar a atualização, faça commit na branch, envie ao GitHub e abra um Pull Request. A revisão e a integração à `main` podem ser feitas por Josué ou por `@isacrezendemarques380`.
 
 ## Critérios para concluir
 
