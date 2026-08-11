@@ -147,7 +147,7 @@ const PERFUMES = [
     accent:"#201f21", foto:"assets/p-rayhaan-obsidian.jpg", desc:"Íris elegante e atalcada sobre couro, oud e madeiras cremosas. Sofisticado para encontros e ocasiões especiais." },
 
   { nome:"Aquatica", marca:"Rayhaan", inspiracao:"lima, coco e rum", familia:"Gourmand", genero:"Masculino", periodo:"Dia",
-    ocasiao:"dia", intensidade:"equilibrado", preco:380, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"dia", intensidade:"equilibrado", preco:380, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     notas:{ topo:"Lima · Leite de Coco · Bergamota · Tangerina", coracao:"Cana-de-açúcar · Jasmim · Hibisco · Gardênia", fundo:"Rum · Almíscar · Fava Tonka · Patchouli" },
     accent:"#40aeb6", foto:"assets/p-rayhaan-aquatica.webp", desc:"Lima vibrante e coco cremoso com cana-de-açúcar e rum. Tropical, diferente e feito para dias de sol." },
 
