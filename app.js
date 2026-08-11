@@ -62,7 +62,7 @@ const PERFUMES = [
     accent:"#c2a24e", foto:"assets/p-fakhar-gold-new.webp", desc:"Tuberosa cremosa com toque salino sobre âmbar e madeiras. Feminino moderno, macio e sofisticado." },
 
   { nome:"Fakhar (Black)", marca:"Lattafa", inspiracao:"aromático fresco", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"trabalho", intensidade:"marcante", preco:220, tamanho:"100 ml · EDP", selo:"Para ele",
+    ocasiao:"trabalho", intensidade:"marcante", preco:220, tamanho:"100 ml · EDP", selo:"Para ele", disponivel:false,
     notas:{ topo:"Maçã · Bergamota · Gengibre", coracao:"Lavanda · Sálvia · Gerânio", fundo:"Fava Tonka · Cedro · Âmbar" },
     accent:"#3a322a", foto:"assets/p-fakhar-black-new.webp", desc:"Maçã e ervas aromáticas sobre madeiras âmbar — fresco-amadeirado, moderno e elegante. Coringa masculino de ótimo custo." },
 
@@ -172,7 +172,7 @@ const PERFUMES = [
     accent:"#c79635", foto:"assets/p-atheeri.webp", desc:"Floral etéreo e luminoso: flores úmidas pelo orvalho encontram orquídea, jasmim e uma base macia de baunilha e madeiras âmbar." },
 
   { nome:"Tharwah Gold", marca:"Lattafa Pride", inspiracao:"lavanda, flores brancas e baunilha", familia:"Floral", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:390, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"especial", intensidade:"marcante", preco:390, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     notas:{ topo:"Lavanda · Bergamota", coracao:"Flor de Laranjeira · Jasmim", fundo:"Baunilha · Vetiver · Âmbar" },
     accent:"#d5a33e", foto:"assets/p-tharwah-gold.jpg", desc:"Doce floral sofisticado, com lavanda e bergamota sobre flores brancas e uma base quente de baunilha, âmbar e vetiver." },
 
