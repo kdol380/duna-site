@@ -167,7 +167,7 @@ const PERFUMES = [
     accent:"#d98e9e", foto:"assets/p-sabah-sugar.webp", desc:"Um floral gourmand jovem e feminino, com um coquetel suculento de frutas vermelhas, flores delicadas e fundo cremoso de baunilha e almíscar." },
 
   { nome:"Atheeri", marca:"Lattafa", inspiracao:"floral orvalhado e cremoso", familia:"Floral", genero:"Feminino", periodo:"Dia",
-    ocasiao:"trabalho", intensidade:"equilibrado", preco:430, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"trabalho", intensidade:"equilibrado", preco:430, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     notas:{ topo:"Flor de Maracujá · Gotas de Orvalho", coracao:"Orquídea · Jasmim", fundo:"Baunilha · Amberwood" },
     accent:"#c79635", foto:"assets/p-atheeri.webp", desc:"Floral etéreo e luminoso: flores úmidas pelo orvalho encontram orquídea, jasmim e uma base macia de baunilha e madeiras âmbar." },
 
