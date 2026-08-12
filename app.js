@@ -107,7 +107,7 @@ const PERFUMES = [
     accent:"#1395a3", foto:"assets/p-pacific-aura.jpg", desc:"Refrescante e vibrante, combina cítricos, hortelã e cassis com um fundo moderno de figo e âmbar. Ideal para dias quentes." },
 
   { nome:"Chants Tenderina", marca:"Maison Alhambra", inspiracao:"floral frutado delicado", familia:"Floral", genero:"Feminino", periodo:"Dia",
-    ocasiao:"dia", intensidade:"suave", preco:200, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"dia", intensidade:"suave", preco:200, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     notas:{ topo:"Bergamota · Flor de Toranja · Pêssego", coracao:"Rosa · Jasmim · Íris", fundo:"Almíscar Branco · Baunilha · Vetiver · Patchouli" },
     accent:"#d9a8b4", foto:"assets/p-chants-tenderina.webp", desc:"Floral limpo e feminino, com pêssego, rosa e almíscar branco. Leve, confortável e perfeito para o uso diário." },
 
