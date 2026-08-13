@@ -199,7 +199,8 @@ function waLink(msg){
   return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(msg);
 }
 
-const WA_BALAO_ICON = `<svg class="ic-wa-balao" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.1-.5 0a6.5 6.5 0 01-1.9-1.2 7.3 7.3 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4a.4.4 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1A5 5 0 009 12.5a11 11 0 004.2 3.7c.6.2 1 .4 1.4.5a3.3 3.3 0 001.5.1c.5-.1 1.4-.6 1.6-1.1s.2-1 .1-1.1z"/></svg>`;
+const WHATSAPP_ICON = `<svg class="ic-wa-balao" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.1-.5 0a6.5 6.5 0 01-1.9-1.2 7.3 7.3 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4a.4.4 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1A5 5 0 009 12.5a11 11 0 004.2 3.7c.6.2 1 .4 1.4.5a3.3 3.3 0 001.5.1c.5-.1 1.4-.6 1.6-1.1s.2-1 .1-1.1z"/></svg>`;
+const BALAO_MENSAGEM_ICON = `<svg class="ic-message-bubble" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H7l-5 2 1.5-4.5A9 9 0 1 1 21 12Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12h.01M12 12h.01M16 12h.01" stroke-width="2.5" stroke-linecap="round"/></svg>`;
 function waAvisoEstoque(nome){
   return waLink(`Olá, Duna! Gostaria de saber sobre a disponibilidade do ${nome}, avise-me quando o produto voltar ao estoque !`);
 }
@@ -387,7 +388,7 @@ function cardHTML(p,i){
         <svg class="ic-add" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
         <span class="lbl">Adicionar</span>
       </button>` : `<a class="card-wa card-notify" href="${waAvisoEstoque(nomeCompleto(p))}" target="_blank" rel="noopener">
-        ${WA_BALAO_ICON}<span class="lbl">Avise-me quando voltar</span>
+        ${BALAO_MENSAGEM_ICON}<span class="lbl">Avise-me quando voltar</span>
       </a>`}
     </div>
   </article>`;
@@ -465,7 +466,7 @@ document.querySelectorAll(".skin-wa[data-product]").forEach(link=>{
   link.href = waAvisoEstoque(link.dataset.product);
   link.target = "_blank";
   link.rel = "noopener";
-  link.insertAdjacentHTML("afterbegin", WA_BALAO_ICON);
+  link.insertAdjacentHTML("afterbegin", BALAO_MENSAGEM_ICON);
 });
 
 if(grid){
@@ -870,8 +871,7 @@ qvWrap.innerHTML = `
             Adicionar ao pedido
           </button>
           <a class="btn btn-line-dark" id="qvWa" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm4.4 12c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.1-.5 0a6.5 6.5 0 01-1.9-1.2 7.3 7.3 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4a.4.4 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1A5 5 0 009 12.5a11 11 0 004.2 3.7c1.6.6 1.9.5 2.3.5s1.4-.6 1.6-1.1.2-1 .1-1.1z"/></svg>
-            Pedir agora
+            ${WHATSAPP_ICON}<span>Pedir agora</span>
           </a>
         </div>
       </div>
@@ -905,7 +905,7 @@ function openQuickView(nome){
   qvAdd.lastChild.textContent = disponivel ? " Adicionar ao pedido" : " Esgotado no momento";
   const qvWa = document.getElementById("qvWa");
   qvWa.href = disponivel ? waProduto(p) : waAvisoEstoque(nomeCompleto(p));
-  qvWa.lastChild.textContent = disponivel ? " Pedir agora" : " Avise-me quando voltar";
+  qvWa.innerHTML = `${disponivel ? WHATSAPP_ICON : BALAO_MENSAGEM_ICON}<span>${disponivel ? "Pedir agora" : "Avise-me quando voltar"}</span>`;
   qvEl.setAttribute("aria-label", `Detalhes de ${p.nome}`);
   qvEl.classList.add("open"); qvOverlay.classList.add("open");
   qvEl.setAttribute("aria-hidden","false");
@@ -997,7 +997,7 @@ skinQvWrap.innerHTML = `
           <span id="skinQvSize"></span><strong id="skinQvPrice"></strong>
         </div>
         <button class="btn btn-gold skin-qv-action" id="skinQvAdd" type="button">+ Adicionar ao pedido</button>
-        <a class="btn btn-gold skin-qv-action" id="skinQvNotify" href="#" target="_blank" rel="noopener">${WA_BALAO_ICON}<span>Avise-me quando voltar</span></a>
+        <a class="btn btn-gold skin-qv-action" id="skinQvNotify" href="#" target="_blank" rel="noopener">${BALAO_MENSAGEM_ICON}<span>Avise-me quando voltar</span></a>
         <p class="skin-qv-note">Guia prático de uso. Em caso de sensibilidade ou tratamento dermatológico, procure orientação profissional.</p>
       </div>
     </div>
