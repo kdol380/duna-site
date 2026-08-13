@@ -487,7 +487,6 @@ body.page-light .nav-burger span{ background:var(--grafite); }
 .card-price{ font-family:var(--serif); font-size:1.7rem; font-weight:700; color:var(--ouro-fundo); line-height:1; margin-top:2px; }
 .card-price small{ font-size:.85rem; font-weight:600; }
 .card-price s{ text-decoration-thickness:1px; text-decoration-color:currentColor; }
-.card-price s small{ font-size:1em; font-weight:inherit; }
 .card-wa{
   display:inline-flex; align-items:center; gap:7px;
   font-family:var(--sans); font-size:.68rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
