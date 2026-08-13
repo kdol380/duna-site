@@ -359,7 +359,8 @@ header.nav.scrolled .nav-logo .emblem{ height:32px; }
 .skin-card h3{font-family:var(--serif);font-size:1.35rem;line-height:1.05;color:var(--ink);margin:0 0 8px}
 .skin-card>p:not(.skin-brand){font-size:.78rem!important;margin:0 0 14px!important;line-height:1.45!important}
 .skin-price{display:block;font-family:var(--serif);font-size:1.3rem;color:var(--ink);margin:-3px 0 13px}
-.skin-card.is-soldout .skin-photo img{filter:grayscale(.55);opacity:.72}
+.skin-card.is-soldout .skin-photo img{filter:grayscale(.45);opacity:.66}
+.skin-card.is-soldout .skin-price{opacity:.58}
 .skin-soldout{position:absolute;z-index:2;top:25px;right:25px;padding:7px 11px;border-radius:999px;background:#25221f;color:#fff;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}
 .skin-wa{display:flex;justify-content:center;align-items:center;min-height:42px;border-radius:999px;background:var(--grafite);color:#fff;text-decoration:none;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;transition:background .25s ease,transform .25s ease}
 .skin-add{width:100%;border:0;cursor:pointer;font-family:var(--sans)}

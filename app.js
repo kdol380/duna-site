@@ -366,7 +366,7 @@ function cardHTML(p,i){
     <div class="card-corner"><span></span><span></span><span></span><span></span></div>
     <div class="card-top">
       <span class="card-pill pill-solid">${p.genero}</span>
-      <span class="card-pill pill-line">${disponivel ? p.familia : "Indisponível"}</span>
+      <span class="card-pill pill-line">${disponivel ? p.familia : "Esgotado"}</span>
     </div>
     <div class="bottle">${frascoVisual(p)}</div>
     ${p.marca ? `<p class="card-brand">${p.marca}</p>` : ""}
@@ -380,7 +380,7 @@ function cardHTML(p,i){
       </div>
       <button class="card-wa" ${disponivel ? `data-add="${p.nome}"` : "disabled aria-disabled=\"true\""}>
         <svg class="ic-add" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
-        <span class="lbl">${disponivel ? "Adicionar" : "Indisponível"}</span>
+        <span class="lbl">${disponivel ? "Adicionar" : "Esgotado"}</span>
       </button>
     </div>
   </article>`;
@@ -880,7 +880,7 @@ function openQuickView(nome){
   const disponivel = estaDisponivel(p);
   qvNome = nome;
   qvLastFocus = document.activeElement;
-  document.getElementById("qvSelo").textContent = disponivel ? p.selo : "Indisponível";
+  document.getElementById("qvSelo").textContent = disponivel ? p.selo : "Esgotado";
   document.getElementById("qvBottle").innerHTML = frascoVisual(p);
   document.getElementById("qvFam").textContent = `${p.marca ? p.marca + " · " : ""}${p.familia} · ${p.genero} · ${p.periodo}`;
   document.getElementById("qvName").textContent = p.nome;
@@ -893,7 +893,7 @@ function openQuickView(nome){
   const qvAdd = document.getElementById("qvAdd");
   qvAdd.disabled = !disponivel;
   qvAdd.setAttribute("aria-disabled", String(!disponivel));
-  qvAdd.lastChild.textContent = disponivel ? " Adicionar ao pedido" : " Indisponível no momento";
+  qvAdd.lastChild.textContent = disponivel ? " Adicionar ao pedido" : " Esgotado no momento";
   const qvWa = document.getElementById("qvWa");
   qvWa.href = disponivel ? waProduto(p) : waLink(`Olá, Duna! Quero ser avisado quando o *${nomeCompleto(p)}* voltar ao estoque. 🌙`);
   qvWa.lastChild.textContent = disponivel ? " Pedir agora" : " Avise-me quando voltar";
