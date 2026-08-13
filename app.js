@@ -257,7 +257,7 @@ function piramideHTML(p){
 }
 
 function waProduto(p){
-  return waLink(`Olá, Duna! Tenho interesse no *${nomeCompleto(p)}* (${p.tamanho}) — ${precoTxt(p)}. Ainda está disponível? 🌙`);
+  return waLink(`Olá, Duna! Tenho interesse no ${nomeCompleto(p)} (${p.tamanho}) — ${precoTxt(p)}. Ainda está disponível?`);
 }
 // liga os botões fixos de WhatsApp (só os que existirem na página)
 ["waNav","waHero","waBottom","waFloat","waFoot1","waFoot2","waMobile"].forEach(id=>{
