@@ -267,7 +267,7 @@ if(waSpecial) waSpecial.href = waLink("Olá, Duna! Quero cotar uma encomenda esp
    ===================================================================== */
 function frascoVisual(p){
   return p.foto
-    ? `<img src="${p.foto}" alt="Perfume ${p.nome}" loading="lazy" />`
+    ? `<img src="${p.foto}" alt="${p.tipo === "skincare" ? "Skincare" : "Perfume"} ${p.nome}" loading="lazy" />`
     : bottleSVG(p.accent);
 }
 function bottleSVG(accent){
@@ -488,7 +488,7 @@ if(grid){
 }
 
 /* =====================================================================
-   🛍️  MEU PEDIDO  (vários perfumes → 1 pedido no WhatsApp)
+   🛍️  MEU PEDIDO  (perfumes e skincare → 1 pedido no WhatsApp)
    ===================================================================== */
 const cartEl       = document.getElementById("cart");
 const cartOverlay  = document.getElementById("cartOverlay");
@@ -498,7 +498,35 @@ const cartCountEl  = document.getElementById("cartCount");
 const cartTotalEl  = document.getElementById("cartTotal");
 const cartFloat    = document.getElementById("cartFloat");
 const cartSend     = document.getElementById("cartSend");
-const porNome = Object.fromEntries(PERFUMES.map(p=>[p.nome,p]));
+
+let produtosExtras = {};
+try{ produtosExtras = JSON.parse(localStorage.getItem("duna_cart_products")||"{}"); }catch(e){ produtosExtras={}; }
+const salvarProdutosExtras = ()=>{ try{ localStorage.setItem("duna_cart_products", JSON.stringify(produtosExtras)); }catch(e){} };
+const porNome = Object.fromEntries([...PERFUMES, ...Object.values(produtosExtras)].map(p=>[p.nome,p]));
+
+function produtoSkincareDoCard(card){
+  if(!card) return null;
+  const nome = card.querySelector("h3")?.textContent.trim();
+  const marca = card.querySelector(".skin-brand")?.textContent.trim();
+  const descricao = card.querySelector("p:not(.skin-brand)")?.textContent.trim() || "";
+  const precoTexto = card.querySelector(".skin-price")?.textContent || "";
+  const precoEncontrado = precoTexto.match(/R\$\s*(\d+)/);
+  const foto = card.querySelector(".skin-photo img")?.getAttribute("src");
+  if(!nome || !marca || !precoEncontrado || !foto) return null;
+  return {
+    nome, marca, preco:Number(precoEncontrado[1]),
+    tamanho:descricao.split("·").pop().trim(), foto,
+    disponivel:!card.classList.contains("is-soldout"), tipo:"skincare"
+  };
+}
+
+document.querySelectorAll(".skin-card").forEach(card=>{
+  const produto = produtoSkincareDoCard(card);
+  if(!produto) return;
+  produtosExtras[produto.nome] = produto;
+  porNome[produto.nome] = produto;
+});
+if(document.querySelector(".skin-card")) salvarProdutosExtras();
 
 let cart = {};
 try{ cart = JSON.parse(localStorage.getItem("duna_cart")||"{}"); }catch(e){ cart={}; }
@@ -510,6 +538,10 @@ const cartTemSemPreco = ()=> Object.keys(cart).some(n=> porNome[n] && !temPreco(
 
 function bumpFloat(){ if(!cartFloat) return; cartFloat.classList.remove("bump"); void cartFloat.offsetWidth; cartFloat.classList.add("bump"); }
 function addToCart(nome){ if(!estaDisponivel(porNome[nome])) return; cart[nome]=(cart[nome]||0)+1; salvarCart(); renderCart(); bumpFloat(); showToast(nome); }
+document.querySelectorAll("[data-skin-add]").forEach(btn=>btn.addEventListener("click", ()=>{
+  const produto = produtoSkincareDoCard(btn.closest(".skin-card"));
+  if(produto) addToCart(produto.nome);
+}));
 function setQty(nome,d){ cart[nome]=(cart[nome]||0)+d; if(cart[nome]<=0) delete cart[nome]; salvarCart(); renderCart(); }
 function removeItem(nome){ delete cart[nome]; salvarCart(); renderCart(); }
 function abrirCart(){ if(!cartEl) return; cartEl.classList.add("open"); cartOverlay.classList.add("open"); document.body.classList.add("no-scroll"); }
@@ -536,7 +568,7 @@ function renderCart(){
   if(itens.length===0){
     cartBody.innerHTML = `<div class="cart-empty">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 7h12l-1 13H7L6 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg>
-      Seu pedido está vazio.<br>Adicione suas fragrâncias favoritas.</div>`;
+      Seu pedido está vazio.<br>Adicione seus produtos favoritos.</div>`;
     cartFoot.classList.add("hidden");
     return;
   }
