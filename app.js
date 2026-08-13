@@ -455,7 +455,7 @@ if(deptBtns.length && perfumePanel && skincarePanel){
 }
 
 document.querySelectorAll(".skin-wa[data-product]").forEach(link=>{
-  link.href = waLink(`Olá, Duna! Quero saber o valor e a disponibilidade do *${link.dataset.product}*. ✨`);
+  link.href = waLink(`Olá, Duna! Gostaria de saber sobre a disponibilidade do ${link.dataset.product}, avise-me quando o produto voltar ao estoque !`);
   link.target = "_blank";
   link.rel = "noopener";
 });
