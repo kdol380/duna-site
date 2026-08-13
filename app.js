@@ -199,6 +199,11 @@ function waLink(msg){
   return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(msg);
 }
 
+const WHATSAPP_ICON = `<svg class="ic-wa-balao" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.1-.5 0a6.5 6.5 0 01-1.9-1.2 7.3 7.3 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4a.4.4 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1A5 5 0 009 12.5a11 11 0 004.2 3.7c.6.2 1 .4 1.4.5a3.3 3.3 0 001.5.1c.5-.1 1.4-.6 1.6-1.1s.2-1 .1-1.1z"/></svg>`;
+function waAvisoEstoque(nome){
+  return waLink(`Olá, Duna! Gostaria de saber sobre a disponibilidade do ${nome}, avise-me quando o produto voltar ao estoque !`);
+}
+
 /* ---- Preço: trata "Sob consulta" quando preco é null/0 ---- */
 function temPreco(p){ return typeof p.preco === "number" && p.preco > 0; }
 // rótulo para o card/quick-view (com <small>R$</small>)
@@ -366,7 +371,7 @@ function cardHTML(p,i){
     <div class="card-corner"><span></span><span></span><span></span><span></span></div>
     <div class="card-top">
       <span class="card-pill pill-solid">${p.genero}</span>
-      <span class="card-pill pill-line">${disponivel ? p.familia : "Indisponível"}</span>
+      <span class="card-pill pill-line">${disponivel ? p.familia : "Esgotado"}</span>
     </div>
     <div class="bottle">${frascoVisual(p)}</div>
     ${p.marca ? `<p class="card-brand">${p.marca}</p>` : ""}
@@ -376,12 +381,14 @@ function cardHTML(p,i){
     <div class="card-foot">
       <div class="card-meta">
         <span class="card-size">${p.tamanho}</span>
-        <span class="card-price">${precoHTML(p)}</span>
+        <span class="card-price">${disponivel ? precoHTML(p) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p))}</span>
       </div>
-      <button class="card-wa" ${disponivel ? `data-add="${p.nome}"` : "disabled aria-disabled=\"true\""}>
+      ${disponivel ? `<button class="card-wa" data-add="${p.nome}">
         <svg class="ic-add" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
-        <span class="lbl">${disponivel ? "Adicionar" : "Indisponível"}</span>
-      </button>
+        <span class="lbl">Adicionar</span>
+      </button>` : `<a class="card-wa card-notify" href="${waAvisoEstoque(nomeCompleto(p))}" target="_blank" rel="noopener">
+        ${WHATSAPP_ICON}<span class="lbl">Avise-me quando voltar</span>
+      </a>`}
     </div>
   </article>`;
 }
@@ -455,9 +462,10 @@ if(deptBtns.length && perfumePanel && skincarePanel){
 }
 
 document.querySelectorAll(".skin-wa[data-product]").forEach(link=>{
-  link.href = waLink(`Olá, Duna! Gostaria de saber sobre a disponibilidade do ${link.dataset.product}, avise-me quando o produto voltar ao estoque !`);
+  link.href = waAvisoEstoque(link.dataset.product);
   link.target = "_blank";
   link.rel = "noopener";
+  link.insertAdjacentHTML("afterbegin", WHATSAPP_ICON);
 });
 
 if(grid){
@@ -476,6 +484,7 @@ if(grid){
       }
       return;
     }
+    if(e.target.closest(".card-notify")) return;
     const card = e.target.closest(".card[data-nome]");
     if(card) openQuickView(card.dataset.nome);
   });
@@ -861,8 +870,7 @@ qvWrap.innerHTML = `
             Adicionar ao pedido
           </button>
           <a class="btn btn-line-dark" id="qvWa" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm4.4 12c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.1-.5 0a6.5 6.5 0 01-1.9-1.2 7.3 7.3 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4a.4.4 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1A5 5 0 009 12.5a11 11 0 004.2 3.7c1.6.6 1.9.5 2.3.5s1.4-.6 1.6-1.1.2-1 .1-1.1z"/></svg>
-            Pedir agora
+            ${WHATSAPP_ICON}<span>Pedir agora</span>
           </a>
         </div>
       </div>
@@ -880,7 +888,7 @@ function openQuickView(nome){
   const disponivel = estaDisponivel(p);
   qvNome = nome;
   qvLastFocus = document.activeElement;
-  document.getElementById("qvSelo").textContent = disponivel ? p.selo : "Indisponível";
+  document.getElementById("qvSelo").textContent = disponivel ? p.selo : "Esgotado";
   document.getElementById("qvBottle").innerHTML = frascoVisual(p);
   document.getElementById("qvFam").textContent = `${p.marca ? p.marca + " · " : ""}${p.familia} · ${p.genero} · ${p.periodo}`;
   document.getElementById("qvName").textContent = p.nome;
@@ -889,14 +897,14 @@ function openQuickView(nome){
   document.getElementById("qvNotesHelp").open = false;
   document.getElementById("qvNotes").innerHTML = piramideHTML(p);
   document.getElementById("qvSize").textContent = p.tamanho;
-  document.getElementById("qvPrice").innerHTML = precoHTML(p);
+  document.getElementById("qvPrice").innerHTML = disponivel ? precoHTML(p) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p));
   const qvAdd = document.getElementById("qvAdd");
   qvAdd.disabled = !disponivel;
   qvAdd.setAttribute("aria-disabled", String(!disponivel));
-  qvAdd.lastChild.textContent = disponivel ? " Adicionar ao pedido" : " Indisponível no momento";
+  qvAdd.lastChild.textContent = disponivel ? " Adicionar ao pedido" : " Esgotado no momento";
   const qvWa = document.getElementById("qvWa");
-  qvWa.href = disponivel ? waProduto(p) : waLink(`Olá, Duna! Quero ser avisado quando o *${nomeCompleto(p)}* voltar ao estoque. 🌙`);
-  qvWa.lastChild.textContent = disponivel ? " Pedir agora" : " Avise-me quando voltar";
+  qvWa.href = disponivel ? waProduto(p) : waAvisoEstoque(nomeCompleto(p));
+  qvWa.innerHTML = `${WHATSAPP_ICON}<span>${disponivel ? "Pedir agora" : "Avise-me quando voltar"}</span>`;
   qvEl.setAttribute("aria-label", `Detalhes de ${p.nome}`);
   qvEl.classList.add("open"); qvOverlay.classList.add("open");
   qvEl.setAttribute("aria-hidden","false");
@@ -987,8 +995,11 @@ skinQvWrap.innerHTML = `
         <div class="skin-qv-meta">
           <span id="skinQvSize"></span><strong id="skinQvPrice"></strong>
         </div>
-        <button class="btn btn-gold skin-qv-action" id="skinQvAdd" type="button">+ Adicionar ao pedido</button>
-        <a class="btn btn-gold skin-qv-action" id="skinQvNotify" href="#" target="_blank" rel="noopener">Avise-me quando voltar</a>
+        <div class="qv-actions skin-qv-actions">
+          <button class="btn btn-gold skin-qv-action" id="skinQvAdd" type="button">+ Adicionar ao pedido</button>
+          <a class="btn btn-line-dark skin-qv-action" id="skinQvWa" href="#" target="_blank" rel="noopener">${WHATSAPP_ICON}<span>Pedir agora</span></a>
+          <a class="btn btn-line-dark skin-qv-action" id="skinQvNotify" href="#" target="_blank" rel="noopener">${WHATSAPP_ICON}<span>Avise-me quando voltar</span></a>
+        </div>
         <p class="skin-qv-note">Guia prático de uso. Em caso de sensibilidade ou tratamento dermatológico, procure orientação profissional.</p>
       </div>
     </div>
@@ -1024,6 +1035,9 @@ function openSkinQuickView(card){
   document.getElementById("skinQvSize").textContent = descricao.split("·").pop().trim();
   document.getElementById("skinQvPrice").innerHTML = preco;
   document.getElementById("skinQvAdd").hidden = !disponivel;
+  const waAction = document.getElementById("skinQvWa");
+  waAction.hidden = !disponivel;
+  waAction.href = waProduto(produto);
   const notifyAction = document.getElementById("skinQvNotify");
   notifyAction.hidden = disponivel;
   if(notify) notifyAction.href = notify.href;
