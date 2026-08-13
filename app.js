@@ -810,6 +810,14 @@ qvWrap.innerHTML = `
         <h3 class="qv-name" id="qvName"></h3>
         <p class="qv-insp" id="qvInsp"></p>
         <p class="qv-desc" id="qvDesc"></p>
+        <details class="qv-notes-help" id="qvNotesHelp">
+          <summary>O que significam essas notas?</summary>
+          <div class="qv-notes-help-content">
+            <p><strong>Topo</strong><span>A primeira impressão, sentida logo após aplicar.</span></p>
+            <p><strong>Coração</strong><span>Aparece em seguida e revela a personalidade do perfume.</span></p>
+            <p><strong>Fundo</strong><span>Permanece por mais tempo e dá profundidade à fragrância.</span></p>
+          </div>
+        </details>
         <div class="qv-pyramid" id="qvNotes" aria-label="Pirâmide olfativa"></div>
         <div class="qv-meta">
           <span class="card-size" id="qvSize"></span>
@@ -846,6 +854,7 @@ function openQuickView(nome){
   document.getElementById("qvName").textContent = p.nome;
   document.getElementById("qvInsp").textContent = p.inspiracao;
   document.getElementById("qvDesc").textContent = p.desc;
+  document.getElementById("qvNotesHelp").open = false;
   document.getElementById("qvNotes").innerHTML = piramideHTML(p);
   document.getElementById("qvSize").textContent = p.tamanho;
   document.getElementById("qvPrice").innerHTML = precoHTML(p);
