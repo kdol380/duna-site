@@ -1046,12 +1046,6 @@ function closeSkinQuickView(){
 document.querySelectorAll(".skin-card").forEach(card=>{
   const produto = produtoSkincareDoCard(card);
   if(!produto || !SKINCARE_GUIDE[produto.nome]) return;
-  const hint = document.createElement("button");
-  hint.className = "skin-card-hint";
-  hint.type = "button";
-  hint.setAttribute("aria-label", `Ver para que serve e como usar ${produto.marca} ${produto.nome}`);
-  hint.textContent = "Clique para entender como usar";
-  card.appendChild(hint);
   card.addEventListener("click", e=>{
     if(e.target.closest(".skin-wa")) return;
     openSkinQuickView(card);

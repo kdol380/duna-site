@@ -364,8 +364,6 @@ header.nav.scrolled .nav-logo .emblem{ height:32px; }
 .skin-wa{display:flex;justify-content:center;align-items:center;min-height:42px;border-radius:999px;background:var(--grafite);color:#fff;text-decoration:none;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;transition:background .25s ease,transform .25s ease}
 .skin-add{width:100%;border:0;cursor:pointer;font-family:var(--sans)}
 .skin-wa:hover{background:var(--ouro);transform:translateY(-1px)}
-.skin-card-hint{display:block;width:100%;margin:12px 2px 1px;padding:0;border:0;background:none;color:var(--ouro-fundo);font-family:var(--sans);font-size:.65rem;letter-spacing:.08em;text-align:center;text-transform:uppercase;cursor:pointer}
-.skin-card-hint:focus-visible{outline:2px solid var(--ouro);outline-offset:4px;border-radius:3px}
 @media(max-width:900px){.skin-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.skin-grid{grid-template-columns:1fr}.skin-photo{height:310px}}
 .skincare-intro h2{ margin:10px 0 16px; font-size:clamp(2.4rem,5vw,4.4rem); }
