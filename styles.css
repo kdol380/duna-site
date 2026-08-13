@@ -362,9 +362,10 @@ header.nav.scrolled .nav-logo .emblem{ height:32px; }
 .skin-card.is-soldout .skin-photo img{filter:grayscale(.45);opacity:.66}
 .skin-card.is-soldout .skin-price{opacity:.58}
 .skin-soldout{position:absolute;z-index:2;top:25px;right:25px;padding:5px 12px;border:1px solid rgba(118,90,40,.3);border-radius:30px;background:rgba(176,138,60,.08);color:#765a28;font-family:var(--sans);font-size:.6rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase}
-.skin-wa{display:flex;justify-content:center;align-items:center;min-height:42px;border-radius:999px;background:var(--grafite);color:#fff;text-decoration:none;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;transition:background .25s ease,transform .25s ease}
+.skin-wa{display:flex;justify-content:center;align-items:center;gap:8px;min-height:42px;border-radius:999px;background:var(--grafite);color:#fff;text-decoration:none;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;transition:background .25s ease,transform .25s ease}
 .skin-add{width:100%;border:0;cursor:pointer;font-family:var(--sans)}
 .skin-wa:hover{background:var(--ouro);transform:translateY(-1px)}
+.skin-wa svg,.skin-qv-action svg{width:16px;height:16px;flex:0 0 auto}
 @media(max-width:900px){.skin-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.skin-grid{grid-template-columns:1fr}.skin-photo{height:310px}}
 .skincare-intro h2{ margin:10px 0 16px; font-size:clamp(2.4rem,5vw,4.4rem); }
