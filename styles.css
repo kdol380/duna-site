@@ -412,6 +412,7 @@ header.nav.scrolled .nav-logo .emblem{ height:32px; }
 .skin-qv-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:18px 0 14px;color:var(--grafite-60);font-size:.8rem}
 .skin-qv-meta strong{font-family:var(--serif);font-size:1.35rem;color:var(--grafite);font-weight:600}
 .skin-qv-action{width:100%;justify-content:center}
+.skin-qv-actions .skin-qv-action{width:auto;flex:1;min-width:180px}
 .skin-qv-action[hidden]{display:none}
 .skin-qv-note{margin:12px 0 0;color:var(--grafite-45);font-size:.68rem;line-height:1.45;text-align:center}
 @media(max-width:760px){.skin-qv{padding:12px}.skin-qv-card{grid-template-columns:1fr;max-height:94svh}.skin-qv-left{min-height:230px;padding:34px 26px}.skin-qv-photo{height:190px;width:min(250px,82%);padding:12px}.skin-qv-right{padding:28px 22px 24px}.skin-qv-right .qv-name{font-size:2rem}.skin-qv-explain section{padding:10px 12px}.skin-qv-explain p{font-size:.82rem}.skin-qv-meta{margin-top:14px}}

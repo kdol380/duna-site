@@ -995,8 +995,11 @@ skinQvWrap.innerHTML = `
         <div class="skin-qv-meta">
           <span id="skinQvSize"></span><strong id="skinQvPrice"></strong>
         </div>
-        <button class="btn btn-gold skin-qv-action" id="skinQvAdd" type="button">+ Adicionar ao pedido</button>
-        <a class="btn btn-gold skin-qv-action" id="skinQvNotify" href="#" target="_blank" rel="noopener">${WHATSAPP_ICON}<span>Avise-me quando voltar</span></a>
+        <div class="qv-actions skin-qv-actions">
+          <button class="btn btn-gold skin-qv-action" id="skinQvAdd" type="button">+ Adicionar ao pedido</button>
+          <a class="btn btn-line-dark skin-qv-action" id="skinQvWa" href="#" target="_blank" rel="noopener">${WHATSAPP_ICON}<span>Pedir agora</span></a>
+          <a class="btn btn-line-dark skin-qv-action" id="skinQvNotify" href="#" target="_blank" rel="noopener">${WHATSAPP_ICON}<span>Avise-me quando voltar</span></a>
+        </div>
         <p class="skin-qv-note">Guia prático de uso. Em caso de sensibilidade ou tratamento dermatológico, procure orientação profissional.</p>
       </div>
     </div>
@@ -1032,6 +1035,9 @@ function openSkinQuickView(card){
   document.getElementById("skinQvSize").textContent = descricao.split("·").pop().trim();
   document.getElementById("skinQvPrice").innerHTML = preco;
   document.getElementById("skinQvAdd").hidden = !disponivel;
+  const waAction = document.getElementById("skinQvWa");
+  waAction.hidden = !disponivel;
+  waAction.href = waProduto(produto);
   const notifyAction = document.getElementById("skinQvNotify");
   notifyAction.hidden = disponivel;
   if(notify) notifyAction.href = notify.href;
