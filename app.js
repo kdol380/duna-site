@@ -46,7 +46,7 @@ const PERFUMES = [
     notas:{ topo:"Pera · Toranja Rosa · Bergamota", coracao:"Flor de Laranjeira · Maçã · Cedro", fundo:"Almíscar · Âmbar · Baunilha" },
     accent:"#2d6c8c", foto:"assets/p-turathi-electric.jpg", desc:"Fresco com brilho doce: pera e toranja sobre flor de laranjeira. Jovem, sofisticado e fácil de usar." },
 
-  { nome:"Vulcan Feu", marca:"French Avenue", inspiracao:"frutado cremoso", familia:"Gourmand", genero:"Unissex", periodo:"Versátil",
+  { nome:"Vulcan Feu", marca:"French Avenue", inspiracao:"frutado cremoso", familia:"Gourmand", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"potente", preco:375, tamanho:"100 ml · EDP", selo:"Frutado",
     notas:{ topo:"Manga · Limão · Ruibarbo · Gengibre", coracao:"Pimenta Rosa · Jasmim · Praliné", fundo:"Fava Tonka · Cedro · Musgo · Ambargris" },
     accent:"#8a3b1e", foto:"assets/p-vulcan-feu.jpg", desc:"Frutado intenso e cremoso: manga e ruibarbo sobre praliné e fava tonka. Doce, marcante e viciante — extrait de alta projeção." },
@@ -66,12 +66,12 @@ const PERFUMES = [
     notas:{ topo:"Maçã · Bergamota · Gengibre", coracao:"Lavanda · Sálvia · Gerânio", fundo:"Fava Tonka · Cedro · Âmbar" },
     accent:"#3a322a", foto:"assets/p-fakhar-black-new.webp", desc:"Maçã e ervas aromáticas sobre madeiras âmbar — fresco-amadeirado, moderno e elegante. Coringa masculino de ótimo custo." },
 
-  { nome:"Nebras Pride", marca:"Lattafa", inspiracao:"baunilha e cacau", familia:"Gourmand", genero:"Unissex", periodo:"Versátil",
+  { nome:"Nebras Pride", marca:"Lattafa", inspiracao:"baunilha e cacau", familia:"Gourmand", genero:"Feminino", periodo:"Versátil",
     ocasiao:"noite", intensidade:"marcante", preco:265, tamanho:"100 ml · EDP", selo:"Doce", disponivel:false,
     notas:{ topo:"Frutas Vermelhas · Tangerina", coracao:"Baunilha · Cacau · Rosa", fundo:"Açúcar · Fava Tonka · Âmbar · Almíscar" },
     accent:"#9a6a2a", foto:"assets/p-nebras.jpg", desc:"Baunilha cremosa com cacau e frutas vermelhas. Gourmand doce e aconchegante, com fixação longa." },
 
-  { nome:"Zimaya Tiramisu Caramel", marca:"Lattafa", inspiracao:"caramelo cremoso", familia:"Gourmand", genero:"Unissex", periodo:"Noite",
+  { nome:"Zimaya Tiramisu Caramel", marca:"Lattafa", inspiracao:"caramelo cremoso", familia:"Gourmand", genero:"Feminino", periodo:"Noite",
     ocasiao:"noite", intensidade:"marcante", preco:265, tamanho:"100 ml · EDP", selo:"Gourmand", disponivel:false,
     notas:{ topo:"Caramelo", coracao:"Mel · Cumarina · Notas Amadeiradas", fundo:"Baunilha · Uísque · Almíscar" },
     accent:"#8a5a2c", foto:"assets/p-zimaya-tiramisu.jpg", desc:"Sobremesa vestível: caramelo e mel com um toque de uísque sobre baunilha. Doce, cremoso e convidativo." },
@@ -91,7 +91,7 @@ const PERFUMES = [
     notas:{ topo:"Tangerina · Hortelã · Cipreste · Sálvia", coracao:"Cedro · Pimenta", fundo:"Fava Tonka · Almíscar · Sândalo" },
     accent:"#3f7a6a", foto:"assets/p-alpine-sport.jpg", desc:"Esportivo e revigorante: tangerina e hortelã sobre cedro e almíscar. Frescor leve para o calor e o uso de todo dia." },
 
-  { nome:"Rayhaan Elixir", marca:"Rayhaan", inspiracao:"lavanda e baunilha", familia:"Gourmand", genero:"Unissex", periodo:"Noite",
+  { nome:"Rayhaan Elixir", marca:"Rayhaan", inspiracao:"lavanda e baunilha", familia:"Gourmand", genero:"Masculino", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:290, tamanho:"100 ml · EDP", selo:"Assinatura",
     notas:{ topo:"Hortelã · Bergamota", coracao:"Lavanda · Benjoim", fundo:"Baunilha · Fava Tonka" },
     accent:"#7a3a2a", foto:"assets/p-rayhaan-elixir.jpg", desc:"Lavanda e baunilha cremosa com mel de benjoim — doce, aromático e potente. Assinatura marcante para a noite." },
@@ -111,7 +111,7 @@ const PERFUMES = [
     notas:{ topo:"Bergamota · Flor de Toranja · Pêssego", coracao:"Rosa · Jasmim · Íris", fundo:"Almíscar Branco · Baunilha · Vetiver · Patchouli" },
     accent:"#d9a8b4", foto:"assets/p-chants-tenderina.webp", desc:"Floral limpo e feminino, com pêssego, rosa e almíscar branco. Leve, confortável e perfeito para o uso diário." },
 
-  { nome:"Hawas Malibu", marca:"Rasasi", inspiracao:"frutado tropical cremoso", familia:"Gourmand", genero:"Unissex", periodo:"Versátil",
+  { nome:"Hawas Malibu", marca:"Rasasi", inspiracao:"frutado tropical cremoso", familia:"Gourmand", genero:"Masculino", periodo:"Versátil",
     ocasiao:"noite", intensidade:"marcante", preco:340, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Abacaxi · Laranja · Toranja", coracao:"Âmbar · Íris · Lavanda", fundo:"Fava Tonka · Almíscar · Patchouli · Cashmeran" },
     accent:"#168fa5", foto:"assets/p-hawas-malibu.webp", desc:"Frutas tropicais luminosas encontram íris, âmbar e tonka. Cremoso, envolvente e com clima de noite de verão." },
@@ -121,17 +121,17 @@ const PERFUMES = [
     notas:{ topo:"Bergamota · Pimenta · Hortelã", coracao:"Lavanda · Pimenta Rosa · Gerânio", fundo:"Amberwood · Cedro" },
     accent:"#22364c", foto:"assets/p-nocturno.jpg", desc:"Bergamota, hortelã e especiarias sobre lavanda e madeiras secas. Limpo, moderno e fácil de usar do trabalho à noite." },
 
-  { nome:"Attar Al Wesal", marca:"Al Wataniah", inspiracao:"aromático doce especiado", familia:"Gourmand", genero:"Unissex", periodo:"Versátil",
+  { nome:"Attar Al Wesal", marca:"Al Wataniah", inspiracao:"aromático doce especiado", familia:"Gourmand", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:210, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Lavanda · Pera · Hortelã · Bergamota · Limão", coracao:"Canela · Sálvia Esclaréia · Cominho", fundo:"Baunilha Negra · Âmbar · Cedro · Patchouli" },
     accent:"#2c2a2c", foto:"assets/p-attar-al-wesal.jpg", desc:"Aromático adocicado com pera, lavanda e canela sobre baunilha escura. Envolvente, versátil e de excelente custo-benefício." },
 
-  { nome:"Pacific Blue", marca:"Maison Alhambra", inspiracao:"cítrico floral mediterrâneo", familia:"Cítrico", genero:"Unissex", periodo:"Dia",
+  { nome:"Pacific Blue", marca:"Maison Alhambra", inspiracao:"cítrico floral mediterrâneo", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"suave", preco:170, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Limão · Tangerina · Bergamota · Laranja Amarga · Alecrim · Lavanda · Murta", coracao:"Néroli · Flor de Laranjeira · Jasmim", fundo:"Âmbar · Angélica · Ambreta" },
     accent:"#4b9da5", foto:"assets/p-pacific-blue.jpg", desc:"Uma brisa mediterrânea de cítricos, néroli e flores brancas. Fresco, luminoso e confortável para o calor." },
 
-  { nome:"Maahir Honor", marca:"Lattafa", inspiracao:"cítrico aromático elegante", familia:"Cítrico", genero:"Unissex", periodo:"Dia",
+  { nome:"Maahir Honor", marca:"Lattafa", inspiracao:"cítrico aromático elegante", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"equilibrado", preco:320, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Hortelã · Limão · Bergamota · Tomilho", coracao:"Alecrim · Lavanda · Jasmim · Flor de Moringa", fundo:"Almíscar · Cedro · Âmbar" },
     accent:"#d8d4c9", foto:"assets/p-maahir-honor.jpg", desc:"Cítricos, hortelã e ervas aromáticas com acabamento limpo de almíscar, cedro e âmbar. Refinado e muito fresco." },
