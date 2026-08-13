@@ -917,6 +917,157 @@ document.getElementById("qvAdd").addEventListener("click", ()=>{
 });
 
 /* =====================================================================
+   🧴  GUIA DE SKINCARE — explicação simples ao clicar no produto
+   ===================================================================== */
+const SKINCARE_GUIDE = {
+  "345 Relief Cream": {
+    serve:"Hidrata e ajuda a acalmar a pele sensibilizada, além de cuidar da aparência de marcas e do ressecamento.",
+    indicado:"Para quem busca conforto, hidratação e uma rotina suave, inclusive em peles sensíveis ou com tendência a acne.",
+    quando:"Dia e noite",
+    ordem:"Depois do tônico e dos séruns, como último ou penúltimo passo da rotina.",
+    cuidado:"De manhã, finalize sempre com protetor solar."
+  },
+  "Retinal Shot Tightening Booster": {
+    serve:"Tratamento com retinal que ajuda a suavizar a aparência de linhas, textura irregular e poros, deixando a pele com aspecto mais firme.",
+    indicado:"Para quem quer começar um cuidado mais intenso com sinais de idade, textura ou poros aparentes.",
+    quando:"Somente à noite",
+    ordem:"Com a pele limpa, aplique uma pequena quantidade nas áreas desejadas e depois use hidratante.",
+    cuidado:"Se for iniciante, use em noites alternadas nas primeiras 2 semanas. Reduza a frequência se irritar e use protetor solar todos os dias."
+  },
+  "Deep Vita C Capsule Cream": {
+    serve:"Creme hidratante com vitamina C que ajuda a dar luminosidade e a deixar o tom da pele com aparência mais uniforme.",
+    indicado:"Para pele opaca, com tom desigual ou que precisa de mais viço e hidratação.",
+    quando:"Dia e noite",
+    ordem:"Misture as cápsulas com o gel, aplique depois do sérum no rosto e no pescoço.",
+    cuidado:"Na rotina da manhã, finalize com protetor solar."
+  },
+  "Zero Pore Pad": {
+    serve:"Discos que fazem uma esfoliação suave para retirar células mortas e excesso de oleosidade, ajudando na aparência de poros, cravos e textura.",
+    indicado:"Para quem sente a pele áspera, oleosa ou com poros e cravos aparentes.",
+    quando:"Dia ou noite",
+    ordem:"Depois da limpeza: passe primeiro o lado texturizado, depois o lado liso e dê leves batidinhas. Não precisa enxaguar.",
+    cuidado:"Se a pele for sensível, comece poucas vezes por semana e sem esfregar. Durante o dia, use protetor solar."
+  },
+  "PDRN Pink Peptide Serum": {
+    serve:"Sérum hidratante que ajuda no viço, na aparência de firmeza e no tom irregular, deixando a pele com aspecto mais macio e luminoso.",
+    indicado:"Para pele seca, opaca ou com perda de firmeza e elasticidade.",
+    quando:"Dia e noite",
+    ordem:"Com a pele limpa e seca, aplique no rosto e pescoço antes do hidratante.",
+    cuidado:"De manhã, aplique o protetor solar depois do hidratante."
+  },
+  "No.9 NAD Bio Lifting Essence": {
+    serve:"Essência voltada para firmeza e elasticidade, ajudando a suavizar a aparência de linhas finas e a deixar a pele mais preenchida.",
+    indicado:"Para quem percebe perda de firmeza, linhas finas ou quer um cuidado de hidratação com foco em elasticidade.",
+    quando:"Dia e noite",
+    ordem:"Depois da limpeza e do tônico, antes do hidratante. Massageie suavemente até absorver.",
+    cuidado:"Pode reaplicar uma pequena quantidade nas áreas com mais linhas. De manhã, finalize com protetor solar."
+  }
+};
+
+const skinQvWrap = document.createElement("div");
+skinQvWrap.innerHTML = `
+  <div class="skin-qv-overlay" id="skinQvOverlay"></div>
+  <div class="skin-qv" id="skinQv" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="skin-qv-card">
+      <button class="qv-close" id="skinQvClose" aria-label="Fechar explicação">&times;</button>
+      <div class="skin-qv-left">
+        <span class="skin-qv-badge" id="skinQvStock"></span>
+        <div class="skin-qv-photo"><img id="skinQvPhoto" src="" alt="" /></div>
+      </div>
+      <div class="skin-qv-right">
+        <p class="eyebrow" id="skinQvBrand"></p>
+        <h3 class="qv-name" id="skinQvName"></h3>
+        <span class="skin-qv-time" id="skinQvTime"></span>
+        <div class="skin-qv-explain">
+          <section><span>Para que serve</span><p id="skinQvServe"></p></section>
+          <section><span>Quando é indicado</span><p id="skinQvIndicado"></p></section>
+          <section><span>Como usar na rotina</span><p id="skinQvOrdem"></p></section>
+          <section class="skin-qv-care"><span>Atenção simples</span><p id="skinQvCuidado"></p></section>
+        </div>
+        <div class="skin-qv-meta">
+          <span id="skinQvSize"></span><strong id="skinQvPrice"></strong>
+        </div>
+        <button class="btn btn-gold skin-qv-action" id="skinQvAdd" type="button">+ Adicionar ao pedido</button>
+        <a class="btn btn-gold skin-qv-action" id="skinQvNotify" href="#" target="_blank" rel="noopener">Avise-me quando voltar</a>
+        <p class="skin-qv-note">Guia prático de uso. Em caso de sensibilidade ou tratamento dermatológico, procure orientação profissional.</p>
+      </div>
+    </div>
+  </div>`;
+document.body.appendChild(skinQvWrap);
+
+const skinQvEl = document.getElementById("skinQv");
+const skinQvOverlay = document.getElementById("skinQvOverlay");
+let skinQvNome = null, skinQvLastFocus = null;
+
+function openSkinQuickView(card){
+  const produto = produtoSkincareDoCard(card);
+  const guia = produto && SKINCARE_GUIDE[produto.nome];
+  if(!produto || !guia) return;
+  skinQvNome = produto.nome;
+  skinQvLastFocus = document.activeElement;
+  const disponivel = produto.disponivel;
+  const descricao = card.querySelector("p:not(.skin-brand)")?.textContent.trim() || "";
+  const preco = card.querySelector(".skin-price")?.innerHTML || "";
+  const notify = card.querySelector(".skin-wa[data-product]");
+  document.getElementById("skinQvStock").textContent = disponivel ? "Disponível" : "Esgotado";
+  document.getElementById("skinQvStock").classList.toggle("is-soldout", !disponivel);
+  const photo = document.getElementById("skinQvPhoto");
+  photo.src = produto.foto;
+  photo.alt = `${produto.marca} ${produto.nome}`;
+  document.getElementById("skinQvBrand").textContent = produto.marca;
+  document.getElementById("skinQvName").textContent = produto.nome;
+  document.getElementById("skinQvTime").textContent = guia.quando;
+  document.getElementById("skinQvServe").textContent = guia.serve;
+  document.getElementById("skinQvIndicado").textContent = guia.indicado;
+  document.getElementById("skinQvOrdem").textContent = guia.ordem;
+  document.getElementById("skinQvCuidado").textContent = guia.cuidado;
+  document.getElementById("skinQvSize").textContent = descricao.split("·").pop().trim();
+  document.getElementById("skinQvPrice").innerHTML = preco;
+  document.getElementById("skinQvAdd").hidden = !disponivel;
+  const notifyAction = document.getElementById("skinQvNotify");
+  notifyAction.hidden = disponivel;
+  if(notify) notifyAction.href = notify.href;
+  skinQvEl.setAttribute("aria-label", `Como usar ${produto.marca} ${produto.nome}`);
+  skinQvEl.classList.add("open");
+  skinQvOverlay.classList.add("open");
+  skinQvEl.setAttribute("aria-hidden", "false");
+  document.body.classList.add("no-scroll");
+  document.getElementById("skinQvClose").focus();
+}
+
+function closeSkinQuickView(){
+  skinQvEl.classList.remove("open");
+  skinQvOverlay.classList.remove("open");
+  skinQvEl.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("no-scroll");
+  if(skinQvLastFocus && skinQvLastFocus.focus) skinQvLastFocus.focus();
+}
+
+document.querySelectorAll(".skin-card").forEach(card=>{
+  const produto = produtoSkincareDoCard(card);
+  if(!produto || !SKINCARE_GUIDE[produto.nome]) return;
+  const hint = document.createElement("button");
+  hint.className = "skin-card-hint";
+  hint.type = "button";
+  hint.setAttribute("aria-label", `Ver para que serve e como usar ${produto.marca} ${produto.nome}`);
+  hint.textContent = "Clique para entender como usar";
+  card.appendChild(hint);
+  card.addEventListener("click", e=>{
+    if(e.target.closest(".skin-wa")) return;
+    openSkinQuickView(card);
+  });
+});
+
+document.getElementById("skinQvClose").addEventListener("click", closeSkinQuickView);
+skinQvOverlay.addEventListener("click", closeSkinQuickView);
+document.addEventListener("keydown", e=>{
+  if(e.key === "Escape" && skinQvEl.classList.contains("open")) closeSkinQuickView();
+});
+document.getElementById("skinQvAdd").addEventListener("click", ()=>{
+  if(skinQvNome){ addToCart(skinQvNome); closeSkinQuickView(); }
+});
+
+/* =====================================================================
    🃏  TILT 3D nos cards (desktop, ponteiro fino, sem reduced-motion)
    ===================================================================== */
 (function initTilt(){

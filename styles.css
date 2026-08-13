@@ -349,7 +349,7 @@ header.nav.scrolled .nav-logo .emblem{ height:32px; }
   border:1px solid var(--areia); background:radial-gradient(circle at 82% 28%,rgba(205,171,99,.18),transparent 32%),linear-gradient(135deg,#fffdf9,#eee5d4);
 }
 .skin-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:34px;text-align:left}
-.skin-card{background:rgba(255,255,255,.72);border:1px solid rgba(177,138,62,.25);border-radius:18px;padding:14px;box-shadow:0 18px 45px rgba(48,36,18,.08);transition:transform .35s ease,box-shadow .35s ease}
+.skin-card{background:rgba(255,255,255,.72);border:1px solid rgba(177,138,62,.25);border-radius:18px;padding:14px;box-shadow:0 18px 45px rgba(48,36,18,.08);transition:transform .35s ease,box-shadow .35s ease;cursor:pointer}
 .skin-card{position:relative}
 .skin-card:hover{transform:translateY(-6px);box-shadow:0 24px 55px rgba(48,36,18,.14)}
 .skin-photo{height:270px;border-radius:13px;overflow:hidden;background:#f6f3ec;display:grid;place-items:center}
@@ -364,6 +364,8 @@ header.nav.scrolled .nav-logo .emblem{ height:32px; }
 .skin-wa{display:flex;justify-content:center;align-items:center;min-height:42px;border-radius:999px;background:var(--grafite);color:#fff;text-decoration:none;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;transition:background .25s ease,transform .25s ease}
 .skin-add{width:100%;border:0;cursor:pointer;font-family:var(--sans)}
 .skin-wa:hover{background:var(--ouro);transform:translateY(-1px)}
+.skin-card-hint{display:block;width:100%;margin:12px 2px 1px;padding:0;border:0;background:none;color:var(--ouro-fundo);font-family:var(--sans);font-size:.65rem;letter-spacing:.08em;text-align:center;text-transform:uppercase;cursor:pointer}
+.skin-card-hint:focus-visible{outline:2px solid var(--ouro);outline-offset:4px;border-radius:3px}
 @media(max-width:900px){.skin-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.skin-grid{grid-template-columns:1fr}.skin-photo{height:310px}}
 .skincare-intro h2{ margin:10px 0 16px; font-size:clamp(2.4rem,5vw,4.4rem); }
@@ -385,6 +387,34 @@ header.nav.scrolled .nav-logo .emblem{ height:32px; }
 .skincare-page .skin-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
 .skincare-page::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.34) 49%,transparent 63%);transform:translateX(-100%);animation:skinSheen 9s ease-in-out infinite;}
 @keyframes skinSheen{0%,65%{transform:translateX(-100%)}85%,100%{transform:translateX(100%)}}
+
+/* guia simples de uso dos produtos de skincare */
+.skin-qv-overlay{position:fixed;inset:0;z-index:1050;background:rgba(20,18,15,.68);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .4s ease,visibility .4s ease}
+.skin-qv-overlay.open{opacity:1;visibility:visible}
+.skin-qv{position:fixed;inset:0;z-index:1060;display:flex;align-items:center;justify-content:center;padding:22px;pointer-events:none}
+.skin-qv-card{pointer-events:none;width:min(940px,100%);max-height:90svh;overflow:auto;background:var(--branco-puro);border:1px solid var(--areia);border-radius:12px;display:grid;grid-template-columns:350px 1fr;position:relative;opacity:0;visibility:hidden;transform:translateY(24px) scale(.97);transition:opacity .45s var(--ease-out),transform .45s var(--ease-out),visibility .45s;box-shadow:0 40px 90px -30px rgba(22,20,16,.55)}
+.skin-qv.open .skin-qv-card{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+.skin-qv-left{position:relative;min-height:520px;padding:54px 38px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 48% 35%,rgba(255,255,255,.92),transparent 44%),linear-gradient(155deg,#f8f2e6,#e9dcc4)}
+.skin-qv-left::after{content:"";position:absolute;width:260px;height:260px;border:1px solid rgba(176,138,60,.28);border-radius:50%}
+.skin-qv-photo{position:relative;z-index:2;width:100%;height:330px;padding:20px;display:grid;place-items:center;background:#fff;border-radius:18px;box-shadow:0 24px 50px -28px rgba(38,34,28,.55)}
+.skin-qv-photo img{width:100%;height:100%;object-fit:contain}
+.skin-qv-badge{position:absolute;z-index:3;top:20px;left:20px;padding:7px 12px;border-radius:999px;background:var(--ouro);color:#fff;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase}
+.skin-qv-badge.is-soldout{background:var(--grafite)}
+.skin-qv-right{padding:44px 44px 34px}
+.skin-qv-right .qv-name{margin-bottom:10px}
+.skin-qv-time{display:inline-flex;align-items:center;gap:7px;margin-bottom:20px;padding:7px 11px;border-radius:999px;background:rgba(205,171,99,.14);color:var(--ouro-fundo);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.skin-qv-time::before{content:"◷";font-size:.9rem}
+.skin-qv-explain{display:grid;gap:10px}
+.skin-qv-explain section{padding:12px 14px;border:1px solid rgba(176,138,60,.2);border-radius:9px;background:#fdfbf7}
+.skin-qv-explain section>span{display:block;margin-bottom:4px;color:var(--ouro-fundo);font-size:.64rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.skin-qv-explain p{margin:0;color:var(--grafite-60);font-size:.86rem;line-height:1.5}
+.skin-qv-explain .skin-qv-care{background:rgba(205,171,99,.1)}
+.skin-qv-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:18px 0 14px;color:var(--grafite-60);font-size:.8rem}
+.skin-qv-meta strong{font-family:var(--serif);font-size:1.35rem;color:var(--grafite);font-weight:600}
+.skin-qv-action{width:100%;justify-content:center}
+.skin-qv-action[hidden]{display:none}
+.skin-qv-note{margin:12px 0 0;color:var(--grafite-45);font-size:.68rem;line-height:1.45;text-align:center}
+@media(max-width:760px){.skin-qv{padding:12px}.skin-qv-card{grid-template-columns:1fr;max-height:94svh}.skin-qv-left{min-height:230px;padding:34px 26px}.skin-qv-photo{height:190px;width:min(250px,82%);padding:12px}.skin-qv-right{padding:28px 22px 24px}.skin-qv-right .qv-name{font-size:2rem}.skin-qv-explain section{padding:10px 12px}.skin-qv-explain p{font-size:.82rem}.skin-qv-meta{margin-top:14px}}
 
 /* encomendas especiais — destaque logo após o hero */
 .special-order{padding:64px 0;background:var(--branco-q);overflow:hidden;}
