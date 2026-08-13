@@ -376,7 +376,7 @@ function cardHTML(p,i){
     <div class="card-foot">
       <div class="card-meta">
         <span class="card-size">${p.tamanho}</span>
-        <span class="card-price">${precoHTML(p)}</span>
+        <span class="card-price">${disponivel ? precoHTML(p) : `<s>${precoHTML(p)}</s>`}</span>
       </div>
       <button class="card-wa" ${disponivel ? `data-add="${p.nome}"` : "disabled aria-disabled=\"true\""}>
         <svg class="ic-add" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
@@ -889,7 +889,7 @@ function openQuickView(nome){
   document.getElementById("qvNotesHelp").open = false;
   document.getElementById("qvNotes").innerHTML = piramideHTML(p);
   document.getElementById("qvSize").textContent = p.tamanho;
-  document.getElementById("qvPrice").innerHTML = precoHTML(p);
+  document.getElementById("qvPrice").innerHTML = disponivel ? precoHTML(p) : `<s>${precoHTML(p)}</s>`;
   const qvAdd = document.getElementById("qvAdd");
   qvAdd.disabled = !disponivel;
   qvAdd.setAttribute("aria-disabled", String(!disponivel));
