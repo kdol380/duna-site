@@ -10,6 +10,7 @@ const CONFIG = {
 
 // preferência global de movimento reduzido (usada por todos os efeitos)
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const compactMobile = window.matchMedia("(max-width: 620px)").matches;
 
 /* =====================================================================
    📦  CATÁLOGO  —  fictício realista (edite à vontade)
@@ -272,7 +273,7 @@ if(waSpecial) waSpecial.href = waLink("Olá, Duna! Quero cotar uma encomenda esp
    ===================================================================== */
 function frascoVisual(p){
   return p.foto
-    ? `<img src="${p.foto}" alt="${p.tipo === "skincare" ? "Skincare" : "Perfume"} ${p.nome}" loading="lazy" />`
+    ? `<img src="${p.foto}" alt="${p.tipo === "skincare" ? "Skincare" : "Perfume"} ${p.nome}" loading="lazy" decoding="async" />`
     : bottleSVG(p.accent);
 }
 function bottleSVG(accent){
@@ -304,7 +305,11 @@ const revealObserver = new IntersectionObserver((entries)=>{
     if(en.isIntersecting){ en.target.classList.add("in"); revealObserver.unobserve(en.target); }
   });
 }, { threshold:.12, rootMargin:"0px 0px -8% 0px" });
-function initReveal(){ document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el)); }
+function observeReveal(el){
+  if(compactMobile && document.body.classList.contains("catalog-page") && el.classList.contains("card")) el.classList.add("in");
+  else revealObserver.observe(el);
+}
+function initReveal(){ document.querySelectorAll(".reveal").forEach(observeReveal); }
 
 /* =====================================================================
    🗂️  RENDER DA COLEÇÃO + FILTROS
@@ -313,6 +318,10 @@ function initReveal(){ document.querySelectorAll(".reveal").forEach(el=>revealOb
 const grid = document.getElementById("grid");
 const filtersWrap = document.getElementById("filters");
 const countEl = document.getElementById("catCount"); // contador opcional (página catálogo)
+const resultCountEl = document.getElementById("catResultCount");
+const filterToggle = document.getElementById("catFilterToggle");
+const filterBadge = document.getElementById("catFilterBadge");
+const clearFiltersBtn = document.getElementById("catClearFilters");
 
 const familiasUnicas = Array.from(new Set(PERFUMES.map(p=>p.familia)));
 const GRUPOS = [
@@ -347,11 +356,19 @@ function ordenar(list){
 }
 
 if(filtersWrap){
-  filtersWrap.innerHTML = GRUPOS.map(g=>`
+  filtersWrap.innerHTML = `
+    <div class="filter-mobile-head">
+      <div><span>Refine sua busca</span><strong>Filtros</strong></div>
+      <button type="button" class="filter-mobile-close" aria-label="Fechar filtros">&times;</button>
+    </div>
+    ${GRUPOS.map(g=>`
     <div class="filter-group ${g.secondary?'filter-secondary':''}" data-group="${g.key}">
       <span class="filter-label">${g.label}</span>
       ${g.opts.map((o,i)=>`<button class="chip ${i===0?'active':''}" data-val="${o}">${o}</button>`).join("")}
-    </div>`).join("");
+    </div>`).join("")}
+    <div class="filter-mobile-foot">
+      <button type="button" class="filter-apply">Ver <span class="filter-apply-count">0</span> <span class="filter-apply-noun">perfumes</span></button>
+    </div>`;
 
   filtersWrap.addEventListener("click", e=>{
     const btn = e.target.closest(".chip");
@@ -362,6 +379,23 @@ if(filtersWrap){
     renderGrid();
   });
 }
+
+function setFilterPanel(open){
+  if(!filtersWrap || !filterToggle) return;
+  filtersWrap.classList.toggle("is-open", open);
+  filterToggle.setAttribute("aria-expanded", String(open));
+}
+
+if(filterToggle){
+  filterToggle.addEventListener("click", ()=>setFilterPanel(!filtersWrap.classList.contains("is-open")));
+}
+if(filtersWrap){
+  filtersWrap.querySelector(".filter-mobile-close")?.addEventListener("click", ()=>setFilterPanel(false));
+  filtersWrap.querySelector(".filter-apply")?.addEventListener("click", ()=>setFilterPanel(false));
+}
+document.addEventListener("keydown", e=>{
+  if(e.key === "Escape" && filtersWrap?.classList.contains("is-open")) setFilterPanel(false);
+});
 
 function cardHTML(p,i){
   const disponivel = estaDisponivel(p);
@@ -387,7 +421,7 @@ function cardHTML(p,i){
         <svg class="ic-add" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
         <span class="lbl">Adicionar</span>
       </button>` : `<a class="card-wa card-notify" href="${waAvisoEstoque(nomeCompleto(p))}" target="_blank" rel="noopener">
-        ${WHATSAPP_ICON}<span class="lbl">Avise-me quando voltar</span>
+        ${WHATSAPP_ICON}<span class="lbl"><span class="label-wide">Avise-me quando voltar</span><span class="label-compact">Avise-me</span></span>
       </a>`}
     </div>
   </article>`;
@@ -414,11 +448,24 @@ function renderGrid(){
   grid.innerHTML = list.length
     ? list.map(cardHTML).join("")
     : `<p class="grid-empty">Nenhuma fragrância ${busca ? "para essa busca" : "com esses filtros"}.<button class="grid-reset">limpar tudo</button></p>`;
-  grid.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
+  grid.querySelectorAll(".reveal").forEach(observeReveal);
 
   if(countEl){
     countEl.textContent = total + (total===1 ? " fragrância" : " fragrâncias");
   }
+  if(resultCountEl){
+    resultCountEl.textContent = total + (total===1 ? " resultado" : " resultados");
+  }
+  const ativos = Number(sel.genero!=="Todos") + Number(sel.periodo!=="Todas") + Number(sel.familia!=="Todas");
+  if(filterBadge){
+    filterBadge.textContent = ativos;
+    filterBadge.hidden = ativos===0;
+  }
+  if(clearFiltersBtn) clearFiltersBtn.hidden = ativos===0 && !busca && ordem==="padrao";
+  const applyCount = filtersWrap?.querySelector(".filter-apply-count");
+  if(applyCount) applyCount.textContent = total;
+  const applyNoun = filtersWrap?.querySelector(".filter-apply-noun");
+  if(applyNoun) applyNoun.textContent = total===1 ? "perfume" : "perfumes";
 }
 
 function resetFiltros(){
@@ -442,6 +489,7 @@ if(buscaInput){
 }
 const ordemSel = document.getElementById("catSort");
 if(ordemSel) ordemSel.addEventListener("change", ()=>{ ordem = ordemSel.value; renderGrid(); });
+if(clearFiltersBtn) clearFiltersBtn.addEventListener("click", resetFiltros);
 
 /* alternância entre departamentos — skincare fica isolado do quiz/filtros de perfume */
 const deptBtns = document.querySelectorAll("[data-dept]");
@@ -1155,7 +1203,7 @@ if(!reduceMotion){
   const heroHost = document.querySelector(".hero");
   const catHost  = document.querySelector(".cat-header");
   if(heroHost) dustCanvas(heroHost, { alpha:.7, dark:false, density:16 });
-  if(catHost)  dustCanvas(catHost,  { alpha:.4, dark:true,  density:26 });
+  if(catHost && !compactMobile) dustCanvas(catHost, { alpha:.4, dark:true, density:26 });
 }
 
 /* =====================================================================

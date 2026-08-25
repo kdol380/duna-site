@@ -18,7 +18,7 @@
 
 <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="page-light">
+<body class="page-light catalog-page">
 
 <!-- ===================== PRÉ-LOADER ===================== -->
 <div id="preloader">
@@ -88,15 +88,26 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
         <input type="search" id="catSearch" placeholder="Buscar por nome, marca ou nota…" aria-label="Buscar perfume" autocomplete="off" />
       </div>
-      <label class="cat-sort">
-        <span>Ordenar</span>
-        <select id="catSort" aria-label="Ordenar a coleção por">
-          <option value="padrao">Relevância</option>
-          <option value="preco-asc">Menor preço</option>
-          <option value="preco-desc">Maior preço</option>
-          <option value="nome">Nome (A–Z)</option>
-        </select>
-      </label>
+      <div class="cat-actions">
+        <button class="cat-filter-toggle" id="catFilterToggle" type="button" aria-controls="filters" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M6 14v6" stroke-linecap="round"/></svg>
+          <span>Filtrar</span>
+          <small id="catFilterBadge" hidden>0</small>
+        </button>
+        <label class="cat-sort">
+          <span>Ordenar</span>
+          <select id="catSort" aria-label="Ordenar a coleção por">
+            <option value="padrao">Relevância</option>
+            <option value="preco-asc">Menor preço</option>
+            <option value="preco-desc">Maior preço</option>
+            <option value="nome">Nome (A–Z)</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="cat-filter-summary" aria-live="polite">
+      <span id="catResultCount">—</span>
+      <button id="catClearFilters" type="button" hidden>Limpar filtros</button>
     </div>
     <div class="filters" id="filters"></div>
     <div class="grid" id="grid"></div>
