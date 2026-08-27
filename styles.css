@@ -1248,3 +1248,233 @@ a, button{ touch-action:manipulation; }
   .catalog-page .cart-float:hover{ transform:none; background:var(--branco-puro); }
   .catalog-page .cart-count{ top:-4px; right:-4px; min-width:19px; height:19px; font-size:.62rem; }
 }
+
+/* =====================================================================
+   🕌  COLEÇÕES — navegação editorial (home) + seletor (catálogo)
+   ===================================================================== */
+
+/* ---------- Home: grade assimétrica ---------- */
+.col-grid{
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px; margin-top:44px;
+}
+.col-card{ position:relative; display:block; }
+
+/* --- Card grande cinematográfico: Toda a Coleção --- */
+.col-hero{
+  grid-column:1 / -1;
+  min-height:300px; overflow:hidden; border-radius:14px;
+  border:1px solid rgba(176,138,60,.4);
+  background:var(--tinta);
+  display:flex; align-items:flex-end;
+  box-shadow:0 30px 70px -30px rgba(38,30,18,.35);
+  transition:box-shadow .6s var(--ease), transform .6s var(--ease);
+}
+.col-hero:hover{ transform:translateY(-4px); box-shadow:0 44px 90px -34px rgba(133,102,41,.5); }
+.col-hero .col-art{ position:absolute; inset:0; }
+.col-hero .col-art img{
+  width:100%; height:100%; object-fit:cover; object-position:center 62%;
+  transform:scale(1.02); transition:transform 1.4s var(--ease);
+}
+.col-hero:hover .col-art img{ transform:scale(1.09); }
+.col-veil{
+  position:absolute; inset:0;
+  background:linear-gradient(100deg, rgba(15,12,8,.88) 8%, rgba(15,12,8,.55) 46%, rgba(15,12,8,.12) 78%);
+}
+.col-frame{ position:absolute; inset:14px; pointer-events:none; }
+.col-frame span{ position:absolute; width:26px; height:26px; border:1px solid rgba(205,171,99,.65); }
+.col-frame span:nth-child(1){ top:0; left:0; border-right:0; border-bottom:0; }
+.col-frame span:nth-child(2){ top:0; right:0; border-left:0; border-bottom:0; }
+.col-frame span:nth-child(3){ bottom:0; left:0; border-right:0; border-top:0; }
+.col-frame span:nth-child(4){ bottom:0; right:0; border-left:0; border-top:0; }
+.col-hero .col-body{
+  position:relative; z-index:2; padding:44px 48px; max-width:560px;
+}
+.col-kicker{
+  font-family:var(--sans); font-size:.62rem; font-weight:500;
+  letter-spacing:.34em; text-transform:uppercase; color:var(--ouro-claro);
+  margin-bottom:10px;
+}
+.col-hero h3{
+  font-size:clamp(2rem, 3.6vw, 2.9rem); color:var(--branco-q); line-height:1.02;
+}
+.col-hero h3 em{ font-style:italic; color:var(--ouro-claro); }
+.col-desc{ color:var(--creme-70); font-size:.95rem; font-weight:300; margin-top:10px; max-width:44ch; }
+.col-cta{
+  display:inline-flex; align-items:center; gap:12px; margin-top:18px;
+  font-family:var(--sans); font-size:.68rem; font-weight:500;
+  letter-spacing:.26em; text-transform:uppercase; color:var(--ouro-claro);
+}
+.col-arrow{
+  font-style:normal; display:inline-block;
+  transition:transform .45s var(--ease);
+}
+.col-card:hover .col-arrow{ transform:translateX(7px); }
+
+/* --- Cards em arco árabe: Árabes · Nicho · Designer --- */
+.col-arch{
+  background:var(--branco-puro);
+  border:1px solid var(--areia); border-radius:14px;
+  padding:26px 22px 24px; text-align:center;
+  transition:transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s;
+}
+.col-arch:hover{
+  transform:translateY(-7px);
+  border-color:rgba(176,138,60,.55);
+  box-shadow:0 34px 60px -28px rgba(133,102,41,.38);
+}
+.col-arch-window{
+  position:relative; width:min(210px, 78%); aspect-ratio:3/3.9;
+  margin:0 auto; border-radius:999px 999px 12px 12px; overflow:hidden;
+  background:var(--branco-q);
+}
+.col-arch-window .col-art, .col-arch-window .col-art img{ width:100%; height:100%; }
+.col-arch-window .col-art img{
+  object-fit:cover; transform:scale(1.03);
+  transition:transform 1.2s var(--ease), filter 1.2s var(--ease);
+  filter:saturate(.96);
+}
+.col-arch:hover .col-arch-window .col-art img{ transform:scale(1.11); filter:saturate(1.06); }
+.col-arch-ring{
+  position:absolute; inset:7px; pointer-events:none;
+  border:1px solid rgba(176,138,60,.55);
+  border-radius:999px 999px 9px 9px;
+  transition:inset .5s var(--ease), border-color .5s;
+}
+.col-arch:hover .col-arch-ring{ inset:11px; border-color:var(--ouro); }
+.col-arch-info{ margin-top:18px; }
+.col-arch-info .col-kicker{ color:var(--ouro-fundo); margin-bottom:6px; }
+.col-arch h3{ font-size:1.7rem; }
+.col-arch h3 em{ font-style:italic; color:var(--ouro-fundo); }
+.col-arch .col-cta{ color:var(--ouro-fundo); margin-top:10px; }
+
+/* --- Responsivo: no celular o card grande empilha e os arcos viram fichas horizontais --- */
+@media (max-width:880px){
+  .col-grid{ grid-template-columns:1fr; gap:16px; margin-top:34px; }
+  .col-hero{ min-height:230px; }
+  .col-hero .col-body{ padding:28px 26px; }
+  .col-grid .col-arch{
+    display:grid; grid-template-columns:112px 1fr; align-items:center;
+    gap:18px; text-align:left; padding:16px 18px;
+  }
+  .col-arch-window{ width:112px; aspect-ratio:3/3.8; margin:0; }
+  .col-arch-info{ margin-top:0; }
+  .col-arch h3{ font-size:1.45rem; }
+  .col-arch .col-cta{ margin-top:6px; }
+}
+
+/* ---------- Catálogo: 3 destaques grandes + marcas como subtópicos ---------- */
+.col-nav{ margin-bottom:26px; }
+.col-tabs{
+  display:flex; align-items:baseline; justify-content:center;
+  gap:clamp(18px, 4vw, 46px); flex-wrap:wrap;
+  padding-bottom:18px; border-bottom:1px solid var(--linha-ouro);
+}
+.col-tab{
+  font-family:var(--serif); font-weight:600;
+  font-size:clamp(1.35rem, 2.6vw, 1.9rem); line-height:1.1;
+  color:var(--grafite-45); text-align:center; position:relative;
+  padding:2px 2px 10px; transition:color .35s var(--ease);
+}
+.col-tab em{ font-style:italic; }
+.col-tab small{
+  display:block; margin-top:5px;
+  font-family:var(--sans); font-weight:500; font-size:.58rem;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--grafite-45);
+  transition:color .35s;
+}
+.col-tab::after{
+  content:""; position:absolute; left:50%; bottom:-19px; transform:translateX(-50%);
+  width:0; height:2px; background:linear-gradient(90deg,transparent,var(--ouro),transparent);
+  transition:width .5s var(--ease);
+}
+.col-tab:hover{ color:var(--grafite); }
+.col-tab.active{ color:var(--grafite); }
+.col-tab.active em{ color:var(--ouro-fundo); }
+.col-tab.active small{ color:var(--ouro-fundo); }
+.col-tab.active::after{ width:76%; }
+.col-tab-sep{ width:5px; height:5px; background:var(--ouro); transform:rotate(45deg); opacity:.55; align-self:center; }
+
+.col-brands{
+  display:flex; align-items:center; flex-wrap:wrap; justify-content:center;
+  gap:8px; margin-top:16px;
+}
+.col-brands-label{
+  font-family:var(--sans); font-size:.6rem; font-weight:500;
+  letter-spacing:.26em; text-transform:uppercase; color:var(--ouro-fundo);
+  margin-right:6px;
+}
+.col-brand{
+  font-family:var(--sans); font-size:.78rem; font-weight:500; letter-spacing:.04em;
+  color:var(--grafite-60);
+  background:var(--branco-puro); border:1px solid var(--areia); border-radius:30px;
+  padding:7px 16px;
+  transition:border-color .35s var(--ease), color .35s, background .35s, transform .35s var(--ease), box-shadow .35s;
+}
+.col-brand:hover{ border-color:rgba(176,138,60,.5); color:var(--grafite); transform:translateY(-1px); }
+.col-brand.active{
+  background:var(--grafite); border-color:var(--grafite); color:var(--branco-q);
+  box-shadow:0 10px 22px -12px rgba(38,34,28,.5);
+}
+.col-brand-bs{ border-style:dashed; }
+.col-brand-bs.active{ border-style:solid; }
+@media (max-width:760px){
+  .col-tabs{ gap:14px; padding-bottom:14px; }
+  .col-tab{ font-size:1.12rem; padding-bottom:6px; }
+  .col-tab small{ font-size:.5rem; letter-spacing:.16em; }
+  .col-tab::after{ bottom:-15px; }
+  .col-tab-sep{ width:4px; height:4px; }
+  .col-brands{
+    flex-wrap:nowrap; justify-content:flex-start;
+    margin:14px -28px 0; padding:2px 28px 8px;
+    overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  }
+  .col-brands::-webkit-scrollbar{ display:none; }
+  .col-brand{ flex:0 0 auto; }
+  .col-brands-label{ flex:0 0 auto; }
+}
+
+/* ---------- Catálogo: coleção vazia (Nicho/Designer sob encomenda) ---------- */
+.col-empty{
+  grid-column:1 / -1; text-align:center;
+  max-width:600px; margin:26px auto 10px;
+  background:var(--branco-puro); border:1px solid var(--areia); border-radius:16px;
+  padding:52px 34px 46px; position:relative; overflow:hidden;
+}
+.col-empty::before{
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+  background:radial-gradient(420px 200px at 50% 0%, rgba(205,171,99,.16), transparent 70%);
+}
+.col-empty-arch{
+  position:relative; width:108px; height:130px; margin:0 auto 22px;
+  display:flex; align-items:center; justify-content:center;
+}
+.col-empty-arch img{ width:54px; opacity:.9; position:relative; z-index:2; }
+.cea-ring{
+  position:absolute; inset:0; border:1px solid rgba(176,138,60,.5);
+  border-radius:999px 999px 10px 10px;
+}
+.cea-ring-2{ inset:8px; border-color:rgba(176,138,60,.25); }
+.col-empty h3{ font-size:1.9rem; margin-top:10px; }
+.col-empty h3 em{ font-style:italic; }
+.col-empty-txt{ color:var(--grafite-60); font-size:.95rem; max-width:46ch; margin:12px auto 0; }
+.col-empty-actions{
+  display:flex; flex-wrap:wrap; gap:14px; justify-content:center; align-items:center;
+  margin-top:26px;
+}
+.col-empty-back{
+  font-family:var(--sans); font-size:.68rem; font-weight:500;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--ouro-fundo);
+  border-bottom:1px solid var(--linha-ouro); padding-bottom:3px;
+  transition:color .35s, border-color .35s;
+}
+.col-empty-back:hover{ color:var(--grafite); border-color:var(--ouro); }
+
+/* ---------- Movimento reduzido ---------- */
+@media (prefers-reduced-motion: reduce){
+  .col-hero, .col-arch, .col-chip,
+  .col-hero .col-art img, .col-arch-window .col-art img,
+  .col-arrow, .col-arch-ring{ transition:none !important; }
+  .col-hero:hover, .col-arch:hover, .col-chip:hover{ transform:none; }
+  .col-hero:hover .col-art img, .col-arch:hover .col-arch-window .col-art img{ transform:scale(1.03); }
+}

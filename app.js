@@ -21,6 +21,7 @@ const compactMobile = window.matchMedia("(max-width: 620px)").matches;
            real do frasco no lugar do desenho.
    ===================================================================== */
 // preco: null  →  mostra "Sob consulta" (troque pelo valor, ex: preco:199, quando tiver os preços)
+// campo opcional: colecao:"arabes" | "nicho" | "designer"  → sem o campo, o perfume conta como "arabes"
 const PERFUMES = [
   { nome:"Club de Nuit Intense Man", marca:"Armaf", inspiracao:"frutado esfumado", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"potente", preco:250, tamanho:"105 ml · EDT", selo:"Ícone", disponivel:false,
@@ -323,6 +324,24 @@ const filterToggle = document.getElementById("catFilterToggle");
 const filterBadge = document.getElementById("catFilterBadge");
 const clearFiltersBtn = document.getElementById("catClearFilters");
 
+/* =====================================================================
+   🕌  COLEÇÕES  —  Toda a Coleção · Marcas Árabes · Nicho · Designer
+   ===================================================================== */
+const COLECOES = {
+  todos:    { label:"Toda a Coleção", kicker:"A curadoria completa" },
+  arabes:   { label:"Marcas Árabes",  kicker:"Lattafa · Armaf · Alhambra…" },
+  nicho:    { label:"Nicho",          kicker:"Casas autorais e raras" },
+  designer: { label:"Designer",       kicker:"As grifes que você ama" }
+};
+const colecaoDe = p => p.colecao || "arabes";
+const contaColecao = key => key==="todos" ? PERFUMES.length : PERFUMES.filter(p=>colecaoDe(p)===key).length;
+
+// preenche contadores nos cards da home ([data-count="arabes"] etc.)
+document.querySelectorAll("[data-count]").forEach(el=>{
+  const n = contaColecao(el.dataset.count);
+  el.textContent = n > 0 ? `${n} ${n===1?"perfume":"perfumes"}` : "Sob encomenda";
+});
+
 const familiasUnicas = Array.from(new Set(PERFUMES.map(p=>p.familia)));
 const GRUPOS = [
   { key:"genero",  label:"Gênero",          opts:["Todos","Masculino","Feminino","Unissex"] },
@@ -332,6 +351,97 @@ const GRUPOS = [
 const sel = { genero:"Todos", periodo:"Todas", familia:"Todas" };
 let busca = "";          // texto da busca (normalizado)
 let ordem = "padrao";    // ordenação atual
+
+// seleção ativa do catálogo: coleção (todos|arabes|nicho|designer), marca ou body spray
+let colecaoAtiva = "todos";
+let marcaAtiva = null;        // ex.: "Lattafa" (inclui "Lattafa Pride")
+let tipoAtivo = null;         // "bodyspray"
+{
+  const q = new URLSearchParams(location.search);
+  const c = q.get("colecao");
+  if(c && COLECOES[c] && c!=="todos") colecaoAtiva = c;
+  if(q.get("marca")) marcaAtiva = q.get("marca");
+  if(q.get("tipo")==="bodyspray") tipoAtivo = "bodyspray";
+}
+
+const ehBodySpray = p => /body spray/i.test(p.nome);
+const marcaBase = p => (p.marca||"").replace(/\s*Pride$/i,"").trim();   // Lattafa Pride conta como Lattafa
+
+const colNav = document.getElementById("colNav");
+const colBrands = document.getElementById("colBrands");
+
+function syncColNav(){
+  if(!colNav) return;
+  colNav.querySelectorAll(".col-tab").forEach(t=>{
+    const on = !marcaAtiva && !tipoAtivo && t.dataset.col===colecaoAtiva;
+    t.classList.toggle("active", on);
+    t.setAttribute("aria-pressed", String(on));
+  });
+  colNav.querySelectorAll(".col-brand").forEach(b=>{
+    const on = !!((b.dataset.marca && b.dataset.marca===marcaAtiva) ||
+                  (b.dataset.tipo && b.dataset.tipo===tipoAtivo));
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-pressed", String(on));
+  });
+}
+function pushColURL(){
+  const url = new URL(location.href);
+  url.searchParams.delete("colecao"); url.searchParams.delete("marca"); url.searchParams.delete("tipo");
+  if(colecaoAtiva!=="todos") url.searchParams.set("colecao", colecaoAtiva);
+  if(marcaAtiva) url.searchParams.set("marca", marcaAtiva);
+  if(tipoAtivo) url.searchParams.set("tipo", tipoAtivo);
+  history.replaceState(null, "", url);
+}
+function setColecao(key, push=true){
+  colecaoAtiva = COLECOES[key] ? key : "todos";
+  marcaAtiva = null; tipoAtivo = null;
+  if(push) pushColURL();
+  syncColNav(); renderGrid();
+}
+function setMarca(m, push=true){
+  colecaoAtiva = "todos"; tipoAtivo = null;
+  marcaAtiva = (marcaAtiva===m) ? null : m;   // clicar de novo desmarca
+  if(push) pushColURL();
+  syncColNav(); renderGrid();
+}
+function setTipo(t, push=true){
+  colecaoAtiva = "todos"; marcaAtiva = null;
+  tipoAtivo = (tipoAtivo===t) ? null : t;
+  if(push) pushColURL();
+  syncColNav(); renderGrid();
+}
+
+if(colNav){
+  const nEl = colNav.querySelector('[data-tab-count="todos"]');
+  if(nEl){ const n = PERFUMES.length; nEl.textContent = `${n} ${n===1?"fragrância":"fragrâncias"}`; }
+
+  // chips de marca gerados a partir do catálogo (novas marcas aparecem sozinhas)
+  if(colBrands){
+    const marcas = Array.from(new Set(PERFUMES.filter(p=>!ehBodySpray(p)).map(marcaBase))).filter(Boolean).sort((a,b)=>a.localeCompare(b,"pt"));
+    const frag = document.createDocumentFragment();
+    marcas.forEach(m=>{
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "col-brand"; b.dataset.marca = m;
+      b.setAttribute("aria-pressed","false");
+      b.textContent = m;
+      frag.appendChild(b);
+    });
+    const bs = document.createElement("button");
+    bs.type = "button"; bs.className = "col-brand col-brand-bs"; bs.dataset.tipo = "bodyspray";
+    bs.setAttribute("aria-pressed","false");
+    bs.textContent = "Body Spray";
+    frag.appendChild(bs);
+    colBrands.appendChild(frag);
+  }
+
+  colNav.addEventListener("click", e=>{
+    const tab = e.target.closest(".col-tab");
+    if(tab){ setColecao(tab.dataset.col); return; }
+    const b = e.target.closest(".col-brand");
+    if(b){ b.dataset.marca ? setMarca(b.dataset.marca) : setTipo(b.dataset.tipo); }
+  });
+  syncColNav();
+}
 
 // normaliza p/ busca sem acento e sem caixa
 function normaliza(s){ return (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""); }
@@ -429,6 +539,9 @@ function cardHTML(p,i){
 
 // Versátil aparece tanto em Dia quanto em Noite
 function passaFiltros(p){
+  if(colecaoAtiva!=="todos" && colecaoDe(p)!==colecaoAtiva) return false;
+  if(marcaAtiva && marcaBase(p)!==marcaAtiva) return false;
+  if(tipoAtivo==="bodyspray" && !ehBodySpray(p)) return false;
   const okGenero = sel.genero==="Todos" || p.genero===sel.genero;
   let okPeriodo;
   if(sel.periodo==="Todas")          okPeriodo = true;
@@ -445,9 +558,39 @@ function renderGrid(){
   const lim = parseInt(grid.dataset.limit||"0", 10);   // prévia da home
   if(lim>0) list = list.slice(0, lim);
 
+  const colVazia = !list.length && colecaoAtiva!=="todos" && contaColecao(colecaoAtiva)===0 && !busca;
+  const bsVazio = !list.length && tipoAtivo==="bodyspray" && !busca;
   grid.innerHTML = list.length
     ? list.map(cardHTML).join("")
-    : `<p class="grid-empty">Nenhuma fragrância ${busca ? "para essa busca" : "com esses filtros"}.<button class="grid-reset">limpar tudo</button></p>`;
+    : (bsVazio
+      ? `<div class="col-empty reveal is-in">
+          <div class="col-empty-arch" aria-hidden="true">
+            <img src="assets/logo-emblem.png" alt="" />
+            <span class="cea-ring"></span><span class="cea-ring cea-ring-2"></span>
+          </div>
+          <p class="eyebrow">Body Spray · Em breve no catálogo</p>
+          <h3>Os body sprays estão <em class="gold">a caminho.</em></h3>
+          <p class="col-empty-txt">Já temos body sprays no estoque e eles entram no site em breve. Quer garantir o seu agora? Chama a Duna no WhatsApp.</p>
+          <div class="col-empty-actions">
+            <a class="btn btn-gold" href="${waLink("Olá, Duna! Quero saber dos body sprays disponíveis!")}" target="_blank" rel="noopener">Perguntar no WhatsApp</a>
+            <button class="col-empty-back" data-col-back>Ver toda a coleção →</button>
+          </div>
+        </div>`
+      : colVazia
+      ? `<div class="col-empty reveal is-in">
+          <div class="col-empty-arch" aria-hidden="true">
+            <img src="assets/logo-emblem.png" alt="" />
+            <span class="cea-ring"></span><span class="cea-ring cea-ring-2"></span>
+          </div>
+          <p class="eyebrow">${COLECOES[colecaoAtiva].label} · Curadoria sob encomenda</p>
+          <h3>Essa coleção chega <em class="gold">até você primeiro.</em></h3>
+          <p class="col-empty-txt">Estamos selecionando as fragrâncias ${colecaoAtiva==="nicho" ? "de nicho" : "de designer"} para o estoque. Enquanto isso, encomendamos a que você quiser — nos conte qual e receba a cotação.</p>
+          <div class="col-empty-actions">
+            <a class="btn btn-gold" href="${waLink(`Olá, Duna! Quero encomendar um perfume ${colecaoAtiva==="nicho" ? "de nicho" : "de designer"}. Pode me ajudar?`)}" target="_blank" rel="noopener">Encomendar meu perfume</a>
+            <button class="col-empty-back" data-col-back>Ver toda a coleção →</button>
+          </div>
+        </div>`
+      : `<p class="grid-empty">Nenhuma fragrância ${busca ? "para essa busca" : "com esses filtros"}.<button class="grid-reset">limpar tudo</button></p>`);
   grid.querySelectorAll(".reveal").forEach(observeReveal);
 
   if(countEl){
@@ -519,6 +662,8 @@ document.querySelectorAll(".skin-wa[data-product]").forEach(link=>{
 if(grid){
   // botão "limpar filtros" do estado vazio
   grid.addEventListener("click", e=>{ if(e.target.closest(".grid-reset")) resetFiltros(); });
+
+  grid.addEventListener("click", e=>{ if(e.target.closest("[data-col-back]")) setColecao("todos"); });
   // adicionar ao pedido a partir dos cards / abrir detalhes
   grid.addEventListener("click", e=>{
     const btn = e.target.closest("[data-add]");
