@@ -51,7 +51,7 @@ const PERFUMES = [
   { nome:"Club de Nuit Untold", marca:"Armaf", inspiracao:"açafrão ambarado e amadeirado", familia:"Amadeirado", genero:"Unissex", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:369, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Açafrão · Jasmim", coracao:"Amberwood · Âmbar-gris", fundo:"Resina de Abeto · Cedro" },
-    accent:"#d4a52c", foto:"assets/p-club-untold.jpg", desc:"Açafrão e jasmim formam uma aura doce e metálica sobre âmbar e madeiras. Intenso, envolvente e classificado como masculino pelo critério de votação da comunidade." },
+    accent:"#d4a52c", foto:"assets/p-club-untold.jpg", desc:"Açafrão e jasmim formam uma aura doce e metálica sobre âmbar e madeiras. Intenso, envolvente e versátil para diferentes estilos." },
 
   { nome:"Club de Nuit White Imperiale", marca:"Armaf", inspiracao:"rosa cremosa e baunilha", familia:"Floral", genero:"Feminino", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:329, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true,
@@ -106,7 +106,7 @@ const PERFUMES = [
   { nome:"Vanilla P*rn", marca:"Bidaya Parfums", inspiracao:"baunilha cremosa e coco", familia:"Gourmand", genero:"Unissex", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:449, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Baunilha · Coco · Heliotrópio · Notas Atalcadas", coracao:"Baunilha de Madagascar · Leite", fundo:"Absoluto de Baunilha · Coco · Palo Santo · Almíscar" },
-    accent:"#292524", foto:"assets/p-vanilla-prn.jpg", desc:"Uma baunilha feminina intensa e cremosa, acompanhada por coco, leite e um toque atalcado. O palo santo e o almíscar equilibram a doçura no fundo." },
+    accent:"#292524", foto:"assets/p-vanilla-prn.jpg", desc:"Uma baunilha intensa e cremosa, acompanhada por coco, leite e um toque atalcado. O palo santo e o almíscar equilibram a doçura no fundo." },
 
   { nome:"Khamrah", marca:"Lattafa", inspiracao:"canela, tâmaras e baunilha", familia:"Gourmand", genero:"Masculino", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:234, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
@@ -226,7 +226,7 @@ const PERFUMES = [
   { nome:"Tropical Vibe", marca:"Rayhaan", inspiracao:"manga, coco e notas marinhas", familia:"Gourmand", genero:"Unissex", periodo:"Dia",
     ocasiao:"dia", intensidade:"marcante", preco:369, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Manga · Abacaxi · Bergamota · Rum", coracao:"Coco · Flores Brancas · Notas Marinhas", fundo:"Almíscar · Âmbar · Sândalo · Vetiver" },
-    accent:"#11a6a8", foto:"assets/p-tropical-vibe.jpg", desc:"Manga, abacaxi e rum encontram coco, flores brancas e um frescor marinho. Tropical, cremoso e classificado como feminino pela votação da comunidade." },
+    accent:"#11a6a8", foto:"assets/p-tropical-vibe.jpg", desc:"Manga, abacaxi e rum encontram coco, flores brancas e um frescor marinho. Tropical, cremoso e versátil para diferentes estilos." },
 
   { nome:"Hawas for Her", marca:"Rasasi", inspiracao:"frutado floral com praliné", familia:"Floral", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:229, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
@@ -725,6 +725,21 @@ if(colNav){
 
 // normaliza p/ busca sem acento e sem caixa
 function normaliza(s){ return (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""); }
+function slugProduto(produtoOuNome){
+  const texto = typeof produtoOuNome === "string" ? produtoOuNome : nomeCompleto(produtoOuNome);
+  return normaliza(texto).replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+}
+function atualizarProdutoNaURL(produto){
+  const url = new URL(location.href);
+  url.searchParams.set("produto", slugProduto(produto));
+  history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+}
+function limparProdutoDaURL(){
+  const url = new URL(location.href);
+  if(!url.searchParams.has("produto")) return;
+  url.searchParams.delete("produto");
+  history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+}
 function passaBusca(p){
   if(!busca) return true;
   const alvo = normaliza([p.nome, p.marca, p.familia, p.inspiracao, p.notas.topo, p.notas.coracao, p.notas.fundo].join(" "));
@@ -1357,9 +1372,10 @@ const qvEl = document.getElementById("qv");
 const qvOverlay = document.getElementById("qvOverlay");
 let qvNome = null, qvLastFocus = null;
 
-function openQuickView(nome){
+function openQuickView(nome, sincronizarURL=true){
   const p = porNome[nome];
   if(!p) return;
+  if(sincronizarURL) atualizarProdutoNaURL(p);
   const disponivel = estaDisponivel(p);
   qvNome = nome;
   qvLastFocus = document.activeElement;
@@ -1411,6 +1427,7 @@ function closeQuickView(){
   qvEl.classList.remove("open"); qvOverlay.classList.remove("open");
   qvEl.setAttribute("aria-hidden","true");
   document.body.classList.remove("no-scroll");
+  limparProdutoDaURL();
   if(qvLastFocus && qvLastFocus.focus) qvLastFocus.focus();
 }
 document.getElementById("qvClose").addEventListener("click", closeQuickView);
@@ -1511,10 +1528,11 @@ const skinQvEl = document.getElementById("skinQv");
 const skinQvOverlay = document.getElementById("skinQvOverlay");
 let skinQvNome = null, skinQvLastFocus = null;
 
-function openSkinQuickView(card){
+function openSkinQuickView(card, sincronizarURL=true){
   const produto = produtoSkincareDoCard(card);
   const guia = produto && SKINCARE_GUIDE[produto.nome];
   if(!produto || !guia) return;
+  if(sincronizarURL) atualizarProdutoNaURL(produto);
   skinQvNome = produto.nome;
   skinQvLastFocus = document.activeElement;
   const disponivel = produto.disponivel;
@@ -1555,6 +1573,7 @@ function closeSkinQuickView(){
   skinQvOverlay.classList.remove("open");
   skinQvEl.setAttribute("aria-hidden", "true");
   document.body.classList.remove("no-scroll");
+  limparProdutoDaURL();
   if(skinQvLastFocus && skinQvLastFocus.focus) skinQvLastFocus.focus();
 }
 
@@ -1677,6 +1696,24 @@ toTopBtn.addEventListener("click", ()=>window.scrollTo({ top:0, behavior: reduce
    🚀  INIT
    ===================================================================== */
 renderGrid();
+
+// Links individuais usados pelo catálogo da Meta e por compartilhamentos.
+{
+  const produtoParam = new URLSearchParams(location.search).get("produto");
+  if(produtoParam){
+    const cardsSkincare = [...document.querySelectorAll(".skin-card")];
+    if(cardsSkincare.length){
+      const card = cardsSkincare.find(el=>{
+        const produto = produtoSkincareDoCard(el);
+        return produto && slugProduto(produto)===produtoParam;
+      });
+      if(card) openSkinQuickView(card, false);
+    }else{
+      const produto = [...PERFUMES, ...DECANTS].find(p=>slugProduto(p)===produtoParam);
+      if(produto) openQuickView(produto.nome, false);
+    }
+  }
+}
 initReveal();
 onScroll();
 

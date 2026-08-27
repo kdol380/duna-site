@@ -6,7 +6,7 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 
 - Este repositório é a fonte oficial do site Duna Fragrâncias.
 - O site é estático: HTML, CSS e JavaScript, sem etapa de build.
-- A branch de produção é `main`. Depois que o deploy contínuo estiver conectado, o Netlify publicará essa branch.
+- A branch de produção é `main`. O GitHub Pages publica essa branch em `https://kdol380.github.io/duna-site/`.
 - Josué e o colaborador `@isacrezendemarques380` estão autorizados a revisar e integrar atualizações.
 - Mudanças de colaboradores devem ser feitas em uma branch própria e enviadas por Pull Request.
 - Nunca envie diretamente para `main` quando houver outra pessoa revisando o trabalho.
@@ -20,7 +20,7 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 5. Nunca coloque senhas, tokens, credenciais ou chaves no repositório.
 6. Não apague arquivos, produtos ou histórico para resolver conflitos. Pare e informe o conflito.
 7. Antes de editar, confira o estado do Git. Preserve alterações existentes e sincronize com o remoto somente quando isso for seguro.
-8. Não suponha que o Netlify já está conectado ao GitHub; confirme a integração antes de prometer publicação automática ou link de prévia.
+8. Confirme o resultado da ação `pages-build-deployment` antes de informar que uma atualização está disponível no GitHub Pages.
 
 ## Onde cada informação fica
 
@@ -33,7 +33,8 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 | Página inicial | `index.html` | Não duplicar o catálogo manualmente |
 | Catálogo de perfumes | `catalogo.html` | Os cards são gerados a partir de `PERFUMES` |
 | Aparência e responsividade | `styles.css` | Preserve desktop e celular |
-| Publicação Netlify | `netlify.toml` | Site estático; publicação na raiz |
+| Feed do catálogo Meta | `catalogo-meta.csv` | Gerado pelo script `scripts/gerar-catalogo-meta.mjs` |
+| Publicação | GitHub Pages | Site estático publicado a partir da branch `main` |
 
 ## Regras do catálogo de perfumes
 
@@ -44,6 +45,7 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 - A foto deve existir em `assets/` e ser referenciada, por exemplo `foto:"assets/p-produto.webp"`.
 - Ao adicionar um perfume, exija: nome, marca, preço, tamanho, disponibilidade e foto. Não crie os demais dados comerciais ou olfativos sem confirmação.
 - Preserve a sintaxe e todos os campos usados por filtros, busca, quiz, carrinho e WhatsApp.
+- Depois de qualquer mudança em produtos, preços, estoque, imagens ou skincare, execute `scripts/gerar-catalogo-meta.mjs` e inclua o `catalogo-meta.csv` atualizado no mesmo commit.
 
 ## Regras de skincare
 
@@ -61,7 +63,7 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 5. Verifique pelo menos:
    - sintaxe de `app.js`;
    - existência das imagens referenciadas;
-   - abertura de `index.html`, `catalogo.html` e `skincare.html`;
+   - abertura de `index.html`, `catalogo.html`, `skincare.html` e `catalogo-meta.csv`;
    - preço, estoque, busca, filtros e botão do WhatsApp afetados;
    - visualização em celular e desktop quando houver mudança visual.
 6. Explique claramente o que mudou e o que foi verificado.

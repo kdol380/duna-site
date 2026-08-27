@@ -7,13 +7,13 @@
 
 ## Finalidade
 
-Este guia permite que outra pessoa atualize preços, estoque, produtos, fotos e textos sem depender do histórico desta conversa. O GitHub guarda a versão oficial; depois de conectado ao repositório, o Netlify coloca no ar somente o que for aprovado.
+Este guia permite que outra pessoa atualize preços, estoque, produtos, fotos e textos sem depender do histórico desta conversa. O GitHub guarda a versão oficial e o GitHub Pages publica a branch `main`.
 
 ## Escopo
 
-Este processo cobre alterações de perfumes, skincare, preços, disponibilidade, imagens e textos do site. Também cobre revisão pelo GitHub e publicação pelo Netlify.
+Este processo cobre alterações de perfumes, skincare, preços, disponibilidade, imagens e textos do site. Também cobre revisão pelo GitHub e publicação pelo GitHub Pages.
 
-Não cobre compartilhamento de senhas, cobrança do Netlify, compra ou configuração de domínio e mudanças comerciais sem confirmação do responsável.
+Não cobre compartilhamento de senhas, compra ou configuração de domínio e mudanças comerciais sem confirmação do responsável.
 
 ## O que cada responsável precisa
 
@@ -26,13 +26,13 @@ Nunca compartilhe senhas ou códigos de acesso. Cada pessoa usa sua própria con
 
 ## Responsabilidades
 
-| Etapa | Isac | Codex | Josué | Netlify |
+| Etapa | Isac | Codex | Josué | GitHub Pages |
 |---|---|---|---|---|
 | Informar a mudança | Pode solicitar | Ajuda a identificar dados faltantes | Pode solicitar | — |
 | Alterar o site | Acompanha | Executa e verifica | — | — |
 | Conferir preço e estoque | Autorizado | Mostra exatamente o que mudou | Autorizado | — |
 | Aprovar a publicação | Autorizado | Prepara o Pull Request | Autorizado | — |
-| Colocar no ar | Aprova a integração | — | Aprova a integração | Publica automaticamente depois de conectado ao GitHub |
+| Colocar no ar | Aprova a integração | — | Aprova a integração | Publica automaticamente a branch `main` |
 
 ## Fluxo simples
 
@@ -43,7 +43,7 @@ Codex atualiza uma branch separada
         ↓
 Codex testa e envia para revisão no GitHub
         ↓
-Josué ou Isac confere o link de teste do Netlify
+Josué ou Isac confere a prévia local ou a branch de revisão
         ↓
 Aprovação e publicação no site oficial
 ```
@@ -110,7 +110,7 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 
 **Como:** enviar a branch ao GitHub e abrir um Pull Request descrevendo exatamente o que mudou.
 
-**Resultado:** link de revisão e, quando configurado, uma prévia do Netlify.
+**Resultado:** link de revisão e prévia local quando necessário.
 
 ### 5. Aprovar e publicar
 
@@ -120,7 +120,7 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 
 **Como:** validar valores, estoque, fotos, textos e aparência. Aprovar a integração somente se tudo estiver correto.
 
-**Resultado:** depois que o deploy contínuo estiver configurado, o Netlify publica automaticamente a nova versão da branch `main`.
+**Resultado:** o GitHub Pages publica automaticamente a nova versão da branch `main`.
 
 ## Conferência antes de aprovar
 
@@ -131,7 +131,7 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 - [ ] Nenhum outro produto foi alterado sem pedido.
 - [ ] O botão do WhatsApp abre com o produto correto.
 - [ ] O catálogo funciona no celular e no computador.
-- [ ] A prévia do Netlify está correta.
+- [ ] A prévia e o GitHub Pages estão corretos.
 
 ## Situações especiais
 
@@ -159,4 +159,6 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 - `app.js`: catálogo de perfumes, preços, estoque e WhatsApp.
 - `skincare.html`: catálogo de skincare.
 - `assets/`: imagens do site.
-- `netlify.toml`: configuração da publicação.
+- `catalogo-meta.csv`: feed público para o catálogo do Meta Commerce Manager.
+- `scripts/gerar-catalogo-meta.mjs`: recria e valida o feed da Meta depois de qualquer alteração de produto, preço, estoque ou imagem.
+- `https://kdol380.github.io/duna-site/`: endereço público do GitHub Pages.
