@@ -3,7 +3,7 @@
    ===================================================================== */
 const CONFIG = {
   // TROCAR: número do WhatsApp no formato internacional, só dígitos (55 + DDD + número)
-  whatsapp: "5533991106555",
+  whatsapp: "553397121052",
   // Mensagem padrão para o botão geral
   msgGeral: "Olá, Duna! Vim pelo site e quero saber mais sobre os perfumes!"
 };
