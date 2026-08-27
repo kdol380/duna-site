@@ -43,7 +43,7 @@ const PERFUMES = [
     notas:{ topo:"Bergamota · Limão · Lima · Cassis · Folha de Violeta · Gengibre", coracao:"Rosa · Íris · Jasmim", fundo:"Ambroxan · Almíscar · Sândalo · Cedro" },
     accent:"#aeb5ba", foto:"assets/p-club-sillage.jpg", desc:"Fresco e gelado, combina uma abertura cítrica vibrante com flores elegantes e um fundo limpo de ambroxan, almíscar e madeiras. Masculino segundo a votação da comunidade." },
 
-  { nome:"Club de Nuit Untold", marca:"Armaf", inspiracao:"açafrão ambarado e amadeirado", familia:"Amadeirado", genero:"Masculino", periodo:"Noite",
+  { nome:"Club de Nuit Untold", marca:"Armaf", inspiracao:"açafrão ambarado e amadeirado", familia:"Amadeirado", genero:"Unissex", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:369, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Açafrão · Jasmim", coracao:"Amberwood · Âmbar-gris", fundo:"Resina de Abeto · Cedro" },
     accent:"#d4a52c", foto:"assets/p-club-untold.jpg", desc:"Açafrão e jasmim formam uma aura doce e metálica sobre âmbar e madeiras. Intenso, envolvente e classificado como masculino pelo critério de votação da comunidade." },
@@ -98,7 +98,7 @@ const PERFUMES = [
     notas:{ topo:"Manga · Frutas Tropicais · Toranja · Limão Siciliano · Cássia", coracao:"Gengibre · Íris · Noz-moscada", fundo:"Âmbar · Almíscar · Cedro" },
     accent:"#149ba0", foto:"assets/p-maktub-la-vie.jpg", desc:"Manga e frutas tropicais ganham brilho cítrico, especiarias e um fundo de âmbar, almíscar e cedro. Masculino frutado, vibrante e de presença marcante." },
 
-  { nome:"Vanilla P*rn", marca:"Bidaya Parfums", inspiracao:"baunilha cremosa e coco", familia:"Gourmand", genero:"Feminino", periodo:"Noite",
+  { nome:"Vanilla P*rn", marca:"Bidaya Parfums", inspiracao:"baunilha cremosa e coco", familia:"Gourmand", genero:"Unissex", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:449, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Baunilha · Coco · Heliotrópio · Notas Atalcadas", coracao:"Baunilha de Madagascar · Leite", fundo:"Absoluto de Baunilha · Coco · Palo Santo · Almíscar" },
     accent:"#292524", foto:"assets/p-vanilla-prn.jpg", desc:"Uma baunilha feminina intensa e cremosa, acompanhada por coco, leite e um toque atalcado. O palo santo e o almíscar equilibram a doçura no fundo." },
@@ -218,7 +218,7 @@ const PERFUMES = [
     notas:{ topo:"Cardamomo · Pimenta Rosa · Folha de Violeta · Hortelã", coracao:"Canela · Lavanda · Sálvia · Melancia · Abacaxi", fundo:"Castanha · Baunilha · Amberwood · Madeira Guaiac · Cedro" },
     accent:"#9a6839", foto:"assets/p-your-touch.jpg", desc:"Especiarias frescas evoluem para canela, frutas e uma base cremosa de castanha, baunilha e madeiras. Masculino quente e envolvente." },
 
-  { nome:"Tropical Vibe", marca:"Rayhaan", inspiracao:"manga, coco e notas marinhas", familia:"Gourmand", genero:"Feminino", periodo:"Dia",
+  { nome:"Tropical Vibe", marca:"Rayhaan", inspiracao:"manga, coco e notas marinhas", familia:"Gourmand", genero:"Unissex", periodo:"Dia",
     ocasiao:"dia", intensidade:"marcante", preco:369, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Manga · Abacaxi · Bergamota · Rum", coracao:"Coco · Flores Brancas · Notas Marinhas", fundo:"Almíscar · Âmbar · Sândalo · Vetiver" },
     accent:"#11a6a8", foto:"assets/p-tropical-vibe.jpg", desc:"Manga, abacaxi e rum encontram coco, flores brancas e um frescor marinho. Tropical, cremoso e classificado como feminino pela votação da comunidade." },
