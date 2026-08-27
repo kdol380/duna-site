@@ -20,6 +20,11 @@
 </head>
 <body class="page-light catalog-page">
 
+<!-- ===================== BARRA DE ANÚNCIO ===================== -->
+<div class="announce" role="note">
+  <span>Entrega para todo o Brasil</span><i aria-hidden="true"></i><span>Pedido fácil pelo WhatsApp</span><i aria-hidden="true" class="an-3"></i><span class="an-3">Curadoria honesta</span>
+</div>
+
 <!-- ===================== PRÉ-LOADER ===================== -->
 <div id="preloader">
   <img class="pre-lockup" src="assets/logo-lockup.png" alt="Duna Fragrâncias" />
@@ -83,6 +88,35 @@
 <section class="cat-main">
   <div class="wrap">
     <div id="perfumePanel">
+    <!-- navegação de coleções: 3 destaques + marcas como subtópicos -->
+    <div class="col-nav" id="colNav" aria-label="Escolher coleção">
+      <div class="col-tabs" role="group">
+        <button class="col-tab" data-col="todos" type="button" aria-pressed="false">
+          Toda a <em>Coleção</em>
+          <small><span data-tab-count="todos"></span></small>
+        </button>
+        <span class="col-tab-sep" aria-hidden="true"></span>
+        <button class="col-tab" data-col="designer" type="button" aria-pressed="false">
+          <em>Designer</em>
+          <small>Sob encomenda</small>
+        </button>
+        <span class="col-tab-sep" aria-hidden="true"></span>
+        <button class="col-tab" data-col="nicho" type="button" aria-pressed="false">
+          <em>Nicho</em>
+          <small>Sob encomenda</small>
+        </button>
+        <span class="col-tab-sep" aria-hidden="true"></span>
+        <button class="col-tab" data-tipo="decants" type="button" aria-pressed="false">
+          <em>Decants</em>
+          <small><span data-tab-count="decants"></span></small>
+        </button>
+      </div>
+      <div class="col-brands" id="colBrands">
+        <span class="col-brands-label">Marcas árabes</span>
+        <!-- chips de marca preenchidos pelo app.js -->
+      </div>
+    </div>
+
     <div class="cat-toolbar">
       <div class="cat-search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
@@ -189,6 +223,6 @@
   <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.1-.5 0a6.5 6.5 0 01-1.9-1.2 7.3 7.3 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4a.4.4 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1A5 5 0 009 12.5a11 11 0 004.2 3.7c.6.2 1 .4 1.4.5a3.3 3.3 0 001.5.1c.5-.1 1.4-.6 1.6-1.1s.2-1 .1-1.1z"/></svg>
 </a>
 
-<script defer src="app.js?v=20260827-la-vivacite-disponivel"></script>
+<script defer src="app.js?v=20260827-site-unificado"></script>
 </body>
 </html>

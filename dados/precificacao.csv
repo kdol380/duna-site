@@ -1,0 +1,75 @@
+marca,produto,qtd,custo,preco_final,desconto_max,preco_minimo,preco_decant,frasco_split,situacao
+Afnan,Turathi Electric,1.0,160.0,295.0,60,235.0,44,8,No site — preço mantido
+Al Wataniah,Ameerati,3.0,99.91,199.0,45,154.0,30,8,NOVO — PRECIFICAR
+Al Wataniah,Attar Al Wesal,2.0,99.91,209.0,50,159.0,31,8,No site — preço mantido
+Al Wataniah,Sabah Al Ward,3.0,99.91,199.0,45,154.0,30,8,No site — preço mantido
+Al Wataniah,Sabah Al Ward Delilah,2.0,141.25,279.0,60,219.0,42,8,NOVO — PRECIFICAR
+Al Wataniah,Sabah Al Ward Garden of Eden,2.0,158.47,289.0,60,229.0,43,8,NOVO — PRECIFICAR
+Al Wataniah,Sabah Al Ward Sugar,4.0,86.12,179.0,45,134.0,27,8,No site — preço mantido
+Al Wataniah,Sabah Al Ward Valentine,2.0,134.35,269.0,60,209.0,40,8,NOVO — PRECIFICAR
+Armaf,Club de Nuit Imperiale,2.0,182.59,329.0,60,269.0,49,8,NOVO — PRECIFICAR
+Armaf,Club de Nuit Intense Man,3.0,172.25,279.0,50,229.0,42,8,No site — preço mantido
+Armaf,Club de Nuit Intense Man Body Spray,3.0,37.9,89.0,25,64.0,13,8,NOVO — PRECIFICAR
+Armaf,Club de Nuit Maleka,3.0,189.47,339.0,60,279.0,51,8,No site — preço mantido
+Armaf,Club de Nuit Sillage,2.0,175.69,339.0,60,279.0,51,8,NOVO — PRECIFICAR
+Armaf,Club de Nuit Sillage Body Spray,3.0,37.9,89.0,25,64.0,13,8,NOVO — PRECIFICAR
+Armaf,Club de Nuit Untold,2.0,192.92,369.0,60,309.0,55,8,NOVO — PRECIFICAR
+Armaf,Club de Nuit Urban Man Elixir,2.0,203.25,389.0,60,329.0,58,8,NOVO — PRECIFICAR
+Armaf,Odyssey Homme White Edition,1.0,140.0,270.0,60,210.0,40,8,No site — preço mantido
+Armaf,Odyssey Mandarin Sky,3.0,141.25,259.0,55,204.0,39,8,NOVO — PRECIFICAR
+Bidaya,Aisha Princess,3.0,170.0,309.0,60,249.0,46,8,NOVO — PRECIFICAR
+Bidaya,Ayat,4.0,170.0,309.0,60,249.0,46,8,NOVO — PRECIFICAR
+Bidaya,Blind Ecstasy,3.0,313.5,449.0,60,389.0,67,8,NOVO — PRECIFICAR
+Bidaya,Elliur,3.0,170.0,309.0,60,249.0,46,8,NOVO — PRECIFICAR
+Bidaya,Habibi King,4.0,172.25,319.0,60,259.0,48,8,NOVO — PRECIFICAR
+Bidaya,Habibi Prince,3.0,180.0,309.0,60,249.0,46,8,NOVO — PRECIFICAR
+Bidaya,Maktub Gold,4.0,170.0,309.0,60,249.0,46,8,NOVO — PRECIFICAR
+Bidaya,Maktub La Vie,1.0,172.25,309.0,60,249.0,46,8,NOVO — PRECIFICAR
+Bidaya,Vanilla P*rn,5.0,250.0,449.0,60,389.0,67,8,NOVO — PRECIFICAR
+French Avenue,Thunder,1.0,190.0,365.0,60,305.0,55,8,No site — preço mantido
+French Avenue,Vulcan Feu,2.0,175.0,375.0,60,315.0,56,8,No site — preço mantido
+Lattafa,Afeef,3.0,365.17,579.0,60,519.0,87,8,NOVO — PRECIFICAR
+Lattafa,Art of Arabia I,3.0,175.69,299.0,60,239.0,45,8,NOVO — PRECIFICAR
+Lattafa,Atheeri,3.0,292.82,430.0,60,370.0,64,8,No site — preço mantido
+Lattafa,Emeer,3.0,168.81,309.0,60,249.0,46,8,NOVO — PRECIFICAR
+Lattafa,Fakhar Lattafa Man (Fakhar Black),3.0,134.35,220.0,40,180.0,33,8,No site — preço mantido
+Lattafa,Fakhar Lattafa Women (Fakhar Rose),3.0,158.47,265.0,50,215.0,40,8,No site — preço mantido
+Lattafa,Haya,3.0,134.35,239.0,50,189.0,36,8,NOVO — PRECIFICAR
+Lattafa,Khamrah,1.0,134.35,234.0,45,189.0,35,8,NOVO — PRECIFICAR
+Lattafa,Khamrah Qahwa,2.0,120.58,224.0,50,174.0,34,8,NOVO — PRECIFICAR
+Lattafa,Maahir Honor,3.0,158.47,319.0,60,259.0,48,8,No site — preço mantido
+Lattafa,Maahir Legacy,2.0,134.35,269.0,60,209.0,40,8,NOVO — PRECIFICAR
+Lattafa,Musamam White Intense,3.0,203.25,399.0,60,339.0,60,8,NOVO — PRECIFICAR
+Lattafa,Opulent Dubai,3.0,99.91,179.0,35,144.0,27,8,NOVO — PRECIFICAR
+Lattafa,Qaed Al Fursan,3.0,99.91,179.0,35,144.0,27,8,NOVO — PRECIFICAR
+Lattafa,Queen of Arabia,2.0,389.29,649.0,60,589.0,97,8,NOVO — PRECIFICAR
+Lattafa,Shaheen Gold,3.0,120.58,239.0,55,184.0,36,8,NOVO — PRECIFICAR
+Lattafa,Tharwah Gold,3.0,310.05,479.0,60,419.0,72,8,No site — preço mantido
+Lattafa,Victoria,3.0,134.35,239.0,50,189.0,36,8,NOVO — PRECIFICAR
+Lattafa,Éclaire,3.0,199.81,359.0,60,299.0,54,8,NOVO — PRECIFICAR
+Maison Alhambra,Athena,2.0,134.35,249.0,55,194.0,37,8,NOVO — PRECIFICAR
+Maison Alhambra,B.A.D. Femme,3.0,93.02,170.0,35,135.0,26,8,No site — preço mantido
+Maison Alhambra,Delilah,3.0,144.69,250.0,50,200.0,38,8,No site — preço mantido
+Maison Alhambra,Delilah Blanc,3.0,134.35,250.0,55,195.0,38,8,No site — preço mantido
+Maison Alhambra,Jorge Di Profumo,3.0,99.91,199.0,45,154.0,30,8,NOVO — PRECIFICAR
+Maison Alhambra,La Vivacite,4.0,120.0,239.0,55,184.0,36,8,NOVO — PRECIFICAR
+Maison Alhambra,La Vivacité Intensa,3.0,89.57,199.0,50,149.0,30,8,NOVO — PRECIFICAR
+Maison Alhambra,L’Intrude,2.0,93.02,189.0,45,144.0,28,8,NOVO — PRECIFICAR
+Maison Alhambra,No. 2 Men,3.0,113.68,219.0,50,169.0,33,8,NOVO — PRECIFICAR
+Maison Alhambra,Pacific Blue,1.0,80.0,170.0,45,125.0,26,8,No site — preço mantido
+Maison Alhambra,Pink Eclipse,2.0,182.59,315.0,60,255.0,47,8,No site — preço mantido
+Maison Alhambra,Salvo,3.0,134.35,200.0,30,170.0,30,8,No site — preço mantido
+Maison Alhambra,So Candid,2.0,103.35,199.0,45,154.0,30,8,NOVO — PRECIFICAR
+Maison Alhambra,So Candid Pour Homme,2.0,168.81,309.0,60,249.0,46,8,NOVO — PRECIFICAR
+Maison Alhambra,Your Touch,2.0,106.8,209.0,50,159.0,31,8,NOVO — PRECIFICAR
+Maison Alhambra,Your Touch for Women,2.0,93.02,189.0,45,144.0,28,8,NOVO — PRECIFICAR
+Rasasi,Hawas Black for Him,1.0,220.0,300.0,40,260.0,45,8,No site — preço mantido
+Rasasi,Hawas Malibu for Him,2.0,220.0,340.0,60,280.0,51,8,No site — preço mantido
+Rasasi,Hawas for Her,3.0,113.68,229.0,55,174.0,34,8,NOVO — PRECIFICAR
+Rasasi,Hawas for Him,4.0,134.35,230.0,45,185.0,34,8,No site — preço mantido
+Rayhaan,Aquatica,2.0,210.14,380.0,60,320.0,57,8,No site — preço mantido
+Rayhaan,Azul,1.0,248.04,360.0,55,305.0,54,8,No site — preço mantido
+Rayhaan,Elixir,3.0,155.03,290.0,60,230.0,44,8,No site — preço mantido
+Rayhaan,Nocturno Pour Homme,2.0,175.69,330.0,60,270.0,50,8,No site — preço mantido
+Rayhaan,Pacific Aura,2.0,182.59,350.0,60,290.0,52,8,No site — preço mantido
+Rayhaan,Tropical Vibe,2.0,192.92,369.0,60,309.0,55,8,NOVO — PRECIFICAR
