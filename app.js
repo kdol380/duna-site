@@ -410,16 +410,17 @@ const marcaBase = p => (p.marca||"").replace(/\s*Pride$/i,"").trim();   // Latta
    ===================================================================== */
 const DECANT_ML = 10;
 const DECANT_FATOR = 0.15;
+const DECANT_FRASCO = 8;   // frasco split, cobrado à parte (não entra no preço do decant)
 const podeDecant = p => estaDisponivel(p) && temPreco(p) && !ehBodySpray(p);
 const DECANTS = PERFUMES.filter(podeDecant).map(p => ({
   ...p,
   nome: `${p.nome} · Decant ${DECANT_ML}ml`,
   base: p.nome,
   preco: Math.round(p.preco * DECANT_FATOR),
-  tamanho: `${DECANT_ML} ml · Decant`,
+  tamanho: `${DECANT_ML} ml · Decant · + R$ ${DECANT_FRASCO} frasco`,
   selo: "Decant",
   decant: true,
-  desc: `Decant de ${DECANT_ML} ml do ${p.marca ? p.marca + " " : ""}${p.nome} — a mesma fragrância original, fracionada para você conhecer antes de investir no frasco cheio.`
+  desc: `Decant de ${DECANT_ML} ml do ${p.marca ? p.marca + " " : ""}${p.nome} — a mesma fragrância original, fracionada para você conhecer antes de investir no frasco cheio. Frasco split cobrado à parte: R$ ${DECANT_FRASCO}.`
 }));
 
 const colNav = document.getElementById("colNav");
