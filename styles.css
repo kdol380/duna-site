@@ -1242,11 +1242,6 @@ a, button{ touch-action:manipulation; }
   .catalog-page .reveal,.catalog-page .reveal[data-d]{ opacity:1; transform:none; transition:none; }
 
   .catalog-page .wa-float{ display:none; }
-  .catalog-page .cart-float{ top:10px; right:58px; bottom:auto; z-index:1002; width:42px; height:42px;
-    border:1px solid rgba(176,138,60,.24); background:rgba(255,254,251,.72); color:var(--ouro-fundo); box-shadow:none; }
-  .catalog-page .cart-float svg{ width:21px; height:21px; }
-  .catalog-page .cart-float:hover{ transform:none; background:var(--branco-puro); }
-  .catalog-page .cart-count{ top:-4px; right:-4px; min-width:19px; height:19px; font-size:.62rem; }
 }
 
 /* =====================================================================
