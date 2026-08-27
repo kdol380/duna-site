@@ -342,6 +342,41 @@ document.querySelectorAll("[data-count]").forEach(el=>{
   el.textContent = n > 0 ? `${n} ${n===1?"perfume":"perfumes"}` : "Sob encomenda";
 });
 
+/* =====================================================================
+   ✨  NOVIDADES DA SEMANA (home) — alimentada pelo selo "Novo"/"Novidade"
+   ===================================================================== */
+const novGrid = document.getElementById("novGrid");
+if(novGrid){
+  const novos = PERFUMES
+    .filter(p => estaDisponivel(p) && (p.selo==="Novo" || p.selo==="Novidade"))
+    .slice(0, 4);
+  if(novos.length){
+    novGrid.innerHTML = novos.map(p=>`
+      <button type="button" class="nov-card reveal" data-qv="${p.nome}" aria-label="Ver detalhes de ${p.nome}">
+        <span class="nov-tag">Novo</span>
+        <span class="nov-thumb">${frascoVisual(p)}</span>
+        ${p.marca ? `<span class="nov-brand">${p.marca}</span>` : ""}
+        <span class="nov-name">${p.nome}</span>
+        <span class="nov-price">${precoTxt(p)}</span>
+      </button>`).join("");
+    novGrid.querySelectorAll(".reveal").forEach(el=>observeReveal(el));
+    novGrid.addEventListener("click", e=>{
+      const b = e.target.closest("[data-qv]");
+      if(b && typeof openQuickView === "function") openQuickView(b.dataset.qv);
+    });
+  } else {
+    const sec = document.getElementById("novidades");
+    if(sec) sec.hidden = true;
+  }
+}
+
+/* barra de anúncio: some suavemente quando a página rola */
+if(document.querySelector(".announce")){
+  const onScrollAnnounce = ()=> document.body.classList.toggle("past-top", window.scrollY > 24);
+  window.addEventListener("scroll", onScrollAnnounce, { passive:true });
+  onScrollAnnounce();
+}
+
 const familiasUnicas = Array.from(new Set(PERFUMES.map(p=>p.familia)));
 const GRUPOS = [
   { key:"genero",  label:"Gênero",          opts:["Todos","Masculino","Feminino","Unissex"] },
@@ -361,11 +396,31 @@ let tipoAtivo = null;         // "bodyspray"
   const c = q.get("colecao");
   if(c && COLECOES[c] && c!=="todos") colecaoAtiva = c;
   if(q.get("marca")) marcaAtiva = q.get("marca");
-  if(q.get("tipo")==="bodyspray") tipoAtivo = "bodyspray";
+  if(["bodyspray","decants"].includes(q.get("tipo"))) tipoAtivo = q.get("tipo");
 }
 
 const ehBodySpray = p => /body spray/i.test(p.nome);
 const marcaBase = p => (p.marca||"").replace(/\s*Pride$/i,"").trim();   // Lattafa Pride conta como Lattafa
+
+/* =====================================================================
+   🧪  DECANTS — gerados automaticamente a partir do catálogo
+   Regra: todo perfume disponível e com preço vira decant de 10 ml
+   custando 15% do valor do frasco cheio (arredondado). Ao adicionar
+   um perfume novo em PERFUMES, o decant aparece sozinho na aba.
+   ===================================================================== */
+const DECANT_ML = 10;
+const DECANT_FATOR = 0.15;
+const podeDecant = p => estaDisponivel(p) && temPreco(p) && !ehBodySpray(p);
+const DECANTS = PERFUMES.filter(podeDecant).map(p => ({
+  ...p,
+  nome: `${p.nome} · Decant ${DECANT_ML}ml`,
+  base: p.nome,
+  preco: Math.round(p.preco * DECANT_FATOR),
+  tamanho: `${DECANT_ML} ml · Decant`,
+  selo: "Decant",
+  decant: true,
+  desc: `Decant de ${DECANT_ML} ml do ${p.marca ? p.marca + " " : ""}${p.nome} — a mesma fragrância original, fracionada para você conhecer antes de investir no frasco cheio.`
+}));
 
 const colNav = document.getElementById("colNav");
 const colBrands = document.getElementById("colBrands");
@@ -373,7 +428,9 @@ const colBrands = document.getElementById("colBrands");
 function syncColNav(){
   if(!colNav) return;
   colNav.querySelectorAll(".col-tab").forEach(t=>{
-    const on = !marcaAtiva && !tipoAtivo && t.dataset.col===colecaoAtiva;
+    const on = t.dataset.tipo
+      ? t.dataset.tipo===tipoAtivo
+      : (!marcaAtiva && !tipoAtivo && t.dataset.col===colecaoAtiva);
     t.classList.toggle("active", on);
     t.setAttribute("aria-pressed", String(on));
   });
@@ -414,6 +471,8 @@ function setTipo(t, push=true){
 if(colNav){
   const nEl = colNav.querySelector('[data-tab-count="todos"]');
   if(nEl){ const n = PERFUMES.length; nEl.textContent = `${n} ${n===1?"fragrância":"fragrâncias"}`; }
+  const dEl = colNav.querySelector('[data-tab-count="decants"]');
+  if(dEl){ const n = DECANTS.length; dEl.textContent = `${n} ${n===1?"opção":"opções"} · ${DECANT_ML} ml`; }
 
   // chips de marca gerados a partir do catálogo (novas marcas aparecem sozinhas)
   if(colBrands){
@@ -436,7 +495,7 @@ if(colNav){
 
   colNav.addEventListener("click", e=>{
     const tab = e.target.closest(".col-tab");
-    if(tab){ setColecao(tab.dataset.col); return; }
+    if(tab){ tab.dataset.tipo ? setTipo(tab.dataset.tipo) : setColecao(tab.dataset.col); return; }
     const b = e.target.closest(".col-brand");
     if(b){ b.dataset.marca ? setMarca(b.dataset.marca) : setTipo(b.dataset.tipo); }
   });
@@ -553,7 +612,8 @@ function passaFiltros(p){
 
 function renderGrid(){
   if(!grid) return;
-  let list = ordenar(PERFUMES.filter(passaFiltros).filter(passaBusca));
+  const base = tipoAtivo==="decants" ? DECANTS : PERFUMES;
+  let list = ordenar(base.filter(passaFiltros).filter(passaBusca));
   const total = list.length;
   const lim = parseInt(grid.dataset.limit||"0", 10);   // prévia da home
   if(lim>0) list = list.slice(0, lim);
@@ -704,7 +764,7 @@ const cartSend     = document.getElementById("cartSend");
 let produtosExtras = {};
 try{ produtosExtras = JSON.parse(localStorage.getItem("duna_cart_products")||"{}"); }catch(e){ produtosExtras={}; }
 const salvarProdutosExtras = ()=>{ try{ localStorage.setItem("duna_cart_products", JSON.stringify(produtosExtras)); }catch(e){} };
-const porNome = Object.fromEntries([...PERFUMES, ...Object.values(produtosExtras)].map(p=>[p.nome,p]));
+const porNome = Object.fromEntries([...PERFUMES, ...DECANTS, ...Object.values(produtosExtras)].map(p=>[p.nome,p]));
 
 function produtoSkincareDoCard(card){
   if(!card) return null;
@@ -1066,6 +1126,7 @@ qvWrap.innerHTML = `
             ${WHATSAPP_ICON}<span>Pedir agora</span>
           </a>
         </div>
+        <div class="qv-related" id="qvRelated"></div>
       </div>
     </div>
   </div>`;
@@ -1098,6 +1159,27 @@ function openQuickView(nome){
   const qvWa = document.getElementById("qvWa");
   qvWa.href = disponivel ? waProduto(p) : waAvisoEstoque(nomeCompleto(p));
   qvWa.innerHTML = `${WHATSAPP_ICON}<span>${disponivel ? "Pedir agora" : "Avise-me quando voltar"}</span>`;
+  // "quem gosta desse vai amar" — mesma família ou mesma marca, disponíveis primeiro
+  const baseNome = p.base || p.nome;
+  const rel = PERFUMES
+    .filter(x => x.nome!==baseNome && (x.familia===p.familia || (p.marca && x.marca===p.marca)))
+    .sort((a,b)=>{
+      const disp = Number(estaDisponivel(b)) - Number(estaDisponivel(a));
+      if(disp) return disp;
+      return Number(b.familia===p.familia) - Number(a.familia===p.familia);
+    })
+    .slice(0,3);
+  document.getElementById("qvRelated").innerHTML = rel.length ? `
+    <p class="qv-rel-title">Quem gosta desse <em>vai amar</em></p>
+    <div class="qv-rel-grid">
+      ${rel.map(r=>`
+      <button type="button" class="qv-rel-card" data-qv="${r.nome}" aria-label="Ver detalhes de ${r.nome}">
+        <span class="qv-rel-thumb">${frascoVisual(r)}</span>
+        <span class="qv-rel-name">${r.nome}</span>
+        <span class="qv-rel-price">${estaDisponivel(r) ? precoTxt(r) : "Esgotado"}</span>
+      </button>`).join("")}
+    </div>` : "";
+
   qvEl.setAttribute("aria-label", `Detalhes de ${p.nome}`);
   qvEl.classList.add("open"); qvOverlay.classList.add("open");
   qvEl.setAttribute("aria-hidden","false");
@@ -1115,6 +1197,11 @@ qvOverlay.addEventListener("click", closeQuickView);
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && qvEl.classList.contains("open")) closeQuickView(); });
 document.getElementById("qvAdd").addEventListener("click", ()=>{
   if(qvNome){ addToCart(qvNome); closeQuickView(); }
+});
+// clicar num relacionado troca o quick view para ele
+document.getElementById("qvRelated").addEventListener("click", e=>{
+  const b = e.target.closest("[data-qv]");
+  if(b) openQuickView(b.dataset.qv);
 });
 
 /* =====================================================================
