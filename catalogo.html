@@ -20,6 +20,11 @@
 </head>
 <body class="page-light catalog-page">
 
+<!-- ===================== BARRA DE ANÚNCIO ===================== -->
+<div class="announce" role="note">
+  <span>Entrega para todo o Brasil</span><i aria-hidden="true"></i><span>Pedido fácil pelo WhatsApp</span><i aria-hidden="true" class="an-3"></i><span class="an-3">Curadoria honesta</span>
+</div>
+
 <!-- ===================== PRÉ-LOADER ===================== -->
 <div id="preloader">
   <img class="pre-lockup" src="assets/logo-lockup.png" alt="Duna Fragrâncias" />
@@ -83,6 +88,35 @@
 <section class="cat-main">
   <div class="wrap">
     <div id="perfumePanel">
+    <!-- navegação de coleções: 3 destaques + marcas como subtópicos -->
+    <div class="col-nav" id="colNav" aria-label="Escolher coleção">
+      <div class="col-tabs" role="group">
+        <button class="col-tab" data-col="todos" type="button" aria-pressed="false">
+          Toda a <em>Coleção</em>
+          <small><span data-tab-count="todos"></span></small>
+        </button>
+        <span class="col-tab-sep" aria-hidden="true"></span>
+        <button class="col-tab" data-col="designer" type="button" aria-pressed="false">
+          <em>Designer</em>
+          <small>Sob encomenda</small>
+        </button>
+        <span class="col-tab-sep" aria-hidden="true"></span>
+        <button class="col-tab" data-col="nicho" type="button" aria-pressed="false">
+          <em>Nicho</em>
+          <small>Sob encomenda</small>
+        </button>
+        <span class="col-tab-sep" aria-hidden="true"></span>
+        <button class="col-tab" data-tipo="decants" type="button" aria-pressed="false">
+          <em>Decants</em>
+          <small><span data-tab-count="decants"></span></small>
+        </button>
+      </div>
+      <div class="col-brands" id="colBrands">
+        <span class="col-brands-label">Marcas árabes</span>
+        <!-- chips de marca preenchidos pelo app.js -->
+      </div>
+    </div>
+
     <div class="cat-toolbar">
       <div class="cat-search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
