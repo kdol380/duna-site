@@ -599,11 +599,12 @@ if(document.querySelector(".announce")){
 
 const familiasUnicas = Array.from(new Set(PERFUMES.map(p=>p.familia)));
 const GRUPOS = [
+  { key:"estoque", label:"Disponibilidade", opts:["Todos","Disponível agora"] },
   { key:"genero",  label:"Gênero",          opts:["Todos","Masculino","Feminino","Unissex"] },
   { key:"periodo", label:"Ocasião",         opts:["Todas","Dia","Noite","Versátil"] },
   { key:"familia", label:"Família olfativa", opts:["Todas", ...familiasUnicas], secondary:true }
 ];
-const sel = { genero:"Todos", periodo:"Todas", familia:"Todas" };
+const sel = { estoque:"Todos", genero:"Todos", periodo:"Todas", familia:"Todas" };
 let busca = "";          // texto da busca (normalizado)
 let ordem = "padrao";    // ordenação atual
 
@@ -837,6 +838,7 @@ function passaFiltros(p){
   if(colecaoAtiva!=="todos" && colecaoDe(p)!==colecaoAtiva) return false;
   if(marcaAtiva && marcaBase(p)!==marcaAtiva) return false;
   if(tipoAtivo==="bodyspray" && !ehBodySpray(p)) return false;
+  if(sel.estoque==="Disponível agora" && !estaDisponivel(p)) return false;
   const okGenero = sel.genero==="Todos" || p.genero===sel.genero;
   let okPeriodo;
   if(sel.periodo==="Todas")          okPeriodo = true;
@@ -895,7 +897,7 @@ function renderGrid(){
   if(resultCountEl){
     resultCountEl.textContent = total + (total===1 ? " resultado" : " resultados");
   }
-  const ativos = Number(sel.genero!=="Todos") + Number(sel.periodo!=="Todas") + Number(sel.familia!=="Todas");
+  const ativos = Object.values(sel).filter(v=>v!=="Todos" && v!=="Todas").length;
   if(filterBadge){
     filterBadge.textContent = ativos;
     filterBadge.hidden = ativos===0;
@@ -908,7 +910,7 @@ function renderGrid(){
 }
 
 function resetFiltros(){
-  sel.genero="Todos"; sel.periodo="Todas"; sel.familia="Todas";
+  sel.estoque="Todos"; sel.genero="Todos"; sel.periodo="Todas"; sel.familia="Todas";
   busca=""; ordem="padrao";
   const bi=document.getElementById("catSearch"); if(bi) bi.value="";
   const os=document.getElementById("catSort"); if(os) os.value="padrao";
