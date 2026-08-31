@@ -655,24 +655,58 @@ const marcaBase = p => (p.marca||"").replace(/\s*Pride$/i,"").trim();   // Latta
 
 /* =====================================================================
    🧪  DECANTS — gerados automaticamente a partir do catálogo
-   Regra: todo perfume disponível e com preço vira decant de 10 ml
-   custando 15% do valor do frasco cheio (arredondado). Ao adicionar
-   um perfume novo em PERFUMES, o decant aparece sozinho na aba.
+   O valor por ml diminui conforme a faixa de preço do perfume e o
+   volume escolhido. O frasco split custa R$ 6 em qualquer tamanho.
    ===================================================================== */
-const DECANT_ML = 10;
-const DECANT_FATOR = 0.15;
-const DECANT_FRASCO = 8;   // frasco split, cobrado à parte (não entra no preço do decant)
+const DECANT_FRASCO = 6;
+const DECANT_VOLUMES = [
+  { ml:3,  descontoVolume:0 },
+  { ml:5,  descontoVolume:.05 },
+  { ml:10, descontoVolume:.10 }
+];
 const podeDecant = p => estaDisponivel(p) && temPreco(p) && !ehBodySpray(p);
-const DECANTS = PERFUMES.filter(podeDecant).map(p => ({
-  ...p,
-  nome: `${p.nome} · Decant ${DECANT_ML}ml`,
-  base: p.nome,
-  preco: Math.round(p.preco * DECANT_FATOR),
-  tamanho: `${DECANT_ML} ml · Decant · + R$ ${DECANT_FRASCO} frasco`,
-  selo: "Decant",
-  decant: true,
-  desc: `Decant de ${DECANT_ML} ml do ${p.marca ? p.marca + " " : ""}${p.nome} — a mesma fragrância original, fracionada para você conhecer antes de investir no frasco cheio. Frasco split cobrado à parte: R$ ${DECANT_FRASCO}.`
-}));
+const fatorMlDecant = preco => preco >= 500 ? .014 : (preco >= 400 ? .015 : .0165);
+const dinheiroDecimal = valor => valor.toLocaleString("pt-BR", { minimumFractionDigits:2, maximumFractionDigits:2 });
+
+function opcaoDecant(perfume, volume){
+  const cfg = DECANT_VOLUMES.find(v=>v.ml===Number(volume)) || DECANT_VOLUMES[0];
+  const bruto = perfume.preco * fatorMlDecant(perfume.preco) * cfg.ml * (1-cfg.descontoVolume);
+  const precoLiquido = Math.round(bruto);
+  return {
+    ml:cfg.ml,
+    descontoVolume:cfg.descontoVolume,
+    precoLiquido,
+    precoMl:precoLiquido/cfg.ml,
+    preco:precoLiquido + DECANT_FRASCO
+  };
+}
+
+const DECANTS = PERFUMES.filter(podeDecant).map(p => {
+  const opcoes = DECANT_VOLUMES.map(v=>opcaoDecant(p,v.ml));
+  return {
+    ...p,
+    nome:`${p.nome} · Decant`,
+    base:p.nome,
+    preco:opcoes[0].preco,
+    tamanho:"Escolha 3, 5 ou 10 ml",
+    selo:"Decant",
+    decant:true,
+    opcoes,
+    desc:`Decant do ${p.marca ? p.marca + " " : ""}${p.nome} — a mesma fragrância original, fracionada em 3, 5 ou 10 ml. O frasco split de R$ ${DECANT_FRASCO} já está incluído no total.`
+  };
+});
+
+const DECANT_VARIANTS = DECANTS.flatMap(d=>d.opcoes.map(opcao=>({
+  ...d,
+  nome:`${d.base} · Decant ${opcao.ml}ml`,
+  tamanho:`${opcao.ml} ml · frasco incluso`,
+  preco:opcao.preco,
+  precoLiquido:opcao.precoLiquido,
+  precoMl:opcao.precoMl,
+  decantMl:opcao.ml,
+  opcoes:undefined
+})));
+const decantPorBaseEVolume = new Map(DECANT_VARIANTS.map(p=>[`${p.base}|${p.decantMl}`,p]));
 
 const colNav = document.getElementById("colNav");
 const colBrands = document.getElementById("colBrands");
@@ -692,6 +726,8 @@ function syncColNav(){
     b.classList.toggle("active", on);
     b.setAttribute("aria-pressed", String(on));
   });
+  const oferta = document.getElementById("decantOffer");
+  if(oferta) oferta.hidden = tipoAtivo!=="decants";
 }
 function pushColURL(){
   const url = new URL(location.href);
@@ -724,7 +760,7 @@ if(colNav){
   const nEl = colNav.querySelector('[data-tab-count="todos"]');
   if(nEl){ const n = PERFUMES.length; nEl.textContent = `${n} ${n===1?"fragrância":"fragrâncias"}`; }
   const dEl = colNav.querySelector('[data-tab-count="decants"]');
-  if(dEl){ const n = DECANTS.length; dEl.textContent = `${n} ${n===1?"opção":"opções"} · ${DECANT_ML} ml`; }
+  if(dEl){ const n = DECANTS.length; dEl.textContent = `${n} ${n===1?"fragrância":"fragrâncias"} · 3, 5 ou 10 ml`; }
 
   // chips de marca gerados a partir do catálogo (novas marcas aparecem sozinhas)
   if(colBrands){
@@ -833,10 +869,21 @@ document.addEventListener("keydown", e=>{
   if(e.key === "Escape" && filtersWrap?.classList.contains("is-open")) setFilterPanel(false);
 });
 
+function seletorDecantHTML(p, contexto="card"){
+  if(!p.decant || !Array.isArray(p.opcoes)) return "";
+  return `<div class="decant-picker decant-picker-${contexto}" data-decant-picker>
+    <span class="decant-picker-label">Escolha o volume</span>
+    <div class="decant-volumes" role="group" aria-label="Volume do decant">
+      ${p.opcoes.map((opcao,i)=>`<button type="button" class="decant-volume ${i===0?"active":""}" data-decant-volume="${opcao.ml}" aria-pressed="${i===0}">${opcao.ml}<small>ml</small></button>`).join("")}
+    </div>
+  </div>`;
+}
+
 function cardHTML(p,i){
   const disponivel = estaDisponivel(p);
+  const opcaoDecantPadrao = p.decant && p.opcoes ? p.opcoes[0] : null;
   return `
-  <article class="card reveal ${disponivel ? "" : "is-unavailable"}" data-d="${(i%4)+1}" data-nome="${p.nome}" tabindex="0" role="button" aria-label="Ver detalhes de ${p.nome}">
+  <article class="card reveal ${p.decant?"is-decant":""} ${disponivel ? "" : "is-unavailable"}" data-d="${(i%4)+1}" data-nome="${p.nome}" tabindex="0" role="button" aria-label="Ver detalhes de ${p.nome}">
     <div class="card-glare"></div>
     <div class="card-corner"><span></span><span></span><span></span><span></span></div>
     <div class="card-top">
@@ -845,15 +892,17 @@ function cardHTML(p,i){
     </div>
     <div class="bottle">${frascoVisual(p)}</div>
     ${p.marca ? `<p class="card-brand">${p.marca}</p>` : ""}
-    <h3 class="card-name">${p.nome}</h3>
-    <p class="card-fam">${p.inspiracao}</p>
+    <h3 class="card-name">${p.decant?p.base:p.nome}</h3>
+    <p class="card-fam">${p.decant?"Decant original · frasco incluso":p.inspiracao}</p>
     <span class="card-hint">Ver detalhes</span>
+    ${seletorDecantHTML(p)}
     <div class="card-foot">
       <div class="card-meta">
-        <span class="card-size">${p.tamanho}</span>
-        <span class="card-price">${disponivel ? precoHTML(p) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p))}</span>
+        <span class="card-size" ${p.decant?"data-decant-unit":""}>${p.decant?`R$ ${dinheiroDecimal(opcaoDecantPadrao.precoMl)} por ml`:p.tamanho}</span>
+        <span class="card-price" ${p.decant?"data-decant-total":""}>${disponivel ? (p.decant?`<small>R$</small> ${opcaoDecantPadrao.preco}`:precoHTML(p)) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p))}</span>
+        ${p.decant?`<span class="decant-bottle-note">inclui frasco de R$ ${DECANT_FRASCO}</span>`:""}
       </div>
-      ${disponivel ? `<button class="card-wa" data-add="${p.nome}">
+      ${disponivel ? `<button class="card-wa" ${p.decant?`data-add-decant="${p.base}" data-volume="${opcaoDecantPadrao.ml}"`:`data-add="${p.nome}"`}>
         <svg class="ic-add" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
         <span class="lbl">Adicionar</span>
       </button>` : `<a class="card-wa card-notify" href="${waAvisoEstoque(nomeCompleto(p))}" target="_blank" rel="noopener">
@@ -994,6 +1043,34 @@ if(grid){
   grid.addEventListener("click", e=>{ if(e.target.closest("[data-col-back]")) setColecao("todos"); });
   // adicionar ao pedido a partir dos cards / abrir detalhes
   grid.addEventListener("click", e=>{
+    const volumeBtn = e.target.closest("[data-decant-volume]");
+    if(volumeBtn){
+      const card = volumeBtn.closest(".card.is-decant");
+      const decant = card && DECANTS.find(p=>p.nome===card.dataset.nome);
+      const opcao = decant?.opcoes.find(op=>op.ml===Number(volumeBtn.dataset.decantVolume));
+      if(!card || !opcao) return;
+      card.querySelectorAll("[data-decant-volume]").forEach(btn=>{
+        const ativo = btn===volumeBtn;
+        btn.classList.toggle("active", ativo);
+        btn.setAttribute("aria-pressed", String(ativo));
+      });
+      card.querySelector("[data-decant-unit]").textContent = `R$ ${dinheiroDecimal(opcao.precoMl)} por ml`;
+      card.querySelector("[data-decant-total]").innerHTML = `<small>R$</small> ${opcao.preco}`;
+      card.querySelector("[data-add-decant]").dataset.volume = opcao.ml;
+      return;
+    }
+    const btnDecant = e.target.closest("[data-add-decant]");
+    if(btnDecant){
+      const variante = decantPorBaseEVolume.get(`${btnDecant.dataset.addDecant}|${btnDecant.dataset.volume}`);
+      if(variante) addToCart(variante.nome);
+      const lbl = btnDecant.querySelector(".lbl");
+      if(lbl && !btnDecant.classList.contains("added")){
+        const orig = lbl.textContent;
+        btnDecant.classList.add("added"); lbl.textContent = "Adicionado ✓";
+        setTimeout(()=>{ btnDecant.classList.remove("added"); lbl.textContent = orig; }, 1100);
+      }
+      return;
+    }
     const btn = e.target.closest("[data-add]");
     if(btn){
       addToCart(btn.dataset.add);
@@ -1032,7 +1109,7 @@ const cartSend     = document.getElementById("cartSend");
 let produtosExtras = {};
 try{ produtosExtras = JSON.parse(localStorage.getItem("duna_cart_products")||"{}"); }catch(e){ produtosExtras={}; }
 const salvarProdutosExtras = ()=>{ try{ localStorage.setItem("duna_cart_products", JSON.stringify(produtosExtras)); }catch(e){} };
-const porNome = Object.fromEntries([...PERFUMES, ...DECANTS, ...Object.values(produtosExtras)].map(p=>[p.nome,p]));
+const porNome = Object.fromEntries([...PERFUMES, ...DECANTS, ...DECANT_VARIANTS, ...Object.values(produtosExtras)].map(p=>[p.nome,p]));
 
 function produtoSkincareDoCard(card){
   if(!card) return null;
@@ -1062,9 +1139,59 @@ let cart = {};
 try{ cart = JSON.parse(localStorage.getItem("duna_cart")||"{}"); }catch(e){ cart={}; }
 const salvarCart = ()=>{ try{ localStorage.setItem("duna_cart", JSON.stringify(cart)); }catch(e){} };
 const totalItens = ()=> Object.values(cart).reduce((a,b)=>a+b,0);
-const totalPreco = ()=> Object.entries(cart).reduce((s,[n,q])=> s + (porNome[n]&&temPreco(porNome[n]) ? porNome[n].preco*q : 0), 0);
+const taxaDescontoDecants = qtd => qtd>=10 ? .15 : (qtd>=5 ? .10 : (qtd>=3 ? .05 : 0));
+
+function resumoCarrinho(){
+  let outros = 0, liquidoDecants = 0, frascosDecants = 0, qtdDecants = 0;
+  Object.entries(cart).forEach(([nome,qtd])=>{
+    const p = porNome[nome];
+    if(!p || !temPreco(p)) return;
+    if(p.decant && Number.isFinite(p.precoLiquido)){
+      qtdDecants += qtd;
+      liquidoDecants += p.precoLiquido*qtd;
+      frascosDecants += DECANT_FRASCO*qtd;
+    }else{
+      outros += p.preco*qtd;
+    }
+  });
+  const taxa = taxaDescontoDecants(qtdDecants);
+  const descontoDecants = Math.round(liquidoDecants*taxa);
+  return {
+    outros, liquidoDecants, frascosDecants, qtdDecants, taxa, descontoDecants,
+    total:outros + liquidoDecants + frascosDecants - descontoDecants
+  };
+}
+const totalPreco = ()=> resumoCarrinho().total;
 // algum item do pedido está "Sob consulta"?
 const cartTemSemPreco = ()=> Object.keys(cart).some(n=> porNome[n] && !temPreco(porNome[n]));
+
+const cartTotalRow = cartTotalEl?.closest(".cart-total");
+const cartDealEl = document.createElement("div");
+cartDealEl.className = "cart-decant-deal";
+cartDealEl.hidden = true;
+const cartBreakdownEl = document.createElement("div");
+cartBreakdownEl.className = "cart-breakdown";
+cartBreakdownEl.hidden = true;
+if(cartFoot && cartTotalRow){
+  cartFoot.insertBefore(cartDealEl, cartTotalRow);
+  cartFoot.insertBefore(cartBreakdownEl, cartTotalRow);
+}
+
+function mensagemProgressoDecants(qtd){
+  if(qtd<3){
+    const faltam = 3-qtd;
+    return `Adicione mais ${faltam} ${faltam===1?"decant":"decants"} e ganhe 5% OFF na fragrância.`;
+  }
+  if(qtd<5){
+    const faltam = 5-qtd;
+    return `5% OFF ativo. Mais ${faltam} ${faltam===1?"decant":"decants"} libera 10% OFF.`;
+  }
+  if(qtd<10){
+    const faltam = 10-qtd;
+    return `10% OFF ativo. Mais ${faltam} ${faltam===1?"decant":"decants"} libera 15% OFF.`;
+  }
+  return "Você alcançou 15% OFF na fragrância dos decants.";
+}
 
 function bumpFloat(){ if(!cartFloat) return; cartFloat.classList.remove("bump"); void cartFloat.offsetWidth; cartFloat.classList.add("bump"); }
 function addToCart(nome){ if(!estaDisponivel(porNome[nome])) return; cart[nome]=(cart[nome]||0)+1; salvarCart(); renderCart(); bumpFloat(); showToast(nome); }
@@ -1080,12 +1207,19 @@ function fecharCart(){ if(!cartEl) return; cartEl.classList.remove("open"); cart
 function msgPedido(){
   const linhas = Object.entries(cart).filter(([n])=>porNome[n]).map(([n,q])=>{
     const p = porNome[n];
-    return `• ${q}x ${nomeCompleto(p)} (${p.tamanho}) — ${precoTxt(p)}${q>1&&temPreco(p)?" cada":""}`;
+    const preco = p.decant && Number.isFinite(p.precoLiquido)
+      ? `R$ ${p.preco} cada (R$ ${p.precoLiquido} fragrância + R$ ${DECANT_FRASCO} frasco)`
+      : `${precoTxt(p)}${q>1&&temPreco(p)?" cada":""}`;
+    return `• ${q}x ${nomeCompleto(p)} (${p.tamanho}) — ${preco}`;
   });
+  const resumo = resumoCarrinho();
+  const descontoLinha = resumo.descontoDecants
+    ? `\nDesconto do kit decant (${Math.round(resumo.taxa*100)}% sobre a fragrância): - R$ ${resumo.descontoDecants}`
+    : "";
   const totalLinha = cartTemSemPreco()
     ? "Total: a combinar no atendimento"
-    : `Total estimado: R$ ${totalPreco()}`;
-  return `Olá, Duna! Quero fazer um pedido:\n\n${linhas.join("\n")}\n\n${totalLinha}\n\nPode confirmar a disponibilidade e o frete?`;
+    : `Total estimado: R$ ${resumo.total}`;
+  return `Olá, Duna! Quero fazer um pedido:\n\n${linhas.join("\n")}${descontoLinha}\n\n${totalLinha}\n\nPode confirmar a disponibilidade e o frete?`;
 }
 
 function renderCart(){
@@ -1099,6 +1233,8 @@ function renderCart(){
     cartBody.innerHTML = `<div class="cart-empty">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 7h12l-1 13H7L6 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg>
       Seu pedido está vazio.<br>Adicione seus produtos favoritos.</div>`;
+    cartDealEl.hidden = true;
+    cartBreakdownEl.hidden = true;
     cartFoot.classList.add("hidden");
     return;
   }
@@ -1109,7 +1245,7 @@ function renderCart(){
       <div class="ci-info">
         <div class="ci-name">${p.marca ? p.marca+" " : ""}${nome}</div>
         <div class="ci-meta">${p.tamanho}</div>
-        <div class="ci-price">${precoHTML(p)}</div>
+        <div class="ci-price">${precoHTML(p)}${p.decant&&Number.isFinite(p.precoLiquido)?` <small>· R$ ${DECANT_FRASCO} do frasco incluso</small>`:""}</div>
       </div>
       <div class="ci-side">
         <div class="ci-qty">
@@ -1121,6 +1257,28 @@ function renderCart(){
       </div>
     </div>`;
   }).join("");
+  const resumo = resumoCarrinho();
+  if(resumo.qtdDecants){
+    const pct = Math.round(resumo.taxa*100);
+    const progresso = Math.min(100,(resumo.qtdDecants/10)*100);
+    cartDealEl.hidden = false;
+    cartDealEl.innerHTML = `<div class="cart-deal-head">
+      <strong>Kit de decants</strong><span>${pct?pct+"% OFF ativo":"Monte seu kit"}</span>
+    </div>
+    <p>${mensagemProgressoDecants(resumo.qtdDecants)}</p>
+    <div class="cart-deal-track" aria-hidden="true"><i style="width:${progresso}%"></i></div>
+    <div class="cart-deal-levels"><span>3 = 5%</span><span>5 = 10%</span><span>10 = 15%</span></div>`;
+    const linhasResumo = [];
+    if(resumo.outros) linhasResumo.push(`<div><span>Outros produtos</span><strong>R$ ${resumo.outros}</strong></div>`);
+    linhasResumo.push(`<div><span>Fragrância · ${resumo.qtdDecants} ${resumo.qtdDecants===1?"decant":"decants"}</span><strong>R$ ${resumo.liquidoDecants}</strong></div>`);
+    linhasResumo.push(`<div><span>Frascos · ${resumo.qtdDecants} × R$ ${DECANT_FRASCO}</span><strong>R$ ${resumo.frascosDecants}</strong></div>`);
+    if(resumo.descontoDecants) linhasResumo.push(`<div class="is-discount"><span>Desconto decants · ${pct}%</span><strong>− R$ ${resumo.descontoDecants}</strong></div>`);
+    cartBreakdownEl.hidden = false;
+    cartBreakdownEl.innerHTML = linhasResumo.join("");
+  }else{
+    cartDealEl.hidden = true;
+    cartBreakdownEl.hidden = true;
+  }
   cartFoot.classList.remove("hidden");
   if(cartTemSemPreco()){ cartTotalEl.textContent = "A combinar"; }
   else { animateTotal(cartTotalEl, totalPreco()); }
@@ -1381,6 +1539,7 @@ qvWrap.innerHTML = `
           </div>
         </details>
         <div class="qv-pyramid" id="qvNotes" aria-label="Pirâmide olfativa"></div>
+        <div class="qv-decant-picker" id="qvDecantPicker" hidden></div>
         <div class="qv-meta">
           <span class="card-size" id="qvSize"></span>
           <span class="card-price" id="qvPrice"></span>
@@ -1402,14 +1561,31 @@ document.body.appendChild(qvWrap);
 
 const qvEl = document.getElementById("qv");
 const qvOverlay = document.getElementById("qvOverlay");
-let qvNome = null, qvLastFocus = null;
+let qvNome = null, qvLastFocus = null, qvDecantAtual = null;
+
+function selecionarDecantQuickView(decant, volume){
+  const variante = decantPorBaseEVolume.get(`${decant.base}|${volume}`);
+  if(!variante) return;
+  qvNome = variante.nome;
+  document.querySelectorAll("#qvDecantPicker [data-decant-volume]").forEach(btn=>{
+    const ativo = Number(btn.dataset.decantVolume)===variante.decantMl;
+    btn.classList.toggle("active", ativo);
+    btn.setAttribute("aria-pressed", String(ativo));
+  });
+  document.getElementById("qvSize").textContent = `${variante.decantMl} ml · frasco de R$ ${DECANT_FRASCO} incluso`;
+  document.getElementById("qvPrice").innerHTML = `<small>R$</small> ${variante.preco}<em>R$ ${dinheiroDecimal(variante.precoMl)} por ml</em>`;
+  const qvWa = document.getElementById("qvWa");
+  qvWa.href = waProduto(variante);
+}
 
 function openQuickView(nome, sincronizarURL=true){
   const p = porNome[nome];
   if(!p) return;
+  const decantBase = p.decant ? DECANTS.find(d=>d.base===p.base) : null;
   if(sincronizarURL) atualizarProdutoNaURL(p);
   const disponivel = estaDisponivel(p);
   qvNome = nome;
+  qvDecantAtual = decantBase;
   qvLastFocus = document.activeElement;
   document.getElementById("qvSelo").textContent = disponivel ? p.selo : "Esgotado";
   document.getElementById("qvBottle").innerHTML = frascoVisual(p);
@@ -1419,6 +1595,9 @@ function openQuickView(nome, sincronizarURL=true){
   document.getElementById("qvDesc").textContent = p.desc;
   document.getElementById("qvNotesHelp").open = false;
   document.getElementById("qvNotes").innerHTML = piramideHTML(p);
+  const qvDecantPicker = document.getElementById("qvDecantPicker");
+  qvDecantPicker.hidden = !decantBase;
+  qvDecantPicker.innerHTML = decantBase ? seletorDecantHTML(decantBase,"quick") : "";
   document.getElementById("qvSize").textContent = p.tamanho;
   document.getElementById("qvPrice").innerHTML = disponivel ? precoHTML(p) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p));
   const qvAdd = document.getElementById("qvAdd");
@@ -1428,6 +1607,7 @@ function openQuickView(nome, sincronizarURL=true){
   const qvWa = document.getElementById("qvWa");
   qvWa.href = disponivel ? waProduto(p) : waAvisoEstoque(nomeCompleto(p));
   qvWa.innerHTML = `${WHATSAPP_ICON}<span>${disponivel ? "Pedir agora" : "Avise-me quando voltar"}</span>`;
+  if(decantBase) selecionarDecantQuickView(decantBase,p.decantMl || decantBase.opcoes[0].ml);
   // "quem gosta desse vai amar" — mesma família ou mesma marca, disponíveis primeiro
   const baseNome = p.base || p.nome;
   const rel = PERFUMES
@@ -1460,6 +1640,7 @@ function closeQuickView(){
   qvEl.setAttribute("aria-hidden","true");
   document.body.classList.remove("no-scroll");
   limparProdutoDaURL();
+  qvDecantAtual = null;
   if(qvLastFocus && qvLastFocus.focus) qvLastFocus.focus();
 }
 document.getElementById("qvClose").addEventListener("click", closeQuickView);
@@ -1467,6 +1648,11 @@ qvOverlay.addEventListener("click", closeQuickView);
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && qvEl.classList.contains("open")) closeQuickView(); });
 document.getElementById("qvAdd").addEventListener("click", ()=>{
   if(qvNome){ addToCart(qvNome); closeQuickView(); }
+});
+document.getElementById("qvDecantPicker").addEventListener("click", e=>{
+  const btn = e.target.closest("[data-decant-volume]");
+  if(!btn) return;
+  if(qvDecantAtual) selecionarDecantQuickView(qvDecantAtual,Number(btn.dataset.decantVolume));
 });
 // clicar num relacionado troca o quick view para ele
 document.getElementById("qvRelated").addEventListener("click", e=>{
