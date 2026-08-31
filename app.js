@@ -23,10 +23,40 @@ const compactMobile = window.matchMedia("(max-width: 620px)").matches;
 // preco: null  →  mostra "Sob consulta" (troque pelo valor, ex: preco:199, quando tiver os preços)
 // campo opcional: colecao:"arabes" | "nicho" | "designer"  → sem o campo, o perfume conta como "arabes"
 const PERFUMES = [
+  { nome:"Evoke Gold", marca:"Ajmal", inspiracao:"neróli, pimenta e íris", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+    ocasiao:"trabalho", intensidade:"equilibrado", preco:330, tamanho:"90 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Neróli · Pimenta", coracao:"Gerânio · Íris · Violeta · Âmbar", fundo:"Patchouli · Cedro" },
+    accent:"#b9944c", foto:"assets/p-ajmal-evoke-gold.jpg", desc:"Aromático fresco e especiado, com neróli e pimenta sobre um coração de íris, violeta e âmbar. Patchouli e cedro deixam a fragrância masculina elegante e equilibrada." },
+
+  { nome:"Eclaire", marca:"Lattafa", inspiracao:"caramelo, leite e baunilha", familia:"Gourmand", genero:"Feminino", periodo:"Noite",
+    ocasiao:"especial", intensidade:"marcante", preco:359, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Caramelo · Leite · Açúcar", coracao:"Flores Brancas · Mel", fundo:"Baunilha · Praliné · Almíscar" },
+    accent:"#d8bba8", foto:"assets/p-lattafa-eclaire.jpg", desc:"Gourmand feminino cremoso: caramelo, leite e açúcar encontram flores brancas e mel, finalizados por baunilha, praliné e almíscar." },
+
+  { nome:"Belgravia", marca:"Maison Asrar", inspiracao:"bergamota, vetiver e almíscar", familia:"Amadeirado", genero:"Unissex", periodo:"Versátil",
+    ocasiao:"especial", intensidade:"marcante", preco:650, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Bergamota · Cassis · Limão", coracao:"Lírio-do-vale · Frésia · Sândalo · Caramelo", fundo:"Vetiver · Cedro · Musgo · Almíscar" },
+    accent:"#cbc5b6", foto:"assets/p-maison-asrar-belgravia.jpg", desc:"Bergamota luminosa e cassis abrem uma composição amadeirada e almiscarada, com flores delicadas, sândalo, vetiver, cedro e musgo." },
+
+  { nome:"Regent", marca:"Maison Asrar", inspiracao:"bergamota, gengibre e toranja", familia:"Amadeirado", genero:"Unissex", periodo:"Versátil",
+    ocasiao:"especial", intensidade:"marcante", preco:500, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Bergamota · Mandarina · Gengibre · Toranja", coracao:"Jasmim · Flor de Laranjeira · Íris", fundo:"Âmbar-gris · Cedro · Almíscar · Patchouli · Sândalo · Fava Tonka" },
+    accent:"#183d31", foto:"assets/p-maison-asrar-regent.jpg", desc:"Cítricos e gengibre trazem energia à abertura, enquanto flores, íris, madeiras, âmbar-gris e tonka formam uma base quente, estruturada e elegante." },
+
+  { nome:"Legacy", marca:"Maison Asrar", inspiracao:"pera, gengibre e bergamota", familia:"Amadeirado", genero:"Unissex", periodo:"Versátil",
+    ocasiao:"especial", intensidade:"marcante", preco:470, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Gengibre · Pera · Bergamota", coracao:"Flor de Laranjeira · Jasmim · Notas Amadeiradas", fundo:"Almíscar · Baunilha · Âmbar" },
+    accent:"#24355d", foto:"assets/p-maison-asrar-legacy.jpg", desc:"Pera crocante, gengibre e bergamota abrem uma fragrância luminosa, com flores brancas, madeiras e um fundo envolvente de almíscar, baunilha e âmbar." },
+
   { nome:"Club de Nuit Intense Man", marca:"Armaf", inspiracao:"frutado esfumado", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"potente", preco:279, tamanho:"105 ml · EDT", selo:"Ícone", disponivel:true,
     notas:{ topo:"Abacaxi · Limão · Cassis · Maçã", coracao:"Bétula · Jasmim · Rosa", fundo:"Almíscar · Ambargris · Patchouli · Baunilha" },
     accent:"#5a5238", foto:"assets/p-club-intense-new.jpg", desc:"O fenômeno árabe: abacaxi esfumado sobre bétula e madeiras. Projeção e fixação enormes — presença que rende elogios o dia inteiro." },
+
+  { nome:"Club de Nuit Intense Man Body Spray", marca:"Armaf", inspiracao:"frutado esfumado", familia:"Amadeirado", genero:"Masculino", periodo:"Dia",
+    ocasiao:"dia", intensidade:"suave", preco:89, tamanho:"125 ml · Body Spray", selo:"Novo", disponivel:true,
+    notas:{ topo:"Abacaxi · Limão · Cassis · Maçã", coracao:"Bétula · Jasmim · Rosa", fundo:"Almíscar · Ambargris · Patchouli · Baunilha" },
+    accent:"#2f2f2f", foto:"assets/p-club-intense-body-spray.jpg", desc:"O perfil frutado e amadeirado do Club de Nuit Intense Man em uma versão corporal mais leve e prática para usar e reaplicar durante o dia." },
 
   { nome:"Club de Nuit Maleka", marca:"Armaf", inspiracao:"frutado elegante", familia:"Floral", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:339, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:true,
@@ -946,7 +976,7 @@ if(deptBtns.length && perfumePanel && skincarePanel){
     });
     perfumePanel.hidden = skincare;
     skincarePanel.hidden = !skincare;
-    if(countEl) countEl.textContent = skincare ? "6 produtos de skincare" : `${PERFUMES.length} fragrâncias`;
+    if(countEl) countEl.textContent = skincare ? "8 produtos de skincare" : `${PERFUMES.length} fragrâncias`;
   }));
 }
 
@@ -1489,6 +1519,20 @@ const SKINCARE_GUIDE = {
     quando:"Dia e noite",
     ordem:"Depois da limpeza e do tônico, antes do hidratante. Massageie suavemente até absorver.",
     cuidado:"Pode reaplicar uma pequena quantidade nas áreas com mais linhas. De manhã, finalize com protetor solar."
+  },
+  "No.9 NAD+ Collagen Under Eye Patches": {
+    serve:"Patches refrescantes que ajudam a reduzir a aparência de inchaço, olheiras e linhas finas, deixando a região dos olhos mais hidratada.",
+    indicado:"Para a área dos olhos com aparência cansada, ressecada, inchada ou com linhas finas aparentes.",
+    quando:"Dia ou noite",
+    ordem:"Com a pele limpa, coloque um patch sob cada olho, deixe agir por cerca de 20 minutos e espalhe suavemente a essência restante.",
+    cuidado:"Produto de uso único. Retire imediatamente se houver desconforto ou irritação."
+  },
+  "No.9 NAD+ Retinal Volumetox Eye Cream": {
+    serve:"Creme com retinal e NAD+ que ajuda na aparência de firmeza, linhas, olheiras e tom irregular ao redor dos olhos.",
+    indicado:"Para quem busca um cuidado mais intenso para linhas finas, perda de firmeza e aparência cansada na região dos olhos.",
+    quando:"Preferencialmente à noite",
+    ordem:"Depois do sérum, aplique uma pequena quantidade ao redor dos olhos, sem encostar na linha d’água, e finalize com hidratante se necessário.",
+    cuidado:"Introduza aos poucos se a pele for sensível. Durante o dia, use protetor solar e reduza a frequência se houver irritação."
   }
 };
 
