@@ -38,12 +38,12 @@ const PERFUMES = [
     notas:{ topo:"Bergamota · Cassis · Limão", coracao:"Lírio-do-vale · Frésia · Sândalo · Caramelo", fundo:"Vetiver · Cedro · Musgo · Almíscar" },
     accent:"#cbc5b6", foto:"assets/p-maison-asrar-belgravia.jpg", desc:"Bergamota luminosa e cassis abrem uma composição amadeirada e almiscarada, com flores delicadas, sândalo, vetiver, cedro e musgo." },
 
-  { nome:"Regent", marca:"Maison Asrar", inspiracao:"bergamota, gengibre e toranja", familia:"Amadeirado", genero:"Unissex", periodo:"Versátil",
+  { nome:"Regent", marca:"Maison Asrar", inspiracao:"bergamota, gengibre e toranja", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:500, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Bergamota · Mandarina · Gengibre · Toranja", coracao:"Jasmim · Flor de Laranjeira · Íris", fundo:"Âmbar-gris · Cedro · Almíscar · Patchouli · Sândalo · Fava Tonka" },
     accent:"#183d31", foto:"assets/p-maison-asrar-regent.jpg", desc:"Cítricos e gengibre trazem energia à abertura, enquanto flores, íris, madeiras, âmbar-gris e tonka formam uma base quente, estruturada e elegante." },
 
-  { nome:"Legacy", marca:"Maison Asrar", inspiracao:"pera, gengibre e bergamota", familia:"Amadeirado", genero:"Unissex", periodo:"Versátil",
+  { nome:"Legacy", marca:"Maison Asrar", inspiracao:"pera, gengibre e bergamota", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:470, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Gengibre · Pera · Bergamota", coracao:"Flor de Laranjeira · Jasmim · Notas Amadeiradas", fundo:"Almíscar · Baunilha · Âmbar" },
     accent:"#24355d", foto:"assets/p-maison-asrar-legacy.jpg", desc:"Pera crocante, gengibre e bergamota abrem uma fragrância luminosa, com flores brancas, madeiras e um fundo envolvente de almíscar, baunilha e âmbar." },
