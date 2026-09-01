@@ -508,10 +508,10 @@ body.page-light .nav-burger span{ background:var(--grafite); }
 .decant-picker-label{ display:block; margin-bottom:7px; text-align:center; font-family:var(--sans); font-size:.56rem;
   font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--grafite-45); }
 .decant-volumes{ display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
-.decant-volume{ min-height:34px; display:flex; align-items:baseline; justify-content:center; gap:3px;
+.decant-volume{ min-height:34px; display:flex; align-items:center; justify-content:center; gap:3px; text-align:center;
   border:1px solid var(--areia); border-radius:30px; background:var(--branco-q); color:var(--grafite-60);
-  font:600 .8rem/1 var(--sans); transition:.25s var(--ease); }
-.decant-volume small{ font-size:.52rem; font-weight:500; letter-spacing:.05em; text-transform:uppercase; }
+  font:600 .8rem/1 var(--sans); font-variant-numeric:tabular-nums; transition:.25s var(--ease); }
+.decant-volume small{ display:inline-block; font-size:.52rem; font-weight:500; line-height:1; letter-spacing:.05em; text-transform:uppercase; }
 .decant-volume:hover{ border-color:var(--ouro); color:var(--ouro-fundo); }
 .decant-volume.active{ border-color:var(--grafite); background:var(--grafite); color:var(--branco-puro); box-shadow:0 6px 16px -10px rgba(38,34,28,.7); }
 .is-decant .card-foot{ padding-top:12px; }
