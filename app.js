@@ -218,10 +218,10 @@ const PERFUMES = [
     notas:{ topo:"Cassis · Pera", coracao:"Íris · Flor de Laranjeira · Jasmim", fundo:"Patchouli · Fava Tonka · Praliné · Baunilha" },
     accent:"#d39a79", foto:"assets/p-la-vivacite.jpg", desc:"Pera e cassis encontram íris, flores brancas, praliné e baunilha. Feminino doce, elegante e envolvente para ocasiões especiais." },
 
-  { nome:"La Vita Bella Intensa", marca:"Maison Alhambra", inspiracao:"pera, íris e praliné", familia:"Gourmand", acorde:"Doce", genero:"Feminino", periodo:"Noite",
+  { nome:"La Vivacité Intensa", marca:"Maison Alhambra", inspiracao:"pera, íris e praliné", familia:"Gourmand", acorde:"Doce", genero:"Feminino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:199, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Pera · Cassis", coracao:"Íris · Jasmim · Flor de Laranjeira", fundo:"Praliné · Baunilha · Fava Tonka" },
-    accent:"#bd7b5c", foto:"assets/p-la-vita-bella-intensa.jpg", desc:"Pera e cassis dão brilho à íris e às flores brancas, sobre uma base cremosa de praliné, baunilha e tonka. Feminino doce e intenso." },
+    accent:"#bd7b5c", foto:"assets/p-la-vivacite-intensa.jpg", desc:"Pera e cassis dão brilho à íris e às flores brancas, sobre uma base cremosa de praliné, baunilha e tonka. Feminino doce e intenso." },
 
   { nome:"L'Intrude", marca:"Maison Alhambra", inspiracao:"flores brancas e baunilha", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:189, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
