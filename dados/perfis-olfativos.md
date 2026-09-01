@@ -45,7 +45,7 @@ Os body sprays herdam o acorde do perfume homônimo. O Sabah Al Ward Delilah ain
 | Maison Alhambra Athena | Baunilha | https://www.fragrantica.com/perfume/Maison-Alhambra/Athena-103018.html |
 | Maison Alhambra Jorge di Profumo | Especiado fresco | https://www.fragrantica.com/perfume/Maison-Alhambra/Jorge-di-Profumo-92629.html |
 | Maison Alhambra La Vivacité | Doce | https://www.fragrantica.com/perfume/Maison-Alhambra/La-Vivacite-100488.html |
-| Maison Alhambra La Vita Bella Intensa | Doce | https://www.fragrantica.com/perfume/Maison-Alhambra/La-Vita-Bella-Intensa-92616.html |
+| Maison Alhambra La Vivacité Intensa | Doce | https://www.fragrantica.com/perfume/Maison-Alhambra/La-Vita-Bella-Intensa-92616.html |
 | Maison Alhambra L'Intrude | Floral branco | https://www.fragrantica.com/perfume/Maison-Alhambra/L-Intrude-93651.html |
 | Maison Alhambra No. 2 Men | Especiado fresco | https://www.fragrantica.com/perfume/Maison-Alhambra/No-2-Men-94065.html |
 | Maison Alhambra So Candid | Floral branco | https://www.fragrantica.com/perfume/Maison-Alhambra/So-Candid-94072.html |
