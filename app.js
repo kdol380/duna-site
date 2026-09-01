@@ -14,7 +14,7 @@ const compactMobile = window.matchMedia("(max-width: 620px)").matches;
 
 /* =====================================================================
    📦  CATÁLOGO  —  fictício realista (edite à vontade)
-   campos: nome, inspiracao, familia, genero, periodo, ocasiao,
+   campos: nome, inspiracao, familia, acorde, genero, periodo, ocasiao,
            intensidade, preco, tamanho, notas {topo, coracao, fundo},
            accent, selo
    campo opcional: foto:"assets/nome-do-arquivo.png"  → mostra a FOTO
@@ -23,422 +23,422 @@ const compactMobile = window.matchMedia("(max-width: 620px)").matches;
 // preco: null  →  mostra "Sob consulta" (troque pelo valor, ex: preco:199, quando tiver os preços)
 // campo opcional: colecao:"arabes" | "nicho" | "designer"  → sem o campo, o perfume conta como "arabes"
 const PERFUMES = [
-  { nome:"Evoke Gold", marca:"Ajmal", inspiracao:"neróli, pimenta e íris", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Evoke Gold", marca:"Ajmal", inspiracao:"neróli, pimenta e íris", familia:"Amadeirado", acorde:"Íris", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:330, tamanho:"90 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Neróli · Pimenta", coracao:"Gerânio · Íris · Violeta · Âmbar", fundo:"Patchouli · Cedro" },
     accent:"#b9944c", foto:"assets/p-ajmal-evoke-gold.jpg", desc:"Aromático fresco e especiado, com neróli e pimenta sobre um coração de íris, violeta e âmbar. Patchouli e cedro deixam a fragrância masculina elegante e equilibrada." },
 
-  { nome:"Eclaire", marca:"Lattafa", inspiracao:"caramelo, leite e baunilha", familia:"Gourmand", genero:"Feminino", periodo:"Noite",
+  { nome:"Eclaire", marca:"Lattafa", inspiracao:"caramelo, leite e baunilha", familia:"Gourmand", acorde:"Doce", genero:"Feminino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:359, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Caramelo · Leite · Açúcar", coracao:"Flores Brancas · Mel", fundo:"Baunilha · Praliné · Almíscar" },
     accent:"#d8bba8", foto:"assets/p-lattafa-eclaire.jpg", desc:"Gourmand feminino cremoso: caramelo, leite e açúcar encontram flores brancas e mel, finalizados por baunilha, praliné e almíscar." },
 
-  { nome:"Belgravia", marca:"Maison Asrar", inspiracao:"bergamota, vetiver e almíscar", familia:"Amadeirado", genero:"Unissex", periodo:"Versátil",
+  { nome:"Belgravia", marca:"Maison Asrar", inspiracao:"bergamota, vetiver e almíscar", familia:"Amadeirado", acorde:"Cítrico", genero:"Unissex", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:650, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Bergamota · Cassis · Limão", coracao:"Lírio-do-vale · Frésia · Sândalo · Caramelo", fundo:"Vetiver · Cedro · Musgo · Almíscar" },
     accent:"#cbc5b6", foto:"assets/p-maison-asrar-belgravia.jpg", desc:"Bergamota luminosa e cassis abrem uma composição amadeirada e almiscarada, com flores delicadas, sândalo, vetiver, cedro e musgo." },
 
-  { nome:"Regent", marca:"Maison Asrar", inspiracao:"bergamota, gengibre e toranja", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Regent", marca:"Maison Asrar", inspiracao:"bergamota, gengibre e toranja", familia:"Amadeirado", acorde:"Cítrico", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:500, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Bergamota · Mandarina · Gengibre · Toranja", coracao:"Jasmim · Flor de Laranjeira · Íris", fundo:"Âmbar-gris · Cedro · Almíscar · Patchouli · Sândalo · Fava Tonka" },
     accent:"#183d31", foto:"assets/p-maison-asrar-regent.jpg", desc:"Cítricos e gengibre trazem energia à abertura, enquanto flores, íris, madeiras, âmbar-gris e tonka formam uma base quente, estruturada e elegante." },
 
-  { nome:"Legacy", marca:"Maison Asrar", inspiracao:"pera, gengibre e bergamota", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Legacy", marca:"Maison Asrar", inspiracao:"pera, gengibre e bergamota", familia:"Amadeirado", acorde:"Floral branco", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:470, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Gengibre · Pera · Bergamota", coracao:"Flor de Laranjeira · Jasmim · Notas Amadeiradas", fundo:"Almíscar · Baunilha · Âmbar" },
     accent:"#24355d", foto:"assets/p-maison-asrar-legacy.jpg", desc:"Pera crocante, gengibre e bergamota abrem uma fragrância luminosa, com flores brancas, madeiras e um fundo envolvente de almíscar, baunilha e âmbar." },
 
-  { nome:"Club de Nuit Intense Man", marca:"Armaf", inspiracao:"frutado esfumado", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Club de Nuit Intense Man", marca:"Armaf", inspiracao:"frutado esfumado", familia:"Amadeirado", acorde:"Cítrico", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"potente", preco:279, tamanho:"105 ml · EDT", selo:"Ícone", disponivel:true,
     notas:{ topo:"Abacaxi · Limão · Cassis · Maçã", coracao:"Bétula · Jasmim · Rosa", fundo:"Almíscar · Ambargris · Patchouli · Baunilha" },
     accent:"#5a5238", foto:"assets/p-club-intense-new.jpg", desc:"O fenômeno árabe: abacaxi esfumado sobre bétula e madeiras. Projeção e fixação enormes — presença que rende elogios o dia inteiro." },
 
-  { nome:"Club de Nuit Intense Man Body Spray", marca:"Armaf", inspiracao:"frutado esfumado", familia:"Amadeirado", genero:"Masculino", periodo:"Dia",
+  { nome:"Club de Nuit Intense Man Body Spray", marca:"Armaf", inspiracao:"frutado esfumado", familia:"Amadeirado", acorde:"Cítrico", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"suave", preco:89, tamanho:"125 ml · Body Spray", selo:"Novo", disponivel:true,
     notas:{ topo:"Abacaxi · Limão · Cassis · Maçã", coracao:"Bétula · Jasmim · Rosa", fundo:"Almíscar · Ambargris · Patchouli · Baunilha" },
     accent:"#2f2f2f", foto:"assets/p-club-intense-body-spray.jpg", desc:"O perfil frutado e amadeirado do Club de Nuit Intense Man em uma versão corporal mais leve e prática para usar e reaplicar durante o dia." },
 
-  { nome:"Club de Nuit Maleka", marca:"Armaf", inspiracao:"frutado elegante", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"Club de Nuit Maleka", marca:"Armaf", inspiracao:"frutado elegante", familia:"Floral", acorde:"Íris", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:339, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:true,
     notas:{ topo:"Lichia · Bergamota · Pimenta Rosa", coracao:"Íris", fundo:"Praliné · Ambroxan · Sândalo" },
     accent:"#9e4a63", foto:"assets/p-club-maleka.jpg", desc:"Floral-frutado luminoso e moderno: lichia e pimenta rosa sobre íris e praliné. Feminino elegante, do dia à noite." },
 
-  { nome:"Club de Nuit Urban Man Elixir", marca:"Armaf", inspiracao:"cítrico aromático e ambarado", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Club de Nuit Urban Man Elixir", marca:"Armaf", inspiracao:"cítrico aromático e ambarado", familia:"Amadeirado", acorde:"Âmbar", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"marcante", preco:389, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Bergamota · Pimenta Rosa · Jasmim · Flor de Laranjeira", coracao:"Lavanda · Elemi · Gerânio · Vetiver · Açafrão · Calêndula", fundo:"Ambroxan · Âmbar · Cedro · Patchouli · Labdano" },
     accent:"#343434", foto:"assets/p-club-urban-elixir.jpg", desc:"Aromático masculino de presença forte, com cítricos e pimenta rosa sobre lavanda, açafrão, ambroxan e madeiras. Versátil, moderno e marcante." },
 
-  { nome:"Club de Nuit Sillage", marca:"Armaf", inspiracao:"cítrico metálico e almiscarado", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
+  { nome:"Club de Nuit Sillage", marca:"Armaf", inspiracao:"cítrico metálico e almiscarado", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"Dia",
     ocasiao:"trabalho", intensidade:"marcante", preco:339, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Bergamota · Limão · Lima · Cassis · Folha de Violeta · Gengibre", coracao:"Rosa · Íris · Jasmim", fundo:"Ambroxan · Almíscar · Sândalo · Cedro" },
     accent:"#aeb5ba", foto:"assets/p-club-sillage.jpg", desc:"Fresco e gelado, combina uma abertura cítrica vibrante com flores elegantes e um fundo limpo de ambroxan, almíscar e madeiras. Masculino segundo a votação da comunidade." },
 
-  { nome:"Club de Nuit Sillage Body Spray", marca:"Armaf", inspiracao:"cítrico metálico e almiscarado", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
+  { nome:"Club de Nuit Sillage Body Spray", marca:"Armaf", inspiracao:"cítrico metálico e almiscarado", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"suave", preco:89, tamanho:"125 ml · Body Spray", selo:"Novo", disponivel:true,
     notas:{ topo:"Bergamota · Limão · Lima · Cassis · Folha de Violeta · Gengibre", coracao:"Rosa · Íris · Jasmim", fundo:"Ambroxan · Almíscar · Sândalo · Cedro" },
     accent:"#b8bec2", foto:"assets/p-club-sillage-body-spray.webp", desc:"A fragrância fresca e elegante do Club de Nuit Sillage em uma versão corporal mais leve e prática. Ideal para reaplicar durante o dia e prolongar a sensação de frescor." },
 
-  { nome:"Club de Nuit Untold", marca:"Armaf", inspiracao:"açafrão ambarado e amadeirado", familia:"Amadeirado", genero:"Unissex", periodo:"Noite",
+  { nome:"Club de Nuit Untold", marca:"Armaf", inspiracao:"açafrão ambarado e amadeirado", familia:"Amadeirado", acorde:"Amadeirado", genero:"Unissex", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:369, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Açafrão · Jasmim", coracao:"Amberwood · Âmbar-gris", fundo:"Resina de Abeto · Cedro" },
     accent:"#d4a52c", foto:"assets/p-club-untold.jpg", desc:"Açafrão e jasmim formam uma aura doce e metálica sobre âmbar e madeiras. Intenso, envolvente e versátil para diferentes estilos." },
 
-  { nome:"Club de Nuit White Imperiale", marca:"Armaf", inspiracao:"rosa cremosa e baunilha", familia:"Floral", genero:"Feminino", periodo:"Noite",
+  { nome:"Club de Nuit White Imperiale", marca:"Armaf", inspiracao:"rosa cremosa e baunilha", familia:"Floral", acorde:"Rosa", genero:"Feminino", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:329, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Lichia · Bergamota · Noz-moscada", coracao:"Rosa Turca · Baunilha · Almíscar · Peônia", fundo:"Baunilha · Incenso · Cashmeran · Cedro" },
     accent:"#c9a84f", foto:"assets/p-club-white-imperiale.jpg", desc:"Rosa cremosa, lichia e baunilha formam uma fragrância feminina elegante e envolvente. O incenso e as madeiras dão profundidade e muita presença." },
 
-  { nome:"Odyssey Mandarin Sky", marca:"Armaf", inspiracao:"mandarina e caramelo", familia:"Gourmand", genero:"Masculino", periodo:"Noite",
+  { nome:"Odyssey Mandarin Sky", marca:"Armaf", inspiracao:"mandarina e caramelo", familia:"Gourmand", acorde:"Cítrico", genero:"Masculino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:259, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Mandarina · Laranja · Açafrão · Sálvia", coracao:"Caramelo · Fava Tonka · Calêndula", fundo:"Ambroxan · Cedro · Vetiver" },
     accent:"#e77f2f", foto:"assets/p-odyssey-mandarin-sky.jpg", desc:"Mandarina vibrante e especiarias encontram um coração cremoso de caramelo e fava tonka. Masculino doce, moderno e marcante para a noite." },
 
-  { nome:"Aisha Princess", marca:"Bidaya Parfums", inspiracao:"floral doce com marshmallow", familia:"Gourmand", genero:"Feminino", periodo:"Noite",
+  { nome:"Aisha Princess", marca:"Bidaya Parfums", inspiracao:"floral doce com marshmallow", familia:"Gourmand", acorde:"Doce", genero:"Feminino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Néroli · Frutas Vermelhas · Coentro", coracao:"Flor de Laranjeira · Baunilha · Marshmallow · Jasmim · Lavanda · Íris", fundo:"Açúcar · Caramelo · Notas Amadeiradas · Sândalo · Âmbar" },
     accent:"#c75f66", foto:"assets/p-aisha-princess.jpg", desc:"Floral gourmand feminino, com flores brancas, marshmallow e baunilha sobre um fundo de açúcar, caramelo e madeiras. Doce, delicado e envolvente." },
 
-  { nome:"Ayat", marca:"Bidaya Parfums", inspiracao:"hibisco, rosa e baunilha", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"Ayat", marca:"Bidaya Parfums", inspiracao:"hibisco, rosa e baunilha", familia:"Floral", acorde:"Floral", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Hibisco · Cassis · Hortelã-pimenta", coracao:"Rosa Damascena · Baunilha · Canela · Ambreta", fundo:"Âmbar · Couro" },
     accent:"#a83b4b", foto:"assets/p-bidaya-ayat.jpg", desc:"Hibisco e rosa ganham frescor com hortelã e cassis, enquanto baunilha, canela, âmbar e couro deixam a fragrância feminina mais quente e sofisticada." },
 
-  { nome:"Blind Ecstasy", marca:"Bidaya Parfums", inspiracao:"conhaque, especiarias e madeiras", familia:"Amadeirado", genero:"Masculino", periodo:"Noite",
+  { nome:"Blind Ecstasy", marca:"Bidaya Parfums", inspiracao:"conhaque, especiarias e madeiras", familia:"Amadeirado", acorde:"Amadeirado", genero:"Masculino", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:449, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Frutas Vermelhas · Conhaque · Toranja · Bergamota · Zimbro", coracao:"Sálvia Esclaréia · Cipreste · Pimenta · Gengibre", fundo:"Sândalo · Baunilha · Âmbar · Almíscar · Cedro da Virgínia · Cardamomo · Vetiver" },
     accent:"#841f2a", foto:"assets/p-blind-ecstasy.jpg", desc:"Conhaque e frutas vermelhas abrem uma fragrância masculina intensa, cercada por especiarias, baunilha, âmbar e madeiras. Quente e ideal para ocasiões especiais." },
 
-  { nome:"Elliur", marca:"Bidaya Parfums", inspiracao:"cassis, cítricos e figo", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
+  { nome:"Elliur", marca:"Bidaya Parfums", inspiracao:"cassis, cítricos e figo", familia:"Cítrico", acorde:"Frutado", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"equilibrado", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Cassis · Hortelã · Laranja · Limão · Cidra", coracao:"Coentro · Rosa de Maio · Damasco · Manjericão", fundo:"Figo · Ambreta · Tâmara · Cenoura" },
     accent:"#159d82", foto:"assets/p-bidaya-elliur.jpg", desc:"Cítricos, cassis e hortelã criam uma abertura fresca e vibrante, seguida por figo, damasco e ervas aromáticas. Masculino leve, diferente e ótimo para o dia." },
 
-  { nome:"Habibi King", marca:"Bidaya Parfums", inspiracao:"baunilha, canela e praliné", familia:"Gourmand", genero:"Masculino", periodo:"Noite",
+  { nome:"Habibi King", marca:"Bidaya Parfums", inspiracao:"baunilha, canela e praliné", familia:"Gourmand", acorde:"Doce", genero:"Masculino", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:319, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Canela · Flor de Laranjeira · Cardamomo · Bergamota", coracao:"Baunilha Bourbon · Elemi", fundo:"Praliné · Fava Tonka · Madeira Guaiac · Amêndoa Caramelizada · Âmbar · Almíscar" },
     accent:"#9a4a2d", foto:"assets/p-habibi-king.jpg", desc:"Especiarias quentes encontram baunilha Bourbon, praliné e amêndoa caramelizada. Um gourmand masculino intenso, cremoso e marcante para a noite." },
 
-  { nome:"Habibi Prince", marca:"Bidaya Parfums", inspiracao:"verde aquático com coco e figo", familia:"Amadeirado", genero:"Masculino", periodo:"Dia",
+  { nome:"Habibi Prince", marca:"Bidaya Parfums", inspiracao:"verde aquático com coco e figo", familia:"Amadeirado", acorde:"Verde", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"equilibrado", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Notas Verdes · Bergamota · Hortelã · Notas Aquáticas", coracao:"Coco · Figo · Gengibre · Pimenta-preta · Canela", fundo:"Almíscar · Sândalo · Âmbar · Vetiver · Fava Tonka" },
     accent:"#31a84d", foto:"assets/p-habibi-prince.jpg", desc:"Fresco verde e aquático com hortelã, coco e figo, finalizado por especiarias e madeiras. Masculino moderno, confortável e versátil para os dias quentes." },
 
-  { nome:"Maktub Gold", marca:"Bidaya Parfums", inspiracao:"cítricos, especiarias e baunilha", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
+  { nome:"Maktub Gold", marca:"Bidaya Parfums", inspiracao:"cítricos, especiarias e baunilha", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Laranja Brasileira · Gengibre · Bergamota da Calábria · Limão Siciliano", coracao:"Pera · Canela · Cravo · Cardamomo da Guatemala", fundo:"Baunilha de Madagascar · Almíscar Branco · Notas Amadeiradas · Âmbar-gris" },
     accent:"#d8ad2f", foto:"assets/p-maktub-gold.jpg", desc:"Cítricos luminosos e gengibre evoluem para pera, especiarias e uma base cremosa de baunilha e madeiras. Masculino elegante, versátil e marcante." },
 
-  { nome:"Maktub La Vie", marca:"Bidaya Parfums", inspiracao:"manga tropical e especiarias", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
+  { nome:"Maktub La Vie", marca:"Bidaya Parfums", inspiracao:"manga tropical e especiarias", familia:"Cítrico", acorde:"Tropical", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Manga · Frutas Tropicais · Toranja · Limão Siciliano · Cássia", coracao:"Gengibre · Íris · Noz-moscada", fundo:"Âmbar · Almíscar · Cedro" },
     accent:"#149ba0", foto:"assets/p-maktub-la-vie.jpg", desc:"Manga e frutas tropicais ganham brilho cítrico, especiarias e um fundo de âmbar, almíscar e cedro. Masculino frutado, vibrante e de presença marcante." },
 
-  { nome:"Vanilla P*rn", marca:"Bidaya Parfums", inspiracao:"baunilha cremosa e coco", familia:"Gourmand", genero:"Unissex", periodo:"Noite",
+  { nome:"Vanilla P*rn", marca:"Bidaya Parfums", inspiracao:"baunilha cremosa e coco", familia:"Gourmand", acorde:"Baunilha", genero:"Unissex", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:449, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Baunilha · Coco · Heliotrópio · Notas Atalcadas", coracao:"Baunilha de Madagascar · Leite", fundo:"Absoluto de Baunilha · Coco · Palo Santo · Almíscar" },
     accent:"#292524", foto:"assets/p-vanilla-prn.jpg", desc:"Uma baunilha intensa e cremosa, acompanhada por coco, leite e um toque atalcado. O palo santo e o almíscar equilibram a doçura no fundo." },
 
-  { nome:"Khamrah", marca:"Lattafa", inspiracao:"canela, tâmaras e baunilha", familia:"Gourmand", genero:"Masculino", periodo:"Noite",
+  { nome:"Khamrah", marca:"Lattafa", inspiracao:"canela, tâmaras e baunilha", familia:"Gourmand", acorde:"Doce", genero:"Masculino", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:234, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Canela · Noz-moscada · Bergamota", coracao:"Tâmaras · Praliné · Tuberosa · Mahonial", fundo:"Baunilha · Fava Tonka · Amberwood · Mirra · Benjoim · Akigalawood" },
     accent:"#b5742d", foto:"assets/p-khamrah.jpg", desc:"Canela e tâmaras se misturam a praliné, baunilha e resinas quentes. Um gourmand masculino intenso, adocicado e envolvente para noites e ocasiões especiais." },
 
-  { nome:"Khamrah Qahwa", marca:"Lattafa", inspiracao:"café, especiarias e baunilha", familia:"Gourmand", genero:"Masculino", periodo:"Noite",
+  { nome:"Khamrah Qahwa", marca:"Lattafa", inspiracao:"café, especiarias e baunilha", familia:"Gourmand", acorde:"Especiado quente", genero:"Masculino", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:224, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Canela · Cardamomo · Gengibre", coracao:"Praliné · Frutas Cristalizadas · Flores Brancas", fundo:"Baunilha · Café · Fava Tonka · Benjoim · Almíscar" },
     accent:"#8a5328", foto:"assets/p-khamrah-qahwa-new.jpg", desc:"Café, baunilha e praliné aparecem cercados por canela, cardamomo e gengibre. Masculino quente, doce e marcante, perfeito para a noite." },
 
-  { nome:"Queen of Arabia", marca:"Lattafa", inspiracao:"coco salgado e baunilha", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"Queen of Arabia", marca:"Lattafa", inspiracao:"coco salgado e baunilha", familia:"Floral", acorde:"Baunilha", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:649, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Coco · Sal", coracao:"Sândalo · Heliotrópio", fundo:"Baunilha · Âmbar" },
     accent:"#b69a43", foto:"assets/p-queen-of-arabia.jpg", desc:"Coco com um toque salgado encontra heliotrópio, sândalo e baunilha. Feminino cremoso, sofisticado e envolvente, com apresentação luxuosa." },
 
-  { nome:"Haya", marca:"Lattafa", inspiracao:"champanhe, morango e flores brancas", familia:"Floral", genero:"Feminino", periodo:"Dia",
+  { nome:"Haya", marca:"Lattafa", inspiracao:"champanhe, morango e flores brancas", familia:"Floral", acorde:"Cítrico", genero:"Feminino", periodo:"Dia",
     ocasiao:"dia", intensidade:"equilibrado", preco:239, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Champanhe · Morango · Tangerina · Laranja Sanguínea · Rosa", coracao:"Gardênia · Jasmim · Orquídea de Baunilha", fundo:"Âmbar · Sândalo · Castanha" },
     accent:"#d79aa6", foto:"assets/p-haya.jpg", desc:"Champanhe, morango e cítricos abrem um floral feminino alegre e luminoso. Gardênia, jasmim e baunilha deixam o perfume cremoso e elegante." },
 
-  { nome:"Art of Arabia I", marca:"Lattafa Pride", inspiracao:"chá preto, cítricos e especiarias", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
+  { nome:"Art of Arabia I", marca:"Lattafa Pride", inspiracao:"chá preto, cítricos e especiarias", familia:"Cítrico", acorde:"Especiado fresco", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"marcante", preco:299, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Bergamota · Hortelã", coracao:"Chá Preto · Gengibre · Lavanda", fundo:"Ambroxan · Olíbano · Canela" },
     accent:"#4b4b4b", foto:"assets/p-art-of-arabia-i.webp", desc:"Bergamota e hortelã encontram chá preto, gengibre e lavanda sobre ambroxan e incenso. Masculino elegante, aromático e versátil." },
 
-  { nome:"Maahir Legacy", marca:"Lattafa", inspiracao:"cítrico aromático e refrescante", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
+  { nome:"Maahir Legacy", marca:"Lattafa", inspiracao:"cítrico aromático e refrescante", familia:"Cítrico", acorde:"Aromático", genero:"Masculino", periodo:"Dia",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:269, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Lima · Hortelã · Toranja · Lavanda · Abacaxi", coracao:"Pimenta-preta · Alecrim · Zimbro · Gerânio · Olíbano", fundo:"Ambroxan · Vetiver · Musgo de Carvalho · Cashmeran · Fava Tonka" },
     accent:"#a7adb0", foto:"assets/p-maahir-legacy.jpg", desc:"Cítricos, hortelã e abacaxi criam um frescor aromático sobre especiarias, ambroxan e vetiver. Masculino limpo e ótimo para o dia a dia." },
 
-  { nome:"Afeef", marca:"Lattafa", inspiracao:"flores brancas, pêssego e praliné", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"Afeef", marca:"Lattafa", inspiracao:"flores brancas, pêssego e praliné", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:579, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Pêssego · Pimenta Rosa · Bergamota", coracao:"Tuberosa · Flor de Laranjeira · Jasmim", fundo:"Praliné · Âmbar · Sândalo · Patchouli" },
     accent:"#c8a34d", foto:"assets/p-afeef.jpg", desc:"Pêssego e pimenta rosa iluminam um buquê de tuberosa, flor de laranjeira e jasmim. Praliné, âmbar e sândalo deixam o feminino cremoso e sofisticado." },
 
-  { nome:"Qaed Al Fursan", marca:"Lattafa", inspiracao:"abacaxi, açafrão e madeiras", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Qaed Al Fursan", marca:"Lattafa", inspiracao:"abacaxi, açafrão e madeiras", familia:"Amadeirado", acorde:"Frutado", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:179, tamanho:"90 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Abacaxi · Açafrão", coracao:"Abeto Balsâmico · Jasmim", fundo:"Cedro · Âmbar · Oud" },
     accent:"#282521", foto:"assets/p-qaed-al-fursan.webp", desc:"Abacaxi suculento e açafrão encontram uma base escura de cedro, âmbar e oud. Masculino marcante, versátil e de excelente custo-benefício." },
 
-  { nome:"Shaheen Gold", marca:"Lattafa", inspiracao:"abacaxi, figo e baunilha", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
+  { nome:"Shaheen Gold", marca:"Lattafa", inspiracao:"abacaxi, figo e baunilha", familia:"Cítrico", acorde:"Doce", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:239, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Abacaxi · Toranja", coracao:"Lavanda · Figo", fundo:"Baunilha · Patchouli · Fava Tonka" },
     accent:"#c39a45", foto:"assets/p-shaheen-gold.jpg", desc:"Abacaxi e toranja abrem uma fragrância masculina frutada, com figo, lavanda, baunilha e tonka. Doce, moderna e fácil de usar." },
 
-  { nome:"Emeer", marca:"Lattafa", inspiracao:"chá branco, cítricos e madeiras", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Emeer", marca:"Lattafa", inspiracao:"chá branco, cítricos e madeiras", familia:"Amadeirado", acorde:"Aromático", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"marcante", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Limão · Bergamota · Sálvia Esclaréia · Zimbro", coracao:"Chá Branco · Sândalo · Cardamomo · Olíbano", fundo:"Âmbar-gris · Cedro · Cashmeran · Patchouli" },
     accent:"#b98b36", foto:"assets/p-emeer.jpg", desc:"Cítricos e ervas aromáticas encontram chá branco, cardamomo e madeiras elegantes. Masculino sofisticado, versátil e de presença marcante." },
 
-  { nome:"Victoria", marca:"Lattafa", inspiracao:"torta de limão e baunilha", familia:"Gourmand", genero:"Feminino", periodo:"Versátil",
+  { nome:"Victoria", marca:"Lattafa", inspiracao:"torta de limão e baunilha", familia:"Gourmand", acorde:"Baunilha", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:239, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Torta de Limão com Merengue", coracao:"Néroli", fundo:"Baunilha" },
     accent:"#b7a36c", foto:"assets/p-victoria.jpg", desc:"Um gourmand feminino luminoso que lembra torta de limão com merengue, suavizada por néroli e baunilha. Cremoso, alegre e fácil de usar." },
 
-  { nome:"Opulent Dubai", marca:"Lattafa", inspiracao:"manga, cítricos e madeiras", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
+  { nome:"Opulent Dubai", marca:"Lattafa", inspiracao:"manga, cítricos e madeiras", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:179, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Manga · Toranja · Limão · Gengibre", coracao:"Jasmim · Cedro · Violeta", fundo:"Notas Amadeiradas · Âmbar-gris · Musgo de Carvalho · Benjoim" },
     accent:"#79b8c7", foto:"assets/p-opulent-dubai.jpg", desc:"Manga e cítricos ganham energia com gengibre, flores e uma base amadeirada de âmbar, musgo e benjoim. Masculino vibrante e marcante." },
 
-  { nome:"Musamam White Intense", marca:"Lattafa", inspiracao:"coco, flores e sândalo", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"Musamam White Intense", marca:"Lattafa", inspiracao:"coco, flores e sândalo", familia:"Floral", acorde:"Amadeirado", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"potente", preco:399, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Especiarias · Bergamota · Laranja", coracao:"Coco · Ylang-Ylang · Ambroxan · Mahonial", fundo:"Sândalo · Almíscar · Benjoim" },
     accent:"#c9a266", foto:"assets/p-musamam-white-intense.jpg", desc:"Coco cremoso, ylang-ylang e especiarias repousam sobre sândalo, almíscar e benjoim. Feminino intenso, elegante e envolvente." },
 
-  { nome:"Athena", marca:"Maison Alhambra", inspiracao:"flores brancas e baunilha", familia:"Floral", genero:"Feminino", periodo:"Dia",
+  { nome:"Athena", marca:"Maison Alhambra", inspiracao:"flores brancas e baunilha", familia:"Floral", acorde:"Baunilha", genero:"Feminino", periodo:"Dia",
     ocasiao:"dia", intensidade:"equilibrado", preco:249, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Tangerina · Pimenta Rosa · Bergamota", coracao:"Jasmim Sambac · Ylang-Ylang · Lírio-do-Vale", fundo:"Baunilha · Sândalo · Patchouli" },
     accent:"#d6aa72", foto:"assets/p-athena.jpg", desc:"Cítricos e pimenta rosa iluminam um buquê de jasmim, ylang-ylang e lírio-do-vale. Feminino floral, cremoso e elegante para o dia." },
 
-  { nome:"Jorge di Profumo", marca:"Maison Alhambra", inspiracao:"cítrico aromático e amadeirado", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Jorge di Profumo", marca:"Maison Alhambra", inspiracao:"cítrico aromático e amadeirado", familia:"Amadeirado", acorde:"Especiado fresco", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"marcante", preco:199, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Bergamota · Pimenta-preta · Limão Siciliano", coracao:"Lavanda · Tabaco · Gerânio", fundo:"Vetiver · Sândalo · Almíscar" },
     accent:"#343434", foto:"assets/p-jorge-di-profumo.webp", desc:"Cítricos e pimenta-preta abrem um aromático masculino elegante, com lavanda, tabaco, vetiver e madeiras. Versátil e marcante sem perder o frescor." },
 
-  { nome:"La Vivacité", marca:"Maison Alhambra", inspiracao:"frutado floral com baunilha", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"La Vivacité", marca:"Maison Alhambra", inspiracao:"frutado floral com baunilha", familia:"Floral", acorde:"Doce", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:239, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Cassis · Pera", coracao:"Íris · Flor de Laranjeira · Jasmim", fundo:"Patchouli · Fava Tonka · Praliné · Baunilha" },
     accent:"#d39a79", foto:"assets/p-la-vivacite.jpg", desc:"Pera e cassis encontram íris, flores brancas, praliné e baunilha. Feminino doce, elegante e envolvente para ocasiões especiais." },
 
-  { nome:"La Vita Bella Intensa", marca:"Maison Alhambra", inspiracao:"pera, íris e praliné", familia:"Gourmand", genero:"Feminino", periodo:"Noite",
+  { nome:"La Vita Bella Intensa", marca:"Maison Alhambra", inspiracao:"pera, íris e praliné", familia:"Gourmand", acorde:"Doce", genero:"Feminino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:199, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Pera · Cassis", coracao:"Íris · Jasmim · Flor de Laranjeira", fundo:"Praliné · Baunilha · Fava Tonka" },
     accent:"#bd7b5c", foto:"assets/p-la-vita-bella-intensa.jpg", desc:"Pera e cassis dão brilho à íris e às flores brancas, sobre uma base cremosa de praliné, baunilha e tonka. Feminino doce e intenso." },
 
-  { nome:"L'Intrude", marca:"Maison Alhambra", inspiracao:"flores brancas e baunilha", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"L'Intrude", marca:"Maison Alhambra", inspiracao:"flores brancas e baunilha", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:189, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Pera · Bergamota", coracao:"Tuberosa · Flor de Laranjeira · Jasmim Sambac", fundo:"Patchouli · Ambroxan · Baunilha · Vetiver" },
     accent:"#b69773", foto:"assets/p-lintrude.jpg", desc:"Pera e bergamota iluminam um buquê intenso de tuberosa, flor de laranjeira e jasmim. Feminino marcante, cremoso e sofisticado." },
 
-  { nome:"No. 2 Men", marca:"Maison Alhambra", inspiracao:"lavanda, especiarias e incenso", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"No. 2 Men", marca:"Maison Alhambra", inspiracao:"lavanda, especiarias e incenso", familia:"Amadeirado", acorde:"Especiado fresco", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"marcante", preco:219, tamanho:"80 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Bergamota · Lavanda", coracao:"Gengibre · Cardamomo", fundo:"Vetiver · Incenso · Almíscar · Sândalo · Labdano · Madeira Guaiac" },
     accent:"#a8adb0", foto:"assets/p-no-2-men.jpg", desc:"Lavanda e bergamota ganham calor com gengibre e cardamomo, enquanto incenso, vetiver e madeiras criam uma base masculina elegante." },
 
-  { nome:"So Candid", marca:"Maison Alhambra", inspiracao:"flores brancas cremosas", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"So Candid", marca:"Maison Alhambra", inspiracao:"flores brancas cremosas", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:199, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Flor de Laranjeira", coracao:"Tuberosa · Jasmim", fundo:"Leite" },
     accent:"#dc9aa6", foto:"assets/p-so-candid.jpg", desc:"Flor de laranjeira, tuberosa e jasmim formam um floral branco feminino, suavizado por uma base leitosa e cremosa. Elegante e envolvente." },
 
-  { nome:"So Candid Pour Homme", marca:"Maison Alhambra", inspiracao:"caramelo aromático e vetiver", familia:"Gourmand", genero:"Masculino", periodo:"Noite",
+  { nome:"So Candid Pour Homme", marca:"Maison Alhambra", inspiracao:"caramelo aromático e vetiver", familia:"Gourmand", acorde:"Caramelo", genero:"Masculino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Sálvia Esclaréia · Mandarina", coracao:"Caramelo · Fava Tonka", fundo:"Vetiver" },
     accent:"#277d72", foto:"assets/p-so-candid-pour-homme.jpg", desc:"Mandarina e sálvia encontram um coração doce de caramelo e tonka, equilibrado pelo vetiver. Masculino moderno, quente e marcante." },
 
-  { nome:"Your Touch For Women", marca:"Maison Alhambra", inspiracao:"frutas vermelhas, rosa e baunilha", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"Your Touch For Women", marca:"Maison Alhambra", inspiracao:"frutas vermelhas, rosa e baunilha", familia:"Floral", acorde:"Frutado", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:189, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Framboesa · Limão · Laranja", coracao:"Rosa", fundo:"Baunilha · Amberwood · Almíscar" },
     accent:"#d4b17a", foto:"assets/p-your-touch-for-women.jpg", desc:"Framboesa e cítricos trazem brilho à rosa, enquanto baunilha, âmbar amadeirado e almíscar dão cremosidade. Feminino doce e versátil." },
 
-  { nome:"Your Touch", marca:"Maison Alhambra", inspiracao:"especiarias, castanha e baunilha", familia:"Amadeirado", genero:"Masculino", periodo:"Noite",
+  { nome:"Your Touch", marca:"Maison Alhambra", inspiracao:"especiarias, castanha e baunilha", familia:"Amadeirado", acorde:"Especiado quente", genero:"Masculino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:209, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Cardamomo · Pimenta Rosa · Folha de Violeta · Hortelã", coracao:"Canela · Lavanda · Sálvia · Melancia · Abacaxi", fundo:"Castanha · Baunilha · Amberwood · Madeira Guaiac · Cedro" },
     accent:"#9a6839", foto:"assets/p-your-touch.jpg", desc:"Especiarias frescas evoluem para canela, frutas e uma base cremosa de castanha, baunilha e madeiras. Masculino quente e envolvente." },
 
-  { nome:"Tropical Vibe", marca:"Rayhaan", inspiracao:"manga, coco e notas marinhas", familia:"Gourmand", genero:"Unissex", periodo:"Dia",
+  { nome:"Tropical Vibe", marca:"Rayhaan", inspiracao:"manga, coco e notas marinhas", familia:"Gourmand", acorde:"Tropical", genero:"Unissex", periodo:"Dia",
     ocasiao:"dia", intensidade:"marcante", preco:369, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Manga · Abacaxi · Bergamota · Rum", coracao:"Coco · Flores Brancas · Notas Marinhas", fundo:"Almíscar · Âmbar · Sândalo · Vetiver" },
     accent:"#11a6a8", foto:"assets/p-tropical-vibe.jpg", desc:"Manga, abacaxi e rum encontram coco, flores brancas e um frescor marinho. Tropical, cremoso e versátil para diferentes estilos." },
 
-  { nome:"Hawas for Her", marca:"Rasasi", inspiracao:"frutado floral com praliné", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"Hawas for Her", marca:"Rasasi", inspiracao:"frutado floral com praliné", familia:"Floral", acorde:"Amadeirado", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:229, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Romã · Maçã · Toranja", coracao:"Íris · Jasmim Sambac · Cítricos", fundo:"Praliné · Patchouli · Vetiver" },
     accent:"#d7b78d", foto:"assets/p-hawas-for-her.jpg", desc:"Romã, maçã e toranja abrem um floral feminino luminoso, com íris, jasmim e um fundo de praliné, patchouli e vetiver." },
 
-  { nome:"Odyssey Homme White Edition", marca:"Armaf", inspiracao:"aromático fresco-doce", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Odyssey Homme White Edition", marca:"Armaf", inspiracao:"aromático fresco-doce", familia:"Amadeirado", acorde:"Amadeirado", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:270, tamanho:"100 ml · EDP", selo:"Versátil",
     notas:{ topo:"Pimenta Rosa · Cardamomo · Hortelã", coracao:"Sálvia · Notas Aquáticas · Abacaxi", fundo:"Baunilha · Âmbar · Cedro" },
     accent:"#7a8a93", foto:"assets/p-odyssey-white.jpg", desc:"Fresco e doce na medida: especiarias suaves sobre baunilha e madeiras âmbar. Aromático moderno que veste bem em qualquer estação." },
 
-  { nome:"Turathi Blue", marca:"Afnan", inspiracao:"aquático fresco", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
+  { nome:"Turathi Blue", marca:"Afnan", inspiracao:"aquático fresco", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"Versátil",
     ocasiao:"dia", intensidade:"equilibrado", preco:285, tamanho:"90 ml · EDP", selo:"Fresco", disponivel:false,
     notas:{ topo:"Bergamota · Toranja · Gengibre", coracao:"Hortelã · Âmbar · Notas Amadeiradas", fundo:"Almíscar · Patchouli · Especiarias" },
     accent:"#2f5a73", foto:"assets/p-turathi-blue.jpg", desc:"Azul, frio e arejado: cítricos e gengibre com fundo amadeirado e almíscar. Coringa fresco para o dia a dia e o calor." },
 
-  { nome:"Turathi Electric", marca:"Afnan", inspiracao:"cítrico doce", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
+  { nome:"Turathi Electric", marca:"Afnan", inspiracao:"cítrico doce", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"Versátil",
     ocasiao:"dia", intensidade:"equilibrado", preco:295, tamanho:"90 ml · EDP", selo:"Novidade",
     notas:{ topo:"Pera · Toranja Rosa · Bergamota", coracao:"Flor de Laranjeira · Maçã · Cedro", fundo:"Almíscar · Âmbar · Baunilha" },
     accent:"#2d6c8c", foto:"assets/p-turathi-electric.jpg", desc:"Fresco com brilho doce: pera e toranja sobre flor de laranjeira. Jovem, sofisticado e fácil de usar." },
 
-  { nome:"Vulcan Feu", marca:"French Avenue", inspiracao:"frutado cremoso", familia:"Gourmand", genero:"Masculino", periodo:"Versátil",
+  { nome:"Vulcan Feu", marca:"French Avenue", inspiracao:"frutado cremoso", familia:"Gourmand", acorde:"Tropical", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"potente", preco:375, tamanho:"100 ml · EDP", selo:"Frutado",
     notas:{ topo:"Manga · Limão · Ruibarbo · Gengibre", coracao:"Pimenta Rosa · Jasmim · Praliné", fundo:"Fava Tonka · Cedro · Musgo · Ambargris" },
     accent:"#8a3b1e", foto:"assets/p-vulcan-feu.jpg", desc:"Frutado intenso e cremoso: manga e ruibarbo sobre praliné e fava tonka. Doce, marcante e viciante — extrait de alta projeção." },
 
-  { nome:"Thunder", marca:"French Avenue", inspiracao:"íris aveludada", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Thunder", marca:"French Avenue", inspiracao:"íris aveludada", familia:"Amadeirado", acorde:"Íris", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"marcante", preco:365, tamanho:"100 ml · EDP", selo:"Sofisticado",
     notas:{ topo:"Elemi · Lavanda · Bergamota · Pimenta Rosa", coracao:"Íris · Baunilha · Gerânio", fundo:"Fava Tonka · Cedro · Vetiver" },
     accent:"#4a4a6a", foto:"assets/p-thunder.jpg", desc:"Íris aveludada e levemente empoeirada sobre baunilha e madeiras. Elegante, cremoso e sofisticado — ótima presença." },
 
-  { nome:"Fakhar (Rose)", marca:"Lattafa", inspiracao:"tuberosa amadeirada", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"Fakhar (Rose)", marca:"Lattafa", inspiracao:"tuberosa amadeirada", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:265, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:true,
     notas:{ topo:"Tuberosa · Notas Salinas", coracao:"Âmbar · Fava Tonka · Cashmeran", fundo:"Cedro · Vetiver · Labdano" },
     accent:"#c2a24e", foto:"assets/p-fakhar-gold-new.webp", desc:"Tuberosa cremosa com toque salino sobre âmbar e madeiras. Feminino moderno, macio e sofisticado." },
 
-  { nome:"Fakhar (Black)", marca:"Lattafa", inspiracao:"aromático fresco", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Fakhar (Black)", marca:"Lattafa", inspiracao:"aromático fresco", familia:"Amadeirado", acorde:"Aromático", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"marcante", preco:220, tamanho:"100 ml · EDP", selo:"Para ele", disponivel:true,
     notas:{ topo:"Maçã · Bergamota · Gengibre", coracao:"Lavanda · Sálvia · Gerânio", fundo:"Fava Tonka · Cedro · Âmbar" },
     accent:"#3a322a", foto:"assets/p-fakhar-black-new.webp", desc:"Maçã e ervas aromáticas sobre madeiras âmbar — fresco-amadeirado, moderno e elegante. Coringa masculino de ótimo custo." },
 
-  { nome:"Nebras Pride", marca:"Lattafa", inspiracao:"baunilha e cacau", familia:"Gourmand", genero:"Feminino", periodo:"Versátil",
+  { nome:"Nebras Pride", marca:"Lattafa", inspiracao:"baunilha e cacau", familia:"Gourmand", acorde:"Baunilha", genero:"Feminino", periodo:"Versátil",
     ocasiao:"noite", intensidade:"marcante", preco:265, tamanho:"100 ml · EDP", selo:"Doce", disponivel:false,
     notas:{ topo:"Frutas Vermelhas · Tangerina", coracao:"Baunilha · Cacau · Rosa", fundo:"Açúcar · Fava Tonka · Âmbar · Almíscar" },
     accent:"#9a6a2a", foto:"assets/p-nebras.jpg", desc:"Baunilha cremosa com cacau e frutas vermelhas. Gourmand doce e aconchegante, com fixação longa." },
 
-  { nome:"Zimaya Tiramisu Caramel", marca:"Lattafa", inspiracao:"caramelo cremoso", familia:"Gourmand", genero:"Feminino", periodo:"Noite",
+  { nome:"Tiramisu Caramel", marca:"Zimaya", inspiracao:"caramelo cremoso", familia:"Gourmand", acorde:"Baunilha", genero:"Feminino", periodo:"Noite",
     ocasiao:"noite", intensidade:"marcante", preco:265, tamanho:"100 ml · EDP", selo:"Gourmand", disponivel:false,
     notas:{ topo:"Caramelo", coracao:"Mel · Cumarina · Notas Amadeiradas", fundo:"Baunilha · Uísque · Almíscar" },
     accent:"#8a5a2c", foto:"assets/p-zimaya-tiramisu.jpg", desc:"Sobremesa vestível: caramelo e mel com um toque de uísque sobre baunilha. Doce, cremoso e convidativo." },
 
-  { nome:"Delilah", marca:"Maison Alhambra", inspiracao:"rosa e ruibarbo", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"Delilah", marca:"Maison Alhambra", inspiracao:"rosa e ruibarbo", familia:"Floral", acorde:"Rosa", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:250, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:true,
     notas:{ topo:"Ruibarbo · Lichia · Bergamota", coracao:"Rosa Turca · Peônia · Lírio", fundo:"Almíscar Branco · Cashmeran · Baunilha" },
     accent:"#b06a85", foto:"assets/p-delilah.jpg", desc:"Floral-frutado rosado e radiante: ruibarbo e lichia sobre rosa e baunilha. Feminino elogiadíssimo e versátil." },
 
-  { nome:"Salvo", marca:"Maison Alhambra", inspiracao:"fresco especiado", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
+  { nome:"Salvo", marca:"Maison Alhambra", inspiracao:"fresco especiado", familia:"Cítrico", acorde:"Especiado fresco", genero:"Masculino", periodo:"Versátil",
     ocasiao:"dia", intensidade:"marcante", preco:200, tamanho:"100 ml · EDP", selo:"Coringa",
     notas:{ topo:"Bergamota", coracao:"Lavanda · Pimenta de Sichuan · Anis Estrelado · Noz-moscada", fundo:"Ambroxan · Baunilha" },
     accent:"#3a6a8a", foto:"assets/p-salvo.jpg", desc:"Fresco, picante e potente: bergamota e ambroxan no estilo coringa. Agrada todo mundo, do dia ao trabalho." },
 
-  { nome:"Alpine Homme Sport", marca:"Maison Alhambra", inspiracao:"cítrico esportivo", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
+  { nome:"Alpine Homme Sport", marca:"Maison Alhambra", inspiracao:"cítrico esportivo", familia:"Cítrico", acorde:"Aromático", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"suave", preco:225, tamanho:"100 ml · EDP", selo:"Dia a dia", disponivel:false,
     notas:{ topo:"Tangerina · Hortelã · Cipreste · Sálvia", coracao:"Cedro · Pimenta", fundo:"Fava Tonka · Almíscar · Sândalo" },
     accent:"#3f7a6a", foto:"assets/p-alpine-sport.jpg", desc:"Esportivo e revigorante: tangerina e hortelã sobre cedro e almíscar. Frescor leve para o calor e o uso de todo dia." },
 
-  { nome:"Rayhaan Elixir", marca:"Rayhaan", inspiracao:"lavanda e baunilha", familia:"Gourmand", genero:"Masculino", periodo:"Noite",
+  { nome:"Rayhaan Elixir", marca:"Rayhaan", inspiracao:"lavanda e baunilha", familia:"Gourmand", acorde:"Baunilha", genero:"Masculino", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:290, tamanho:"100 ml · EDP", selo:"Assinatura",
     notas:{ topo:"Hortelã · Bergamota", coracao:"Lavanda · Benjoim", fundo:"Baunilha · Fava Tonka" },
     accent:"#7a3a2a", foto:"assets/p-rayhaan-elixir.jpg", desc:"Lavanda e baunilha cremosa com mel de benjoim — doce, aromático e potente. Assinatura marcante para a noite." },
 
-  { nome:"Hawas Black", marca:"Rasasi", inspiracao:"cítrico escuro e amadeirado", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Hawas Black", marca:"Rasasi", inspiracao:"cítrico escuro e amadeirado", familia:"Amadeirado", acorde:"Amadeirado", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"potente", preco:300, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Bergamota · Abacaxi · Toranja", coracao:"Patchouli · Cedro · Jasmim", fundo:"Musgo de Carvalho · Notas Amadeiradas · Âmbar" },
     accent:"#25221f", foto:"assets/p-hawas-black.jpg", desc:"Cítricos e abacaxi sobre uma base escura de musgo, âmbar e madeiras. Masculino elegante, intenso e de longa presença." },
 
-  { nome:"Pacific Aura", marca:"Rayhaan", inspiracao:"cítrico verde e aquático", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
+  { nome:"Pacific Aura", marca:"Rayhaan", inspiracao:"cítrico verde e aquático", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"equilibrado", preco:350, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Tangerina · Hortelã · Cidra · Bergamota · Cassis · Coentro", coracao:"Manjericão · Cenoura · Rosa", fundo:"Figo · Ambroxan · Âmbar" },
     accent:"#1395a3", foto:"assets/p-pacific-aura.jpg", desc:"Refrescante e vibrante, combina cítricos, hortelã e cassis com um fundo moderno de figo e âmbar. Ideal para dias quentes." },
 
-  { nome:"Chants Tenderina", marca:"Maison Alhambra", inspiracao:"floral frutado delicado", familia:"Floral", genero:"Feminino", periodo:"Dia",
+  { nome:"Chants Tenderina", marca:"Maison Alhambra", inspiracao:"floral frutado delicado", familia:"Floral", acorde:"Cítrico", genero:"Feminino", periodo:"Dia",
     ocasiao:"dia", intensidade:"suave", preco:200, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     notas:{ topo:"Bergamota · Flor de Toranja · Pêssego", coracao:"Rosa · Jasmim · Íris", fundo:"Almíscar Branco · Baunilha · Vetiver · Patchouli" },
     accent:"#d9a8b4", foto:"assets/p-chants-tenderina.webp", desc:"Floral limpo e feminino, com pêssego, rosa e almíscar branco. Leve, confortável e perfeito para o uso diário." },
 
-  { nome:"Hawas Malibu", marca:"Rasasi", inspiracao:"frutado tropical cremoso", familia:"Gourmand", genero:"Masculino", periodo:"Versátil",
+  { nome:"Hawas Malibu", marca:"Rasasi", inspiracao:"frutado tropical cremoso", familia:"Gourmand", acorde:"Doce", genero:"Masculino", periodo:"Versátil",
     ocasiao:"noite", intensidade:"marcante", preco:340, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Abacaxi · Laranja · Toranja", coracao:"Âmbar · Íris · Lavanda", fundo:"Fava Tonka · Almíscar · Patchouli · Cashmeran" },
     accent:"#168fa5", foto:"assets/p-hawas-malibu.webp", desc:"Frutas tropicais luminosas encontram íris, âmbar e tonka. Cremoso, envolvente e com clima de noite de verão." },
 
-  { nome:"Nocturno", marca:"Rayhaan", inspiracao:"aromático fresco especiado", familia:"Amadeirado", genero:"Masculino", periodo:"Versátil",
+  { nome:"Nocturno", marca:"Rayhaan", inspiracao:"aromático fresco especiado", familia:"Amadeirado", acorde:"Especiado fresco", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:330, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Bergamota · Pimenta · Hortelã", coracao:"Lavanda · Pimenta Rosa · Gerânio", fundo:"Amberwood · Cedro" },
     accent:"#22364c", foto:"assets/p-nocturno.jpg", desc:"Bergamota, hortelã e especiarias sobre lavanda e madeiras secas. Limpo, moderno e fácil de usar do trabalho à noite." },
 
-  { nome:"Attar Al Wesal", marca:"Al Wataniah", inspiracao:"aromático doce especiado", familia:"Gourmand", genero:"Masculino", periodo:"Versátil",
+  { nome:"Attar Al Wesal", marca:"Al Wataniah", inspiracao:"aromático doce especiado", familia:"Gourmand", acorde:"Aromático", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:209, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Lavanda · Pera · Hortelã · Bergamota · Limão", coracao:"Canela · Sálvia Esclaréia · Cominho", fundo:"Baunilha Negra · Âmbar · Cedro · Patchouli" },
     accent:"#2c2a2c", foto:"assets/p-attar-al-wesal.jpg", desc:"Aromático adocicado com pera, lavanda e canela sobre baunilha escura. Envolvente, versátil e de excelente custo-benefício." },
 
-  { nome:"Pacific Blue", marca:"Maison Alhambra", inspiracao:"cítrico floral mediterrâneo", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
+  { nome:"Pacific Blue", marca:"Maison Alhambra", inspiracao:"cítrico floral mediterrâneo", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"suave", preco:170, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Limão · Tangerina · Bergamota · Laranja Amarga · Alecrim · Lavanda · Murta", coracao:"Néroli · Flor de Laranjeira · Jasmim", fundo:"Âmbar · Angélica · Ambreta" },
     accent:"#4b9da5", foto:"assets/p-pacific-blue.jpg", desc:"Uma brisa mediterrânea de cítricos, néroli e flores brancas. Fresco, luminoso e confortável para o calor." },
 
-  { nome:"Maahir Honor", marca:"Lattafa", inspiracao:"cítrico aromático elegante", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
+  { nome:"Maahir Honor", marca:"Lattafa", inspiracao:"cítrico aromático elegante", familia:"Cítrico", acorde:"Aromático", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"equilibrado", preco:319, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Hortelã · Limão · Bergamota · Tomilho", coracao:"Alecrim · Lavanda · Jasmim · Flor de Moringa", fundo:"Almíscar · Cedro · Âmbar" },
     accent:"#d8d4c9", foto:"assets/p-maahir-honor.jpg", desc:"Cítricos, hortelã e ervas aromáticas com acabamento limpo de almíscar, cedro e âmbar. Refinado e muito fresco." },
 
-  { nome:"Sabah Al Ward", marca:"Al Wataniah", inspiracao:"floral gourmand com cacau", familia:"Floral", genero:"Feminino", periodo:"Noite",
+  { nome:"Sabah Al Ward", marca:"Al Wataniah", inspiracao:"floral gourmand com cacau", familia:"Floral", acorde:"Baunilha", genero:"Feminino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:199, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Pimenta Rosa · Tangerina", coracao:"Cacau · Flor de Laranjeira · Jasmim Sambac", fundo:"Baunilha · Fava Tonka · Patchouli" },
     accent:"#8b2448", foto:"assets/p-sabah-al-ward.jpg", desc:"Jasmim e flor de laranjeira ganham profundidade com cacau, baunilha e tonka. Feminino, doce e marcante." },
 
-  { nome:"Ameerati", marca:"Al Wataniah", inspiracao:"atalcado, almiscarado e verde", familia:"Amadeirado", genero:"Feminino", periodo:"Dia",
+  { nome:"Ameerati", marca:"Al Wataniah", inspiracao:"atalcado, almiscarado e verde", familia:"Amadeirado", acorde:"Atalcado", genero:"Feminino", periodo:"Dia",
     ocasiao:"dia", intensidade:"equilibrado", preco:199, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Almíscar · Notas Verdes · Cítricos", coracao:"Notas Herbais · Notas Amadeiradas", fundo:"Notas Atalcadas · Notas Especiadas" },
     accent:"#b78945", foto:"assets/p-ameerati.jpg", desc:"Almíscar, notas verdes e cítricos abrem a fragrância, que evolui para nuances herbais e amadeiradas sobre um fundo atalcado e especiado. Feminino fresco e elegante para o dia a dia." },
 
-  { nome:"Sabah Al Ward Garden of Eden", marca:"Al Wataniah", inspiracao:"floral aquático e luminoso", familia:"Floral", genero:"Feminino", periodo:"Dia",
+  { nome:"Sabah Al Ward Garden of Eden", marca:"Al Wataniah", inspiracao:"floral aquático e luminoso", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"Dia",
     ocasiao:"dia", intensidade:"equilibrado", preco:289, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Lótus Azul · Notas Aquáticas · Bergamota · Frutas · Tangerina", coracao:"Lírio · Íris · Jasmim-Manga · Jasmim", fundo:"Baunilha · Sândalo · Âmbar · Almíscar" },
     accent:"#1584a5", foto:"assets/p-sabah-garden-of-eden.jpg", desc:"Um floral aquático feminino e luminoso: lótus azul, cítricos e notas de água encontram flores brancas, baunilha, sândalo e almíscar." },
 
-  { nome:"Sabah Al Ward Valentine", marca:"Al Wataniah", inspiracao:"cereja, baunilha e café", familia:"Gourmand", genero:"Feminino", periodo:"Noite",
+  { nome:"Sabah Al Ward Valentine", marca:"Al Wataniah", inspiracao:"cereja, baunilha e café", familia:"Gourmand", acorde:"Doce", genero:"Feminino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:269, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Cereja · Notas Doces · Baunilha · Creme", coracao:"Café · Cítricos · Flor de Laranjeira · Flores Brancas", fundo:"Almíscar · Patchouli · Âmbar" },
     accent:"#8d2433", foto:"assets/p-sabah-valentine.jpg", desc:"Gourmand feminino de cereja cremosa e baunilha, com café, flores brancas e um fundo quente de âmbar, almíscar e patchouli." },
 
-  { nome:"Sabah Al Ward Delilah", marca:"Al Wataniah", inspiracao:"frutas vermelhas e marshmallow", familia:"Gourmand", genero:"Feminino", periodo:"Noite",
+  { nome:"Sabah Al Ward Delilah", marca:"Al Wataniah", inspiracao:"frutas vermelhas e marshmallow", familia:"Gourmand", acorde:"Frutado", genero:"Feminino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:279, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Morango · Framboesa · Lichia · Tangerina", coracao:"Rosa Damascena · Peônia · Flores Brancas", fundo:"Baunilha · Marshmallow · Almíscar" },
     accent:"#7f347d", foto:"assets/p-sabah-delilah.webp", desc:"Floral frutado gourmand feminino: frutas vermelhas e lichia abrem caminho para rosas e peônia, repousando sobre baunilha cremosa, marshmallow e almíscar." },
 
-  { nome:"Obsidian", marca:"Rayhaan", inspiracao:"íris, couro e madeiras", familia:"Amadeirado", genero:"Masculino", periodo:"Noite",
+  { nome:"Obsidian", marca:"Rayhaan", inspiracao:"íris, couro e madeiras", familia:"Amadeirado", acorde:"Amadeirado", genero:"Masculino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:360, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     notas:{ topo:"Íris · Cítricos", coracao:"Couro", fundo:"Sândalo · Ambreta · Cedro · Oud" },
     accent:"#201f21", foto:"assets/p-rayhaan-obsidian.jpg", desc:"Íris elegante e atalcada sobre couro, oud e madeiras cremosas. Sofisticado para encontros e ocasiões especiais." },
 
-  { nome:"Aquatica", marca:"Rayhaan", inspiracao:"lima, coco e rum", familia:"Gourmand", genero:"Masculino", periodo:"Dia",
+  { nome:"Aquatica", marca:"Rayhaan", inspiracao:"lima, coco e rum", familia:"Gourmand", acorde:"Cítrico", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"equilibrado", preco:380, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Lima · Leite de Coco · Bergamota · Tangerina", coracao:"Cana-de-açúcar · Jasmim · Hibisco · Gardênia", fundo:"Rum · Almíscar · Fava Tonka · Patchouli" },
     accent:"#40aeb6", foto:"assets/p-rayhaan-aquatica.webp", desc:"Lima vibrante e coco cremoso com cana-de-açúcar e rum. Tropical, diferente e feito para dias de sol." },
 
-  { nome:"Azul", marca:"Rayhaan", inspiracao:"cítrico aquático minimalista", familia:"Cítrico", genero:"Masculino", periodo:"Dia",
+  { nome:"Azul", marca:"Rayhaan", inspiracao:"cítrico aquático minimalista", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"suave", preco:360, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Bergamota · Limão", coracao:"Flor de Toranja", fundo:"Calone · Sândalo" },
     accent:"#1d6584", foto:"assets/p-rayhaan-azul.jpg", desc:"Limão e bergamota em uma construção limpa, aquática e amadeirada. Refrescante, direto e perfeito para calor intenso." },
 
-  { nome:"Delilah Blanc", marca:"Maison Alhambra", inspiracao:"floral branco cremoso", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"Delilah Blanc", marca:"Maison Alhambra", inspiracao:"floral branco cremoso", familia:"Floral", acorde:"Cítrico", genero:"Feminino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:250, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Bergamota · Laranja · Pêssego", coracao:"Tuberosa · Jasmim · Néroli", fundo:"Baunilha · Almíscar Branco · Sândalo" },
     accent:"#d9d7d0", foto:"assets/p-delilah-blanc.webp", desc:"Floral branco limpo e cremoso, com cítricos suaves e fundo de baunilha, almíscar e sândalo. Elegante e confortável." },
 
-  { nome:"Sabah Al Ward Sugar", marca:"Al Wataniah", inspiracao:"frutas vermelhas e baunilha", familia:"Gourmand", genero:"Feminino", periodo:"Versátil",
+  { nome:"Sabah Al Ward Sugar", marca:"Al Wataniah", inspiracao:"frutas vermelhas e baunilha", familia:"Gourmand", acorde:"Frutado", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:179, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Morango · Framboesa · Mirtilo · Cassis · Cereja", coracao:"Jasmim · Violeta", fundo:"Almíscar · Pétalas de Rosa · Baunilha · Musgo de Carvalho · Âmbar · Cashmeran · Patchouli" },
     accent:"#d98e9e", foto:"assets/p-sabah-sugar.webp", desc:"Um floral gourmand jovem e feminino, com um coquetel suculento de frutas vermelhas, flores delicadas e fundo cremoso de baunilha e almíscar." },
 
-  { nome:"Atheeri", marca:"Lattafa", inspiracao:"floral orvalhado e cremoso", familia:"Floral", genero:"Feminino", periodo:"Dia",
+  { nome:"Atheeri", marca:"Lattafa", inspiracao:"floral orvalhado e cremoso", familia:"Floral", acorde:"Floral", genero:"Feminino", periodo:"Dia",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:430, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Flor de Maracujá · Gotas de Orvalho", coracao:"Orquídea · Jasmim", fundo:"Baunilha · Amberwood" },
     accent:"#c79635", foto:"assets/p-atheeri.webp", desc:"Floral etéreo e luminoso: flores úmidas pelo orvalho encontram orquídea, jasmim e uma base macia de baunilha e madeiras âmbar." },
 
-  { nome:"Tharwah Gold", marca:"Lattafa Pride", inspiracao:"lavanda, flores brancas e baunilha", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"Tharwah Gold", marca:"Lattafa Pride", inspiracao:"lavanda, flores brancas e baunilha", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:479, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Lavanda · Bergamota", coracao:"Flor de Laranjeira · Jasmim", fundo:"Baunilha · Vetiver · Âmbar" },
     accent:"#d5a33e", foto:"assets/p-tharwah-gold.jpg", desc:"Doce floral sofisticado, com lavanda e bergamota sobre flores brancas e uma base quente de baunilha, âmbar e vetiver." },
 
-  { nome:"B.A.D Femme", marca:"Maison Alhambra", inspiracao:"café, flores brancas e praliné", familia:"Gourmand", genero:"Feminino", periodo:"Noite",
+  { nome:"B.A.D Femme", marca:"Maison Alhambra", inspiracao:"café, flores brancas e praliné", familia:"Gourmand", acorde:"Floral branco", genero:"Feminino", periodo:"Noite",
     ocasiao:"especial", intensidade:"potente", preco:170, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Bergamota · Amêndoa · Café · Limão", coracao:"Tuberosa · Flor de Laranjeira · Jasmim Sambac · Rosa Búlgara · Íris", fundo:"Fava Tonka · Baunilha · Almíscar · Cacau · Praliné · Sândalo · Cashmeran · Âmbar · Patchouli · Cedro · Canela" },
     accent:"#42321f", foto:"assets/p-bad-femme.webp", desc:"Gourmand floral intenso: café e amêndoa abrem caminho para flores brancas, praliné, cacau e baunilha. Sensual e marcante para a noite." },
 
-  { nome:"Pink Eclipse", marca:"Maison Alhambra", inspiracao:"floral frutado ambarado", familia:"Floral", genero:"Feminino", periodo:"Versátil",
+  { nome:"Pink Eclipse", marca:"Maison Alhambra", inspiracao:"floral frutado ambarado", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:315, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Pera · Bergamota · Tangerina", coracao:"Flor de Laranjeira · Jasmim · Néroli", fundo:"Baunilha · Almíscar · Âmbar · Benjoim" },
     accent:"#da8fa5", foto:"assets/p-pink-eclipse.webp", desc:"Feminino moderno e luminoso, com frutas cítricas, flores brancas e um fundo doce e confortável de baunilha, âmbar e benjoim." },
 
-  { nome:"Hawas for Him", marca:"Rasasi", inspiracao:"aquático frutado e especiado", familia:"Cítrico", genero:"Masculino", periodo:"Versátil",
+  { nome:"Hawas for Him", marca:"Rasasi", inspiracao:"aquático frutado e especiado", familia:"Cítrico", acorde:"Frutado", genero:"Masculino", periodo:"Versátil",
     ocasiao:"dia", intensidade:"marcante", preco:230, tamanho:"100 ml · EDP", selo:"Novo",
     notas:{ topo:"Maçã · Bergamota · Limão · Canela", coracao:"Notas Aquáticas · Ameixa · Flor de Laranjeira · Cardamomo", fundo:"Ambargris · Almíscar · Madeira Flutuante · Patchouli" },
     accent:"#6f79a4", foto:"assets/p-hawas-for-him.webp", desc:"Ícone aquático masculino, combina cítricos, maçã e canela com ameixa, notas marinhas e madeiras. Fresco, potente e extremamente versátil." }
@@ -627,14 +627,17 @@ if(document.querySelector(".announce")){
   onScrollAnnounce();
 }
 
-const familiasUnicas = Array.from(new Set(PERFUMES.map(p=>p.familia)));
+// O catálogo exibe o primeiro acorde principal conferido. A família ampla
+// continua separada para sustentar o quiz e as recomendações relacionadas.
+const perfilOlfativo = p => p.acorde || p.familia;
+const perfisUnicos = Array.from(new Set(PERFUMES.map(perfilOlfativo)));
 const GRUPOS = [
   { key:"estoque", label:"Disponibilidade", opts:["Todos","Disponível agora"] },
   { key:"genero",  label:"Gênero",          opts:["Todos","Masculino","Feminino","Unissex"] },
   { key:"periodo", label:"Ocasião",         opts:["Todas","Dia","Noite","Versátil"] },
-  { key:"familia", label:"Família olfativa", opts:["Todas", ...familiasUnicas], secondary:true }
+  { key:"perfil",  label:"Perfil olfativo", opts:["Todos", ...perfisUnicos], secondary:true }
 ];
-const sel = { estoque:"Todos", genero:"Todos", periodo:"Todas", familia:"Todas" };
+const sel = { estoque:"Todos", genero:"Todos", periodo:"Todas", perfil:"Todos" };
 let busca = "";          // texto da busca (normalizado)
 let ordem = "padrao";    // ordenação atual
 
@@ -655,24 +658,58 @@ const marcaBase = p => (p.marca||"").replace(/\s*Pride$/i,"").trim();   // Latta
 
 /* =====================================================================
    🧪  DECANTS — gerados automaticamente a partir do catálogo
-   Regra: todo perfume disponível e com preço vira decant de 10 ml
-   custando 15% do valor do frasco cheio (arredondado). Ao adicionar
-   um perfume novo em PERFUMES, o decant aparece sozinho na aba.
+   O valor por ml diminui conforme a faixa de preço do perfume e o
+   volume escolhido. O frasco split custa R$ 6 em qualquer tamanho.
    ===================================================================== */
-const DECANT_ML = 10;
-const DECANT_FATOR = 0.15;
-const DECANT_FRASCO = 8;   // frasco split, cobrado à parte (não entra no preço do decant)
+const DECANT_FRASCO = 6;
+const DECANT_VOLUMES = [
+  { ml:3,  descontoVolume:0 },
+  { ml:5,  descontoVolume:.05 },
+  { ml:10, descontoVolume:.10 }
+];
 const podeDecant = p => estaDisponivel(p) && temPreco(p) && !ehBodySpray(p);
-const DECANTS = PERFUMES.filter(podeDecant).map(p => ({
-  ...p,
-  nome: `${p.nome} · Decant ${DECANT_ML}ml`,
-  base: p.nome,
-  preco: Math.round(p.preco * DECANT_FATOR),
-  tamanho: `${DECANT_ML} ml · Decant · + R$ ${DECANT_FRASCO} frasco`,
-  selo: "Decant",
-  decant: true,
-  desc: `Decant de ${DECANT_ML} ml do ${p.marca ? p.marca + " " : ""}${p.nome} — a mesma fragrância original, fracionada para você conhecer antes de investir no frasco cheio. Frasco split cobrado à parte: R$ ${DECANT_FRASCO}.`
-}));
+const fatorMlDecant = preco => preco >= 500 ? .014 : (preco >= 400 ? .015 : .0165);
+const dinheiroDecimal = valor => valor.toLocaleString("pt-BR", { minimumFractionDigits:2, maximumFractionDigits:2 });
+
+function opcaoDecant(perfume, volume){
+  const cfg = DECANT_VOLUMES.find(v=>v.ml===Number(volume)) || DECANT_VOLUMES[0];
+  const bruto = perfume.preco * fatorMlDecant(perfume.preco) * cfg.ml * (1-cfg.descontoVolume);
+  const precoLiquido = Math.round(bruto);
+  return {
+    ml:cfg.ml,
+    descontoVolume:cfg.descontoVolume,
+    precoLiquido,
+    precoMl:precoLiquido/cfg.ml,
+    preco:precoLiquido + DECANT_FRASCO
+  };
+}
+
+const DECANTS = PERFUMES.filter(podeDecant).map(p => {
+  const opcoes = DECANT_VOLUMES.map(v=>opcaoDecant(p,v.ml));
+  return {
+    ...p,
+    nome:`${p.nome} · Decant`,
+    base:p.nome,
+    preco:opcoes[0].preco,
+    tamanho:"Escolha 3, 5 ou 10 ml",
+    selo:"Decant",
+    decant:true,
+    opcoes,
+    desc:`Decant do ${p.marca ? p.marca + " " : ""}${p.nome} — a mesma fragrância original, fracionada em 3, 5 ou 10 ml. O frasco split de R$ ${DECANT_FRASCO} já está incluído no total.`
+  };
+});
+
+const DECANT_VARIANTS = DECANTS.flatMap(d=>d.opcoes.map(opcao=>({
+  ...d,
+  nome:`${d.base} · Decant ${opcao.ml}ml`,
+  tamanho:`${opcao.ml} ml · frasco incluso`,
+  preco:opcao.preco,
+  precoLiquido:opcao.precoLiquido,
+  precoMl:opcao.precoMl,
+  decantMl:opcao.ml,
+  opcoes:undefined
+})));
+const decantPorBaseEVolume = new Map(DECANT_VARIANTS.map(p=>[`${p.base}|${p.decantMl}`,p]));
 
 const colNav = document.getElementById("colNav");
 const colBrands = document.getElementById("colBrands");
@@ -692,6 +729,8 @@ function syncColNav(){
     b.classList.toggle("active", on);
     b.setAttribute("aria-pressed", String(on));
   });
+  const oferta = document.getElementById("decantOffer");
+  if(oferta) oferta.hidden = tipoAtivo!=="decants";
 }
 function pushColURL(){
   const url = new URL(location.href);
@@ -724,7 +763,7 @@ if(colNav){
   const nEl = colNav.querySelector('[data-tab-count="todos"]');
   if(nEl){ const n = PERFUMES.length; nEl.textContent = `${n} ${n===1?"fragrância":"fragrâncias"}`; }
   const dEl = colNav.querySelector('[data-tab-count="decants"]');
-  if(dEl){ const n = DECANTS.length; dEl.textContent = `${n} ${n===1?"opção":"opções"} · ${DECANT_ML} ml`; }
+  if(dEl){ const n = DECANTS.length; dEl.textContent = `${n} ${n===1?"fragrância":"fragrâncias"} · 3, 5 ou 10 ml`; }
 
   // chips de marca gerados a partir do catálogo (novas marcas aparecem sozinhas)
   if(colBrands){
@@ -773,7 +812,7 @@ function limparProdutoDaURL(){
 }
 function passaBusca(p){
   if(!busca) return true;
-  const alvo = normaliza([p.nome, p.marca, p.familia, p.inspiracao, p.notas.topo, p.notas.coracao, p.notas.fundo].join(" "));
+  const alvo = normaliza([p.nome, p.marca, perfilOlfativo(p), p.familia, p.inspiracao, p.notas.topo, p.notas.coracao, p.notas.fundo].join(" "));
   return busca.split(/\s+/).every(t => alvo.includes(t));
 }
 function ordenar(list){
@@ -833,27 +872,40 @@ document.addEventListener("keydown", e=>{
   if(e.key === "Escape" && filtersWrap?.classList.contains("is-open")) setFilterPanel(false);
 });
 
+function seletorDecantHTML(p, contexto="card"){
+  if(!p.decant || !Array.isArray(p.opcoes)) return "";
+  return `<div class="decant-picker decant-picker-${contexto}" data-decant-picker>
+    <span class="decant-picker-label">Escolha o volume</span>
+    <div class="decant-volumes" role="group" aria-label="Volume do decant">
+      ${p.opcoes.map((opcao,i)=>`<button type="button" class="decant-volume ${i===0?"active":""}" data-decant-volume="${opcao.ml}" aria-pressed="${i===0}">${opcao.ml}<small>ml</small></button>`).join("")}
+    </div>
+  </div>`;
+}
+
 function cardHTML(p,i){
   const disponivel = estaDisponivel(p);
+  const opcaoDecantPadrao = p.decant && p.opcoes ? p.opcoes[0] : null;
   return `
-  <article class="card reveal ${disponivel ? "" : "is-unavailable"}" data-d="${(i%4)+1}" data-nome="${p.nome}" tabindex="0" role="button" aria-label="Ver detalhes de ${p.nome}">
+  <article class="card reveal ${p.decant?"is-decant":""} ${disponivel ? "" : "is-unavailable"}" data-d="${(i%4)+1}" data-nome="${p.nome}" tabindex="0" role="button" aria-label="Ver detalhes de ${p.nome}">
     <div class="card-glare"></div>
     <div class="card-corner"><span></span><span></span><span></span><span></span></div>
     <div class="card-top">
       <span class="card-pill pill-solid">${p.genero}</span>
-      <span class="card-pill pill-line">${disponivel ? p.familia : "Esgotado"}</span>
+      <span class="card-pill pill-line">${disponivel ? perfilOlfativo(p) : "Esgotado"}</span>
     </div>
     <div class="bottle">${frascoVisual(p)}</div>
     ${p.marca ? `<p class="card-brand">${p.marca}</p>` : ""}
-    <h3 class="card-name">${p.nome}</h3>
-    <p class="card-fam">${p.inspiracao}</p>
+    <h3 class="card-name">${p.decant?p.base:p.nome}</h3>
+    <p class="card-fam">${p.decant?"Decant original · frasco incluso":p.inspiracao}</p>
     <span class="card-hint">Ver detalhes</span>
+    ${seletorDecantHTML(p)}
     <div class="card-foot">
       <div class="card-meta">
-        <span class="card-size">${p.tamanho}</span>
-        <span class="card-price">${disponivel ? precoHTML(p) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p))}</span>
+        <span class="card-size" ${p.decant?"data-decant-unit":""}>${p.decant?`R$ ${dinheiroDecimal(opcaoDecantPadrao.precoMl)} por ml`:p.tamanho}</span>
+        <span class="card-price" ${p.decant?"data-decant-total":""}>${disponivel ? (p.decant?`<small>R$</small> ${opcaoDecantPadrao.preco}`:precoHTML(p)) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p))}</span>
+        ${p.decant?`<span class="decant-bottle-note">inclui frasco de R$ ${DECANT_FRASCO}</span>`:""}
       </div>
-      ${disponivel ? `<button class="card-wa" data-add="${p.nome}">
+      ${disponivel ? `<button class="card-wa" ${p.decant?`data-add-decant="${p.base}" data-volume="${opcaoDecantPadrao.ml}"`:`data-add="${p.nome}"`}>
         <svg class="ic-add" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
         <span class="lbl">Adicionar</span>
       </button>` : `<a class="card-wa card-notify" href="${waAvisoEstoque(nomeCompleto(p))}" target="_blank" rel="noopener">
@@ -874,8 +926,8 @@ function passaFiltros(p){
   if(sel.periodo==="Todas")          okPeriodo = true;
   else if(sel.periodo==="Versátil")  okPeriodo = p.periodo==="Versátil";
   else                               okPeriodo = (p.periodo===sel.periodo || p.periodo==="Versátil");
-  const okFamilia = sel.familia==="Todas" || p.familia===sel.familia;
-  return okGenero && okPeriodo && okFamilia;
+  const okPerfil = sel.perfil==="Todos" || perfilOlfativo(p)===sel.perfil;
+  return okGenero && okPeriodo && okPerfil;
 }
 
 function renderGrid(){
@@ -940,7 +992,7 @@ function renderGrid(){
 }
 
 function resetFiltros(){
-  sel.estoque="Todos"; sel.genero="Todos"; sel.periodo="Todas"; sel.familia="Todas";
+  sel.estoque="Todos"; sel.genero="Todos"; sel.periodo="Todas"; sel.perfil="Todos";
   busca=""; ordem="padrao";
   const bi=document.getElementById("catSearch"); if(bi) bi.value="";
   const os=document.getElementById("catSort"); if(os) os.value="padrao";
@@ -994,6 +1046,34 @@ if(grid){
   grid.addEventListener("click", e=>{ if(e.target.closest("[data-col-back]")) setColecao("todos"); });
   // adicionar ao pedido a partir dos cards / abrir detalhes
   grid.addEventListener("click", e=>{
+    const volumeBtn = e.target.closest("[data-decant-volume]");
+    if(volumeBtn){
+      const card = volumeBtn.closest(".card.is-decant");
+      const decant = card && DECANTS.find(p=>p.nome===card.dataset.nome);
+      const opcao = decant?.opcoes.find(op=>op.ml===Number(volumeBtn.dataset.decantVolume));
+      if(!card || !opcao) return;
+      card.querySelectorAll("[data-decant-volume]").forEach(btn=>{
+        const ativo = btn===volumeBtn;
+        btn.classList.toggle("active", ativo);
+        btn.setAttribute("aria-pressed", String(ativo));
+      });
+      card.querySelector("[data-decant-unit]").textContent = `R$ ${dinheiroDecimal(opcao.precoMl)} por ml`;
+      card.querySelector("[data-decant-total]").innerHTML = `<small>R$</small> ${opcao.preco}`;
+      card.querySelector("[data-add-decant]").dataset.volume = opcao.ml;
+      return;
+    }
+    const btnDecant = e.target.closest("[data-add-decant]");
+    if(btnDecant){
+      const variante = decantPorBaseEVolume.get(`${btnDecant.dataset.addDecant}|${btnDecant.dataset.volume}`);
+      if(variante) addToCart(variante.nome);
+      const lbl = btnDecant.querySelector(".lbl");
+      if(lbl && !btnDecant.classList.contains("added")){
+        const orig = lbl.textContent;
+        btnDecant.classList.add("added"); lbl.textContent = "Adicionado ✓";
+        setTimeout(()=>{ btnDecant.classList.remove("added"); lbl.textContent = orig; }, 1100);
+      }
+      return;
+    }
     const btn = e.target.closest("[data-add]");
     if(btn){
       addToCart(btn.dataset.add);
@@ -1032,7 +1112,7 @@ const cartSend     = document.getElementById("cartSend");
 let produtosExtras = {};
 try{ produtosExtras = JSON.parse(localStorage.getItem("duna_cart_products")||"{}"); }catch(e){ produtosExtras={}; }
 const salvarProdutosExtras = ()=>{ try{ localStorage.setItem("duna_cart_products", JSON.stringify(produtosExtras)); }catch(e){} };
-const porNome = Object.fromEntries([...PERFUMES, ...DECANTS, ...Object.values(produtosExtras)].map(p=>[p.nome,p]));
+const porNome = Object.fromEntries([...PERFUMES, ...DECANTS, ...DECANT_VARIANTS, ...Object.values(produtosExtras)].map(p=>[p.nome,p]));
 
 function produtoSkincareDoCard(card){
   if(!card) return null;
@@ -1062,9 +1142,59 @@ let cart = {};
 try{ cart = JSON.parse(localStorage.getItem("duna_cart")||"{}"); }catch(e){ cart={}; }
 const salvarCart = ()=>{ try{ localStorage.setItem("duna_cart", JSON.stringify(cart)); }catch(e){} };
 const totalItens = ()=> Object.values(cart).reduce((a,b)=>a+b,0);
-const totalPreco = ()=> Object.entries(cart).reduce((s,[n,q])=> s + (porNome[n]&&temPreco(porNome[n]) ? porNome[n].preco*q : 0), 0);
+const taxaDescontoDecants = qtd => qtd>=10 ? .15 : (qtd>=5 ? .10 : (qtd>=3 ? .05 : 0));
+
+function resumoCarrinho(){
+  let outros = 0, liquidoDecants = 0, frascosDecants = 0, qtdDecants = 0;
+  Object.entries(cart).forEach(([nome,qtd])=>{
+    const p = porNome[nome];
+    if(!p || !temPreco(p)) return;
+    if(p.decant && Number.isFinite(p.precoLiquido)){
+      qtdDecants += qtd;
+      liquidoDecants += p.precoLiquido*qtd;
+      frascosDecants += DECANT_FRASCO*qtd;
+    }else{
+      outros += p.preco*qtd;
+    }
+  });
+  const taxa = taxaDescontoDecants(qtdDecants);
+  const descontoDecants = Math.round(liquidoDecants*taxa);
+  return {
+    outros, liquidoDecants, frascosDecants, qtdDecants, taxa, descontoDecants,
+    total:outros + liquidoDecants + frascosDecants - descontoDecants
+  };
+}
+const totalPreco = ()=> resumoCarrinho().total;
 // algum item do pedido está "Sob consulta"?
 const cartTemSemPreco = ()=> Object.keys(cart).some(n=> porNome[n] && !temPreco(porNome[n]));
+
+const cartTotalRow = cartTotalEl?.closest(".cart-total");
+const cartDealEl = document.createElement("div");
+cartDealEl.className = "cart-decant-deal";
+cartDealEl.hidden = true;
+const cartBreakdownEl = document.createElement("div");
+cartBreakdownEl.className = "cart-breakdown";
+cartBreakdownEl.hidden = true;
+if(cartFoot && cartTotalRow){
+  cartFoot.insertBefore(cartDealEl, cartTotalRow);
+  cartFoot.insertBefore(cartBreakdownEl, cartTotalRow);
+}
+
+function mensagemProgressoDecants(qtd){
+  if(qtd<3){
+    const faltam = 3-qtd;
+    return `Adicione mais ${faltam} ${faltam===1?"decant":"decants"} e ganhe 5% OFF na fragrância.`;
+  }
+  if(qtd<5){
+    const faltam = 5-qtd;
+    return `5% OFF ativo. Mais ${faltam} ${faltam===1?"decant":"decants"} libera 10% OFF.`;
+  }
+  if(qtd<10){
+    const faltam = 10-qtd;
+    return `10% OFF ativo. Mais ${faltam} ${faltam===1?"decant":"decants"} libera 15% OFF.`;
+  }
+  return "Você alcançou 15% OFF na fragrância dos decants.";
+}
 
 function bumpFloat(){ if(!cartFloat) return; cartFloat.classList.remove("bump"); void cartFloat.offsetWidth; cartFloat.classList.add("bump"); }
 function addToCart(nome){ if(!estaDisponivel(porNome[nome])) return; cart[nome]=(cart[nome]||0)+1; salvarCart(); renderCart(); bumpFloat(); showToast(nome); }
@@ -1080,12 +1210,19 @@ function fecharCart(){ if(!cartEl) return; cartEl.classList.remove("open"); cart
 function msgPedido(){
   const linhas = Object.entries(cart).filter(([n])=>porNome[n]).map(([n,q])=>{
     const p = porNome[n];
-    return `• ${q}x ${nomeCompleto(p)} (${p.tamanho}) — ${precoTxt(p)}${q>1&&temPreco(p)?" cada":""}`;
+    const preco = p.decant && Number.isFinite(p.precoLiquido)
+      ? `R$ ${p.preco} cada (R$ ${p.precoLiquido} fragrância + R$ ${DECANT_FRASCO} frasco)`
+      : `${precoTxt(p)}${q>1&&temPreco(p)?" cada":""}`;
+    return `• ${q}x ${nomeCompleto(p)} (${p.tamanho}) — ${preco}`;
   });
+  const resumo = resumoCarrinho();
+  const descontoLinha = resumo.descontoDecants
+    ? `\nDesconto do kit decant (${Math.round(resumo.taxa*100)}% sobre a fragrância): - R$ ${resumo.descontoDecants}`
+    : "";
   const totalLinha = cartTemSemPreco()
     ? "Total: a combinar no atendimento"
-    : `Total estimado: R$ ${totalPreco()}`;
-  return `Olá, Duna! Quero fazer um pedido:\n\n${linhas.join("\n")}\n\n${totalLinha}\n\nPode confirmar a disponibilidade e o frete?`;
+    : `Total estimado: R$ ${resumo.total}`;
+  return `Olá, Duna! Quero fazer um pedido:\n\n${linhas.join("\n")}${descontoLinha}\n\n${totalLinha}\n\nPode confirmar a disponibilidade e o frete?`;
 }
 
 function renderCart(){
@@ -1099,6 +1236,8 @@ function renderCart(){
     cartBody.innerHTML = `<div class="cart-empty">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 7h12l-1 13H7L6 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg>
       Seu pedido está vazio.<br>Adicione seus produtos favoritos.</div>`;
+    cartDealEl.hidden = true;
+    cartBreakdownEl.hidden = true;
     cartFoot.classList.add("hidden");
     return;
   }
@@ -1109,7 +1248,7 @@ function renderCart(){
       <div class="ci-info">
         <div class="ci-name">${p.marca ? p.marca+" " : ""}${nome}</div>
         <div class="ci-meta">${p.tamanho}</div>
-        <div class="ci-price">${precoHTML(p)}</div>
+        <div class="ci-price">${precoHTML(p)}${p.decant&&Number.isFinite(p.precoLiquido)?` <small>· R$ ${DECANT_FRASCO} do frasco incluso</small>`:""}</div>
       </div>
       <div class="ci-side">
         <div class="ci-qty">
@@ -1121,6 +1260,28 @@ function renderCart(){
       </div>
     </div>`;
   }).join("");
+  const resumo = resumoCarrinho();
+  if(resumo.qtdDecants){
+    const pct = Math.round(resumo.taxa*100);
+    const progresso = Math.min(100,(resumo.qtdDecants/10)*100);
+    cartDealEl.hidden = false;
+    cartDealEl.innerHTML = `<div class="cart-deal-head">
+      <strong>Kit de decants</strong><span>${pct?pct+"% OFF ativo":"Monte seu kit"}</span>
+    </div>
+    <p>${mensagemProgressoDecants(resumo.qtdDecants)}</p>
+    <div class="cart-deal-track" aria-hidden="true"><i style="width:${progresso}%"></i></div>
+    <div class="cart-deal-levels"><span>3 = 5%</span><span>5 = 10%</span><span>10 = 15%</span></div>`;
+    const linhasResumo = [];
+    if(resumo.outros) linhasResumo.push(`<div><span>Outros produtos</span><strong>R$ ${resumo.outros}</strong></div>`);
+    linhasResumo.push(`<div><span>Fragrância · ${resumo.qtdDecants} ${resumo.qtdDecants===1?"decant":"decants"}</span><strong>R$ ${resumo.liquidoDecants}</strong></div>`);
+    linhasResumo.push(`<div><span>Frascos · ${resumo.qtdDecants} × R$ ${DECANT_FRASCO}</span><strong>R$ ${resumo.frascosDecants}</strong></div>`);
+    if(resumo.descontoDecants) linhasResumo.push(`<div class="is-discount"><span>Desconto decants · ${pct}%</span><strong>− R$ ${resumo.descontoDecants}</strong></div>`);
+    cartBreakdownEl.hidden = false;
+    cartBreakdownEl.innerHTML = linhasResumo.join("");
+  }else{
+    cartDealEl.hidden = true;
+    cartBreakdownEl.hidden = true;
+  }
   cartFoot.classList.remove("hidden");
   if(cartTemSemPreco()){ cartTotalEl.textContent = "A combinar"; }
   else { animateTotal(cartTotalEl, totalPreco()); }
@@ -1225,7 +1386,7 @@ if(steps.length){
     updateBack();
 
     document.getElementById("rBottle").innerHTML = frascoVisual(best);
-    document.getElementById("rFam").textContent = (best.marca ? best.marca + " · " : "") + best.familia + " · " + best.selo;
+    document.getElementById("rFam").textContent = (best.marca ? best.marca + " · " : "") + perfilOlfativo(best) + " · " + best.selo;
     document.getElementById("rName").textContent = best.nome;
     document.getElementById("rDesc").textContent = best.desc;
     document.getElementById("rPrice").innerHTML = precoHTML(best) + " · " + best.tamanho;
@@ -1381,6 +1542,7 @@ qvWrap.innerHTML = `
           </div>
         </details>
         <div class="qv-pyramid" id="qvNotes" aria-label="Pirâmide olfativa"></div>
+        <div class="qv-decant-picker" id="qvDecantPicker" hidden></div>
         <div class="qv-meta">
           <span class="card-size" id="qvSize"></span>
           <span class="card-price" id="qvPrice"></span>
@@ -1402,23 +1564,43 @@ document.body.appendChild(qvWrap);
 
 const qvEl = document.getElementById("qv");
 const qvOverlay = document.getElementById("qvOverlay");
-let qvNome = null, qvLastFocus = null;
+let qvNome = null, qvLastFocus = null, qvDecantAtual = null;
+
+function selecionarDecantQuickView(decant, volume){
+  const variante = decantPorBaseEVolume.get(`${decant.base}|${volume}`);
+  if(!variante) return;
+  qvNome = variante.nome;
+  document.querySelectorAll("#qvDecantPicker [data-decant-volume]").forEach(btn=>{
+    const ativo = Number(btn.dataset.decantVolume)===variante.decantMl;
+    btn.classList.toggle("active", ativo);
+    btn.setAttribute("aria-pressed", String(ativo));
+  });
+  document.getElementById("qvSize").textContent = `${variante.decantMl} ml · frasco de R$ ${DECANT_FRASCO} incluso`;
+  document.getElementById("qvPrice").innerHTML = `<small>R$</small> ${variante.preco}<em>R$ ${dinheiroDecimal(variante.precoMl)} por ml</em>`;
+  const qvWa = document.getElementById("qvWa");
+  qvWa.href = waProduto(variante);
+}
 
 function openQuickView(nome, sincronizarURL=true){
   const p = porNome[nome];
   if(!p) return;
+  const decantBase = p.decant ? DECANTS.find(d=>d.base===p.base) : null;
   if(sincronizarURL) atualizarProdutoNaURL(p);
   const disponivel = estaDisponivel(p);
   qvNome = nome;
+  qvDecantAtual = decantBase;
   qvLastFocus = document.activeElement;
   document.getElementById("qvSelo").textContent = disponivel ? p.selo : "Esgotado";
   document.getElementById("qvBottle").innerHTML = frascoVisual(p);
-  document.getElementById("qvFam").textContent = `${p.marca ? p.marca + " · " : ""}${p.familia} · ${p.genero} · ${p.periodo}`;
+  document.getElementById("qvFam").textContent = `${p.marca ? p.marca + " · " : ""}${perfilOlfativo(p)} · ${p.genero} · ${p.periodo}`;
   document.getElementById("qvName").textContent = p.nome;
   document.getElementById("qvInsp").textContent = p.inspiracao;
   document.getElementById("qvDesc").textContent = p.desc;
   document.getElementById("qvNotesHelp").open = false;
   document.getElementById("qvNotes").innerHTML = piramideHTML(p);
+  const qvDecantPicker = document.getElementById("qvDecantPicker");
+  qvDecantPicker.hidden = !decantBase;
+  qvDecantPicker.innerHTML = decantBase ? seletorDecantHTML(decantBase,"quick") : "";
   document.getElementById("qvSize").textContent = p.tamanho;
   document.getElementById("qvPrice").innerHTML = disponivel ? precoHTML(p) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p));
   const qvAdd = document.getElementById("qvAdd");
@@ -1428,6 +1610,7 @@ function openQuickView(nome, sincronizarURL=true){
   const qvWa = document.getElementById("qvWa");
   qvWa.href = disponivel ? waProduto(p) : waAvisoEstoque(nomeCompleto(p));
   qvWa.innerHTML = `${WHATSAPP_ICON}<span>${disponivel ? "Pedir agora" : "Avise-me quando voltar"}</span>`;
+  if(decantBase) selecionarDecantQuickView(decantBase,p.decantMl || decantBase.opcoes[0].ml);
   // "quem gosta desse vai amar" — mesma família ou mesma marca, disponíveis primeiro
   const baseNome = p.base || p.nome;
   const rel = PERFUMES
@@ -1460,6 +1643,7 @@ function closeQuickView(){
   qvEl.setAttribute("aria-hidden","true");
   document.body.classList.remove("no-scroll");
   limparProdutoDaURL();
+  qvDecantAtual = null;
   if(qvLastFocus && qvLastFocus.focus) qvLastFocus.focus();
 }
 document.getElementById("qvClose").addEventListener("click", closeQuickView);
@@ -1467,6 +1651,11 @@ qvOverlay.addEventListener("click", closeQuickView);
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && qvEl.classList.contains("open")) closeQuickView(); });
 document.getElementById("qvAdd").addEventListener("click", ()=>{
   if(qvNome){ addToCart(qvNome); closeQuickView(); }
+});
+document.getElementById("qvDecantPicker").addEventListener("click", e=>{
+  const btn = e.target.closest("[data-decant-volume]");
+  if(!btn) return;
+  if(qvDecantAtual) selecionarDecantQuickView(qvDecantAtual,Number(btn.dataset.decantVolume));
 });
 // clicar num relacionado troca o quick view para ele
 document.getElementById("qvRelated").addEventListener("click", e=>{
