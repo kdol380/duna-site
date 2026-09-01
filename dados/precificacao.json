@@ -1,8 +1,8 @@
 {
- "atualizado_em": "2026-08-27",
+ "atualizado_em": "2026-08-31",
  "fonte": "Precificacao_Duna_2026-08-27.xlsx",
  "regra_desconto": "desconto máx = 50% da margem em R$, teto R$60, arredondado p/ baixo em degraus de R$5",
- "regra_decant": "decant 10 ml = 15% do preço do frasco cheio, arredondado; frasco split R$8 cobrado à parte",
+ "regra_decant": "decants de 3, 5 e 10 ml; frasco split R$6 incluído; valor por ml reduzido por faixa de preço e volume",
  "produtos": [
   {
    "marca": "Afnan",
@@ -17,7 +17,7 @@
    "desconto_max": 60,
    "preco_minimo": 235.0,
    "preco_decant": 44,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Al Wataniah",
@@ -32,7 +32,7 @@
    "desconto_max": 45,
    "preco_minimo": 154.0,
    "preco_decant": 30,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Al Wataniah",
@@ -47,7 +47,7 @@
    "desconto_max": 50,
    "preco_minimo": 159.0,
    "preco_decant": 31,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Al Wataniah",
@@ -62,7 +62,7 @@
    "desconto_max": 45,
    "preco_minimo": 154.0,
    "preco_decant": 30,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Al Wataniah",
@@ -76,8 +76,8 @@
    "preco_final": 279.0,
    "desconto_max": 60,
    "preco_minimo": 219.0,
-   "preco_decant": 42,
-   "frasco_split": 8
+   "preco_decant": 41,
+   "frasco_split": 6
   },
   {
    "marca": "Al Wataniah",
@@ -92,7 +92,7 @@
    "desconto_max": 60,
    "preco_minimo": 229.0,
    "preco_decant": 43,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Al Wataniah",
@@ -107,7 +107,7 @@
    "desconto_max": 45,
    "preco_minimo": 134.0,
    "preco_decant": 27,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Al Wataniah",
@@ -122,7 +122,7 @@
    "desconto_max": 60,
    "preco_minimo": 209.0,
    "preco_decant": 40,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Armaf",
@@ -137,7 +137,7 @@
    "desconto_max": 60,
    "preco_minimo": 269.0,
    "preco_decant": 49,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Armaf",
@@ -151,8 +151,8 @@
    "preco_final": 279.0,
    "desconto_max": 50,
    "preco_minimo": 229.0,
-   "preco_decant": 42,
-   "frasco_split": 8
+   "preco_decant": 41,
+   "frasco_split": 6
   },
   {
    "marca": "Armaf",
@@ -167,7 +167,7 @@
    "desconto_max": 25,
    "preco_minimo": 64.0,
    "preco_decant": 13,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Armaf",
@@ -181,8 +181,8 @@
    "preco_final": 339.0,
    "desconto_max": 60,
    "preco_minimo": 279.0,
-   "preco_decant": 51,
-   "frasco_split": 8
+   "preco_decant": 50,
+   "frasco_split": 6
   },
   {
    "marca": "Armaf",
@@ -196,8 +196,8 @@
    "preco_final": 339.0,
    "desconto_max": 60,
    "preco_minimo": 279.0,
-   "preco_decant": 51,
-   "frasco_split": 8
+   "preco_decant": 50,
+   "frasco_split": 6
   },
   {
    "marca": "Armaf",
@@ -212,7 +212,7 @@
    "desconto_max": 25,
    "preco_minimo": 64.0,
    "preco_decant": 13,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Armaf",
@@ -227,7 +227,7 @@
    "desconto_max": 60,
    "preco_minimo": 309.0,
    "preco_decant": 55,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Armaf",
@@ -242,7 +242,7 @@
    "desconto_max": 60,
    "preco_minimo": 329.0,
    "preco_decant": 58,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Armaf",
@@ -257,7 +257,7 @@
    "desconto_max": 60,
    "preco_minimo": 210.0,
    "preco_decant": 40,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Armaf",
@@ -271,8 +271,8 @@
    "preco_final": 259.0,
    "desconto_max": 55,
    "preco_minimo": 204.0,
-   "preco_decant": 39,
-   "frasco_split": 8
+   "preco_decant": 38,
+   "frasco_split": 6
   },
   {
    "marca": "Bidaya",
@@ -287,7 +287,7 @@
    "desconto_max": 60,
    "preco_minimo": 249.0,
    "preco_decant": 46,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Bidaya",
@@ -302,7 +302,7 @@
    "desconto_max": 60,
    "preco_minimo": 249.0,
    "preco_decant": 46,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Bidaya",
@@ -316,8 +316,8 @@
    "preco_final": 449.0,
    "desconto_max": 60,
    "preco_minimo": 389.0,
-   "preco_decant": 67,
-   "frasco_split": 8
+   "preco_decant": 61,
+   "frasco_split": 6
   },
   {
    "marca": "Bidaya",
@@ -332,7 +332,7 @@
    "desconto_max": 60,
    "preco_minimo": 249.0,
    "preco_decant": 46,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Bidaya",
@@ -346,8 +346,8 @@
    "preco_final": 319.0,
    "desconto_max": 60,
    "preco_minimo": 259.0,
-   "preco_decant": 48,
-   "frasco_split": 8
+   "preco_decant": 47,
+   "frasco_split": 6
   },
   {
    "marca": "Bidaya",
@@ -362,7 +362,7 @@
    "desconto_max": 60,
    "preco_minimo": 249.0,
    "preco_decant": 46,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Bidaya",
@@ -377,7 +377,7 @@
    "desconto_max": 60,
    "preco_minimo": 249.0,
    "preco_decant": 46,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Bidaya",
@@ -392,7 +392,7 @@
    "desconto_max": 60,
    "preco_minimo": 249.0,
    "preco_decant": 46,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Bidaya",
@@ -406,8 +406,8 @@
    "preco_final": 449.0,
    "desconto_max": 60,
    "preco_minimo": 389.0,
-   "preco_decant": 67,
-   "frasco_split": 8
+   "preco_decant": 61,
+   "frasco_split": 6
   },
   {
    "marca": "French Avenue",
@@ -421,8 +421,8 @@
    "preco_final": 365.0,
    "desconto_max": 60,
    "preco_minimo": 305.0,
-   "preco_decant": 55,
-   "frasco_split": 8
+   "preco_decant": 54,
+   "frasco_split": 6
   },
   {
    "marca": "French Avenue",
@@ -437,7 +437,7 @@
    "desconto_max": 60,
    "preco_minimo": 315.0,
    "preco_decant": 56,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -451,8 +451,8 @@
    "preco_final": 579.0,
    "desconto_max": 60,
    "preco_minimo": 519.0,
-   "preco_decant": 87,
-   "frasco_split": 8
+   "preco_decant": 73,
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -466,8 +466,8 @@
    "preco_final": 299.0,
    "desconto_max": 60,
    "preco_minimo": 239.0,
-   "preco_decant": 45,
-   "frasco_split": 8
+   "preco_decant": 44,
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -481,8 +481,8 @@
    "preco_final": 430.0,
    "desconto_max": 60,
    "preco_minimo": 370.0,
-   "preco_decant": 64,
-   "frasco_split": 8
+   "preco_decant": 58,
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -497,7 +497,7 @@
    "desconto_max": 60,
    "preco_minimo": 249.0,
    "preco_decant": 46,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -512,7 +512,7 @@
    "desconto_max": 40,
    "preco_minimo": 180.0,
    "preco_decant": 33,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -526,8 +526,8 @@
    "preco_final": 265.0,
    "desconto_max": 50,
    "preco_minimo": 215.0,
-   "preco_decant": 40,
-   "frasco_split": 8
+   "preco_decant": 39,
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -541,8 +541,8 @@
    "preco_final": 239.0,
    "desconto_max": 50,
    "preco_minimo": 189.0,
-   "preco_decant": 36,
-   "frasco_split": 8
+   "preco_decant": 35,
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -557,7 +557,7 @@
    "desconto_max": 45,
    "preco_minimo": 189.0,
    "preco_decant": 35,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -571,8 +571,8 @@
    "preco_final": 224.0,
    "desconto_max": 50,
    "preco_minimo": 174.0,
-   "preco_decant": 34,
-   "frasco_split": 8
+   "preco_decant": 33,
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -586,8 +586,8 @@
    "preco_final": 319.0,
    "desconto_max": 60,
    "preco_minimo": 259.0,
-   "preco_decant": 48,
-   "frasco_split": 8
+   "preco_decant": 47,
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -602,7 +602,7 @@
    "desconto_max": 60,
    "preco_minimo": 209.0,
    "preco_decant": 40,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -616,8 +616,8 @@
    "preco_final": 399.0,
    "desconto_max": 60,
    "preco_minimo": 339.0,
-   "preco_decant": 60,
-   "frasco_split": 8
+   "preco_decant": 59,
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -632,7 +632,7 @@
    "desconto_max": 35,
    "preco_minimo": 144.0,
    "preco_decant": 27,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -647,7 +647,7 @@
    "desconto_max": 35,
    "preco_minimo": 144.0,
    "preco_decant": 27,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -661,8 +661,8 @@
    "preco_final": 649.0,
    "desconto_max": 60,
    "preco_minimo": 589.0,
-   "preco_decant": 97,
-   "frasco_split": 8
+   "preco_decant": 82,
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -676,8 +676,8 @@
    "preco_final": 239.0,
    "desconto_max": 55,
    "preco_minimo": 184.0,
-   "preco_decant": 36,
-   "frasco_split": 8
+   "preco_decant": 35,
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -691,8 +691,8 @@
    "preco_final": 479.0,
    "desconto_max": 60,
    "preco_minimo": 419.0,
-   "preco_decant": 72,
-   "frasco_split": 8
+   "preco_decant": 65,
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -706,8 +706,8 @@
    "preco_final": 239.0,
    "desconto_max": 50,
    "preco_minimo": 189.0,
-   "preco_decant": 36,
-   "frasco_split": 8
+   "preco_decant": 35,
+   "frasco_split": 6
   },
   {
    "marca": "Lattafa",
@@ -721,8 +721,8 @@
    "preco_final": 359.0,
    "desconto_max": 60,
    "preco_minimo": 299.0,
-   "preco_decant": 54,
-   "frasco_split": 8
+   "preco_decant": 53,
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -737,7 +737,7 @@
    "desconto_max": 55,
    "preco_minimo": 194.0,
    "preco_decant": 37,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -751,8 +751,8 @@
    "preco_final": 170.0,
    "desconto_max": 35,
    "preco_minimo": 135.0,
-   "preco_decant": 26,
-   "frasco_split": 8
+   "preco_decant": 25,
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -766,8 +766,8 @@
    "preco_final": 250.0,
    "desconto_max": 50,
    "preco_minimo": 200.0,
-   "preco_decant": 38,
-   "frasco_split": 8
+   "preco_decant": 37,
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -781,8 +781,8 @@
    "preco_final": 250.0,
    "desconto_max": 55,
    "preco_minimo": 195.0,
-   "preco_decant": 38,
-   "frasco_split": 8
+   "preco_decant": 37,
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -797,7 +797,7 @@
    "desconto_max": 45,
    "preco_minimo": 154.0,
    "preco_decant": 30,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -811,8 +811,8 @@
    "preco_final": 239.0,
    "desconto_max": 55,
    "preco_minimo": 184.0,
-   "preco_decant": 36,
-   "frasco_split": 8
+   "preco_decant": 35,
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -827,7 +827,7 @@
    "desconto_max": 50,
    "preco_minimo": 149.0,
    "preco_decant": 30,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -842,7 +842,7 @@
    "desconto_max": 45,
    "preco_minimo": 144.0,
    "preco_decant": 28,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -857,7 +857,7 @@
    "desconto_max": 50,
    "preco_minimo": 169.0,
    "preco_decant": 33,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -871,8 +871,8 @@
    "preco_final": 170.0,
    "desconto_max": 45,
    "preco_minimo": 125.0,
-   "preco_decant": 26,
-   "frasco_split": 8
+   "preco_decant": 25,
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -887,7 +887,7 @@
    "desconto_max": 60,
    "preco_minimo": 255.0,
    "preco_decant": 47,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -902,7 +902,7 @@
    "desconto_max": 30,
    "preco_minimo": 170.0,
    "preco_decant": 30,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -917,7 +917,7 @@
    "desconto_max": 45,
    "preco_minimo": 154.0,
    "preco_decant": 30,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -932,7 +932,7 @@
    "desconto_max": 60,
    "preco_minimo": 249.0,
    "preco_decant": 46,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -947,7 +947,7 @@
    "desconto_max": 50,
    "preco_minimo": 159.0,
    "preco_decant": 31,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Maison Alhambra",
@@ -962,7 +962,7 @@
    "desconto_max": 45,
    "preco_minimo": 144.0,
    "preco_decant": 28,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Rasasi",
@@ -977,7 +977,7 @@
    "desconto_max": 40,
    "preco_minimo": 260.0,
    "preco_decant": 45,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Rasasi",
@@ -991,8 +991,8 @@
    "preco_final": 340.0,
    "desconto_max": 60,
    "preco_minimo": 280.0,
-   "preco_decant": 51,
-   "frasco_split": 8
+   "preco_decant": 50,
+   "frasco_split": 6
   },
   {
    "marca": "Rasasi",
@@ -1007,7 +1007,7 @@
    "desconto_max": 55,
    "preco_minimo": 174.0,
    "preco_decant": 34,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Rasasi",
@@ -1022,7 +1022,7 @@
    "desconto_max": 45,
    "preco_minimo": 185.0,
    "preco_decant": 34,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Rayhaan",
@@ -1036,8 +1036,8 @@
    "preco_final": 380.0,
    "desconto_max": 60,
    "preco_minimo": 320.0,
-   "preco_decant": 57,
-   "frasco_split": 8
+   "preco_decant": 56,
+   "frasco_split": 6
   },
   {
    "marca": "Rayhaan",
@@ -1051,8 +1051,8 @@
    "preco_final": 360.0,
    "desconto_max": 55,
    "preco_minimo": 305.0,
-   "preco_decant": 54,
-   "frasco_split": 8
+   "preco_decant": 53,
+   "frasco_split": 6
   },
   {
    "marca": "Rayhaan",
@@ -1066,8 +1066,8 @@
    "preco_final": 290.0,
    "desconto_max": 60,
    "preco_minimo": 230.0,
-   "preco_decant": 44,
-   "frasco_split": 8
+   "preco_decant": 43,
+   "frasco_split": 6
   },
   {
    "marca": "Rayhaan",
@@ -1081,8 +1081,8 @@
    "preco_final": 330.0,
    "desconto_max": 60,
    "preco_minimo": 270.0,
-   "preco_decant": 50,
-   "frasco_split": 8
+   "preco_decant": 49,
+   "frasco_split": 6
   },
   {
    "marca": "Rayhaan",
@@ -1097,7 +1097,7 @@
    "desconto_max": 60,
    "preco_minimo": 290.0,
    "preco_decant": 52,
-   "frasco_split": 8
+   "frasco_split": 6
   },
   {
    "marca": "Rayhaan",
@@ -1112,7 +1112,7 @@
    "desconto_max": 60,
    "preco_minimo": 309.0,
    "preco_decant": 55,
-   "frasco_split": 8
+   "frasco_split": 6
   }
  ]
 }
