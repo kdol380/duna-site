@@ -454,12 +454,13 @@ body.page-light .nav-links a[aria-current="page"]::after{transform:scaleX(1);}
 body.page-light .nav-logo .s{ color:var(--ouro-fundo); }
 body.page-light .nav-burger span{ background:var(--grafite); }
 
-.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:26px; }
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:24px; }
 
 .card{
   position:relative; background:var(--branco-puro);
-  border:1px solid var(--areia); border-radius:4px;
-  padding:30px 26px 26px; overflow:hidden;
+  border:1px solid rgba(176,138,60,.24); border-radius:12px;
+  padding:14px 14px 18px; overflow:hidden;
+  box-shadow:0 12px 34px -30px rgba(38,34,28,.5);
   transition:transform .5s var(--ease), box-shadow .5s var(--ease), border-color .5s;
   display:flex; flex-direction:column;
 }
@@ -477,13 +478,18 @@ body.page-light .nav-burger span{ background:var(--grafite); }
 .card-corner span:nth-child(3){ bottom:0; left:0; border-right:0; border-top:0; }
 .card-corner span:nth-child(4){ bottom:0; right:0; border-left:0; border-top:0; }
 
-.card-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+.card-top{ position:absolute; z-index:4; top:26px; left:26px; right:26px; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
 .card-pill{ font-family:var(--sans); font-size:.6rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
   padding:5px 12px; border-radius:30px; }
 .pill-solid{ background:var(--ouro); color:var(--branco-puro); }
 .pill-line{ border:1px solid var(--areia); color:var(--grafite-45); }
 
-.bottle{ height:170px; display:flex; align-items:flex-end; justify-content:center; margin:6px 0 14px;
+.bottle-stage{ position:relative; height:238px; margin-bottom:18px; display:grid; place-items:center; overflow:hidden;
+  border-radius:9px; border:1px solid rgba(176,138,60,.12);
+  background:radial-gradient(circle at 50% 43%,#fff 0 28%,transparent 64%),linear-gradient(150deg,#f9f6ef,#eee6d8); }
+.bottle-stage::after{ content:""; position:absolute; left:18%; right:18%; bottom:17px; height:16px; border-radius:50%;
+  background:rgba(48,36,18,.12); filter:blur(10px); }
+.bottle{ position:relative; z-index:1; height:190px; display:flex; align-items:flex-end; justify-content:center; margin:0;
   transition:transform .6s var(--ease); }
 .card:hover .bottle{ transform:translateY(-4px) scale(1.04); }
 .bottle svg{ height:100%; width:auto; }
@@ -498,12 +504,19 @@ body.page-light .nav-burger span{ background:var(--grafite); }
 .note-row dt{ font-family:var(--sans); font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ouro-fundo); }
 .note-row dd{ font-family:var(--serif); font-size:1.02rem; color:var(--grafite); line-height:1.3; }
 
-.card-foot{ margin-top:auto; padding-top:18px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-.card-meta{ display:flex; flex-direction:column; }
+.card-foot{ margin-top:auto; padding-top:18px; display:flex; flex-direction:column; align-items:stretch; gap:12px; }
+.card-meta{ min-height:73px; display:flex; flex-direction:column; align-items:center; text-align:center; }
 .card-size{ font-family:var(--sans); font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--grafite-45); }
 .card-price{ font-family:var(--serif); font-size:1.7rem; font-weight:700; color:var(--ouro-fundo); line-height:1; margin-top:2px; }
 .card-price small{ font-size:1em; font-weight:inherit; }
 .card-price s{ text-decoration-thickness:1px; text-decoration-color:currentColor; }
+.card-payment{ display:flex; flex-direction:column; align-items:center; margin-top:5px; font-variant-numeric:tabular-nums; }
+.card-card-price{ color:var(--grafite-45); font:500 .68rem/1.2 var(--sans); }
+.card-pix-price{ display:flex; align-items:center; justify-content:center; gap:5px; margin-top:2px; color:var(--ouro-fundo); }
+.card-pix-price strong{ font:700 1.82rem/1 var(--serif); }
+.card-pix-price span{ font:600 .62rem/1 var(--sans); letter-spacing:.06em; text-transform:uppercase; }
+.card-installment{ margin-top:5px; color:var(--grafite-60); font:400 .65rem/1.2 var(--sans); }
+.card-installment b{ color:var(--grafite); font-weight:600; }
 .decant-picker{ margin-top:14px; }
 .decant-picker-label{ display:block; margin-bottom:7px; text-align:center; font-family:var(--sans); font-size:.56rem;
   font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--grafite-45); }
@@ -533,6 +546,18 @@ body.page-light .nav-burger span{ background:var(--grafite); }
 .card.is-unavailable .card-price{ opacity:.58; }
 .card.is-unavailable .pill-line{ color:#765a28; border-color:rgba(118,90,40,.3); background:rgba(176,138,60,.08); }
 .card-wa svg{ width:14px; height:14px; }
+.catalog-pagination{ margin:46px auto 0; display:flex; flex-direction:column; align-items:center; gap:14px; }
+.catalog-pagination[hidden]{ display:none; }
+.catalog-pagination>p{ color:var(--grafite-45); font:500 .65rem/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
+.catalog-pagination>p strong{ color:var(--grafite); }
+.pagination-controls{ display:flex; align-items:center; justify-content:center; gap:7px; flex-wrap:wrap; }
+.pagination-controls button{ min-width:42px; height:42px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  border:1px solid var(--areia); border-radius:999px; background:var(--branco-puro); color:var(--grafite);
+  font:600 .68rem/1 var(--sans); letter-spacing:.06em; transition:.25s var(--ease); }
+.pagination-controls button:hover:not(:disabled){ border-color:var(--ouro); color:var(--ouro-fundo); transform:translateY(-2px); }
+.pagination-controls button.active{ background:var(--grafite); border-color:var(--grafite); color:var(--branco-puro); }
+.pagination-controls button:disabled{ opacity:.35; cursor:not-allowed; }
+.pagination-ellipsis{ width:24px; text-align:center; color:var(--grafite-45); }
 
 /* =====================================================================
    QUIZ — Descubra seu perfume
@@ -748,6 +773,17 @@ footer{ background:var(--areia); color:var(--grafite-60); padding:70px 0 36px; p
 .cart-breakdown>div{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; color:var(--grafite-60); font-size:.7rem; }
 .cart-breakdown strong{ color:var(--grafite); font-family:var(--sans); font-size:.72rem; font-variant-numeric:tabular-nums; }
 .cart-breakdown .is-discount,.cart-breakdown .is-discount strong{ color:#687b3d; }
+.cart-payment-method{ margin:0 0 15px; padding:0; border:0; }
+.cart-payment-method legend{ margin-bottom:9px; color:var(--grafite-60); font:600 .62rem/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
+.cart-payment-options{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.cart-payment-options label{ position:relative; cursor:pointer; }
+.cart-payment-options input{ position:absolute; opacity:0; pointer-events:none; }
+.cart-payment-options span{ min-height:58px; padding:10px 12px; display:flex; flex-direction:column; justify-content:center;
+  border:1px solid var(--areia); border-radius:8px; background:var(--branco-q); transition:.25s var(--ease); }
+.cart-payment-options b{ color:var(--grafite); font:600 1rem/1 var(--serif); }
+.cart-payment-options small{ margin-top:5px; color:var(--grafite-45); font:500 .55rem/1 var(--sans); letter-spacing:.04em; }
+.cart-payment-options input:checked+span{ border-color:var(--ouro); background:#fbf5e8; box-shadow:inset 0 0 0 1px rgba(176,138,60,.16); }
+.cart-payment-options input:focus-visible+span{ outline:2px solid var(--ouro); outline-offset:2px; }
 .cart-total{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:14px; }
 .cart-total span{ font-family:var(--sans); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--grafite-60); }
 .cart-total strong{ font-family:var(--serif); font-size:1.8rem; color:var(--ouro-fundo); }
@@ -1223,6 +1259,7 @@ a, button{ touch-action:manipulation; }
 
   .cat-main{ padding:18px 0 72px; }
   .cat-main .wrap{ padding:0 12px; }
+  .catalog-page .col-brands{ margin-left:0; margin-right:0; padding-left:0; padding-right:0; }
   .decant-offer{ grid-template-columns:1fr; gap:16px; margin-bottom:16px; padding:18px 16px; }
   .decant-offer-copy strong{ font-size:1.35rem; }
   .decant-offer-copy p{ font-size:.76rem; line-height:1.45; }
@@ -1273,16 +1310,18 @@ a, button{ touch-action:manipulation; }
     font:500 .67rem/1 var(--sans); letter-spacing:.1em; text-transform:uppercase; }
 
   .catalog-page .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px 10px; }
-  .catalog-page .card{ min-width:0; min-height:326px; padding:10px 8px 9px; border-radius:3px;
+  .catalog-page .card{ min-width:0; min-height:368px; padding:7px 7px 9px; border-radius:9px;
     transition:border-color .2s; will-change:auto; transform-style:flat; contain:layout paint; }
-  .catalog-page .card.is-decant{ min-height:406px; }
+  .catalog-page .card.is-decant{ min-height:448px; }
   .catalog-page .card:hover{ transform:none; box-shadow:none; }
   .catalog-page .card-glare,.catalog-page .card-corner{ display:none; }
   .catalog-page .card-top{ position:absolute; z-index:4; top:8px; left:8px; right:8px; }
   .catalog-page .card-top .pill-solid,.catalog-page .card-top .pill-line{ display:none; }
   .catalog-page .card.is-unavailable .card-top .pill-line{ display:inline-flex; margin-left:auto; padding:4px 7px;
     background:rgba(255,254,251,.92); font-size:.48rem; letter-spacing:.1em; }
-  .catalog-page .bottle{ height:137px; margin:2px 0 8px; align-items:center; }
+  .catalog-page .bottle-stage{ height:154px; margin-bottom:10px; border-radius:7px; }
+  .catalog-page .bottle-stage::after{ bottom:10px; height:10px; }
+  .catalog-page .bottle{ height:132px; margin:0; align-items:center; }
   .catalog-page .card:hover .bottle{ transform:none; }
   .catalog-page .bottle img{ max-width:100%; filter:drop-shadow(0 8px 14px rgba(38,34,28,.16)); }
   .catalog-page .card-brand{ margin-top:0; overflow:hidden; color:var(--ouro-fundo); font-size:.49rem; letter-spacing:.16em;
@@ -1297,10 +1336,16 @@ a, button{ touch-action:manipulation; }
   .catalog-page .is-decant .decant-volume small{ font-size:.44rem; }
   .catalog-page .card-foot{ gap:8px; margin-top:auto; padding-top:9px; align-items:stretch; }
   .catalog-page .is-decant .card-foot{ flex-direction:column; gap:6px; }
-  .catalog-page .card-meta{ align-items:center; min-width:0; }
+  .catalog-page .card-meta{ min-height:87px; align-items:center; min-width:0; }
   .catalog-page .card-size{ max-width:100%; overflow:hidden; font-size:.48rem; letter-spacing:.09em; text-overflow:ellipsis; white-space:nowrap; }
   .catalog-page .card-price{ margin-top:3px; font-size:1.22rem; }
   .catalog-page .card-price small{ font-size:.72em; }
+  .catalog-page .card-payment{ margin-top:4px; }
+  .catalog-page .card-card-price{ font-size:.54rem; }
+  .catalog-page .card-pix-price{ gap:3px; }
+  .catalog-page .card-pix-price strong{ font-size:1.32rem; }
+  .catalog-page .card-pix-price span{ font-size:.47rem; }
+  .catalog-page .card-installment{ margin-top:4px; font-size:.51rem; }
   .catalog-page .decant-bottle-note{ margin-top:2px; font-size:.45rem; text-align:center; }
   .catalog-page .card-wa{ width:100%; min-height:40px; padding:9px 7px; justify-content:center; gap:5px;
     border-radius:30px; font-size:.57rem; letter-spacing:.07em; }
@@ -1314,6 +1359,10 @@ a, button{ touch-action:manipulation; }
   .catalog-page.past-top .cart-float{ top:9px; }
   .catalog-page .cart-float svg{ width:21px; height:21px; }
   .catalog-page .wa-float{ display:none; }
+  .catalog-pagination{ margin-top:32px; }
+  .pagination-controls{ gap:5px; }
+  .pagination-controls button{ min-width:38px; height:38px; padding:0 10px; font-size:.62rem; }
+  .pagination-controls button>span{ display:none; }
 }
 
 /* =====================================================================

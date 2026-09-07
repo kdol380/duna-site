@@ -462,6 +462,21 @@ function temPreco(p){ return typeof p.preco === "number" && p.preco > 0; }
 function precoHTML(p){ return temPreco(p) ? `<small>R$</small> ${p.preco}` : `<span class="preco-consulta">Sob consulta</span>`; }
 // texto puro para mensagens do WhatsApp
 function precoTxt(p){ return temPreco(p) ? `R$ ${p.preco}` : "valor a combinar"; }
+const DESCONTO_PIX = .04;
+function moeda(valor){
+  return Number(valor).toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
+}
+function precoCartao(valorPix){ return Number(valorPix) * (1 + DESCONTO_PIX); }
+function precoComPagamentoHTML(valorPix, disponivel=true, attrs=""){
+  if(!(typeof valorPix === "number" && valorPix > 0)) return `<span class="preco-consulta">Sob consulta</span>`;
+  if(!disponivel) return `<span class="card-price card-price-soldout"><s>${moeda(valorPix)}</s></span>`;
+  const cartao = precoCartao(valorPix);
+  return `<div class="card-payment" ${attrs}>
+    <span class="card-card-price">${moeda(cartao)}</span>
+    <span class="card-pix-price"><strong>${moeda(valorPix)}</strong> <span>no Pix</span></span>
+    <span class="card-installment">ou 3x de <b>${moeda(cartao/3)}</b> sem juros</span>
+  </div>`;
+}
 // nome com marca, para mensagens
 function nomeCompleto(p){ return p.marca ? `${p.marca} ${p.nome}` : p.nome; }
 // estoque: todo produto é considerado disponível, salvo quando tiver disponivel:false
@@ -570,6 +585,7 @@ const grid = document.getElementById("grid");
 const filtersWrap = document.getElementById("filters");
 const countEl = document.getElementById("catCount"); // contador opcional (página catálogo)
 const resultCountEl = document.getElementById("catResultCount");
+const paginationEl = document.getElementById("catalogPagination");
 const filterToggle = document.getElementById("catFilterToggle");
 const filterBadge = document.getElementById("catFilterBadge");
 const clearFiltersBtn = document.getElementById("catClearFilters");
@@ -640,6 +656,8 @@ const GRUPOS = [
 const sel = { estoque:"Todos", genero:"Todos", periodo:"Todas", perfil:"Todos" };
 let busca = "";          // texto da busca (normalizado)
 let ordem = "padrao";    // ordenação atual
+const ITENS_POR_PAGINA = 32;
+let paginaAtual = Math.max(1, Number(new URLSearchParams(location.search).get("pagina")) || 1);
 
 // seleção ativa do catálogo: coleção (todos|arabes|nicho|designer), marca ou body spray
 let colecaoAtiva = "todos";
@@ -734,7 +752,7 @@ function syncColNav(){
 }
 function pushColURL(){
   const url = new URL(location.href);
-  url.searchParams.delete("colecao"); url.searchParams.delete("marca"); url.searchParams.delete("tipo");
+  url.searchParams.delete("colecao"); url.searchParams.delete("marca"); url.searchParams.delete("tipo"); url.searchParams.delete("pagina");
   if(colecaoAtiva!=="todos") url.searchParams.set("colecao", colecaoAtiva);
   if(marcaAtiva) url.searchParams.set("marca", marcaAtiva);
   if(tipoAtivo) url.searchParams.set("tipo", tipoAtivo);
@@ -742,18 +760,20 @@ function pushColURL(){
 }
 function setColecao(key, push=true){
   colecaoAtiva = COLECOES[key] ? key : "todos";
-  marcaAtiva = null; tipoAtivo = null;
+  marcaAtiva = null; tipoAtivo = null; paginaAtual = 1;
   if(push) pushColURL();
   syncColNav(); renderGrid();
 }
 function setMarca(m, push=true){
   colecaoAtiva = "todos"; tipoAtivo = null;
+  paginaAtual = 1;
   marcaAtiva = (marcaAtiva===m) ? null : m;   // clicar de novo desmarca
   if(push) pushColURL();
   syncColNav(); renderGrid();
 }
 function setTipo(t, push=true){
   colecaoAtiva = "todos"; marcaAtiva = null;
+  paginaAtual = 1;
   tipoAtivo = (tipoAtivo===t) ? null : t;
   if(push) pushColURL();
   syncColNav(); renderGrid();
@@ -850,6 +870,7 @@ if(filtersWrap){
     if(!btn) return;
     const grupo = btn.closest(".filter-group").dataset.group;
     sel[grupo] = btn.dataset.val;
+    paginaAtual = 1;
     btn.closest(".filter-group").querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c===btn));
     renderGrid();
   });
@@ -893,7 +914,7 @@ function cardHTML(p,i){
       <span class="card-pill pill-solid">${p.genero}</span>
       <span class="card-pill pill-line">${disponivel ? perfilOlfativo(p) : "Esgotado"}</span>
     </div>
-    <div class="bottle">${frascoVisual(p)}</div>
+    <div class="bottle-stage"><div class="bottle">${frascoVisual(p)}</div></div>
     ${p.marca ? `<p class="card-brand">${p.marca}</p>` : ""}
     <h3 class="card-name">${p.decant?p.base:p.nome}</h3>
     <p class="card-fam">${p.decant?"Decant original · frasco incluso":p.inspiracao}</p>
@@ -902,7 +923,7 @@ function cardHTML(p,i){
     <div class="card-foot">
       <div class="card-meta">
         <span class="card-size" ${p.decant?"data-decant-unit":""}>${p.decant?`R$ ${dinheiroDecimal(opcaoDecantPadrao.precoMl)} por ml`:p.tamanho}</span>
-        <span class="card-price" ${p.decant?"data-decant-total":""}>${disponivel ? (p.decant?`<small>R$</small> ${opcaoDecantPadrao.preco}`:precoHTML(p)) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p))}</span>
+        ${precoComPagamentoHTML(p.decant?opcaoDecantPadrao.preco:p.preco, disponivel, p.decant?'data-decant-total=""':"")}
         ${p.decant?`<span class="decant-bottle-note">inclui frasco de R$ ${DECANT_FRASCO}</span>`:""}
       </div>
       ${disponivel ? `<button class="card-wa" ${p.decant?`data-add-decant="${p.base}" data-volume="${opcaoDecantPadrao.ml}"`:`data-add="${p.nome}"`}>
@@ -936,7 +957,16 @@ function renderGrid(){
   let list = ordenar(base.filter(passaFiltros).filter(passaBusca));
   const total = list.length;
   const lim = parseInt(grid.dataset.limit||"0", 10);   // prévia da home
+  const paginado = lim===0 && !!paginationEl;
+  const totalPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
+  paginaAtual = Math.min(paginaAtual, totalPaginas);
+  if(paginado){
+    const url = new URL(location.href);
+    if(paginaAtual>1) url.searchParams.set("pagina", paginaAtual); else url.searchParams.delete("pagina");
+    history.replaceState(null,"",url);
+  }
   if(lim>0) list = list.slice(0, lim);
+  else if(paginado) list = list.slice((paginaAtual-1)*ITENS_POR_PAGINA, paginaAtual*ITENS_POR_PAGINA);
 
   const colVazia = !list.length && colecaoAtiva!=="todos" && contaColecao(colecaoAtiva)===0 && !busca;
   const bsVazio = !list.length && tipoAtivo==="bodyspray" && !busca;
@@ -977,8 +1007,13 @@ function renderGrid(){
     countEl.textContent = total + (total===1 ? " fragrância" : " fragrâncias");
   }
   if(resultCountEl){
-    resultCountEl.textContent = total + (total===1 ? " resultado" : " resultados");
+    const inicio = total ? (paginaAtual-1)*ITENS_POR_PAGINA+1 : 0;
+    const fim = Math.min(paginaAtual*ITENS_POR_PAGINA, total);
+    resultCountEl.textContent = paginado && total>ITENS_POR_PAGINA
+      ? `${inicio}–${fim} de ${total} resultados`
+      : total + (total===1 ? " resultado" : " resultados");
   }
+  renderPaginacao(totalPaginas, total, paginado);
   const ativos = Object.values(sel).filter(v=>v!=="Todos" && v!=="Todas").length;
   if(filterBadge){
     filterBadge.textContent = ativos;
@@ -991,9 +1026,45 @@ function renderGrid(){
   if(applyNoun) applyNoun.textContent = total===1 ? "perfume" : "perfumes";
 }
 
+function paginasVisiveis(totalPaginas){
+  if(totalPaginas<=7) return Array.from({length:totalPaginas},(_,i)=>i+1);
+  const paginas = new Set([1,totalPaginas,paginaAtual-1,paginaAtual,paginaAtual+1]);
+  const ordenadas = [...paginas].filter(n=>n>=1&&n<=totalPaginas).sort((a,b)=>a-b);
+  const saida = [];
+  ordenadas.forEach((n,i)=>{ if(i && n-ordenadas[i-1]>1) saida.push("…"); saida.push(n); });
+  return saida;
+}
+function renderPaginacao(totalPaginas, total, ativo){
+  if(!paginationEl) return;
+  paginationEl.hidden = !ativo || total<=ITENS_POR_PAGINA;
+  if(paginationEl.hidden){ paginationEl.innerHTML=""; return; }
+  paginationEl.innerHTML = `
+    <p>Página <strong>${paginaAtual}</strong> de ${totalPaginas}</p>
+    <div class="pagination-controls">
+      <button type="button" data-page="${paginaAtual-1}" ${paginaAtual===1?"disabled":""} aria-label="Página anterior">← <span>Anterior</span></button>
+      ${paginasVisiveis(totalPaginas).map(n=>n==="…"
+        ? `<span class="pagination-ellipsis" aria-hidden="true">…</span>`
+        : `<button type="button" class="pagination-number ${n===paginaAtual?"active":""}" data-page="${n}" ${n===paginaAtual?'aria-current="page"':""}>${n}</button>`).join("")}
+      <button type="button" data-page="${paginaAtual+1}" ${paginaAtual===totalPaginas?"disabled":""} aria-label="Próxima página"><span>Próxima</span> →</button>
+    </div>`;
+}
+
+if(paginationEl){
+  paginationEl.addEventListener("click", e=>{
+    const btn = e.target.closest("[data-page]");
+    if(!btn || btn.disabled) return;
+    paginaAtual = Number(btn.dataset.page);
+    const url = new URL(location.href);
+    if(paginaAtual>1) url.searchParams.set("pagina", paginaAtual); else url.searchParams.delete("pagina");
+    history.replaceState(null,"",url);
+    renderGrid();
+    document.querySelector(".cat-filter-summary")?.scrollIntoView({ behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth", block:"start" });
+  });
+}
+
 function resetFiltros(){
   sel.estoque="Todos"; sel.genero="Todos"; sel.periodo="Todas"; sel.perfil="Todos";
-  busca=""; ordem="padrao";
+  busca=""; ordem="padrao"; paginaAtual=1;
   const bi=document.getElementById("catSearch"); if(bi) bi.value="";
   const os=document.getElementById("catSort"); if(os) os.value="padrao";
   if(filtersWrap) filtersWrap.querySelectorAll(".filter-group").forEach(fg=>
@@ -1007,11 +1078,11 @@ if(buscaInput){
   let _bt;
   buscaInput.addEventListener("input", ()=>{
     clearTimeout(_bt);
-    _bt = setTimeout(()=>{ busca = normaliza(buscaInput.value.trim()); renderGrid(); }, 180);
+    _bt = setTimeout(()=>{ busca = normaliza(buscaInput.value.trim()); paginaAtual=1; renderGrid(); }, 180);
   });
 }
 const ordemSel = document.getElementById("catSort");
-if(ordemSel) ordemSel.addEventListener("change", ()=>{ ordem = ordemSel.value; renderGrid(); });
+if(ordemSel) ordemSel.addEventListener("change", ()=>{ ordem = ordemSel.value; paginaAtual=1; renderGrid(); });
 if(clearFiltersBtn) clearFiltersBtn.addEventListener("click", resetFiltros);
 
 /* alternância entre departamentos — skincare fica isolado do quiz/filtros de perfume */
@@ -1058,7 +1129,7 @@ if(grid){
         btn.setAttribute("aria-pressed", String(ativo));
       });
       card.querySelector("[data-decant-unit]").textContent = `R$ ${dinheiroDecimal(opcao.precoMl)} por ml`;
-      card.querySelector("[data-decant-total]").innerHTML = `<small>R$</small> ${opcao.preco}`;
+      card.querySelector("[data-decant-total]").outerHTML = precoComPagamentoHTML(opcao.preco, true, 'data-decant-total=""');
       card.querySelector("[data-add-decant]").dataset.volume = opcao.ml;
       return;
     }
@@ -1169,15 +1240,26 @@ const totalPreco = ()=> resumoCarrinho().total;
 const cartTemSemPreco = ()=> Object.keys(cart).some(n=> porNome[n] && !temPreco(porNome[n]));
 
 const cartTotalRow = cartTotalEl?.closest(".cart-total");
+let formaPagamento = "pix";
+try{ formaPagamento = localStorage.getItem("duna_payment_method") || "pix"; }catch(e){ formaPagamento="pix"; }
+if(!["pix","cartao"].includes(formaPagamento)) formaPagamento="pix";
 const cartDealEl = document.createElement("div");
 cartDealEl.className = "cart-decant-deal";
 cartDealEl.hidden = true;
 const cartBreakdownEl = document.createElement("div");
 cartBreakdownEl.className = "cart-breakdown";
 cartBreakdownEl.hidden = true;
+const cartPaymentEl = document.createElement("fieldset");
+cartPaymentEl.className = "cart-payment-method";
+cartPaymentEl.innerHTML = `<legend>Forma de pagamento</legend>
+  <div class="cart-payment-options">
+    <label><input type="radio" name="payment-method" value="pix" ${formaPagamento==="pix"?"checked":""}><span><b>Pix</b><small>pagamento à vista</small></span></label>
+    <label><input type="radio" name="payment-method" value="cartao" ${formaPagamento==="cartao"?"checked":""}><span><b>Cartão</b><small>até 3x sem juros</small></span></label>
+  </div>`;
 if(cartFoot && cartTotalRow){
   cartFoot.insertBefore(cartDealEl, cartTotalRow);
   cartFoot.insertBefore(cartBreakdownEl, cartTotalRow);
+  cartFoot.insertBefore(cartPaymentEl, cartTotalRow);
 }
 
 function mensagemProgressoDecants(qtd){
@@ -1222,7 +1304,8 @@ function msgPedido(){
   const totalLinha = cartTemSemPreco()
     ? "Total: a combinar no atendimento"
     : `Total estimado: R$ ${resumo.total}`;
-  return `Olá, Duna! Quero fazer um pedido:\n\n${linhas.join("\n")}${descontoLinha}\n\n${totalLinha}\n\nPode confirmar a disponibilidade e o frete?`;
+  const pagamentoLinha = formaPagamento==="cartao" ? "Forma de pagamento: Cartão (até 3x sem juros)" : "Forma de pagamento: Pix";
+  return `Olá, Duna! Quero fazer um pedido:\n\n${linhas.join("\n")}${descontoLinha}\n\n${totalLinha}\n${pagamentoLinha}\n\nPode confirmar a disponibilidade e o frete?`;
 }
 
 function renderCart(){
@@ -1311,6 +1394,12 @@ if(cartEl){
   document.getElementById("cartClose").addEventListener("click", fecharCart);
   document.getElementById("cartContinue").addEventListener("click", fecharCart);
   cartOverlay.addEventListener("click", fecharCart);
+  cartPaymentEl.addEventListener("change", e=>{
+    if(!e.target.matches('[name="payment-method"]')) return;
+    formaPagamento = e.target.value;
+    try{ localStorage.setItem("duna_payment_method", formaPagamento); }catch(err){}
+    cartSend.href = waLink(msgPedido());
+  });
   document.addEventListener("keydown", e=>{ if(e.key==="Escape" && cartEl.classList.contains("open")) fecharCart(); });
   renderCart();
 }
