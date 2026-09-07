@@ -4,7 +4,7 @@
 
 Depois da publicação no GitHub Pages, use este endereço como fonte de dados do catálogo:
 
-`https://kdol380.github.io/duna-site/catalogo-meta.csv`
+`https://dunafragrancias.com.br/catalogo-meta.csv`
 
 O arquivo contém os perfumes e produtos de skincare com preço, disponibilidade, imagem, marca e link individual. Produtos esgotados permanecem no feed como `out of stock`.
 

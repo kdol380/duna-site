@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(scriptDir, "..");
-const siteBase = "https://kdol380.github.io/duna-site";
+const siteBase = "https://dunafragrancias.com.br";
 
 const appSource = await fs.readFile(path.join(rootDir, "app.js"), "utf8");
 const skincareSource = await fs.readFile(path.join(rootDir, "skincare.html"), "utf8");
@@ -81,7 +81,7 @@ function genderForMeta(value) {
 function feedRow(product, kind) {
   const name = fullName(product);
   const productSlug = slug(name);
-  const page = kind === "skincare" ? "skincare.html" : "catalogo.html";
+  const page = kind === "skincare" ? "skincare" : "catalogo";
   const productType = kind === "skincare"
     ? "Skincare"
     : (/body spray/i.test(product.nome) ? "Perfumes > Body Spray" : "Perfumes > Frasco");
