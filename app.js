@@ -466,7 +466,7 @@ const DESCONTO_PIX = .04;
 function moeda(valor){
   return Number(valor).toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
 }
-function precoCartao(valorPix){ return Number(valorPix) * (1 + DESCONTO_PIX); }
+function precoCartao(valorPix){ return Math.round(Number(valorPix) * (1 + DESCONTO_PIX) * 100) / 100; }
 function precoComPagamentoHTML(valorPix, disponivel=true, attrs=""){
   if(!(typeof valorPix === "number" && valorPix > 0)) return `<span class="preco-consulta">Sob consulta</span>`;
   if(!disponivel) return `<span class="card-price card-price-soldout"><s>${moeda(valorPix)}</s></span>`;
@@ -1243,11 +1243,11 @@ function resumoCarrinho(){
     total:outros + liquidoDecants + frascosDecants - descontoDecants
   };
 }
-const totalPreco = ()=> resumoCarrinho().total;
 // algum item do pedido está "Sob consulta"?
 const cartTemSemPreco = ()=> Object.keys(cart).some(n=> porNome[n] && !temPreco(porNome[n]));
 
 const cartTotalRow = cartTotalEl?.closest(".cart-total");
+const cartTotalLabelEl = cartTotalRow?.querySelector("span");
 let formaPagamento = "pix";
 try{ formaPagamento = localStorage.getItem("duna_payment_method") || "pix"; }catch(e){ formaPagamento="pix"; }
 if(!["pix","cartao"].includes(formaPagamento)) formaPagamento="pix";
@@ -1261,13 +1261,16 @@ const cartPaymentEl = document.createElement("fieldset");
 cartPaymentEl.className = "cart-payment-method";
 cartPaymentEl.innerHTML = `<legend>Forma de pagamento</legend>
   <div class="cart-payment-options">
-    <label><input type="radio" name="payment-method" value="pix" ${formaPagamento==="pix"?"checked":""}><span><b>Pix</b><small>pagamento à vista</small></span></label>
-    <label><input type="radio" name="payment-method" value="cartao" ${formaPagamento==="cartao"?"checked":""}><span><b>Cartão</b><small>até 3x sem juros</small></span></label>
+    <label><input type="radio" name="payment-method" value="pix" ${formaPagamento==="pix"?"checked":""}><span><b>Pix</b><small data-payment-pix>pagamento à vista</small></span></label>
+    <label><input type="radio" name="payment-method" value="cartao" ${formaPagamento==="cartao"?"checked":""}><span><b>Cartão</b><small data-payment-card>até 3x sem juros</small></span></label>
   </div>`;
+const cartSavingsEl = document.createElement("p");
+cartSavingsEl.className = "cart-payment-savings";
 if(cartFoot && cartTotalRow){
   cartFoot.insertBefore(cartDealEl, cartTotalRow);
   cartFoot.insertBefore(cartBreakdownEl, cartTotalRow);
   cartFoot.insertBefore(cartPaymentEl, cartTotalRow);
+  cartFoot.insertBefore(cartSavingsEl, cartTotalRow);
 }
 
 function mensagemProgressoDecants(qtd){
@@ -1297,6 +1300,27 @@ function removeItem(nome){ delete cart[nome]; salvarCart(); renderCart(); }
 function abrirCart(){ if(!cartEl) return; cartEl.classList.add("open"); cartOverlay.classList.add("open"); document.body.classList.add("no-scroll"); }
 function fecharCart(){ if(!cartEl) return; cartEl.classList.remove("open"); cartOverlay.classList.remove("open"); document.body.classList.remove("no-scroll"); }
 
+function totalPorPagamento(resumo=resumoCarrinho()){
+  return formaPagamento==="cartao" ? precoCartao(resumo.total) : resumo.total;
+}
+function precoItemCarrinho(p){
+  if(!temPreco(p)) return `<span class="preco-consulta">Sob consulta</span>`;
+  const valor = formaPagamento==="cartao" ? precoCartao(p.preco) : p.preco;
+  return `${moeda(valor)} <small>${formaPagamento==="cartao"?"no cartão":"no Pix"}</small>`;
+}
+function atualizarValoresPagamento(totalPix){
+  const totalCartao = precoCartao(totalPix);
+  const pixEl = cartPaymentEl.querySelector("[data-payment-pix]");
+  const cardEl = cartPaymentEl.querySelector("[data-payment-card]");
+  if(pixEl) pixEl.textContent = `${moeda(totalPix)} à vista`;
+  if(cardEl) cardEl.textContent = `${moeda(totalCartao)} · 3x de ${moeda(totalCartao/3)}`;
+  const economia = totalCartao-totalPix;
+  cartSavingsEl.textContent = formaPagamento==="cartao"
+    ? `Economize ${moeda(economia)} pagando pelo Pix`
+    : `Você economizou ${moeda(economia)} pagando pelo Pix`;
+  if(cartTotalLabelEl) cartTotalLabelEl.textContent = formaPagamento==="cartao" ? "Total no cartão" : "Total no Pix";
+}
+
 function msgPedido(){
   const linhas = Object.entries(cart).filter(([n])=>porNome[n]).map(([n,q])=>{
     const p = porNome[n];
@@ -1309,11 +1333,15 @@ function msgPedido(){
   const descontoLinha = resumo.descontoDecants
     ? `\nDesconto do kit decant (${Math.round(resumo.taxa*100)}% sobre a fragrância): - R$ ${resumo.descontoDecants}`
     : "";
+  const totalSelecionado = totalPorPagamento(resumo);
+  const acrescimoCartao = formaPagamento==="cartao"
+    ? `\nAcréscimo do cartão (4%): ${moeda(totalSelecionado-resumo.total)}`
+    : "";
   const totalLinha = cartTemSemPreco()
     ? "Total: a combinar no atendimento"
-    : `Total estimado: R$ ${resumo.total}`;
+    : `Total estimado ${formaPagamento==="cartao"?"no cartão":"no Pix"}: ${moeda(totalSelecionado)}`;
   const pagamentoLinha = formaPagamento==="cartao" ? "Forma de pagamento: Cartão (até 3x sem juros)" : "Forma de pagamento: Pix";
-  return `Olá, Duna! Quero fazer um pedido:\n\n${linhas.join("\n")}${descontoLinha}\n\n${totalLinha}\n${pagamentoLinha}\n\nPode confirmar a disponibilidade e o frete?`;
+  return `Olá, Duna! Quero fazer um pedido:\n\n${linhas.join("\n")}${descontoLinha}${acrescimoCartao}\n\n${totalLinha}\n${pagamentoLinha}\n\nPode confirmar a disponibilidade e o frete?`;
 }
 
 function renderCart(){
@@ -1339,7 +1367,7 @@ function renderCart(){
       <div class="ci-info">
         <div class="ci-name">${p.marca ? p.marca+" " : ""}${nome}</div>
         <div class="ci-meta">${p.tamanho}</div>
-        <div class="ci-price">${precoHTML(p)}${p.decant&&Number.isFinite(p.precoLiquido)?` <small>· R$ ${DECANT_FRASCO} do frasco incluso</small>`:""}</div>
+        <div class="ci-price">${precoItemCarrinho(p)}${p.decant&&Number.isFinite(p.precoLiquido)?` <small>· frasco incluso</small>`:""}</div>
       </div>
       <div class="ci-side">
         <div class="ci-qty">
@@ -1367,6 +1395,7 @@ function renderCart(){
     linhasResumo.push(`<div><span>Fragrância · ${resumo.qtdDecants} ${resumo.qtdDecants===1?"decant":"decants"}</span><strong>R$ ${resumo.liquidoDecants}</strong></div>`);
     linhasResumo.push(`<div><span>Frascos · ${resumo.qtdDecants} × R$ ${DECANT_FRASCO}</span><strong>R$ ${resumo.frascosDecants}</strong></div>`);
     if(resumo.descontoDecants) linhasResumo.push(`<div class="is-discount"><span>Desconto decants · ${pct}%</span><strong>− R$ ${resumo.descontoDecants}</strong></div>`);
+    if(formaPagamento==="cartao") linhasResumo.push(`<div class="is-card-adjustment"><span>Cartão · acréscimo de 4%</span><strong>+ ${moeda(totalPorPagamento(resumo)-resumo.total)}</strong></div>`);
     cartBreakdownEl.hidden = false;
     cartBreakdownEl.innerHTML = linhasResumo.join("");
   }else{
@@ -1374,20 +1403,25 @@ function renderCart(){
     cartBreakdownEl.hidden = true;
   }
   cartFoot.classList.remove("hidden");
-  if(cartTemSemPreco()){ cartTotalEl.textContent = "A combinar"; }
-  else { animateTotal(cartTotalEl, totalPreco()); }
+  atualizarValoresPagamento(resumo.total);
+  cartSavingsEl.hidden = cartTemSemPreco();
+  if(cartTemSemPreco()){ cancelAnimationFrame(cartTotalAnimFrame); cartTotalEl.textContent = "A combinar"; }
+  else { animateTotal(cartTotalEl, totalPorPagamento(resumo)); }
   cartSend.href = waLink(msgPedido());
 }
 
 // contagem animada do total (R$)
+let cartTotalAnimFrame = 0;
 function animateTotal(el, to){
-  const from = parseInt((el.textContent||"").replace(/\D/g,""),10) || 0;
-  if(from===to || reduceMotion){ el.textContent = "R$ " + to; return; }
+  cancelAnimationFrame(cartTotalAnimFrame);
+  const from = Number(el.dataset.value) || 0;
+  el.dataset.value = String(to);
+  if(Math.abs(from-to)<.005 || reduceMotion){ el.textContent = moeda(to); return; }
   const t0 = performance.now(), dur = 380;
   (function step(t){
     const k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
-    el.textContent = "R$ " + Math.round(from + (to-from)*e);
-    if(k<1) requestAnimationFrame(step);
+    el.textContent = moeda(from + (to-from)*e);
+    if(k<1) cartTotalAnimFrame = requestAnimationFrame(step);
   })(t0);
 }
 
@@ -1406,7 +1440,7 @@ if(cartEl){
     if(!e.target.matches('[name="payment-method"]')) return;
     formaPagamento = e.target.value;
     try{ localStorage.setItem("duna_payment_method", formaPagamento); }catch(err){}
-    cartSend.href = waLink(msgPedido());
+    renderCart();
   });
   document.addEventListener("keydown", e=>{ if(e.key==="Escape" && cartEl.classList.contains("open")) fecharCart(); });
   renderCart();
