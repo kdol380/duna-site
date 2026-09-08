@@ -730,7 +730,7 @@ const DECANT_VARIANTS = DECANTS.flatMap(d=>d.opcoes.map(opcao=>({
 const decantPorBaseEVolume = new Map(DECANT_VARIANTS.map(p=>[`${p.base}|${p.decantMl}`,p]));
 
 const colNav = document.getElementById("colNav");
-const colBrands = document.getElementById("colBrands");
+const colBrandSelect = document.getElementById("colBrandSelect");
 
 function syncColNav(){
   if(!colNav) return;
@@ -741,12 +741,11 @@ function syncColNav(){
     t.classList.toggle("active", on);
     t.setAttribute("aria-pressed", String(on));
   });
-  colNav.querySelectorAll(".col-brand").forEach(b=>{
-    const on = !!((b.dataset.marca && b.dataset.marca===marcaAtiva) ||
-                  (b.dataset.tipo && b.dataset.tipo===tipoAtivo));
-    b.classList.toggle("active", on);
-    b.setAttribute("aria-pressed", String(on));
-  });
+  if(colBrandSelect){
+    colBrandSelect.value = marcaAtiva
+      ? `marca:${marcaAtiva}`
+      : (tipoAtivo==="bodyspray" ? "tipo:bodyspray" : "");
+  }
   const oferta = document.getElementById("decantOffer");
   if(oferta) oferta.hidden = tipoAtivo!=="decants";
 }
@@ -785,30 +784,30 @@ if(colNav){
   const dEl = colNav.querySelector('[data-tab-count="decants"]');
   if(dEl){ const n = DECANTS.length; dEl.textContent = `${n} ${n===1?"fragrância":"fragrâncias"} · 3, 5 ou 10 ml`; }
 
-  // chips de marca gerados a partir do catálogo (novas marcas aparecem sozinhas)
-  if(colBrands){
+  // seletor de marca gerado a partir do catálogo (novas marcas aparecem sozinhas)
+  if(colBrandSelect){
     const marcas = Array.from(new Set(PERFUMES.filter(p=>!ehBodySpray(p)).map(marcaBase))).filter(Boolean).sort((a,b)=>a.localeCompare(b,"pt"));
-    const frag = document.createDocumentFragment();
     marcas.forEach(m=>{
-      const b = document.createElement("button");
-      b.type = "button"; b.className = "col-brand"; b.dataset.marca = m;
-      b.setAttribute("aria-pressed","false");
-      b.textContent = m;
-      frag.appendChild(b);
+      const option = document.createElement("option");
+      option.value = `marca:${m}`;
+      option.textContent = m;
+      colBrandSelect.appendChild(option);
     });
-    const bs = document.createElement("button");
-    bs.type = "button"; bs.className = "col-brand col-brand-bs"; bs.dataset.tipo = "bodyspray";
-    bs.setAttribute("aria-pressed","false");
-    bs.textContent = "Body Spray";
-    frag.appendChild(bs);
-    colBrands.appendChild(frag);
+    const bodySpray = document.createElement("option");
+    bodySpray.value = "tipo:bodyspray";
+    bodySpray.textContent = "Body Spray";
+    colBrandSelect.appendChild(bodySpray);
+    colBrandSelect.addEventListener("change", ()=>{
+      const valor = colBrandSelect.value;
+      if(valor.startsWith("marca:")) setMarca(valor.slice(6));
+      else if(valor==="tipo:bodyspray") setTipo("bodyspray");
+      else setColecao("todos");
+    });
   }
 
   colNav.addEventListener("click", e=>{
     const tab = e.target.closest(".col-tab");
     if(tab){ tab.dataset.tipo ? setTipo(tab.dataset.tipo) : setColecao(tab.dataset.col); return; }
-    const b = e.target.closest(".col-brand");
-    if(b){ b.dataset.marca ? setMarca(b.dataset.marca) : setTipo(b.dataset.tipo); }
   });
   syncColNav();
 }
@@ -914,7 +913,16 @@ function cardHTML(p,i){
       <span class="card-pill pill-solid">${p.genero}</span>
       <span class="card-pill pill-line">${disponivel ? perfilOlfativo(p) : "Esgotado"}</span>
     </div>
-    <div class="bottle-stage"><div class="bottle">${frascoVisual(p)}</div></div>
+    <div class="bottle-stage">
+      <div class="bottle">${frascoVisual(p)}</div>
+      ${p.decant?`<div class="decant-vial-detail" aria-hidden="true">
+        <svg class="decant-vial-arrow" viewBox="0 0 42 30" fill="none">
+          <path d="M3 5c13 1 22 7 29 19"/>
+          <path d="m25 21 8 4 1-9"/>
+        </svg>
+        <img class="decant-vial-mark" src="assets/ui/frasco-decant-fechado.png" alt="">
+      </div>`:""}
+    </div>
     ${p.marca ? `<p class="card-brand">${p.marca}</p>` : ""}
     <h3 class="card-name">${p.decant?p.base:p.nome}</h3>
     <p class="card-fam">${p.decant?"Decant original · frasco incluso":p.inspiracao}</p>
