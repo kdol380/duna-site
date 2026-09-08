@@ -211,7 +211,7 @@ const PERFUMES = [
   { nome:"Jorge di Profumo", marca:"Maison Alhambra", inspiracao:"cítrico aromático e amadeirado", familia:"Amadeirado", acorde:"Especiado fresco", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"marcante", preco:199, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Bergamota · Pimenta-preta · Limão Siciliano", coracao:"Lavanda · Tabaco · Gerânio", fundo:"Vetiver · Sândalo · Almíscar" },
-    accent:"#343434", foto:"assets/p-jorge-di-profumo.webp", desc:"Cítricos e pimenta-preta abrem um aromático masculino elegante, com lavanda, tabaco, vetiver e madeiras. Versátil e marcante sem perder o frescor." },
+    accent:"#343434", foto:"assets/p-jorge-di-profumo.webp?v=20260908-correct", desc:"Cítricos e pimenta-preta abrem um aromático masculino elegante, com lavanda, tabaco, vetiver e madeiras. Versátil e marcante sem perder o frescor." },
 
   { nome:"La Vivacité", marca:"Maison Alhambra", inspiracao:"frutado floral com baunilha", familia:"Floral", acorde:"Doce", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:239, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
