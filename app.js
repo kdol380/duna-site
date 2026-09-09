@@ -764,9 +764,12 @@ function setColecao(key, push=true){
   syncColNav(); renderGrid();
 }
 function setMarca(m, push=true){
-  colecaoAtiva = "todos"; tipoAtivo = null;
+  colecaoAtiva = "todos";
+  // Marca pode refinar a lista de decants sem trocar de coleção.
+  // Body spray continua sendo um tipo exclusivo do catálogo principal.
+  if(tipoAtivo!=="decants") tipoAtivo = null;
   paginaAtual = 1;
-  marcaAtiva = (marcaAtiva===m) ? null : m;   // clicar de novo desmarca
+  marcaAtiva = m ? ((marcaAtiva===m) ? null : m) : null;   // clicar de novo desmarca
   if(push) pushColURL();
   syncColNav(); renderGrid();
 }
@@ -801,6 +804,7 @@ if(colNav){
       const valor = colBrandSelect.value;
       if(valor.startsWith("marca:")) setMarca(valor.slice(6));
       else if(valor==="tipo:bodyspray") setTipo("bodyspray");
+      else if(tipoAtivo==="decants") setMarca(null);
       else setColecao("todos");
     });
   }
