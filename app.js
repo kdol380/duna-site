@@ -657,6 +657,9 @@ const sel = { estoque:"Todos", genero:"Todos", periodo:"Todas", perfil:"Todos" }
 let busca = "";          // texto da busca (normalizado)
 let ordem = "padrao";    // ordenação atual
 const ITENS_POR_PAGINA = 32;
+let budgetMax = DunaShop.budget(new URLSearchParams(location.search).get("ate"));
+let budgetPayment = new URLSearchParams(location.search).get("pagamento")==="cartao" ? "cartao" : "pix";
+let shippingCEP = "";
 let paginaAtual = Math.max(1, Number(new URLSearchParams(location.search).get("pagina")) || 1);
 
 // seleção ativa do catálogo: coleção (todos|arabes|nicho|designer), marca ou body spray
@@ -910,7 +913,7 @@ function cardHTML(p,i){
   const disponivel = estaDisponivel(p);
   const opcaoDecantPadrao = p.decant && p.opcoes ? p.opcoes[0] : null;
   return `
-  <article class="card reveal ${p.decant?"is-decant":""} ${disponivel ? "" : "is-unavailable"}" data-d="${(i%4)+1}" data-nome="${p.nome}" tabindex="0" role="button" aria-label="Ver detalhes de ${p.nome}">
+  <article class="card reveal ${p.decant?"is-decant":""} ${disponivel ? "" : "is-unavailable"}" data-d="${(i%4)+1}" data-nome="${p.nome}">
     <div class="card-glare"></div>
     <div class="card-corner"><span></span><span></span><span></span><span></span></div>
     <div class="card-top">
@@ -928,10 +931,14 @@ function cardHTML(p,i){
       </div>`:""}
     </div>
     ${p.marca ? `<p class="card-brand">${p.marca}</p>` : ""}
-    <h3 class="card-name">${p.decant?p.base:p.nome}</h3>
+    <h3 class="card-name"><a href="${DunaShop.productURL(p)}">${p.decant?p.base:p.nome}</a></h3>
     <p class="card-fam">${p.decant?"Decant original · frasco incluso":p.inspiracao}</p>
-    <span class="card-hint">Ver detalhes</span>
+    <button type="button" class="card-hint" data-quick="${p.nome}">Ver detalhes</button>
     ${seletorDecantHTML(p)}
+    <div class="discovery-actions">
+      <button type="button" data-favorite="${DunaShop.escape(p.nome)}" aria-pressed="false" aria-label="Salvar ${DunaShop.escape(p.nome)} nos favoritos">♡ <span>Salvar</span></button>
+      ${!p.decant && !ehBodySpray(p) ? `<button type="button" data-compare="${DunaShop.escape(p.nome)}" aria-pressed="false">Comparar</button>` : ""}
+    </div>
     <div class="card-foot">
       <div class="card-meta">
         <span class="card-size" ${p.decant?"data-decant-unit":""}>${p.decant?`R$ ${dinheiroDecimal(opcaoDecantPadrao.precoMl)} por ml`:p.tamanho}</span>
@@ -950,6 +957,7 @@ function cardHTML(p,i){
 
 // Versátil aparece tanto em Dia quanto em Noite
 function passaFiltros(p){
+  if(!DunaShop.matchesBudget(p, budgetMax, budgetPayment)) return false;
   if(colecaoAtiva!=="todos" && colecaoDe(p)!==colecaoAtiva) return false;
   if(marcaAtiva && marcaBase(p)!==marcaAtiva) return false;
   if(tipoAtivo==="bodyspray" && !ehBodySpray(p)) return false;
@@ -1026,7 +1034,7 @@ function renderGrid(){
       : total + (total===1 ? " resultado" : " resultados");
   }
   renderPaginacao(totalPaginas, total, paginado);
-  const ativos = Object.values(sel).filter(v=>v!=="Todos" && v!=="Todas").length;
+  const ativos = Object.values(sel).filter(v=>v!=="Todos" && v!=="Todas").length + Number(!!budgetMax);
   if(filterBadge){
     filterBadge.textContent = ativos;
     filterBadge.hidden = ativos===0;
@@ -1036,6 +1044,7 @@ function renderGrid(){
   if(applyCount) applyCount.textContent = total;
   const applyNoun = filtersWrap?.querySelector(".filter-apply-noun");
   if(applyNoun) applyNoun.textContent = total===1 ? "perfume" : "perfumes";
+  document.dispatchEvent(new CustomEvent("duna:grid"));
 }
 
 function paginasVisiveis(totalPaginas){
@@ -1077,6 +1086,9 @@ if(paginationEl){
 function resetFiltros(){
   sel.estoque="Todos"; sel.genero="Todos"; sel.periodo="Todas"; sel.perfil="Todos";
   busca=""; ordem="padrao"; paginaAtual=1;
+  budgetMax=null;
+  const budgetInput=document.getElementById("budgetMax"); if(budgetInput) budgetInput.value="";
+  const resetURL=new URL(location.href); resetURL.searchParams.delete("ate"); history.replaceState(null,"",resetURL);
   const bi=document.getElementById("catSearch"); if(bi) bi.value="";
   const os=document.getElementById("catSort"); if(os) os.value="padrao";
   if(filtersWrap) filtersWrap.querySelectorAll(".filter-group").forEach(fg=>
@@ -1129,6 +1141,7 @@ if(grid){
   grid.addEventListener("click", e=>{ if(e.target.closest("[data-col-back]")) setColecao("todos"); });
   // adicionar ao pedido a partir dos cards / abrir detalhes
   grid.addEventListener("click", e=>{
+    if(e.target.closest(".discovery-actions, .card-name a")) return;
     const volumeBtn = e.target.closest("[data-decant-volume]");
     if(volumeBtn){
       const card = volumeBtn.closest(".card.is-decant");
@@ -1195,7 +1208,7 @@ const cartSend     = document.getElementById("cartSend");
 let produtosExtras = {};
 try{ produtosExtras = JSON.parse(localStorage.getItem("duna_cart_products")||"{}"); }catch(e){ produtosExtras={}; }
 const salvarProdutosExtras = ()=>{ try{ localStorage.setItem("duna_cart_products", JSON.stringify(produtosExtras)); }catch(e){} };
-const porNome = Object.fromEntries([...PERFUMES, ...DECANTS, ...DECANT_VARIANTS, ...Object.values(produtosExtras)].map(p=>[p.nome,p]));
+const porNome = Object.fromEntries([...Object.values(produtosExtras), ...PERFUMES, ...DECANTS, ...DECANT_VARIANTS, ...(globalThis.DUNA_SKINCARE || [])].map(p=>[p.nome,p]));
 
 function produtoSkincareDoCard(card){
   if(!card) return null;
@@ -1228,24 +1241,7 @@ const totalItens = ()=> Object.values(cart).reduce((a,b)=>a+b,0);
 const taxaDescontoDecants = qtd => qtd>=10 ? .15 : (qtd>=5 ? .10 : (qtd>=3 ? .05 : 0));
 
 function resumoCarrinho(){
-  let outros = 0, liquidoDecants = 0, frascosDecants = 0, qtdDecants = 0;
-  Object.entries(cart).forEach(([nome,qtd])=>{
-    const p = porNome[nome];
-    if(!p || !temPreco(p)) return;
-    if(p.decant && Number.isFinite(p.precoLiquido)){
-      qtdDecants += qtd;
-      liquidoDecants += p.precoLiquido*qtd;
-      frascosDecants += DECANT_FRASCO*qtd;
-    }else{
-      outros += p.preco*qtd;
-    }
-  });
-  const taxa = taxaDescontoDecants(qtdDecants);
-  const descontoDecants = Math.round(liquidoDecants*taxa);
-  return {
-    outros, liquidoDecants, frascosDecants, qtdDecants, taxa, descontoDecants,
-    total:outros + liquidoDecants + frascosDecants - descontoDecants
-  };
+  return DunaShop.orderSummary(Object.entries(cart).map(([nome,quantity])=>({product:porNome[nome],quantity})),DECANT_FRASCO);
 }
 // algum item do pedido está "Sob consulta"?
 const cartTemSemPreco = ()=> Object.keys(cart).some(n=> porNome[n] && !temPreco(porNome[n]));
@@ -1345,7 +1341,7 @@ function msgPedido(){
     ? "Total: a combinar no atendimento"
     : `Total estimado ${formaPagamento==="cartao"?"no cartão":"no Pix"}: ${moeda(totalSelecionado)}`;
   const pagamentoLinha = formaPagamento==="cartao" ? "Forma de pagamento: Cartão (até 3x sem juros)" : "Forma de pagamento: Pix";
-  return `Olá, Duna! Quero fazer um pedido:\n\n${linhas.join("\n")}${descontoLinha}${acrescimoCartao}\n\n${totalLinha}\n${pagamentoLinha}\n\nPode confirmar a disponibilidade e o frete?`;
+  return `Olá, Duna! Quero fazer um pedido:\n\n${linhas.join("\n")}${descontoLinha}${acrescimoCartao}\n\n${totalLinha}\n${pagamentoLinha}\n\nPode confirmar a disponibilidade e o frete?${shippingCEP ? "\nCEP de entrega: "+DunaShop.formatCEP(shippingCEP) : ""}\nFrete e prazo a confirmar no atendimento.`;
 }
 
 function renderCart(){
@@ -1455,7 +1451,7 @@ if(cartEl){
    ===================================================================== */
 const steps = document.querySelectorAll(".quiz-step");
 if(steps.length){
-  const answers = { gen:null, occ:null, int:null, fam:null };
+  const answers = { gen:null, occ:null, int:null, fam:null, budget:null };
   let stepIdx = 0;
   const progress = document.querySelectorAll("#quizProgress i");
   const resultBox = document.getElementById("quizResult");
@@ -1468,11 +1464,15 @@ if(steps.length){
   document.querySelectorAll(".quiz-opt").forEach(opt=>{
     opt.addEventListener("click", ()=>{
       answers[opt.dataset.key] = opt.dataset.val;
+      opt.closest(".quiz-opts").querySelectorAll(".quiz-opt").forEach(button=>button.setAttribute("aria-pressed",String(button===opt)));
+      document.getElementById("quizEmpty").hidden=true;
       if(stepIdx < steps.length-1){
         steps[stepIdx].classList.remove("active");
         stepIdx++;
         steps[stepIdx].classList.add("active");
         progress[stepIdx].classList.add("on");
+        steps[stepIdx].querySelector(".quiz-q").setAttribute("tabindex","-1");
+        steps[stepIdx].querySelector(".quiz-q").focus();
       } else {
         mostrarResultado();
       }
@@ -1489,42 +1489,32 @@ if(steps.length){
     updateBack();
   });
 
-  const ESCALA = ["suave","equilibrado","marcante","potente"];
-  function scorePerfume(p){
-    let s = 0;
-    // 1) gênero — filtro mais forte
-    if(answers.gen === "Tanto faz")      s += 2;                 // sem preferência: bônus leve a todos
-    else if(p.genero === answers.gen)    s += 6;                 // bate exatamente
-    else if(p.genero === "Unissex")      s += 4;                 // unissex serve pra qualquer escolha
-    else                                 s -= 5;                 // gênero oposto: penaliza forte (sem zerar)
-    // 2) família olfativa
-    if(p.familia === answers.fam)        s += 5;
-    // 3) intensidade (exata + proximidade)
-    const d = Math.abs(ESCALA.indexOf(p.intensidade) - ESCALA.indexOf(answers.int));
-    if(d===0) s += 3; else if(d===1) s += 1.5; else if(d===2) s += 0.5;
-    // 4) ocasião
-    if(p.ocasiao === answers.occ)        s += 2;
-    if((answers.occ==="dia" || answers.occ==="trabalho") && p.periodo==="Versátil") s += 0.5;
-    return s;
-  }
-
   function mostrarResultado(){
-    const ranked = PERFUMES
-      .filter(estaDisponivel)
-      .map((p,i)=>({ p, s:scorePerfume(p), i }))
-      .sort((a,b)=> b.s - a.s || a.i - b.i);   // empate: mantém ordem do catálogo
+    const ranked = DunaShop.rankProducts(PERFUMES, answers);
+    if(!ranked.length){
+      document.getElementById("quizEmpty").hidden=false;
+      document.getElementById("quizEmpty").focus();
+      return;
+    }
+    document.getElementById("quizEmpty").hidden=true;
     const best = ranked[0].p;
     const alts = ranked.slice(1,3).map(r=>r.p);
+    document.getElementById("rReasons").innerHTML = ranked[0].reasons.map(reason=>`<li>${DunaShop.escape(reason)}</li>`).join("");
+    const detailLink=document.getElementById("rDetails"); detailLink.href=DunaShop.productURL(best);
+    const decantLink=document.getElementById("rDecant");
+    decantLink.hidden=!podeDecant(best);
+    if(podeDecant(best)) decantLink.href=DunaShop.productURL({...best,decant:true,base:best.nome});
 
     steps.forEach(st=>st.classList.remove("active"));
     resultBox.classList.add("active");
+    resultBox.setAttribute("tabindex","-1"); resultBox.focus();
     updateBack();
 
     document.getElementById("rBottle").innerHTML = frascoVisual(best);
     document.getElementById("rFam").textContent = (best.marca ? best.marca + " · " : "") + perfilOlfativo(best) + " · " + best.selo;
     document.getElementById("rName").textContent = best.nome;
     document.getElementById("rDesc").textContent = best.desc;
-    document.getElementById("rPrice").innerHTML = precoHTML(best) + " · " + best.tamanho;
+    document.getElementById("rPrice").innerHTML = precoComPagamentoHTML(best.preco) + " · " + best.tamanho;
     document.getElementById("rWa").href = waLink(
       `Olá, Duna! Fiz o teste no site e o resultado foi o *${nomeCompleto(best)}* (${best.tamanho})${temPreco(best) ? " — R$ " + best.preco : ""}. Quero saber mais! 🌙`
     );
@@ -1554,7 +1544,8 @@ if(steps.length){
 
   const rRestart = document.getElementById("rRestart");
   if(rRestart) rRestart.addEventListener("click", ()=>{
-    stepIdx=0; answers.gen=answers.occ=answers.int=answers.fam=null;
+    stepIdx=0; answers.gen=answers.occ=answers.int=answers.fam=answers.budget=null;
+    document.getElementById("quizEmpty").hidden=true;
     resultBox.classList.remove("active");
     steps.forEach((st,i)=>st.classList.toggle("active", i===0));
     progress.forEach((i,idx)=>i.classList.toggle("on", idx===0));
@@ -1767,6 +1758,9 @@ function openQuickView(nome, sincronizarURL=true){
       </button>`).join("")}
     </div>` : "";
 
+  let pageLink=document.getElementById("qvProductPage");
+  if(!pageLink){pageLink=document.createElement("a"); pageLink.id="qvProductPage"; pageLink.className="discovery-text-link"; document.getElementById("qvRelated").before(pageLink);}
+  pageLink.href=DunaShop.productURL(p); pageLink.textContent="Ver página completa e compartilhar →";
   qvEl.setAttribute("aria-label", `Detalhes de ${p.nome}`);
   qvEl.classList.add("open"); qvOverlay.classList.add("open");
   qvEl.setAttribute("aria-hidden","false");
@@ -1951,7 +1945,7 @@ document.querySelectorAll(".skin-card").forEach(card=>{
   const produto = produtoSkincareDoCard(card);
   if(!produto || !SKINCARE_GUIDE[produto.nome]) return;
   card.addEventListener("click", e=>{
-    if(e.target.closest(".skin-wa")) return;
+    if(e.target.closest(".skin-wa, .discovery-actions, .discovery-text-link")) return;
     openSkinQuickView(card);
   });
 });

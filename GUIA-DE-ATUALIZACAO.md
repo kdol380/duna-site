@@ -162,3 +162,19 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 - `catalogo-meta.csv`: feed público para o catálogo do Meta Commerce Manager.
 - `scripts/gerar-catalogo-meta.mjs`: recria e valida o feed da Meta depois de qualquer alteração de produto, preço, estoque ou imagem.
 - `https://kdol380.github.io/duna-site/`: endereço público do GitHub Pages.
+
+## Páginas individuais e recursos de descoberta
+
+Após atualizar catálogo, estoque, preços, imagens ou skincare, execute na raiz:
+
+```sh
+node scripts/gerar-paginas-produtos.mjs
+node scripts/gerar-catalogo-meta.mjs
+node --test tests/discovery.test.cjs
+```
+
+Inclua as páginas de `produtos/`, `skincare-data.js`, `sitemap.xml` e `catalogo-meta.csv` atualizados na mesma revisão. As páginas são geradas a partir de `app.js` e `skincare.html`; não edite os arquivos gerados manualmente.
+
+`shop-core.js` centraliza orçamento, classificação do quiz e descontos. `discovery.js` e `discovery.css` implementam favoritos locais, comparação, kit e cotação manual. O CEP é opcional e vai na mensagem do pedido: não há cálculo automático de frete. Favoritos ficam somente neste navegador.
+
+A disponibilidade de decants ainda segue a regra anterior do catálogo, sem estoque separado de líquido. O controle de frascos abertos e volumes será tratado em uma etapa própria no Supabase.
