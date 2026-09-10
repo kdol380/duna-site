@@ -93,7 +93,7 @@ function feedRow(product, kind) {
     availability: product.disponivel === false ? "out of stock" : "in stock",
     condition: "new",
     price: `${Number(product.preco).toFixed(2)} BRL`,
-    link: `${siteBase}/${page}?produto=${encodeURIComponent(productSlug)}`,
+    link: `${siteBase}/produtos/${productSlug}.html`,
     image_link: `${siteBase}/${product.foto}`,
     brand: product.marca,
     product_type: productType,
