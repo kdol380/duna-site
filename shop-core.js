@@ -10,7 +10,7 @@
   const validCEP = value => /^\d{5}-?\d{3}$/.test(String(value || "").trim()) && !/^(\d)\1{7}$/.test(cep(value));
   const formatCEP = value => cep(value).slice(0,8).replace(/^(\d{5})(\d)/, "$1-$2");
   const productURL = product => `produtos/${slug((product.marca ? product.marca+" " : "")+(product.decant ? product.base+" Decant" : product.nome))}.html`;
-  function orderSummary(entries, bottle=6){
+  function orderSummary(entries, bottle=8){
     let outros=0, liquidoDecants=0, frascosDecants=0, qtdDecants=0;
     for(const {product:p,quantity:q} of entries){
       if(!p || !Number.isInteger(q) || q<1 || !(p.preco>0)) continue;

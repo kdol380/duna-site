@@ -18,19 +18,19 @@ test('orçamento distingue Pix e total no cartão, incluindo o limite exato',()=
 });
 
 test('kits aplicam desconto apenas ao líquido e preservam outros produtos',()=>{
-  const product={decant:true,precoLiquido:20,preco:26};
+  const product={decant:true,precoLiquido:20,preco:28};
   for(const [quantity,discount] of [[2,0],[3,3],[4,4],[5,10],[9,18],[10,30]]){
     const r=S.orderSummary([{product,quantity},{product:{preco:100},quantity:1}]);
     assert.equal(r.descontoDecants,discount);
-    assert.equal(r.frascosDecants,quantity*6);
-    assert.equal(r.total,100+quantity*26-discount);
+    assert.equal(r.frascosDecants,quantity*8);
+    assert.equal(r.total,100+quantity*28-discount);
   }
 });
 
 test('kit novo recalcula faixa junto aos decants já existentes',()=>{
-  const product={decant:true,precoLiquido:20,preco:26};
+  const product={decant:true,precoLiquido:20,preco:28};
   const result=S.orderSummary([{product,quantity:2},{product,quantity:3}]);
-  assert.equal(result.taxa,.10);assert.equal(result.total,120);
+  assert.equal(result.taxa,.10);assert.equal(result.total,130);
 });
 
 test('centenas de perfis do quiz nunca ultrapassam orçamento nem recomendam esgotado ou body spray',()=>{

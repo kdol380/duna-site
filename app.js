@@ -680,9 +680,9 @@ const marcaBase = p => (p.marca||"").replace(/\s*Pride$/i,"").trim();   // Latta
 /* =====================================================================
    🧪  DECANTS — gerados automaticamente a partir do catálogo
    O valor por ml diminui conforme a faixa de preço do perfume e o
-   volume escolhido. O frasco split custa R$ 6 em qualquer tamanho.
+   volume escolhido. O frasco split custa R$ 8 em qualquer tamanho.
    ===================================================================== */
-const DECANT_FRASCO = 6;
+const DECANT_FRASCO = 8;
 const DECANT_VOLUMES = [
   { ml:3,  descontoVolume:0 },
   { ml:5,  descontoVolume:.05 },
