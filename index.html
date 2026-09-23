@@ -49,8 +49,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="styles.css?v=20260908-cart-pricing" />
-<link rel="stylesheet" href="discovery.css?v=20260910-2" />
+<link rel="stylesheet" href="styles.css?v=20260923-logo" />
+<link rel="stylesheet" href="discovery.css?v=20260923-nav" />
 </head>
 <body>
 
@@ -59,21 +59,10 @@
   <span>Entrega para todo o Brasil</span><i aria-hidden="true"></i><span>Pedido fácil pelo WhatsApp</span><i aria-hidden="true" class="an-3"></i><span class="an-3">Curadoria honesta</span>
 </div>
 
-<!-- ===================== PRÉ-LOADER ===================== -->
-<div id="preloader">
-  <img class="pre-lockup" src="assets/logo-lockup.png" alt="Duna Fragrâncias" />
-  <div class="pre-bar"></div>
-  <div class="pre-sub">Perfumaria</div>
-</div>
-
 <!-- ===================== NAV ===================== -->
 <header class="nav" id="nav">
   <a href="#top" class="nav-logo" aria-label="Duna Fragrâncias — início">
-    <img class="emblem" src="assets/logo-emblem.png" alt="" />
-    <span class="lockcol">
-      <img class="word" src="assets/logo-duna-word.png" alt="Duna Fragrâncias" />
-      <span class="s">Fragrâncias</span>
-    </span>
+    <img class="nav-lockup" src="assets/logo-assinatura.png" alt="Duna Fragrâncias" width="472" height="112" />
   </a>
   <nav class="nav-links">
     <a href="catalogo.html">Perfumes</a>
@@ -154,23 +143,26 @@
   <div class="scroll-hint"><span>Arraste</span><span class="line"></span></div>
 </section>
 
-<!-- ===================== FAIXA DE CONFIANÇA ===================== -->
-<div class="trust">
-  <div class="marquee">
-    <div class="marquee-track" id="marquee">
-      <span>Árabes · Designer · Nicho</span><span>Premium acessível</span><span>Fixação de longa duração</span><span>Curadoria honesta</span><span>Entrega para todo o Brasil</span><span>Pedido fácil pelo WhatsApp</span>
+<!-- ===================== ATALHOS ===================== -->
+<nav class="atalhos" aria-label="Atalhos do catálogo">
+  <div class="wrap">
+    <div class="atalhos-row">
+      <a href="catalogo.html?genero=Masculino">Masculino</a>
+      <a href="catalogo.html?genero=Feminino">Feminino</a>
+      <a href="catalogo.html?genero=Unissex">Unissex</a>
+      <a href="catalogo.html?tipo=decants">Decants</a>
+      <a href="catalogo.html?ate=250">Até R$ 250</a>
+      <a href="skincare.html">Skincare</a>
     </div>
   </div>
-</div>
+</nav>
 
 <!-- ===================== COLEÇÕES (navegação editorial) ===================== -->
 <section class="section-pad collections" id="colecoes">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="diamond"><i></i></div>
-      <p class="eyebrow">Navegue do seu jeito</p>
-      <h2>Explore por <span class="gold">coleção</span></h2>
-      <p>Quatro caminhos para a sua próxima assinatura — da curadoria completa ao universo que tem a sua cara.</p>
+    <div class="section-head section-head--row reveal">
+      <h2>Por onde começar</h2>
+      <p>Quatro caminhos pela coleção.</p>
     </div>
 
     <div class="col-grid">
@@ -178,10 +170,9 @@
       <a class="col-card col-hero reveal" href="catalogo.html" aria-label="Ver toda a coleção de perfumes">
         <div class="col-art"><img src="assets/dunes-bg.png" alt="" loading="lazy" /></div>
         <div class="col-veil"></div>
-        <div class="col-frame" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
         <div class="col-body">
           <p class="col-kicker">A curadoria completa</p>
-          <h3>Toda a <em>Coleção</em></h3>
+          <h3>Toda a coleção</h3>
           <p class="col-desc">Cada fragrância da Duna num só lugar — com busca e filtros por gênero, ocasião e família olfativa.</p>
           <span class="col-cta"><span class="col-count" data-count="todos"></span><i class="col-arrow" aria-hidden="true">→</i></span>
         </div>
@@ -195,7 +186,7 @@
         </div>
         <div class="col-arch-info">
           <p class="col-kicker">Lattafa · Armaf · Alhambra…</p>
-          <h3>Marcas <em>Árabes</em></h3>
+          <h3>Marcas árabes</h3>
           <span class="col-cta"><span class="col-count" data-count="arabes"></span><i class="col-arrow" aria-hidden="true">→</i></span>
         </div>
       </a>
@@ -208,7 +199,7 @@
         </div>
         <div class="col-arch-info">
           <p class="col-kicker">Casas autorais e raras</p>
-          <h3><em>Nicho</em></h3>
+          <h3>Nicho</h3>
           <span class="col-cta"><span class="col-count" data-count="nicho"></span><i class="col-arrow" aria-hidden="true">→</i></span>
         </div>
       </a>
@@ -221,7 +212,7 @@
         </div>
         <div class="col-arch-info">
           <p class="col-kicker">As grifes que você ama</p>
-          <h3><em>Designer</em></h3>
+          <h3>Designer</h3>
           <span class="col-cta"><span class="col-count" data-count="designer"></span><i class="col-arrow" aria-hidden="true">→</i></span>
         </div>
       </a>
@@ -232,11 +223,9 @@
 <!-- ===================== NOVIDADES DA SEMANA ===================== -->
 <section class="section-pad novidades" id="novidades">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="diamond"><i></i></div>
-      <p class="eyebrow">Recém-chegados</p>
-      <h2>Novidades da <span class="gold">semana</span></h2>
-      <p>As últimas fragrâncias a entrar na curadoria — toque para ver os detalhes.</p>
+    <div class="section-head section-head--row reveal">
+      <h2>Novidades</h2>
+      <a class="section-link" href="catalogo.html">Ver catálogo completo →</a>
     </div>
     <div class="nov-grid" id="novGrid"></div>
   </div>
@@ -246,15 +235,10 @@
 <section class="special-order" aria-labelledby="specialOrderTitle">
   <div class="wrap">
     <div class="special-order-card reveal">
-      <div class="special-order-art" aria-hidden="true">
-        <span class="so-ring so-ring-1"></span><span class="so-ring so-ring-2"></span>
-        <svg viewBox="0 0 90 110" fill="none" stroke="currentColor"><path d="M29 33h32l8 14v49H21V47l8-14Z"/><path d="M35 33V19h20v14M39 19V11h12v8"/><path d="M31 55h28v25H31z"/></svg>
-      </div>
       <div class="special-order-copy">
         <p class="eyebrow">Não encontrou no estoque?</p>
-        <h2>A gente busca o seu <em>perfume dos sonhos.</em></h2>
+        <h2>A gente encomenda para você.</h2>
         <p>Encomendamos perfumes de grife, árabes e de nicho — inclusive aquela marca ou fragrância que você já usa. Conte para a Duna o que procura e receba uma cotação personalizada.</p>
-        <div class="special-tags"><span>Grife</span><span>Árabes</span><span>Nicho</span><span>Sob encomenda</span></div>
       </div>
       <a href="#" class="btn btn-gold special-order-btn" id="waSpecial" target="_blank" rel="noopener">
         Cotar minha encomenda
@@ -267,11 +251,9 @@
 <!-- ===================== COLEÇÃO ===================== -->
 <section class="section-pad" id="colecao">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="diamond"><i></i></div>
-      <p class="eyebrow">Perfumes</p>
-      <h2>Destaques em <span class="gold">fragrâncias</span></h2>
-      <p>Árabes, designer e nicho — uma amostra da curadoria Duna. Veja todos os perfumes, com filtros por gênero, ocasião e família.</p>
+    <div class="section-head section-head--row reveal">
+      <h2>Da coleção</h2>
+      <p>No catálogo você filtra por gênero, ocasião, família e orçamento.</p>
     </div>
 
     <div class="grid" id="grid" data-limit="6"></div>
@@ -287,10 +269,9 @@
 <!-- ===================== QUIZ ===================== -->
 <section class="quiz section-pad" id="quiz">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head section-head--center reveal">
       <div class="diamond"><i></i></div>
-      <p class="eyebrow">Recomendação Personalizada</p>
-      <h2>Descubra <span class="gold">seu perfume</span></h2>
+      <h2>Não sabe qual escolher?</h2>
       <p>Cinco perguntas rápidas, incluindo seu orçamento. No fim, a fragrância da Duna com a sua cara — e mais duas opções que combinam.</p>
     </div>
 
@@ -384,8 +365,8 @@
   <div class="wrap">
     <div class="essence-grid">
       <div class="essence-copy reveal">
-        <p class="eyebrow">A Essência</p>
-        <h2>Presença não é luxo — é uma <span class="gold">escolha bem feita.</span></h2>
+        <p class="eyebrow">Sobre a Duna</p>
+        <h2>Presença não é luxo. É uma escolha bem feita.</h2>
         <p>A Duna existe para que a assinatura dos grandes nomes esteja ao alcance de quem aprecia. Reunimos o melhor das fragrâncias árabes, designer e de nicho — sempre com honestidade sobre o que entregamos e a presença que se faz lembrar.</p>
         <p>Curadoria criteriosa, atendimento próximo e um padrão visual que demonstra cuidado em cada detalhe — do frasco ao lacre.</p>
         <div class="pillars">
@@ -395,15 +376,12 @@
         </div>
       </div>
 
-      <div class="essence-frame reveal" data-d="2">
-        <img src="assets/dunes-bg.png" alt="Dunas douradas — identidade Duna Fragrâncias" loading="lazy" />
-        <div class="veil"></div>
-        <div class="frame-corners"><span></span><span></span><span></span><span></span></div>
-        <div class="emblem-wrap">
-          <img src="assets/logo-lockup.png" alt="Duna Fragrâncias" class="frame-logo" />
-          <div class="s">Presença · Posição · Qualidade</div>
-        </div>
-      </div>
+      <dl class="essence-facts reveal" data-d="2">
+        <div><dt><span class="col-count" data-count="todos"></span></dt><dd>com foto, notas e preço no site</dd></div>
+        <div><dt>3 · 5 · 10 ml</dt><dd>decants para testar antes do frasco</dd></div>
+        <div><dt>Pix ou cartão</dt><dd>melhor preço no Pix, ou 3x sem juros no cartão</dd></div>
+        <div><dt>Todo o Brasil</dt><dd>frete confirmado no atendimento</dd></div>
+      </dl>
     </div>
   </div>
 </section>
@@ -411,53 +389,41 @@
 <!-- ===================== DEPOIMENTOS ===================== -->
 <section class="section-pad proof">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="diamond"><i></i></div>
-      <p class="eyebrow">Provas Sociais</p>
-      <h2>Quem já <span class="gold">sentiu</span></h2>
+    <div class="section-head section-head--row reveal">
+      <h2>O que clientes contaram</h2>
     </div>
-  </div>
-  <div class="proof-marquee">
-    <div class="proof-track" id="proofTrack">
+    <div class="proof-list">
       <div class="quote">
-        <span class="mark">“</span><div class="stars">★★★★★</div>
         <p>Comprei o Club de Nuit Intense e recebo elogios todo dia. A fixação é absurda!</p>
-        <div class="who"><div class="av">L</div><div><b>Lucas A.</b><span>Caratinga · MG</span></div></div>
+        <p class="who"><b>Lucas A.</b> · Caratinga · MG</p>
       </div>
       <div class="quote">
-        <span class="mark">“</span><div class="stars">★★★★★</div>
         <p>Atendimento nota 10 pelo WhatsApp, me ajudaram a escolher. Chegou rapidinho aqui em BH.</p>
-        <div class="who"><div class="av">F</div><div><b>Fernanda R.</b><span>Belo Horizonte · MG</span></div></div>
+        <p class="who"><b>Fernanda R.</b> · Belo Horizonte · MG</p>
       </div>
       <div class="quote">
-        <span class="mark">“</span><div class="stars">★★★★★</div>
         <p>Fiz o teste do site e ele acertou meu perfume em cheio. Virei cliente fiel da Duna.</p>
-        <div class="who"><div class="av">M</div><div><b>Mateus S.</b><span>Caratinga · MG</span></div></div>
+        <p class="who"><b>Mateus S.</b> · Caratinga · MG</p>
       </div>
       <div class="quote">
-        <span class="mark">“</span><div class="stars">★★★★★</div>
         <p>Achei que era bom só pelo preço. É bom de verdade — a qualidade impressiona.</p>
-        <div class="who"><div class="av">J</div><div><b>Juliana C.</b><span>Belo Horizonte · MG</span></div></div>
+        <p class="who"><b>Juliana C.</b> · Belo Horizonte · MG</p>
       </div>
       <div class="quote">
-        <span class="mark">“</span><div class="stars">★★★★★</div>
         <p>Embalagem caprichada e o cheiro dura o dia inteiro. Recomendo de olhos fechados!</p>
-        <div class="who"><div class="av">P</div><div><b>Patrícia L.</b><span>Caratinga · MG</span></div></div>
+        <p class="who"><b>Patrícia L.</b> · Caratinga · MG</p>
       </div>
       <div class="quote">
-        <span class="mark">“</span><div class="stars">★★★★★</div>
         <p>Pedi o Delilah pra minha esposa e ela amou. Entrega certinha e bem embalado.</p>
-        <div class="who"><div class="av">R</div><div><b>Rodrigo M.</b><span>Belo Horizonte · MG</span></div></div>
+        <p class="who"><b>Rodrigo M.</b> · Belo Horizonte · MG</p>
       </div>
       <div class="quote">
-        <span class="mark">“</span><div class="stars">★★★★★</div>
         <p>Melhor custo-benefício de importado que já encontrei. Atendimento honesto do início ao fim.</p>
-        <div class="who"><div class="av">B</div><div><b>Bruno F.</b><span>Caratinga · MG</span></div></div>
+        <p class="who"><b>Bruno F.</b> · Caratinga · MG</p>
       </div>
       <div class="quote">
-        <span class="mark">“</span><div class="stars">★★★★★</div>
         <p>Comprei o Fakhar e não largo mais. A Duna ganhou uma cliente pra vida.</p>
-        <div class="who"><div class="av">A</div><div><b>Amanda O.</b><span>Caratinga · MG</span></div></div>
+        <p class="who"><b>Amanda O.</b> · Caratinga · MG</p>
       </div>
     </div>
   </div>
@@ -466,11 +432,9 @@
 <!-- ===================== COMO PEDIR ===================== -->
 <section class="section-pad" id="pedir">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="diamond"><i></i></div>
-      <p class="eyebrow">Simples assim</p>
-      <h2>Como <span class="gold">pedir</span></h2>
-      <p>Sem cadastro, sem complicação. Você escolhe, a gente cuida do resto.</p>
+    <div class="section-head section-head--row reveal">
+      <h2>Como pedir</h2>
+      <p>Sem cadastro. Você escolhe, a gente cuida do resto.</p>
     </div>
     <div class="how-grid">
       <div class="step reveal" data-d="1"><div class="n">1</div><h4>Escolha</h4><p>Navegue pela coleção ou faça o teste e encontre sua fragrância.</p></div>
@@ -492,11 +456,7 @@
     <div class="foot-top">
       <div class="foot-brand">
         <a href="#top" class="nav-logo">
-          <img class="emblem" src="assets/logo-emblem.png" alt="" />
-          <span class="lockcol">
-            <img class="word" src="assets/logo-duna-word.png" alt="Duna Fragrâncias" />
-            <span class="s">Fragrâncias</span>
-          </span>
+          <img class="nav-lockup" src="assets/logo-assinatura.png" alt="Duna Fragrâncias" width="472" height="112" />
         </a>
         <p>Perfumaria premium: árabes, designer e nicho. Presença que dura. Entrega para todo o Brasil.</p>
       </div>
@@ -523,7 +483,6 @@
     </div>
     <div class="foot-bottom">
       <p>© 2026 Duna Fragrâncias · Todos os direitos reservados.</p>
-      <div class="diamond"><i></i></div>
       <p>Curadoria honesta de fragrâncias · árabes, designer e nicho.</p>
     </div>
   </div>
@@ -563,7 +522,7 @@
 
 <script defer src="shop-core.js?v=20260910"></script>
 <script defer src="skincare-data.js?v=20260910"></script>
-<script defer src="app.js?v=20260910-discovery"></script>
+<script defer src="app.js?v=20260923-nav"></script>
 <script defer src="discovery.js?v=20260910-2"></script>
 </body>
 </html>

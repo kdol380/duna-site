@@ -921,6 +921,7 @@ function cardHTML(p,i){
       <span class="card-pill pill-line">${disponivel ? perfilOlfativo(p) : "Esgotado"}</span>
     </div>
     <div class="bottle-stage">
+      <div class="discovery-actions card-fav"><button type="button" class="fav-icon" data-favorite="${DunaShop.escape(p.nome)}" aria-pressed="false" aria-label="Salvar ${DunaShop.escape(p.nome)} nos favoritos"></button></div>
       <div class="bottle">${frascoVisual(p)}</div>
       ${p.decant?`<div class="decant-vial-detail" aria-hidden="true">
         <svg class="decant-vial-arrow" viewBox="0 0 42 30" fill="none">
@@ -935,10 +936,6 @@ function cardHTML(p,i){
     <p class="card-fam">${p.decant?"Decant original · frasco incluso":p.inspiracao}</p>
     <button type="button" class="card-hint" data-quick="${p.nome}">Ver detalhes</button>
     ${seletorDecantHTML(p)}
-    <div class="discovery-actions">
-      <button type="button" data-favorite="${DunaShop.escape(p.nome)}" aria-pressed="false" aria-label="Salvar ${DunaShop.escape(p.nome)} nos favoritos">♡ <span>Salvar</span></button>
-      ${!p.decant && !ehBodySpray(p) ? `<button type="button" data-compare="${DunaShop.escape(p.nome)}" aria-pressed="false">Comparar</button>` : ""}
-    </div>
     <div class="card-foot">
       <div class="card-meta">
         <span class="card-size" ${p.decant?"data-decant-unit":""}>${p.decant?`R$ ${dinheiroDecimal(opcaoDecantPadrao.precoMl)} por ml`:p.tamanho}</span>
@@ -1107,6 +1104,25 @@ if(buscaInput){
 }
 const ordemSel = document.getElementById("catSort");
 if(ordemSel) ordemSel.addEventListener("change", ()=>{ ordem = ordemSel.value; paginaAtual=1; renderGrid(); });
+
+// Atalhos da home e busca do cabeçalho chegam pela URL: ?genero=Feminino, ?q=baunilha
+{
+  const q = new URLSearchParams(location.search);
+  const genero = q.get("genero");
+  if(genero && GRUPOS.find(g=>g.key==="genero").opts.includes(genero)){
+    sel.genero = genero;
+    filtersWrap?.querySelectorAll('[data-group="genero"] .chip').forEach(c=>c.classList.toggle("active", c.dataset.val===genero));
+  }
+  const termo = (q.get("q")||"").trim();
+  if(termo){ busca = normaliza(termo); if(buscaInput) buscaInput.value = termo; }
+}
+if(buscaInput){
+  buscaInput.addEventListener("input", ()=>{
+    const url = new URL(location.href);
+    buscaInput.value.trim() ? url.searchParams.set("q", buscaInput.value.trim()) : url.searchParams.delete("q");
+    history.replaceState(null, "", url);
+  });
+}
 if(clearFiltersBtn) clearFiltersBtn.addEventListener("click", resetFiltros);
 
 /* alternância entre departamentos — skincare fica isolado do quiz/filtros de perfume */
@@ -1354,7 +1370,8 @@ function renderCart(){
   if(itens.length===0){
     cartBody.innerHTML = `<div class="cart-empty">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 7h12l-1 13H7L6 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg>
-      Seu pedido está vazio.<br>Adicione seus produtos favoritos.</div>`;
+      Seu pedido está vazio.<br>Adicione seus produtos favoritos.
+      <a class="cart-empty-wa" href="${waLink(CONFIG.msgGeral)}" target="_blank" rel="noopener">Prefere conversar? Fale com a Duna no WhatsApp</a></div>`;
     cartDealEl.hidden = true;
     cartBreakdownEl.hidden = true;
     cartFoot.classList.add("hidden");
@@ -1963,6 +1980,7 @@ document.getElementById("skinQvAdd").addEventListener("click", ()=>{
    🃏  TILT 3D nos cards (desktop, ponteiro fino, sem reduced-motion)
    ===================================================================== */
 (function initTilt(){
+  return; // desativado no refino visual: o efeito 3D competia com o produto
   if(reduceMotion || !grid) return;
   if(!window.matchMedia("(hover:hover) and (pointer:fine)").matches) return;
   let cur = null;
@@ -2035,19 +2053,97 @@ function dustCanvas(host, {alpha=.65, dark=false, density=16}={}){
   window.addEventListener("resize", ()=>{ size(); }, { passive:true });
   size();
 }
-if(!reduceMotion){
+if(!reduceMotion){ // poeira dourada só no topo da home (removida do catálogo no refino visual)
   const heroHost = document.querySelector(".hero");
-  const catHost  = document.querySelector(".cat-header");
   if(heroHost) dustCanvas(heroHost, { alpha:.7, dark:false, density:16 });
-  if(catHost && !compactMobile) dustCanvas(catHost, { alpha:.4, dark:true, density:26 });
+}
+
+/* =====================================================================
+   🧭  NAVEGAÇÃO — busca no cabeçalho (todas as páginas) e barra inferior no celular
+   ===================================================================== */
+const ICON_BUSCA = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2" stroke-linecap="round"/></svg>`;
+function abrirBusca(){
+  let sheet = document.getElementById("searchSheet");
+  if(!sheet){
+    sheet = document.createElement("div");
+    sheet.id = "searchSheet"; sheet.className = "search-sheet";
+    sheet.setAttribute("role","dialog"); sheet.setAttribute("aria-modal","true"); sheet.setAttribute("aria-label","Buscar perfume");
+    sheet.innerHTML = `
+      <form class="search-bar" action="catalogo.html" role="search">
+        ${ICON_BUSCA}
+        <input type="search" name="q" placeholder="Nome, marca ou nota (ex.: baunilha)" autocomplete="off" aria-label="Buscar perfume">
+        <button type="button" class="search-close" aria-label="Fechar busca">Fechar</button>
+      </form>
+      <div class="search-results" aria-live="polite"></div>`;
+    document.body.appendChild(sheet);
+    const input = sheet.querySelector("input"), out = sheet.querySelector(".search-results");
+    const lista = PERFUMES.filter(p=>p.foto);
+    const render = ()=>{
+      const t = normaliza(input.value.trim());
+      if(!t){ out.innerHTML = `<p class="search-hint">Experimente: <a href="catalogo.html?q=baunilha">baunilha</a> · <a href="catalogo.html?q=lattafa">Lattafa</a> · <a href="catalogo.html?q=oud">oud</a> · <a href="catalogo.html?q=citrico">cítrico</a></p>`; return; }
+      const achados = lista.filter(p=>{
+        const alvo = normaliza([p.nome,p.marca,p.familia,p.acorde,p.inspiracao,p.notas.topo,p.notas.coracao,p.notas.fundo].join(" "));
+        return t.split(/\s+/).every(x=>alvo.includes(x));
+      }).sort((a,b)=>Number(estaDisponivel(b))-Number(estaDisponivel(a)));
+      out.innerHTML = achados.length
+        ? achados.slice(0,6).map(p=>`<a class="search-item" href="${DunaShop.productURL(p)}"><img src="${p.foto}" alt="" loading="lazy"><span><small>${p.marca||""}</small><b>${p.nome}</b></span><em>${estaDisponivel(p)?precoTxt(p):"Esgotado"}</em></a>`).join("")
+          + `<a class="search-all" href="catalogo.html?q=${encodeURIComponent(input.value.trim())}">Ver ${achados.length} ${achados.length===1?"resultado":"resultados"} no catálogo →</a>`
+        : `<p class="search-hint">Nada encontrado para “${DunaShop.escape(input.value.trim())}”. Tente outra nota ou marca, ou <a href="#" data-wa-busca>pergunte pra Duna no WhatsApp</a>.</p>`;
+    };
+    input.addEventListener("input", render);
+    out.addEventListener("click", e=>{ if(e.target.closest("[data-wa-busca]")){ e.preventDefault(); window.open(waLink(`Olá, Duna! Vocês têm ${input.value.trim()}?`),"_blank","noopener"); } });
+    sheet.querySelector(".search-close").addEventListener("click", fecharBusca);
+    sheet.addEventListener("click", e=>{ if(e.target===sheet) fecharBusca(); });
+    document.addEventListener("keydown", e=>{ if(e.key==="Escape" && sheet.classList.contains("open")) fecharBusca(); });
+    render();
+  }
+  sheet.classList.add("open"); document.body.classList.add("no-scroll");
+  setTimeout(()=>sheet.querySelector("input").focus(), 30);
+}
+function fecharBusca(){
+  const sheet = document.getElementById("searchSheet");
+  if(sheet){ sheet.classList.remove("open"); document.body.classList.remove("no-scroll"); }
+}
+{
+  // lupa no cabeçalho
+  const navEl = document.getElementById("nav");
+  if(navEl && !navEl.querySelector(".nav-search")){
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "nav-search"; b.setAttribute("aria-label","Buscar perfume");
+    b.innerHTML = ICON_BUSCA;
+    b.addEventListener("click", abrirBusca);
+    const antes = navEl.querySelector(".btn-wa-nav") || navEl.querySelector(".nav-burger");
+    navEl.insertBefore(b, antes);
+  }
+  // barra inferior (aparece só no celular, via CSS)
+  const q = new URLSearchParams(location.search);
+  const pagina = location.pathname.split("/").pop() || "index.html";
+  const ativo = pagina==="index.html" ? "inicio"
+    : (pagina==="catalogo.html" && q.get("tipo")==="decants") || /-decant\.html$/.test(pagina) ? "decants"
+    : (pagina==="catalogo.html" || location.pathname.includes("/produtos/")) ? "perfumes" : "";
+  const item = (key, href, label, svg) => `<a href="${href}" class="tab ${ativo===key?"is-active":""}" ${ativo===key?'aria-current="page"':""}>${svg}<span>${label}</span></a>`;
+  const tabbar = document.createElement("nav");
+  tabbar.className = "tabbar"; tabbar.setAttribute("aria-label","Navegação principal");
+  tabbar.innerHTML =
+    item("inicio","index.html","Início",`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z" stroke-linejoin="round"/></svg>`) +
+    item("perfumes","catalogo.html","Perfumes",`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 3h6v3H9zM8 6h8l2 4v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-9z" stroke-linejoin="round"/></svg>`) +
+    item("decants","catalogo.html?tipo=decants","Decants",`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 3h4v3h-4zM9.5 6h5v13a2.5 2.5 0 0 1-5 0z" stroke-linejoin="round"/><path d="M9.5 13h5"/></svg>`) +
+    `<button type="button" class="tab" data-tab-busca>${ICON_BUSCA}<span>Buscar</span></button>` +
+    `<button type="button" class="tab" data-tab-pedido><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 7h12l-1 13H7L6 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg><span>Pedido</span><i class="tab-badge" hidden></i></button>`;
+  document.body.appendChild(tabbar);
+  document.body.classList.add("has-tabbar");
+  tabbar.querySelector("[data-tab-busca]").addEventListener("click", abrirBusca);
+  tabbar.querySelector("[data-tab-pedido]").addEventListener("click", ()=>{ if(typeof abrirCart==="function" && cartEl) abrirCart(); });
+  const badge = tabbar.querySelector(".tab-badge");
+  const syncBadge = ()=>{ const n = Object.values(cart||{}).reduce((a,b)=>a+b,0); badge.hidden = !n; badge.textContent = n; };
+  syncBadge();
+  if(cartCountEl) new MutationObserver(syncBadge).observe(cartCountEl, { childList:true, characterData:true, subtree:true });
 }
 
 /* =====================================================================
    ⬆️  VOLTAR AO TOPO + BARRA DE PROGRESSO
    ===================================================================== */
-const progressBar = document.createElement("div");
-progressBar.className = "scroll-progress";
-document.body.appendChild(progressBar);
+const progressBar = null; // barra de progresso removida no refino visual
 
 const toTopBtn = document.createElement("button");
 toTopBtn.className = "to-top";
