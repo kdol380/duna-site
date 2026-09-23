@@ -2117,10 +2117,13 @@ function fecharBusca(){
   }
   // barra inferior (aparece só no celular, via CSS)
   const q = new URLSearchParams(location.search);
-  const pagina = location.pathname.split("/").pop() || "index.html";
-  const ativo = pagina==="skincare.html" || (globalThis.DUNA_SKINCARE||[]).some(p=>DunaShop.productURL(p).endsWith("/"+pagina)) ? "skincare"
-    : (pagina==="catalogo.html" && q.get("tipo")==="decants") || /-decant\.html$/.test(pagina) ? "decants"
-    : (pagina==="catalogo.html" || location.pathname.includes("/produtos/")) ? "perfumes" : "";
+  // A hospedagem pode servir as páginas com ou sem ".html" (ex.: /catalogo e /catalogo.html); compara sem a extensão.
+  const semExt = s => s.replace(/\.html$/,"").replace(/\/$/,"");
+  const pagina = semExt(location.pathname.split("/").filter(Boolean).pop() || "index");
+  const naPastaProdutos = /\/produtos\//.test(location.pathname);
+  const ativo = pagina==="skincare" || (naPastaProdutos && (globalThis.DUNA_SKINCARE||[]).some(p=>semExt(DunaShop.productURL(p)).endsWith("/"+pagina))) ? "skincare"
+    : (pagina==="catalogo" && q.get("tipo")==="decants") || (naPastaProdutos && /-decant$/.test(pagina)) ? "decants"
+    : (pagina==="catalogo" || naPastaProdutos) ? "perfumes" : "";
   const item = (key, href, label, svg) => `<a href="${href}" data-key="${key}" class="tab ${ativo===key?"is-active":""}" ${ativo===key?'aria-current="page"':""}>${svg}<span>${label}</span></a>`;
   const tabbar = document.createElement("nav");
   tabbar.className = "tabbar"; tabbar.setAttribute("aria-label","Navegação principal");
