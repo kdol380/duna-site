@@ -2121,19 +2121,49 @@ function fecharBusca(){
   const ativo = pagina==="skincare.html" || (globalThis.DUNA_SKINCARE||[]).some(p=>DunaShop.productURL(p).endsWith("/"+pagina)) ? "skincare"
     : (pagina==="catalogo.html" && q.get("tipo")==="decants") || /-decant\.html$/.test(pagina) ? "decants"
     : (pagina==="catalogo.html" || location.pathname.includes("/produtos/")) ? "perfumes" : "";
-  const item = (key, href, label, svg) => `<a href="${href}" class="tab ${ativo===key?"is-active":""}" ${ativo===key?'aria-current="page"':""}>${svg}<span>${label}</span></a>`;
+  const item = (key, href, label, svg) => `<a href="${href}" data-key="${key}" class="tab ${ativo===key?"is-active":""}" ${ativo===key?'aria-current="page"':""}>${svg}<span>${label}</span></a>`;
   const tabbar = document.createElement("nav");
   tabbar.className = "tabbar"; tabbar.setAttribute("aria-label","Navegação principal");
   tabbar.innerHTML =
     item("perfumes","catalogo.html","Perfumes",`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 3h6v3H9zM8 6h8l2 4v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-9z" stroke-linejoin="round"/></svg>`) +
     item("decants","catalogo.html?tipo=decants","Decants",`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 3h4v3h-4zM9.5 6h5v13a2.5 2.5 0 0 1-5 0z" stroke-linejoin="round"/><path d="M9.5 13h5"/></svg>`) +
     item("skincare","skincare.html","Skincare",`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 9h10v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z" stroke-linejoin="round"/><path d="M9 9V6h6v3M10 3h4v3h-4z" stroke-linejoin="round"/><path d="M9.5 14.5c1.5 1 3.5 1 5 0" stroke-linecap="round"/></svg>`) +
-    `<button type="button" class="tab" data-tab-busca>${ICON_BUSCA}<span>Buscar</span></button>` +
-    `<button type="button" class="tab" data-tab-pedido><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 7h12l-1 13H7L6 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg><span>Pedido</span><i class="tab-badge" hidden></i></button>`;
+    `<button type="button" class="tab" data-key="busca" data-tab-busca>${ICON_BUSCA}<span>Buscar</span></button>` +
+    `<button type="button" class="tab" data-key="pedido" data-tab-pedido><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 7h12l-1 13H7L6 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg><span>Pedido</span><i class="tab-badge" hidden></i></button>`;
   document.body.appendChild(tabbar);
   document.body.classList.add("has-tabbar");
   tabbar.querySelector("[data-tab-busca]").addEventListener("click", abrirBusca);
   tabbar.querySelector("[data-tab-pedido]").addEventListener("click", ()=>{ if(typeof abrirCart==="function" && cartEl) abrirCart(); });
+
+  // Indicador que desliza até a aba da página atual (e até Buscar/Pedido enquanto estiverem abertos).
+  // Guarda a última aba no navegador para, na página seguinte, sair do ponto anterior e deslizar até o novo.
+  const ind = document.createElement("span"); ind.className = "tab-ind"; ind.setAttribute("aria-hidden","true");
+  tabbar.prepend(ind);
+  const tabs = [...tabbar.querySelectorAll(".tab")];
+  const idx = key => tabs.findIndex(t=>t.dataset.key===key);
+  const moverPara = (i, animar=true)=>{
+    tabbar.classList.toggle("ind-anim", animar);
+    if(i<0){ ind.classList.remove("on"); return; }
+    ind.style.transform = `translateX(${i*100}%)`; ind.classList.add("on");
+    tabs.forEach((t,j)=>t.classList.toggle("is-lit", j===i));
+  };
+  let anterior = -1;
+  try{ anterior = Number(sessionStorage.getItem("duna_tab") ?? -1); }catch(e){}
+  const atual = idx(ativo);
+  if(anterior>=0 && atual>=0 && anterior!==atual && !reduceMotion){
+    moverPara(anterior, false);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>moverPara(atual, true)));
+  } else moverPara(atual, false);
+  try{ sessionStorage.setItem("duna_tab", String(atual)); }catch(e){}
+  tabs.forEach((t,j)=>t.addEventListener("click", ()=>{
+    moverPara(j, !reduceMotion);
+  }));
+  // quando a busca ou o pedido fecham, o indicador volta para a aba da página
+  const volta = el => el && new MutationObserver(()=>{ if(!el.classList.contains("open")) moverPara(atual, !reduceMotion); })
+    .observe(el, { attributes:true, attributeFilter:["class"] });
+  volta(cartEl);
+  const esperaBusca = new MutationObserver(()=>{ const sh=document.getElementById("searchSheet"); if(sh){ volta(sh); esperaBusca.disconnect(); } });
+  esperaBusca.observe(document.body, { childList:true });
   const badge = tabbar.querySelector(".tab-badge");
   const syncBadge = ()=>{ const n = Object.values(cart||{}).reduce((a,b)=>a+b,0); badge.hidden = !n; badge.textContent = n; };
   syncBadge();

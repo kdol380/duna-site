@@ -2026,3 +2026,57 @@ body.no-scroll .toast{ opacity:0; visibility:hidden; } /* não cobre o botão de
 header.nav.scrolled .nav-logo .nav-lockup, body.page-light .nav-logo .nav-lockup{ height:40px; }
 .foot-brand .nav-lockup{ height:48px; }
 @media (max-width:620px){ .nav-logo .nav-lockup, header.nav.scrolled .nav-logo .nav-lockup, body.page-light .nav-logo .nav-lockup{ height:34px; } }
+
+/* =====================================================================
+   SOBRE A DUNA · combinados e pequeno guia
+   ===================================================================== */
+.sobre-intro{ max-width:880px; }
+.sobre-intro h2{ font-size:clamp(2rem,4vw,3.2rem); line-height:1.08; margin:14px 0 24px; font-weight:600; }
+.sobre-cols{ display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.sobre-cols p{ color:var(--grafite-60); font-size:1.0625rem; line-height:1.7; margin:0; }
+.sobre-sub{ font-family:var(--sans); font-size:.8125rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--ouro-fundo); margin:clamp(48px,6vw,72px) 0 18px; }
+.combinados{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid var(--areia); }
+.combinados li{ display:flex; gap:18px; padding:26px 28px 26px 0; border-bottom:1px solid var(--areia); }
+.combinados li:nth-child(odd){ border-right:1px solid var(--areia); }
+.combinados li:nth-child(even){ padding-left:28px; }
+.cb-n{ font:500 2.25rem/1 var(--serif); color:var(--ouro); flex:none; width:48px; }
+.combinados h4{ font-size:1.375rem; margin:2px 0 8px; }
+.combinados p{ color:var(--grafite-60); font-size:.9375rem; line-height:1.6; margin:0; }
+.guia-head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+.guia-head .sobre-sub{ margin-bottom:18px; }
+.guia-hint{ font-size:.8125rem; color:var(--grafite-60); }
+.guia-row{ display:grid; grid-auto-flow:column; grid-auto-columns:minmax(240px,1fr); gap:12px; overflow-x:auto; scroll-snap-type:x mandatory;
+  padding-bottom:6px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+.guia-row::-webkit-scrollbar{ display:none; }
+.guia-card{ scroll-snap-align:start; background:var(--tinta); color:var(--branco-q); border-radius:12px; padding:24px 22px 26px; min-height:210px;
+  display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden; }
+.guia-card::before{ content:""; position:absolute; left:22px; right:22px; top:0; height:2px; background:linear-gradient(90deg,var(--ouro),transparent); }
+.guia-card h4{ color:var(--ouro-claro); font-size:1.375rem; line-height:1.15; margin:0 0 14px; }
+.guia-card p{ color:var(--creme-70); font-size:.9375rem; line-height:1.55; margin:0; }
+@media (min-width:1100px){ .guia-hint{ display:none; } .guia-row{ grid-auto-flow:row; grid-template-columns:repeat(5,minmax(0,1fr)); overflow:visible; } }
+@media (max-width:760px){
+  .sobre-cols{ grid-template-columns:1fr; gap:14px; }
+  .combinados{ grid-template-columns:1fr; }
+  .combinados li, .combinados li:nth-child(even), .combinados li:nth-child(odd){ padding:22px 0; border-right:0; }
+  .guia-row{ grid-auto-columns:78%; margin:0 -20px; padding:0 20px 6px; scroll-padding:0 20px; }
+}
+
+/* barra do celular: aba atual destacada com indicador que desliza */
+@media (max-width:860px){
+  .tabbar{ isolation:isolate; }
+  .tab-ind{ position:absolute; z-index:0; top:6px; left:4px; width:calc((100% - 8px) / 5); bottom:calc(6px + env(safe-area-inset-bottom)); border-radius:14px;
+    background:#f1e6cf; box-shadow:inset 0 0 0 1px rgba(176,138,60,.25); opacity:0; transform:translateX(0); pointer-events:none; }
+  .tab-ind::after{ content:""; position:absolute; top:-6px; left:50%; width:22px; height:3px; margin-left:-11px; border-radius:0 0 3px 3px; background:var(--ouro); }
+  .tab-ind.on{ opacity:1; }
+  .tabbar.ind-anim .tab-ind{ transition:transform .5s cubic-bezier(.34,1.32,.5,1), opacity .25s; }
+  .tab{ z-index:1; transition:color .25s; }
+  .tab.is-lit{ color:var(--ouro-fundo); }
+  .tab.is-lit span{ font-weight:600; }
+
+  /* WhatsApp sempre à mão, acima da barra */
+  body.has-tabbar .wa-float{ display:flex !important; width:52px; height:52px; right:14px; bottom:calc(78px + env(safe-area-inset-bottom)); z-index:955; }
+  body.has-tabbar .wa-float svg{ width:27px; height:27px; }
+  body.catalog-page.has-tabbar .wa-float{ display:flex !important; }
+  body.has-tabbar.no-scroll .wa-float{ display:none !important; }
+}
+@media (max-width:860px) and (prefers-reduced-motion:reduce){ .tabbar .tab-ind{ transition:none !important; } }
