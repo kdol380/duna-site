@@ -716,14 +716,14 @@ const DECANTS = PERFUMES.filter(podeDecant).map(p => {
     selo:"Decant",
     decant:true,
     opcoes,
-    desc:`Decant do ${p.marca ? p.marca + " " : ""}${p.nome} — a mesma fragrância original, fracionada em 3, 5 ou 10 ml. O frasco split de R$ ${DECANT_FRASCO} já está incluído no total.`
+    desc:`Decant do ${p.marca ? p.marca + " " : ""}${p.nome} — a mesma fragrância original, fracionada em um vidrinho de decant (borrifador) de 3, 5 ou 10 ml. O vidrinho, de R$ ${DECANT_FRASCO}, já está incluído no total. Não acompanha o frasco original do perfume.`
   };
 });
 
 const DECANT_VARIANTS = DECANTS.flatMap(d=>d.opcoes.map(opcao=>({
   ...d,
   nome:`${d.base} · Decant ${opcao.ml}ml`,
-  tamanho:`${opcao.ml} ml · frasco incluso`,
+  tamanho:`${opcao.ml} ml · vidrinho de decant incluso`,
   preco:opcao.preco,
   precoLiquido:opcao.precoLiquido,
   precoMl:opcao.precoMl,
@@ -933,14 +933,14 @@ function cardHTML(p,i){
     </div>
     ${p.marca ? `<p class="card-brand">${p.marca}</p>` : ""}
     <h3 class="card-name"><a href="${DunaShop.productURL(p)}">${p.decant?p.base:p.nome}</a></h3>
-    <p class="card-fam">${p.decant?"Decant original · frasco incluso":p.inspiracao}</p>
+    <p class="card-fam">${p.decant?"Perfume original em vidrinho de decant":p.inspiracao}</p>
     <button type="button" class="card-hint" data-quick="${p.nome}">Ver detalhes</button>
     ${seletorDecantHTML(p)}
     <div class="card-foot">
       <div class="card-meta">
         <span class="card-size" ${p.decant?"data-decant-unit":""}>${p.decant?`R$ ${dinheiroDecimal(opcaoDecantPadrao.precoMl)} por ml`:p.tamanho}</span>
         ${precoComPagamentoHTML(p.decant?opcaoDecantPadrao.preco:p.preco, disponivel, p.decant?'data-decant-total=""':"")}
-        ${p.decant?`<span class="decant-bottle-note">inclui frasco de R$ ${DECANT_FRASCO}</span>`:""}
+        ${p.decant?`<span class="decant-bottle-note">inclui o vidrinho de decant (R$ ${DECANT_FRASCO})</span>`:""}
       </div>
       ${disponivel ? `<button class="card-wa" ${p.decant?`data-add-decant="${p.base}" data-volume="${opcaoDecantPadrao.ml}"`:`data-add="${p.nome}"`}>
         <svg class="ic-add" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
@@ -1341,7 +1341,7 @@ function msgPedido(){
   const linhas = Object.entries(cart).filter(([n])=>porNome[n]).map(([n,q])=>{
     const p = porNome[n];
     const preco = p.decant && Number.isFinite(p.precoLiquido)
-      ? `R$ ${p.preco} cada (R$ ${p.precoLiquido} fragrância + R$ ${DECANT_FRASCO} frasco)`
+      ? `R$ ${p.preco} cada (R$ ${p.precoLiquido} fragrância + R$ ${DECANT_FRASCO} vidrinho de decant)`
       : `${precoTxt(p)}${q>1&&temPreco(p)?" cada":""}`;
     return `• ${q}x ${nomeCompleto(p)} (${p.tamanho}) — ${preco}`;
   });
@@ -1384,7 +1384,7 @@ function renderCart(){
       <div class="ci-info">
         <div class="ci-name">${p.marca ? p.marca+" " : ""}${nome}</div>
         <div class="ci-meta">${p.tamanho}</div>
-        <div class="ci-price">${precoItemCarrinho(p)}${p.decant&&Number.isFinite(p.precoLiquido)?` <small>· frasco incluso</small>`:""}</div>
+        <div class="ci-price">${precoItemCarrinho(p)}${p.decant&&Number.isFinite(p.precoLiquido)?` <small>· vidrinho de decant incluso</small>`:""}</div>
       </div>
       <div class="ci-side">
         <div class="ci-qty">
@@ -1410,7 +1410,7 @@ function renderCart(){
     const linhasResumo = [];
     if(resumo.outros) linhasResumo.push(`<div><span>Outros produtos</span><strong>R$ ${resumo.outros}</strong></div>`);
     linhasResumo.push(`<div><span>Fragrância · ${resumo.qtdDecants} ${resumo.qtdDecants===1?"decant":"decants"}</span><strong>R$ ${resumo.liquidoDecants}</strong></div>`);
-    linhasResumo.push(`<div><span>Frascos · ${resumo.qtdDecants} × R$ ${DECANT_FRASCO}</span><strong>R$ ${resumo.frascosDecants}</strong></div>`);
+    linhasResumo.push(`<div><span>Vidrinhos de decant · ${resumo.qtdDecants} × R$ ${DECANT_FRASCO}</span><strong>R$ ${resumo.frascosDecants}</strong></div>`);
     if(resumo.descontoDecants) linhasResumo.push(`<div class="is-discount"><span>Desconto decants · ${pct}%</span><strong>− R$ ${resumo.descontoDecants}</strong></div>`);
     if(formaPagamento==="cartao") linhasResumo.push(`<div class="is-card-adjustment"><span>Cartão · acréscimo de 4%</span><strong>+ ${moeda(totalPorPagamento(resumo)-resumo.total)}</strong></div>`);
     cartBreakdownEl.hidden = false;
@@ -1718,7 +1718,7 @@ function selecionarDecantQuickView(decant, volume){
     btn.classList.toggle("active", ativo);
     btn.setAttribute("aria-pressed", String(ativo));
   });
-  document.getElementById("qvSize").textContent = `${variante.decantMl} ml · frasco de R$ ${DECANT_FRASCO} incluso`;
+  document.getElementById("qvSize").textContent = `${variante.decantMl} ml · vidrinho de decant (R$ ${DECANT_FRASCO}) incluso`;
   document.getElementById("qvPrice").innerHTML = `<small>R$</small> ${variante.preco}<em>R$ ${dinheiroDecimal(variante.precoMl)} por ml</em>`;
   const qvWa = document.getElementById("qvWa");
   qvWa.href = waProduto(variante);
@@ -2118,16 +2118,16 @@ function fecharBusca(){
   // barra inferior (aparece só no celular, via CSS)
   const q = new URLSearchParams(location.search);
   const pagina = location.pathname.split("/").pop() || "index.html";
-  const ativo = pagina==="index.html" ? "inicio"
+  const ativo = pagina==="skincare.html" || (globalThis.DUNA_SKINCARE||[]).some(p=>DunaShop.productURL(p).endsWith("/"+pagina)) ? "skincare"
     : (pagina==="catalogo.html" && q.get("tipo")==="decants") || /-decant\.html$/.test(pagina) ? "decants"
     : (pagina==="catalogo.html" || location.pathname.includes("/produtos/")) ? "perfumes" : "";
   const item = (key, href, label, svg) => `<a href="${href}" class="tab ${ativo===key?"is-active":""}" ${ativo===key?'aria-current="page"':""}>${svg}<span>${label}</span></a>`;
   const tabbar = document.createElement("nav");
   tabbar.className = "tabbar"; tabbar.setAttribute("aria-label","Navegação principal");
   tabbar.innerHTML =
-    item("inicio","index.html","Início",`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z" stroke-linejoin="round"/></svg>`) +
     item("perfumes","catalogo.html","Perfumes",`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 3h6v3H9zM8 6h8l2 4v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-9z" stroke-linejoin="round"/></svg>`) +
     item("decants","catalogo.html?tipo=decants","Decants",`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 3h4v3h-4zM9.5 6h5v13a2.5 2.5 0 0 1-5 0z" stroke-linejoin="round"/><path d="M9.5 13h5"/></svg>`) +
+    item("skincare","skincare.html","Skincare",`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 9h10v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z" stroke-linejoin="round"/><path d="M9 9V6h6v3M10 3h4v3h-4z" stroke-linejoin="round"/><path d="M9.5 14.5c1.5 1 3.5 1 5 0" stroke-linecap="round"/></svg>`) +
     `<button type="button" class="tab" data-tab-busca>${ICON_BUSCA}<span>Buscar</span></button>` +
     `<button type="button" class="tab" data-tab-pedido><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 7h12l-1 13H7L6 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg><span>Pedido</span><i class="tab-badge" hidden></i></button>`;
   document.body.appendChild(tabbar);

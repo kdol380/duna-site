@@ -47,7 +47,7 @@ globalThis.DUNA_SKINCARE = [
     "tamanho": "5 pares",
     "foto": "assets/s-numbuzin-nad-collagen-eye-patches.jpg",
     "desc": "Patches refrescantes que ajudam a reduzir a aparência de inchaço, olheiras e linhas finas, deixando a região dos olhos mais hidratada.",
-    "disponivel": true,
+    "disponivel": false,
     "tipo": "skincare"
   },
   {
