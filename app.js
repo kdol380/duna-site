@@ -13,7 +13,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 const compactMobile = window.matchMedia("(max-width: 620px)").matches;
 
 /* =====================================================================
-   📦  CATÁLOGO  —  fictício realista (edite à vontade)
+   📦  CATÁLOGO REAL — altere somente com dados confirmados pelo proprietário (ver AGENTS.md)
    campos: nome, inspiracao, familia, acorde, genero, periodo, ocasiao,
            intensidade, preco, tamanho, notas {topo, coracao, fundo},
            accent, selo

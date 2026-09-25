@@ -2,7 +2,7 @@
 
 - **Responsáveis autorizados:** Josué e Isac (`@isacrezendemarques380`)
 - **Execução:** Josué ou Isac com apoio do Codex
-- **Última atualização:** 11/08/2026
+- **Última atualização:** 25/09/2026
 **Revisão:** sempre que o catálogo ou a forma de publicação mudar
 
 ## Finalidade
@@ -165,7 +165,7 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 
 ## Páginas individuais e recursos de descoberta
 
-Após atualizar catálogo, estoque, preços, imagens ou skincare, execute na raiz:
+A lista completa do que conferir antes de cada commit está em `AGENTS.md`, seção “Checklist antes de todo commit”. Resumo — após atualizar catálogo, estoque, preços, imagens ou skincare, execute na raiz:
 
 ```sh
 node scripts/gerar-paginas-produtos.mjs

@@ -8,8 +8,10 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 - O site é estático: HTML, CSS e JavaScript, sem etapa de build.
 - A branch de produção é `main`. A Cloudflare publica essa branch automaticamente em `https://dunafragrancias.com.br` (endereços sem `.html`).
 - Josué e o colaborador `@isacrezendemarques380` estão autorizados a revisar e integrar atualizações.
-- Mudanças de colaboradores devem ser feitas em uma branch própria e enviadas por Pull Request.
-- Nunca envie diretamente para `main` quando houver outra pessoa revisando o trabalho.
+- Padrão: branch própria + Pull Request.
+- Exceção: commit direto na `main` somente quando Josué pedir explicitamente ("sobe pra main").
+- Quando Isac estiver revisando, a revisão por Pull Request é obrigatória — nunca envie direto para `main`.
+- O assistente prepara o commit; o Push é feito pelo Josué no GitHub Desktop (fora do modo tela cheia, se o assistente precisar controlar o app).
 
 ## Regras obrigatórias
 
@@ -21,6 +23,15 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 6. Não apague arquivos, produtos ou histórico para resolver conflitos. Pare e informe o conflito.
 7. Antes de editar, confira o estado do Git. Preserve alterações existentes e sincronize com o remoto somente quando isso for seguro.
 8. Antes de informar que uma atualização está no ar, abra `https://dunafragrancias.com.br` (e a página alterada, sem `.html`) e confirme que a mudança aparece.
+
+## Decisões do projeto (já aprovadas — não refazer sem pedido)
+
+- Manter o hero original da página inicial. Três redesenhos foram recusados.
+- Sem depoimentos/avaliações no site até existirem clientes reais.
+- Barra inferior no celular: Perfumes, Decants, Skincare, Buscar, Pedido. A aba da página atual fica marcada.
+- Nos decants, o termo é “vidrinho de decant” (não “frasco incluso”, que confunde com o frasco do perfume).
+- Logo do cabeçalho: `assets/logo-assinatura.png` (assinatura horizontal oficial); não esticar.
+- Botão flutuante de WhatsApp no celular.
 
 ## Onde cada informação fica
 
@@ -67,7 +78,22 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
    - preço, estoque, busca, filtros e botão do WhatsApp afetados;
    - visualização em celular e desktop quando houver mudança visual.
 6. Explique claramente o que mudou e o que foi verificado.
-7. Quando autorizado a enviar a atualização, faça commit na branch, envie ao GitHub e abra um Pull Request. A revisão e a integração à `main` podem ser feitas por Josué ou por `@isacrezendemarques380`.
+7. Quando autorizado a enviar a atualização, faça commit na branch e abra um Pull Request (ou commit direto na `main`, se Josué pediu). A revisão e a integração à `main` podem ser feitas por Josué ou por `@isacrezendemarques380`.
+
+## Checklist antes de todo commit
+
+Rode na raiz, nesta ordem, e inclua os arquivos gerados no mesmo commit:
+
+```sh
+node scripts/gerar-paginas-produtos.mjs   # páginas de produtos, sitemap, skincare-data.js e ?v= dos CSS/JS
+node scripts/gerar-catalogo-meta.mjs      # feed catalogo-meta.csv
+node --test tests/*.test.cjs              # testes
+```
+
+- `gerar-paginas-produtos.mjs` já chama `scripts/versionar-assets.mjs`. Se só mudou CSS/JS, basta `node scripts/versionar-assets.mjs`.
+- Abra o site no navegador em celular (≈390 px) e computador (≈1440 px): início, catálogo, decants, skincare e uma página de produto.
+- Teste também os endereços sem `.html` (ex.: `/catalogo`), como o site funciona no ar — a barra inferior deve marcar a aba certa.
+- Nenhum erro no console, nenhuma imagem quebrada, nada vazando para os lados no celular.
 
 ## Critérios para concluir
 

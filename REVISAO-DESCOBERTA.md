@@ -1,6 +1,6 @@
 # Revisão das melhorias de descoberta — 10/09/2026
 
-Preparadas na branch `feature/descoberta-e-compra`. Ainda não publicadas.
+Preparadas na branch `feature/descoberta-e-compra`. Já publicadas na `main`.
 
 1. Filtro por orçamento com escolha entre Pix e total no cartão, preservado na URL.
 2. Favoritos neste navegador, sem cadastro.
