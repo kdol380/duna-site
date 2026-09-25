@@ -2,7 +2,7 @@
 
 ## Endereço público do feed
 
-Depois da publicação no GitHub Pages, use este endereço como fonte de dados do catálogo:
+Depois da publicação na Cloudflare, use este endereço como fonte de dados do catálogo:
 
 `https://dunafragrancias.com.br/catalogo-meta.csv`
 

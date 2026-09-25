@@ -6,7 +6,7 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 
 - Este repositório é a fonte oficial do site Duna Fragrâncias.
 - O site é estático: HTML, CSS e JavaScript, sem etapa de build.
-- A branch de produção é `main`. O GitHub Pages publica essa branch em `https://kdol380.github.io/duna-site/`.
+- A branch de produção é `main`. A Cloudflare publica essa branch automaticamente em `https://dunafragrancias.com.br` (endereços sem `.html`).
 - Josué e o colaborador `@isacrezendemarques380` estão autorizados a revisar e integrar atualizações.
 - Mudanças de colaboradores devem ser feitas em uma branch própria e enviadas por Pull Request.
 - Nunca envie diretamente para `main` quando houver outra pessoa revisando o trabalho.
@@ -20,7 +20,7 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 5. Nunca coloque senhas, tokens, credenciais ou chaves no repositório.
 6. Não apague arquivos, produtos ou histórico para resolver conflitos. Pare e informe o conflito.
 7. Antes de editar, confira o estado do Git. Preserve alterações existentes e sincronize com o remoto somente quando isso for seguro.
-8. Confirme o resultado da ação `pages-build-deployment` antes de informar que uma atualização está disponível no GitHub Pages.
+8. Antes de informar que uma atualização está no ar, abra `https://dunafragrancias.com.br` (e a página alterada, sem `.html`) e confirme que a mudança aparece.
 
 ## Onde cada informação fica
 
@@ -34,7 +34,7 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 | Catálogo de perfumes | `catalogo.html` | Os cards são gerados a partir de `PERFUMES` |
 | Aparência e responsividade | `styles.css` | Preserve desktop e celular |
 | Feed do catálogo Meta | `catalogo-meta.csv` | Gerado pelo script `scripts/gerar-catalogo-meta.mjs` |
-| Publicação | GitHub Pages | Site estático publicado a partir da branch `main` |
+| Publicação | Cloudflare | Site estático publicado a partir da branch `main`; URLs sem `.html` |
 
 ## Regras do catálogo de perfumes
 

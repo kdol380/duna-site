@@ -7,11 +7,11 @@
 
 ## Finalidade
 
-Este guia permite que outra pessoa atualize preços, estoque, produtos, fotos e textos sem depender do histórico desta conversa. O GitHub guarda a versão oficial e o GitHub Pages publica a branch `main`.
+Este guia permite que outra pessoa atualize preços, estoque, produtos, fotos e textos sem depender do histórico desta conversa. O GitHub guarda a versão oficial e a Cloudflare publica a branch `main` em `https://dunafragrancias.com.br`.
 
 ## Escopo
 
-Este processo cobre alterações de perfumes, skincare, preços, disponibilidade, imagens e textos do site. Também cobre revisão pelo GitHub e publicação pelo GitHub Pages.
+Este processo cobre alterações de perfumes, skincare, preços, disponibilidade, imagens e textos do site. Também cobre revisão pelo GitHub e publicação pela Cloudflare.
 
 Não cobre compartilhamento de senhas, compra ou configuração de domínio e mudanças comerciais sem confirmação do responsável.
 
@@ -26,7 +26,7 @@ Nunca compartilhe senhas ou códigos de acesso. Cada pessoa usa sua própria con
 
 ## Responsabilidades
 
-| Etapa | Isac | Codex | Josué | GitHub Pages |
+| Etapa | Isac | Codex | Josué | Cloudflare |
 |---|---|---|---|---|
 | Informar a mudança | Pode solicitar | Ajuda a identificar dados faltantes | Pode solicitar | — |
 | Alterar o site | Acompanha | Executa e verifica | — | — |
@@ -120,7 +120,7 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 
 **Como:** validar valores, estoque, fotos, textos e aparência. Aprovar a integração somente se tudo estiver correto.
 
-**Resultado:** o GitHub Pages publica automaticamente a nova versão da branch `main`.
+**Resultado:** a Cloudflare publica automaticamente a nova versão da branch `main`.
 
 ## Conferência antes de aprovar
 
@@ -131,7 +131,7 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 - [ ] Nenhum outro produto foi alterado sem pedido.
 - [ ] O botão do WhatsApp abre com o produto correto.
 - [ ] O catálogo funciona no celular e no computador.
-- [ ] A prévia e o GitHub Pages estão corretos.
+- [ ] A prévia e o site no ar (`dunafragrancias.com.br`) estão corretos.
 
 ## Situações especiais
 
@@ -161,7 +161,7 @@ Se alguma informação estiver faltando, o Codex deve perguntar antes de fazer a
 - `assets/`: imagens do site.
 - `catalogo-meta.csv`: feed público para o catálogo do Meta Commerce Manager.
 - `scripts/gerar-catalogo-meta.mjs`: recria e valida o feed da Meta depois de qualquer alteração de produto, preço, estoque ou imagem.
-- `https://kdol380.github.io/duna-site/`: endereço público do GitHub Pages.
+- `https://dunafragrancias.com.br`: endereço público do site (Cloudflare, páginas sem `.html`).
 
 ## Páginas individuais e recursos de descoberta
 
