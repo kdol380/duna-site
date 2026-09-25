@@ -462,11 +462,10 @@ function temPreco(p){ return typeof p.preco === "number" && p.preco > 0; }
 function precoHTML(p){ return temPreco(p) ? `<small>R$</small> ${p.preco}` : `<span class="preco-consulta">Sob consulta</span>`; }
 // texto puro para mensagens do WhatsApp
 function precoTxt(p){ return temPreco(p) ? `R$ ${p.preco}` : "valor a combinar"; }
-const DESCONTO_PIX = .04;
 function moeda(valor){
   return Number(valor).toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
 }
-function precoCartao(valorPix){ return Math.round(Number(valorPix) * (1 + DESCONTO_PIX) * 100) / 100; }
+const precoCartao = valorPix => DunaShop.cardPrice(valorPix); // regra em shop-core.js
 function precoComPagamentoHTML(valorPix, disponivel=true, attrs=""){
   if(!(typeof valorPix === "number" && valorPix > 0)) return `<span class="preco-consulta">Sob consulta</span>`;
   if(!disponivel) return `<span class="card-price card-price-soldout"><s>${moeda(valorPix)}</s></span>`;
@@ -682,7 +681,7 @@ const marcaBase = p => (p.marca||"").replace(/\s*Pride$/i,"").trim();   // Latta
    O valor por ml diminui conforme a faixa de preço do perfume e o
    volume escolhido. O frasco split custa R$ 8 em qualquer tamanho.
    ===================================================================== */
-const DECANT_FRASCO = 8;
+const DECANT_FRASCO = DunaShop.BOTTLE_PRICE; // regra em shop-core.js
 const DECANT_VOLUMES = [
   { ml:3,  descontoVolume:0 },
   { ml:5,  descontoVolume:.05 },
@@ -1254,7 +1253,7 @@ let cart = {};
 try{ cart = JSON.parse(localStorage.getItem("duna_cart")||"{}"); }catch(e){ cart={}; }
 const salvarCart = ()=>{ try{ localStorage.setItem("duna_cart", JSON.stringify(cart)); }catch(e){} };
 const totalItens = ()=> Object.values(cart).reduce((a,b)=>a+b,0);
-const taxaDescontoDecants = qtd => qtd>=10 ? .15 : (qtd>=5 ? .10 : (qtd>=3 ? .05 : 0));
+const taxaDescontoDecants = qty => DunaShop.decantRate(qty); // regra em shop-core.js
 
 function resumoCarrinho(){
   return DunaShop.orderSummary(Object.entries(cart).map(([nome,quantity])=>({product:porNome[nome],quantity})),DECANT_FRASCO);

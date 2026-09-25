@@ -83,3 +83,21 @@ test('links estáticos e imagens de páginas geradas resolvem sob a raiz do site
     }
   }
 });
+
+test('textos fixos das páginas batem com as regras de shop-core.js',()=>{
+  const catalogo=fs.readFileSync(path.join(root,'catalogo.html'),'utf8');
+  const skincare=fs.readFileSync(path.join(root,'skincare.html'),'utf8');
+  // faixas de desconto mostradas no catálogo
+  const faixas=[...catalogo.matchAll(/<b>(\d+)[^<]*<\/b><em>(\d+)% OFF<\/em>/g)].map(m=>({min:+m[1],rate:+m[2]/100}));
+  assert.deepEqual(faixas.sort((a,b)=>b.min-a.min),S.DECANT_TIERS,'faixas em catalogo.html diferentes de DECANT_TIERS');
+  // mensagens de progresso do carrinho usam os mesmos limites
+  for(const {min} of S.DECANT_TIERS) assert.match(source,new RegExp(`qtd<${min}\\b`),`app.js sem limite ${min} nas mensagens de progresso`);
+  // preço do vidrinho escrito no catálogo
+  for(const m of catalogo.matchAll(/vidrinho[^.]*?R\$ ?(\d+)/g)) assert.equal(+m[1],S.BOTTLE_PRICE,'preço do vidrinho em catalogo.html');
+  // quantidade de skincare
+  const cards=(skincare.match(/class="skin-card/g)||[]).length;
+  assert.match(skincare,new RegExp(`>${cards} produtos de skincare<`),'contagem em skincare.html');
+  assert.match(source,new RegExp(`"${cards} produtos de skincare"`),'contagem de skincare em app.js');
+  // cartão = Pix + 4%, sem erro de arredondamento
+  assert.equal(S.cardPrice(100),104); assert.equal(S.cardPrice(279),290.16);
+});

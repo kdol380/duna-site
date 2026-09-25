@@ -39,6 +39,7 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 |---|---|---|
 | Perfumes, preços e estoque | `app.js` | Array `PERFUMES`, no início do arquivo |
 | Número do WhatsApp | `app.js` | Objeto `CONFIG` |
+| Acréscimo do cartão (4%), vidrinho de decant (R$ 8), faixas de desconto de decants | `shop-core.js` | Fonte única. Se mudar, ajuste também os textos de `catalogo.html` e as mensagens em `app.js`; o teste avisa se ficarem diferentes |
 | Produtos de skincare | `skincare.html` | Cards HTML dentro de `.skin-grid` |
 | Imagens | `assets/` | Use caminho relativo `assets/nome-do-arquivo.ext` |
 | Página inicial | `index.html` | Não duplicar o catálogo manualmente |

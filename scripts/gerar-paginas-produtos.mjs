@@ -30,11 +30,11 @@ const skincare=[...skinSource.matchAll(/<article class="skin-card([^"]*)">([\s\S
   return {nome:name,marca:clean(card.match(/<p class="skin-brand">([\s\S]*?)<\/p>/)?.[1]),preco:Number(price.replace(/\./g,'').replace(',','.')),tamanho:description.split('·').at(-1).trim(),foto:card.match(/<img[^>]+src="([^"]+)"/)?.[1],desc:guide[name]?.serve||description,disponivel:!classes.includes('is-soldout'),tipo:'skincare'};
 });
 const decantSource=source.slice(source.indexOf('const DECANT_FRASCO ='),source.indexOf('const colNav ='));
-const decants=vm.runInNewContext(decantSource+';DECANTS;', {PERFUMES:perfumes,estaDisponivel:p=>p&&p.disponivel!==false,temPreco:p=>typeof p.preco==='number'&&p.preco>0,ehBodySpray:p=>/body spray/i.test(p.nome)}, {timeout:1000});
+const decants=vm.runInNewContext(decantSource+';DECANTS;', {DunaShop:S,PERFUMES:perfumes,estaDisponivel:p=>p&&p.disponivel!==false,temPreco:p=>typeof p.preco==='number'&&p.preco>0,ehBodySpray:p=>/body spray/i.test(p.nome)}, {timeout:1000});
 const all=[...perfumes,...skincare,...decants];
 const full=p=>`${p.marca} ${p.nome}`;
 const wa=text=>`https://wa.me/${config.whatsapp}?text=${encodeURIComponent(text)}`;
-const payment=p=>`<div class="card-payment"><span class="card-card-price">${S.money(Math.round(p.preco*104)/100)} no cartão</span><span class="card-pix-price"><strong>${S.money(p.preco)}</strong><span>no Pix</span></span><span class="card-installment">ou 3x de ${S.money(Math.round(p.preco*104)/100/3)} sem juros</span></div>`;
+const payment=p=>`<div class="card-payment"><span class="card-card-price">${S.money(S.cardPrice(p.preco))} no cartão</span><span class="card-pix-price"><strong>${S.money(p.preco)}</strong><span>no Pix</span></span><span class="card-installment">ou 3x de ${S.money(S.cardPrice(p.preco)/3)} sem juros</span></div>`;
 const mini=p=>`<article class="discovery-mini"><a href="${S.productURL(p)}"><img src="${esc(p.foto)}" alt="${esc(full(p))}" loading="lazy"><p class="eyebrow">${esc(p.marca)}</p><h3>${esc(p.nome)}</h3></a><p>${S.money(p.preco)} no Pix</p><a href="${S.productURL(p)}" class="discovery-text-link">Ver produto →</a></article>`;
 await fs.mkdir(path.join(root,'produtos'),{recursive:true});
 const urls=new Set();
