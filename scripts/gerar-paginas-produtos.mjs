@@ -66,3 +66,6 @@ await fs.writeFile(path.join(root,'skincare-data.js'),'// Gerado por scripts/ger
 const mapURLs=[site,new URL('catalogo',site).href,new URL('skincare',site).href,...urls];
 await fs.writeFile(path.join(root,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+mapURLs.map(url=>`  <url><loc>${esc(url)}</loc></url>`).join('\n')+'\n</urlset>\n');
 console.log(`${all.length} páginas geradas: ${perfumes.length} perfumes, ${skincare.length} skincare e ${decants.length} decants. Sitemap e dados de skincare atualizados.`);
+
+// Mantém o ?v= de CSS e JS em dia com o conteúdo (evita navegador com arquivo antigo).
+await import('./versionar-assets.mjs');
