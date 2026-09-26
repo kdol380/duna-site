@@ -822,6 +822,34 @@ footer{ background:var(--areia); color:var(--grafite-60); padding:70px 0 36px; p
 .cart-continue:hover{ color:var(--ouro-fundo); }
 .card-wa.added{ background:var(--ouro)!important; }
 
+/* Botão "Adicionar" que se transforma (app.js → animarAdicionar).
+   O recorte (clip-path) encolhe o botão até virar bolinha sem mexer no layout do card. */
+.morph-add{
+  position:relative; clip-path:inset(0 0 round 999px);
+  transition:clip-path .5s var(--ease-out), background-color .35s var(--ease), color .15s, transform .3s var(--ease);
+}
+.morph-add.m-load, .morph-add.m-ok{ clip-path:inset(0 var(--morph-x, 0px) round 999px); }
+.morph-add.m-load, .morph-add.m-ok, .morph-add.m-done{ color:transparent; }
+.morph-add.m-ok, .morph-add.m-done{ background:var(--ouro); }
+.morph-add::before, .morph-add::after{ content:""; position:absolute; pointer-events:none; }
+.morph-add.m-load::before{
+  left:50%; top:50%; width:16px; height:16px; margin:-8px 0 0 -8px; border-radius:50%;
+  border:2px solid rgba(246,240,225,.28); border-top-color:var(--ouro-claro);
+  animation:morphSpin .65s linear infinite;
+}
+.morph-add.m-ok::before{
+  left:50%; top:50%; width:6px; height:11px; margin:-8px 0 0 -3px;
+  border:solid var(--branco-puro); border-width:0 2px 2px 0;
+  animation:morphCheck .35s var(--ease-out) both;
+}
+.morph-add.m-done::after{
+  content:"No pedido ✓"; inset:0; display:flex; align-items:center; justify-content:center;
+  color:var(--branco-puro); animation:morphLabel .35s var(--ease-out) both;
+}
+@keyframes morphSpin{ to{ transform:rotate(360deg); } }
+@keyframes morphCheck{ from{ opacity:0; transform:rotate(45deg) scale(.3); } to{ opacity:1; transform:rotate(45deg) scale(1); } }
+@keyframes morphLabel{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+
 /* =====================================================================
    BOTÃO FLUTUANTE WHATSAPP
    ===================================================================== */
@@ -1182,31 +1210,53 @@ a, button{ touch-action:manipulation; }
 .btn-line-dark:hover{ background:var(--ouro); color:var(--branco-puro); transform:translateY(-2px); }
 .btn-line-dark svg{ width:16px; height:16px; }
 
-/* ---------- Toast "adicionado ao pedido" ---------- */
-.toast{
-  position:fixed; left:50%; bottom:26px; z-index:1200;
-  transform:translate(-50%,160%); opacity:0; visibility:hidden;
-  display:flex; align-items:center; gap:13px;
+/* ---------- Resumo do pedido: a sacola se abre ao adicionar ---------- */
+/* Fechado = bolinha do tamanho da sacola flutuante; aberto = cartão com total e "Ver pedido". */
+.cart-island{
+  --isl-w:min(340px, calc(100vw - 32px));
+  position:fixed; right:24px; bottom:92px; z-index:1200;
+  width:58px; height:58px; border-radius:29px; overflow:hidden; cursor:pointer;
   background:var(--grafite); color:var(--branco-q);
-  border:1px solid rgba(205,171,99,.4); border-radius:999px;
-  padding:13px 20px; font-family:var(--sans); font-size:.86rem;
-  box-shadow:0 18px 44px rgba(22,20,16,.4);
-  transition:transform .55s var(--ease-out), opacity .45s, visibility .55s;
-  max-width:min(92vw,460px);
+  border:1px solid rgba(205,171,99,.35);
+  box-shadow:0 18px 44px rgba(22,20,16,.35);
+  font-family:var(--sans);
+  opacity:0; visibility:hidden; transform:scale(.55); transform-origin:right bottom;
+  transition:width .55s var(--ease-out), height .55s var(--ease-out), border-radius .55s var(--ease-out),
+    transform .4s var(--ease-out), opacity .3s, visibility 0s .4s;
 }
-.toast.show{ transform:translate(-50%,0); opacity:1; visibility:visible; }
-.toast .t-check{
-  flex:0 0 24px; width:24px; height:24px; border-radius:50%; background:var(--ouro);
-  display:flex; align-items:center; justify-content:center;
+.cart-island.is-orb{ opacity:1; visibility:visible; transform:none; transition-delay:0s; }
+.cart-island.is-open{ width:var(--isl-w); height:130px; border-radius:22px; }
+.isl-orb{
+  position:absolute; right:0; bottom:0; width:56px; height:56px;
+  display:flex; align-items:center; justify-content:center; transition:opacity .2s;
 }
-.toast .t-check svg{ width:13px; height:13px; }
-.toast b{ color:var(--ouro-claro); font-weight:500; }
-.toast .t-view{
-  flex:0 0 auto; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--ouro-claro); border-bottom:1px solid currentColor; padding-bottom:2px;
-  transition:color .3s; white-space:nowrap;
+.isl-orb svg{ width:24px; height:24px; }
+.isl-count{
+  position:absolute; top:9px; right:8px; min-width:18px; height:18px; padding:0 4px; border-radius:999px;
+  background:var(--ouro); color:var(--tinta); font:600 .75rem/18px var(--sans); font-style:normal; text-align:center;
 }
-.toast .t-view:hover{ color:var(--branco-q); }
+.cart-island.is-open .isl-orb{ opacity:0; }
+.isl-card{
+  position:absolute; right:0; bottom:0; width:var(--isl-w); height:128px; padding:15px 18px 14px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  opacity:0; transition:opacity .2s;
+}
+.cart-island.is-open .isl-card{ opacity:1; transition:opacity .3s .2s; }
+.isl-head{ display:flex; justify-content:space-between; align-items:baseline;
+  font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ouro-claro); }
+.isl-qty{ letter-spacing:.04em; text-transform:none; color:var(--creme-70); }
+.isl-msg{ margin:0; font-size:.86rem; color:var(--creme-70); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.isl-msg b{ color:var(--branco-q); font-weight:500; }
+.isl-foot{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.isl-total{ font-family:var(--serif); font-size:1.4rem; font-weight:600; line-height:1; white-space:nowrap; }
+.isl-total small{ font-family:var(--sans); font-size:.75rem; font-weight:400; color:var(--creme-70); }
+.isl-view{
+  flex:0 0 auto; padding:9px 15px; border-radius:999px; background:var(--ouro); color:var(--tinta);
+  font:500 .75rem/1 var(--sans); letter-spacing:.1em; text-transform:uppercase; transition:background .25s;
+}
+.isl-view:hover{ background:var(--ouro-claro); }
+body.island-open .cart-float{ visibility:hidden; } /* o resumo fica exatamente por cima da sacola */
+.isl-live{ position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 
 /* ---------- Voltar ao topo ---------- */
 .to-top{
@@ -1235,7 +1285,6 @@ a, button{ touch-action:manipulation; }
   .qv-right{ padding:28px 24px 30px; }
   .qv-actions .btn{ flex:1; justify-content:center; }
   .to-top{ bottom:20px; left:16px; width:42px; height:42px; }
-  .toast{ bottom:18px; width:max-content; }
 }
 
 /* Acessibilidade: respeita reduced-motion */
@@ -2017,9 +2066,15 @@ header.nav.scrolled .nav-search:hover, body.page-light .nav-search:hover{ color:
     background:var(--ouro-fundo); color:#fff; font:600 .75rem/18px var(--sans); text-align:center; font-style:normal; }
   body.has-tabbar{ padding-bottom:calc(64px + env(safe-area-inset-bottom)); }
   body.has-tabbar .cart-float, body.has-tabbar .wa-float, body.has-tabbar .catalog-page .cart-float{ display:none !important; }
-  body.has-tabbar .toast, body.has-tabbar .discovery-status{ bottom:calc(76px + env(safe-area-inset-bottom)); }
+  body.has-tabbar .discovery-status{ bottom:calc(76px + env(safe-area-inset-bottom)); }
+  /* no celular o resumo nasce centralizado, logo acima da barra inferior */
+  body.has-tabbar .cart-island{ right:auto; left:50%; translate:-50% 0; transform-origin:center bottom;
+    bottom:calc(76px + env(safe-area-inset-bottom)); }
+  body.has-tabbar .isl-orb{ right:auto; left:calc(50% - 28px); }
+  body.has-tabbar .isl-card{ right:auto; left:50%; translate:-50% 0; }
+  body.island-open .wa-float{ opacity:0; pointer-events:none; }
 }
-body.no-scroll .toast{ opacity:0; visibility:hidden; } /* não cobre o botão de finalizar com o pedido aberto */
+body.no-scroll .cart-island{ opacity:0; visibility:hidden; } /* não cobre o botão de finalizar com o pedido aberto */
 
 /* logo: assinatura horizontal oficial (arquivo único, proporção preservada) */
 .nav-logo .nav-lockup{ display:block; height:44px; width:auto; max-width:none; flex:none; transition:height .4s var(--ease); }

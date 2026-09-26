@@ -1176,24 +1176,13 @@ if(grid){
     const btnDecant = e.target.closest("[data-add-decant]");
     if(btnDecant){
       const variante = decantPorBaseEVolume.get(`${btnDecant.dataset.addDecant}|${btnDecant.dataset.volume}`);
-      if(variante) addToCart(variante.nome);
-      const lbl = btnDecant.querySelector(".lbl");
-      if(lbl && !btnDecant.classList.contains("added")){
-        const orig = lbl.textContent;
-        btnDecant.classList.add("added"); lbl.textContent = "Adicionado ✓";
-        setTimeout(()=>{ btnDecant.classList.remove("added"); lbl.textContent = orig; }, 1100);
-      }
+      if(variante){ addToCart(variante.nome); animarAdicionar(btnDecant); }
       return;
     }
     const btn = e.target.closest("[data-add]");
     if(btn){
       addToCart(btn.dataset.add);
-      const lbl = btn.querySelector(".lbl");
-      if(lbl && !btn.classList.contains("added")){
-        const orig = lbl.textContent;
-        btn.classList.add("added"); lbl.textContent = "Adicionado ✓";
-        setTimeout(()=>{ btn.classList.remove("added"); lbl.textContent = orig; }, 1100);
-      }
+      animarAdicionar(btn);
       return;
     }
     if(e.target.closest(".card-notify")) return;
@@ -1305,11 +1294,33 @@ function mensagemProgressoDecants(qtd){
 }
 
 function bumpFloat(){ if(!cartFloat) return; cartFloat.classList.remove("bump"); void cartFloat.offsetWidth; cartFloat.classList.add("bump"); }
-function addToCart(nome){ if(!estaDisponivel(porNome[nome])) return; cart[nome]=(cart[nome]||0)+1; salvarCart(); renderCart(); bumpFloat(); showToast(nome); }
+function addToCart(nome){ if(!estaDisponivel(porNome[nome])) return; cart[nome]=(cart[nome]||0)+1; salvarCart(); renderCart(); showToast(nome); }
 document.querySelectorAll("[data-skin-add]").forEach(btn=>btn.addEventListener("click", ()=>{
   const produto = produtoSkincareDoCard(btn.closest(".skin-card"));
-  if(produto) addToCart(produto.nome);
+  if(produto){ addToCart(produto.nome); animarAdicionar(btn); }
 }));
+
+// botão "Adicionar" que se transforma: vira bolinha girando → check dourado → "No pedido ✓" → volta ao normal.
+// O item já entra no pedido no clique; a animação é só a confirmação visual.
+function animarAdicionar(btn){
+  if(!btn || btn.dataset.morph) return;
+  if(reduceMotion){
+    const lbl = btn.querySelector(".lbl");
+    if(!lbl) return;
+    const orig = lbl.textContent;
+    btn.dataset.morph = "1"; btn.classList.add("added"); lbl.textContent = "Adicionado ✓";
+    setTimeout(()=>{ btn.classList.remove("added"); lbl.textContent = orig; delete btn.dataset.morph; }, 1100);
+    return;
+  }
+  btn.dataset.morph = "1";
+  btn.style.setProperty("--morph-x", Math.max(0, (btn.offsetWidth - btn.offsetHeight) / 2) + "px");
+  const fase = (nova, ms) => setTimeout(()=>{ btn.classList.remove("m-load","m-ok","m-done"); if(nova) btn.classList.add(nova); }, ms);
+  btn.classList.add("morph-add", "m-load");
+  fase("m-ok", 520);
+  fase("m-done", 1050);
+  fase("", 2500);
+  setTimeout(()=>{ btn.classList.remove("morph-add"); btn.style.removeProperty("--morph-x"); delete btn.dataset.morph; }, 2900);
+}
 function setQty(nome,d){ cart[nome]=(cart[nome]||0)+d; if(cart[nome]<=0) delete cart[nome]; salvarCart(); renderCart(); }
 function removeItem(nome){ delete cart[nome]; salvarCart(); renderCart(); }
 function abrirCart(){ if(!cartEl) return; cartEl.classList.add("open"); cartOverlay.classList.add("open"); document.body.classList.add("no-scroll"); }
@@ -1637,24 +1648,67 @@ const proofTrack = document.getElementById("proofTrack");
 if(proofTrack) proofTrack.innerHTML += proofTrack.innerHTML;
 
 /* =====================================================================
-   🔔  TOAST — confirmação ao adicionar ao pedido
+   🔔  RESUMO DO PEDIDO — ao adicionar, a sacola vira um mini resumo e depois volta
+   (no computador nasce da sacola flutuante; no celular, acima da barra inferior)
    ===================================================================== */
-const toast = document.createElement("div");
-toast.className = "toast"; toast.setAttribute("role","status"); toast.setAttribute("aria-live","polite");
-document.body.appendChild(toast);
-let toastTimer = null;
-function showToast(nome){
-  toast.innerHTML = `
-    <span class="t-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M4 12.5l5 5L20 6.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    <span><b>${nome}</b> foi para o seu pedido</span>
-    <button class="t-view">Ver pedido</button>`;
-  toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>toast.classList.remove("show"), 3200);
+const ilha = document.createElement("div");
+ilha.className = "cart-island";
+ilha.inert = true;
+ilha.innerHTML = `
+  <span class="isl-orb" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg>
+    <i class="isl-count"></i>
+  </span>
+  <div class="isl-card">
+    <div class="isl-head"><span>Seu pedido</span><span class="isl-qty"></span></div>
+    <p class="isl-msg"></p>
+    <div class="isl-foot"><span class="isl-total"></span><button type="button" class="isl-view">Ver pedido</button></div>
+  </div>`;
+const ilhaAviso = document.createElement("p");
+ilhaAviso.className = "isl-live"; ilhaAviso.setAttribute("role","status"); ilhaAviso.setAttribute("aria-live","polite");
+document.body.append(ilha, ilhaAviso);
+let ilhaTimer = 0;
+
+function preencherIlha(nome){
+  const n = totalItens();
+  ilha.querySelector(".isl-count").textContent = n;
+  ilha.querySelector(".isl-qty").textContent = `${n} ${n===1?"item":"itens"}`;
+  ilha.querySelector(".isl-msg").innerHTML = `<b>${nome}</b> entrou no pedido`;
+  ilha.querySelector(".isl-total").innerHTML = cartTemSemPreco()
+    ? "Total a combinar"
+    : `${moeda(totalPorPagamento())} <small>${formaPagamento==="cartao"?"no cartão":"no Pix"}</small>`;
 }
-toast.addEventListener("click", e=>{
-  if(e.target.closest(".t-view")){ toast.classList.remove("show"); abrirCart(); }
-});
+function agendarRecolher(ms){ clearTimeout(ilhaTimer); ilhaTimer = setTimeout(recolherIlha, ms); }
+function recolherIlha(){
+  ilha.classList.remove("is-open");
+  ilhaTimer = setTimeout(()=>{ esconderIlha(); bumpFloat(); }, reduceMotion ? 0 : 480);
+}
+function esconderIlha(){
+  clearTimeout(ilhaTimer);
+  ilha.classList.remove("is-open","is-orb");
+  ilha.inert = true;
+  document.body.classList.remove("island-open");
+}
+function showToast(nome){
+  preencherIlha(nome);
+  ilhaAviso.textContent = `${nome} foi para o seu pedido`;
+  ilha.inert = false;
+  document.body.classList.add("island-open");
+  clearTimeout(ilhaTimer);
+  if(reduceMotion || ilha.classList.contains("is-orb")){
+    ilha.classList.add("is-orb","is-open");
+    agendarRecolher(3200);
+    return;
+  }
+  ilha.classList.add("is-orb");
+  ilhaTimer = setTimeout(()=>{ ilha.classList.add("is-open"); agendarRecolher(3200); }, 260);
+}
+ilha.addEventListener("click", ()=>{ esconderIlha(); abrirCart(); });
+// enquanto a pessoa está com o mouse ou o foco no resumo, ele não fecha
+ilha.addEventListener("pointerenter", ()=>{ if(ilha.classList.contains("is-open")) clearTimeout(ilhaTimer); });
+ilha.addEventListener("pointerleave", ()=>{ if(ilha.classList.contains("is-open")) agendarRecolher(1600); });
+ilha.addEventListener("focusin", ()=>{ if(ilha.classList.contains("is-open")) clearTimeout(ilhaTimer); });
+ilha.addEventListener("focusout", ()=>{ if(ilha.classList.contains("is-open")) agendarRecolher(1600); });
 
 /* =====================================================================
    🔍  QUICK VIEW — modal de detalhes do perfume
