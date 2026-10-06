@@ -23,6 +23,51 @@ const compactMobile = window.matchMedia("(max-width: 620px)").matches;
 // preco: null  →  mostra "Sob consulta" (troque pelo valor, ex: preco:199, quando tiver os preços)
 // campo opcional: colecao:"arabes" | "nicho" | "designer"  → sem o campo, o perfume conta como "arabes"
 const PERFUMES = [
+  { nome:"Divine", marca:"Rayhaan", inspiracao:"lichia, rosa e chocolate", familia:"Floral", acorde:"Frutado", genero:"Feminino", periodo:"",
+    ocasiao:"", intensidade:"", preco:469, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Lichia · Gengibre · Bergamota", coracao:"Peônia · Rosa · Baunilha", fundo:"Patchouli · Chocolate" },
+    accent:"#b9944c", foto:"assets/p-rayhaan-divine.png", desc:"Lichia, gengibre e bergamota na abertura, com peônia, rosa e baunilha no coração. O fundo combina patchouli e chocolate." },
+  { nome:"Club de Nuit Elite", marca:"Armaf", inspiracao:"chá verde, pimentas e vetiver", familia:"Cítrico", acorde:"Cítrico", genero:"Unissex", periodo:"",
+    ocasiao:"", intensidade:"", preco:549, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Chá Verde · Bergamota · Maçã · Pimenta de Sichuan · Pimenta Rosa", coracao:"Rosa Centifolia · Gerânio · Cassis · Notas Aromáticas · Notas Terrosas", fundo:"Vetiver · Âmbar · Cedro · Almíscar · Cashmeran" },
+    accent:"#b9944c", foto:"assets/p-armaf-club-de-nuit-elite.webp", desc:"Chá verde e bergamota encontram maçã e pimentas. O coração reúne notas florais e aromáticas, sobre um fundo de vetiver, cedro e almíscar." },
+  { nome:"Dalal", marca:"Lattafa", inspiracao:"maçã, flores brancas e baunilha", familia:"Floral", acorde:"Doce", genero:"Feminino", periodo:"",
+    ocasiao:"", intensidade:"", preco:629, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Maçã Golden Delicious · Mandarina", coracao:"Ylang-ylang · Jasmim · Flor de Laranjeira", fundo:"Baunilha · Almíscar · Musgo de Carvalho" },
+    accent:"#b9944c", foto:"assets/p-lattafa-dalal.webp", desc:"Maçã e mandarina abrem uma composição floral com ylang-ylang, jasmim e flor de laranjeira. Baunilha, almíscar e musgo de carvalho completam o fundo." },
+  { nome:"Supremacy Collector’s Edition", marca:"Afnan", inspiracao:"abacaxi, bétula e musgo", familia:"Amadeirado", acorde:"Frutado", genero:"Masculino", periodo:"",
+    ocasiao:"", intensidade:"", preco:549, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Abacaxi · Bergamota · Maçã · Flores Brancas", coracao:"Flor de Laranjeira · Bétula · Âmbar", fundo:"Musgo de Carvalho · Almíscar · Âmbar-gris" },
+    accent:"#b9944c", foto:"assets/p-afnan-supremacy-collectors-edition.webp", desc:"Abacaxi, bergamota, maçã e flores brancas na abertura. Flor de laranjeira, bétula e âmbar conduzem a um fundo de musgo de carvalho, almíscar e âmbar-gris." },
+  { nome:"Cedrus Blanc", marca:"Rayhaan", inspiracao:"bergamota, flor de laranjeira e cedro", familia:"Amadeirado", acorde:"Cítrico", genero:"Unissex", periodo:"",
+    ocasiao:"", intensidade:"", preco:389, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Bergamota · Aldeídos", coracao:"Flor de Laranjeira", fundo:"Cedro" },
+    accent:"#b9944c", foto:"assets/p-rayhaan-cedrus-blanc.webp", desc:"Bergamota e flor de laranjeira se encontram com cedro em uma composição de perfil cítrico, floral e amadeirado." },
+  { nome:"Nava Sol", marca:"Rayhaan", inspiracao:"frutas, flores e madeiras", familia:"Floral", acorde:"Frutado", genero:"Unissex", periodo:"",
+    ocasiao:"", intensidade:"", preco:389, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"", coracao:"", fundo:"" },
+    accent:"#b9944c", foto:"assets/p-rayhaan-nava-sol.webp", desc:"Uma composição frutada e floral. A apresentação da Rayhaan destaca doçura de frutas, flor de laranjeira e violeta." },
+  { nome:"Glitch", marca:"Mykonos", inspiracao:"bergamota, abacaxi e patchouli", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"",
+    ocasiao:"", intensidade:"", preco:359, tamanho:"100 ml · Extrait de Parfum", selo:"Novo", disponivel:true,
+    notas:{ topo:"Bergamota · Abacaxi · Maçã", coracao:"Toranja · Lavanda · Artemísia · Lírio-do-vale · Pimenta Rosa · Baunilha · Jasmim", fundo:"Patchouli · Baunilha · Almíscar" },
+    accent:"#b9944c", foto:"assets/p-mykonos-glitch.png", desc:"Fragrância cítrica com bergamota, abacaxi e maçã, notas aromáticas e florais e um fundo de patchouli, baunilha e almíscar." },
+  { nome:"Reflection", marca:"Mykonos", inspiracao:"toranja, gengibre e notas marinhas", familia:"Cítrico", acorde:"Aquático", genero:"Unissex", periodo:"",
+    ocasiao:"", intensidade:"", preco:359, tamanho:"100 ml · Extrait de Parfum", selo:"Novo", disponivel:true,
+    notas:{ topo:"Toranja · Gengibre · Bergamota", coracao:"Notas Marinhas · Cardamomo · Lírio-do-vale", fundo:"Almíscar · Patchouli · Âmbar · Ambroxan" },
+    accent:"#b9944c", foto:"assets/p-mykonos-reflection.png", desc:"Toranja, gengibre e bergamota abrem uma composição com notas marinhas e cardamomo. Almíscar, patchouli, âmbar e ambroxan formam o fundo." },
+  { nome:"Léonie", marca:"Maison Alhambra", inspiracao:"lavanda, flor de laranjeira e baunilha", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"",
+    ocasiao:"", intensidade:"", preco:359, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Lavanda · Mandarina · Petitgrain · Cassis", coracao:"Lavanda · Flor de Laranjeira · Jasmim", fundo:"Almíscar · Baunilha · Cedro · Âmbar-gris" },
+    accent:"#b9944c", foto:"assets/p-maison-alhambra-leonie.png", desc:"Lavanda e cítricos encontram flor de laranjeira e jasmim. O fundo reúne baunilha, almíscar, cedro e âmbar-gris." },
+  { nome:"Muharib", marca:"Maison Asrar", inspiracao:"mel, canela e tabaco", familia:"Oriental", acorde:"Especiado", genero:"Unissex", periodo:"",
+    ocasiao:"", intensidade:"", preco:549, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Limão · Bergamota · Lavandin", coracao:"Cashmere · Canela · Mel", fundo:"Fava Tonka · Jasmim · Tabaco" },
+    accent:"#b9944c", foto:"assets/p-maison-asrar-muharib.png", desc:"Limão, bergamota e lavandin na abertura. Mel, canela e cashmere compõem o coração, sobre um fundo de tonka, jasmim e tabaco." },
+  { nome:"Hawas Diva", marca:"Rasasi", inspiracao:"lichia, rosa e baunilha", familia:"Floral", acorde:"Frutado", genero:"Feminino", periodo:"",
+    ocasiao:"", intensidade:"", preco:389, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    notas:{ topo:"Frutas Vermelhas · Lichia · Ruibarbo", coracao:"Incenso · Rosa · Cedro", fundo:"Almíscar · Âmbar-gris · Baunilha" },
+    accent:"#b9944c", foto:"assets/p-rasasi-hawas-diva.png", desc:"Frutas vermelhas, lichia e ruibarbo abrem um coração de incenso, rosa e cedro. Baunilha, almíscar e âmbar-gris completam a composição." },
+
   { nome:"Evoke Gold", marca:"Ajmal", inspiracao:"neróli, pimenta e íris", familia:"Amadeirado", acorde:"Íris", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:330, tamanho:"90 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Neróli · Pimenta", coracao:"Gerânio · Íris · Violeta · Âmbar", fundo:"Patchouli · Cedro" },
@@ -34,7 +79,7 @@ const PERFUMES = [
     accent:"#d8bba8", foto:"assets/p-lattafa-eclaire.jpg", desc:"Gourmand feminino cremoso: caramelo, leite e açúcar encontram flores brancas e mel, finalizados por baunilha, praliné e almíscar." },
 
   { nome:"Belgravia", marca:"Maison Asrar", inspiracao:"bergamota, vetiver e almíscar", familia:"Amadeirado", acorde:"Cítrico", genero:"Unissex", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:650, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"especial", intensidade:"marcante", preco:600, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Bergamota · Cassis · Limão", coracao:"Lírio-do-vale · Frésia · Sândalo · Caramelo", fundo:"Vetiver · Cedro · Musgo · Almíscar" },
     accent:"#cbc5b6", foto:"assets/p-maison-asrar-belgravia.jpg", desc:"Bergamota luminosa e cassis abrem uma composição amadeirada e almiscarada, com flores delicadas, sândalo, vetiver, cedro e musgo." },
 
@@ -149,7 +194,7 @@ const PERFUMES = [
     accent:"#8a5328", foto:"assets/p-khamrah-qahwa-new.jpg", desc:"Café, baunilha e praliné aparecem cercados por canela, cardamomo e gengibre. Masculino quente, doce e marcante, perfeito para a noite." },
 
   { nome:"Queen of Arabia", marca:"Lattafa", inspiracao:"coco salgado e baunilha", familia:"Floral", acorde:"Baunilha", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:649, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"especial", intensidade:"marcante", preco:589, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Coco · Sal", coracao:"Sândalo · Heliotrópio", fundo:"Baunilha · Âmbar" },
     accent:"#b69a43", foto:"assets/p-queen-of-arabia.jpg", desc:"Coco com um toque salgado encontra heliotrópio, sândalo e baunilha. Feminino cremoso, sofisticado e envolvente, com apresentação luxuosa." },
 
@@ -169,7 +214,7 @@ const PERFUMES = [
     accent:"#a7adb0", foto:"assets/p-maahir-legacy.jpg", desc:"Cítricos, hortelã e abacaxi criam um frescor aromático sobre especiarias, ambroxan e vetiver. Masculino limpo e ótimo para o dia a dia." },
 
   { nome:"Afeef", marca:"Lattafa", inspiracao:"flores brancas, pêssego e praliné", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:579, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"especial", intensidade:"marcante", preco:565, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Pêssego · Pimenta Rosa · Bergamota", coracao:"Tuberosa · Flor de Laranjeira · Jasmim", fundo:"Praliné · Âmbar · Sândalo · Patchouli" },
     accent:"#c8a34d", foto:"assets/p-afeef.jpg", desc:"Pêssego e pimenta rosa iluminam um buquê de tuberosa, flor de laranjeira e jasmim. Praliné, âmbar e sândalo deixam o feminino cremoso e sofisticado." },
 
@@ -394,7 +439,7 @@ const PERFUMES = [
     accent:"#7f347d", foto:"assets/p-sabah-delilah.webp", desc:"Floral frutado gourmand feminino: frutas vermelhas e lichia abrem caminho para rosas e peônia, repousando sobre baunilha cremosa, marshmallow e almíscar." },
 
   { nome:"Obsidian", marca:"Rayhaan", inspiracao:"íris, couro e madeiras", familia:"Amadeirado", acorde:"Amadeirado", genero:"Masculino", periodo:"Noite",
-    ocasiao:"especial", intensidade:"marcante", preco:360, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
+    ocasiao:"especial", intensidade:"marcante", preco:369, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     notas:{ topo:"Íris · Cítricos", coracao:"Couro", fundo:"Sândalo · Ambreta · Cedro · Oud" },
     accent:"#201f21", foto:"assets/p-rayhaan-obsidian.jpg", desc:"Íris elegante e atalcada sobre couro, oud e madeiras cremosas. Sofisticado para encontros e ocasiões especiais." },
 
@@ -512,11 +557,11 @@ function chipsNotas(str){
     .map(n=>`<span class="note-chip">${notaIcone(n)}<span>${n}</span></span>`).join("");
 }
 function piramideHTML(p){
-  const tier = (cls,label,notas)=>`
+  const tier = (cls,label,notas)=>notas ? `
     <div class="pyr-tier ${cls}">
       <span class="pyr-label">${label}</span>
       <span class="pyr-notes">${chipsNotas(notas)}</span>
-    </div>`;
+    </div>` : "";
   return tier("pyr-top","Topo", p.notas.topo)
        + tier("pyr-heart","Coração", p.notas.coracao)
        + tier("pyr-base","Fundo", p.notas.fundo);
@@ -1138,7 +1183,7 @@ if(deptBtns.length && perfumePanel && skincarePanel){
     });
     perfumePanel.hidden = skincare;
     skincarePanel.hidden = !skincare;
-    if(countEl) countEl.textContent = skincare ? "8 produtos de skincare" : `${PERFUMES.length} fragrâncias`;
+    if(countEl) countEl.textContent = skincare ? "17 produtos de skincare" : `${PERFUMES.length} fragrâncias`;
   }));
 }
 
@@ -1734,7 +1779,7 @@ function openQuickView(nome, sincronizarURL=true){
   qvLastFocus = document.activeElement;
   document.getElementById("qvSelo").textContent = disponivel ? p.selo : "Esgotado";
   document.getElementById("qvBottle").innerHTML = frascoVisual(p);
-  document.getElementById("qvFam").textContent = `${p.marca ? p.marca + " · " : ""}${perfilOlfativo(p)} · ${p.genero} · ${p.periodo}`;
+  document.getElementById("qvFam").textContent = [p.marca, perfilOlfativo(p), p.genero, p.periodo].filter(Boolean).join(" · ");
   document.getElementById("qvName").textContent = p.nome;
   document.getElementById("qvInsp").textContent = p.inspiracao;
   document.getElementById("qvDesc").textContent = p.desc;
@@ -1847,12 +1892,12 @@ const SKINCARE_GUIDE = {
     ordem:"Com a pele limpa e seca, aplique no rosto e pescoço antes do hidratante.",
     cuidado:"De manhã, aplique o protetor solar depois do hidratante."
   },
-  "No.9 NAD Bio Lifting Essence": {
-    serve:"Essência voltada para firmeza e elasticidade, ajudando a suavizar a aparência de linhas finas e a deixar a pele mais preenchida.",
-    indicado:"Para quem percebe perda de firmeza, linhas finas ou quer um cuidado de hidratação com foco em elasticidade.",
-    quando:"Dia e noite",
-    ordem:"Depois da limpeza e do tônico, antes do hidratante. Massageie suavemente até absorver.",
-    cuidado:"Pode reaplicar uma pequena quantidade nas áreas com mais linhas. De manhã, finalize com protetor solar."
+  "No.9 NMN Retinol Lift Eye Cream": {
+    serve:"Creme para a área dos olhos com retinol, em embalagem com aplicador.",
+    indicado:"Para complementar o cuidado da região dos olhos.",
+    quando:"Conforme as instruções da embalagem",
+    ordem:"Aplique conforme as instruções do fabricante, evitando contato direto com os olhos.",
+    cuidado:"Uso externo. Suspenda o uso em caso de irritação."
   },
   "No.9 NAD+ Collagen Under Eye Patches": {
     serve:"Patches refrescantes que ajudam a reduzir a aparência de inchaço, olheiras e linhas finas, deixando a região dos olhos mais hidratada.",
