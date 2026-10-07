@@ -1,0 +1,45 @@
+name: Sincronizar preços e estoque da Central
+
+on:
+  schedule:
+    - cron: '3-58/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: central-catalogo
+  cancel-in-progress: false
+
+jobs:
+  sincronizar:
+    if: vars.DUNA_CENTRAL_SYNC_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Consultar preço e disponibilidade públicos
+        env:
+          DUNA_SUPABASE_PUBLISHABLE_KEY: ${{ vars.DUNA_SUPABASE_PUBLISHABLE_KEY }}
+        run: node scripts/sincronizar-central.mjs
+      - name: Gerar páginas e catálogo Meta
+        run: |
+          node scripts/gerar-paginas-produtos.mjs
+          node scripts/gerar-catalogo-meta.mjs
+          node --test tests/*.test.cjs
+      - name: Publicar somente arquivos do catálogo
+        run: |
+          git add app.js skincare.html skincare-data.js catalogo-meta.csv sitemap.xml index.html catalogo.html produtos/
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Sincroniza preço e disponibilidade da Central'
+          # Sem force, rebase ou resolução automática: se main mudou, falha e
+          # a próxima execução parte da nova versão, preservando trabalho humano.
+          git push origin HEAD:main
