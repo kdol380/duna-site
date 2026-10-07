@@ -48,6 +48,13 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 | Feed do catálogo Meta | `catalogo-meta.csv` | Gerado pelo script `scripts/gerar-catalogo-meta.mjs` |
 | Publicação | Cloudflare | Site estático publicado a partir da branch `main`; URLs sem `.html` |
 
+## Integração com a Central
+
+- Leia `docs/sincronizacao-central.md` antes de alterar preços, estoque, vínculos ou a rotina automática.
+- Para produtos vinculados, preço de venda e disponibilidade vêm da Central. Edições manuais desses campos serão substituídas no próximo ciclo.
+- A rotina autorizada de sincronização é a exceção de commits automáticos em `main`, limitada aos campos comerciais e arquivos gerados. Mudanças humanas continuam por branch e PR.
+- Decants ficam separados por `precoDecantBase` e `disponivelDecant`; não sincronizar com estoque de frascos fechados.
+
 ## Regras do catálogo de perfumes
 
 - `preco` é um número sem `R$`, por exemplo `preco:279`.

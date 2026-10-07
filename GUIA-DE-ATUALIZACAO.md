@@ -2,7 +2,7 @@
 
 - **Responsáveis autorizados:** Josué e Isac (`@isacrezendemarques380`)
 - **Execução:** Josué ou Isac com apoio do Codex
-- **Última atualização:** 25/09/2026
+- **Última atualização:** 07/10/2026
 **Revisão:** sempre que o catálogo ou a forma de publicação mudar
 
 ## Finalidade
@@ -47,6 +47,12 @@ Josué ou Isac confere a prévia local ou a branch de revisão
         ↓
 Aprovação e publicação no site oficial
 ```
+
+## Preço e estoque pela Central
+
+Com a sincronização ativada, altere o preço de venda e o estoque dos produtos vinculados na Central. Estoque zero ou produto inativo aparece como esgotado após uma execução e publicação; há atraso de alguns minutos, sem prazo garantido. Fotos, textos, layout e inclusão de produtos continuam no GitHub. Veja configuração, pausa e tratamento de falhas em `docs/sincronizacao-central.md`.
+
+Os exemplos manuais abaixo valem para produtos ainda não vinculados e mudanças editoriais. Para um produto vinculado, corrija o dado comercial na Central.
 
 ## Como pedir uma alteração
 
@@ -177,4 +183,4 @@ Inclua as páginas de `produtos/`, `skincare-data.js`, `sitemap.xml` e `catalogo
 
 `shop-core.js` centraliza orçamento, classificação do quiz e descontos. `discovery.js` e `discovery.css` implementam favoritos locais, comparação, kit e cotação manual. O CEP é opcional e vai na mensagem do pedido: não há cálculo automático de frete. Favoritos ficam somente neste navegador.
 
-A disponibilidade de decants ainda segue a regra anterior do catálogo, sem estoque separado de líquido. O controle de frascos abertos e volumes será tratado em uma etapa própria no Supabase.
+Os decants preservam preço-base e disponibilidade manuais nos campos `precoDecantBase` e `disponivelDecant`, sem acompanhar o estoque do frasco fechado e sem estoque separado de líquido. O controle de frascos abertos e volumes será tratado em uma etapa própria no Supabase.
