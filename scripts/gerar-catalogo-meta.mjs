@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import "../shop-core.js";
 import { fileURLToPath } from "node:url";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
@@ -80,7 +81,7 @@ function genderForMeta(value) {
 
 function feedRow(product, kind) {
   const name = fullName(product);
-  const productSlug = slug(name);
+  const productSlug = globalThis.DunaShop.productURL(product).split("/").pop().replace(/\.html$/, "");
   const page = kind === "skincare" ? "skincare" : "catalogo";
   const productType = kind === "skincare"
     ? "Skincare"
@@ -154,7 +155,8 @@ for (const row of rows) {
   ids.add(row.id);
   if (!/^(in stock|out of stock)$/.test(row.availability)) throw new Error(`Disponibilidade inválida: ${row.id}`);
   if (!/^\d+\.\d{2} BRL$/.test(row.price)) throw new Error(`Preço inválido: ${row.id}`);
-  new URL(row.link);
+  const productPath = new URL(row.link).pathname;
+  await fs.access(path.join(rootDir, productPath));
   new URL(row.image_link);
   const imageRelativePath = new URL(row.image_link).pathname.replace("/duna-site/", "");
   try {

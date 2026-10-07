@@ -15,7 +15,10 @@
   const cep = value => String(value || "").replace(/\D/g, "");
   const validCEP = value => /^\d{5}-?\d{3}$/.test(String(value || "").trim()) && !/^(\d)\1{7}$/.test(cep(value));
   const formatCEP = value => cep(value).slice(0,8).replace(/^(\d{5})(\d)/, "$1-$2");
-  const productURL = product => `produtos/${slug((product.marca ? product.marca+" " : "")+(product.decant ? product.base+" Decant" : product.nome))}.html`;
+  // Preserve the published address after correcting the Numbuzin applicator's identity.
+  const productURL = product => product.marca === "Numbuzin" && product.nome === "No.9 NMN Retinol Lift Eye Cream"
+    ? "produtos/numbuzin-no-9-nad-bio-lifting-essence.html"
+    : `produtos/${slug((product.marca ? product.marca+" " : "")+(product.decant ? product.base+" Decant" : product.nome))}.html`;
   function orderSummary(entries, bottle=BOTTLE_PRICE){
     let outros=0, liquidoDecants=0, frascosDecants=0, qtdDecants=0;
     for(const {product:p,quantity:q} of entries){

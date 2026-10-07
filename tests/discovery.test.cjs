@@ -55,7 +55,7 @@ test('CEP valida formato e rejeita entradas incompletas sem simular cotação',(
 
 test('páginas próprias têm conteúdo inicial, canonical, imagem e oferta coerentes',()=>{
   const names=fs.readdirSync(path.join(root,'produtos')).filter(n=>n.endsWith('.html'));
-  assert.equal(names.length,168);
+  assert.equal(names.length,200);
   const seen=new Set();
   for(const name of names){
     const html=fs.readFileSync(path.join(root,'produtos',name),'utf8');
