@@ -1956,60 +1956,174 @@ document.getElementById("qvRelated").addEventListener("click", e=>{
    ===================================================================== */
 const SKINCARE_GUIDE = {
   "345 Relief Cream": {
-    serve:"Hidrata e ajuda a acalmar a pele sensibilizada, além de cuidar da aparência de marcas e do ressecamento.",
-    indicado:"Para quem busca conforto, hidratação e uma rotina suave, inclusive em peles sensíveis ou com tendência a acne.",
-    quando:"Dia e noite",
-    ordem:"Depois do tônico e dos séruns, como último ou penúltimo passo da rotina.",
-    cuidado:"De manhã, finalize sempre com protetor solar."
-  },
-  "Retinal Shot Tightening Booster": {
-    serve:"Tratamento com retinal que ajuda a suavizar a aparência de linhas, textura irregular e poros, deixando a pele com aspecto mais firme.",
-    indicado:"Para quem quer começar um cuidado mais intenso com sinais de idade, textura ou poros aparentes.",
-    quando:"Somente à noite",
-    ordem:"Com a pele limpa, aplique uma pequena quantidade nas áreas desejadas e depois use hidratante.",
-    cuidado:"Se for iniciante, use em noites alternadas nas primeiras 2 semanas. Reduza a frequência se irritar e use protetor solar todos os dias."
-  },
-  "Deep Vita C Capsule Cream": {
-    serve:"Creme hidratante com vitamina C que ajuda a dar luminosidade e a deixar o tom da pele com aparência mais uniforme.",
-    indicado:"Para pele opaca, com tom desigual ou que precisa de mais viço e hidratação.",
-    quando:"Dia e noite",
-    ordem:"Misture as cápsulas com o gel, aplique depois do sérum no rosto e no pescoço.",
-    cuidado:"Na rotina da manhã, finalize com protetor solar."
-  },
-  "Zero Pore Pad": {
-    serve:"Discos que fazem uma esfoliação suave para retirar células mortas e excesso de oleosidade, ajudando na aparência de poros, cravos e textura.",
-    indicado:"Para quem sente a pele áspera, oleosa ou com poros e cravos aparentes.",
-    quando:"Dia ou noite",
-    ordem:"Depois da limpeza: passe primeiro o lado texturizado, depois o lado liso e dê leves batidinhas. Não precisa enxaguar.",
-    cuidado:"Se a pele for sensível, comece poucas vezes por semana e sem esfregar. Durante o dia, use protetor solar."
+    "oque": "Creme facial hidratante de textura leve.",
+    "serve": "Ajuda a aliviar o ressecamento e a melhorar o aspecto de marcas e vermelhidão, deixando a pele mais confortável.",
+    "indicado": "Pele desidratada ou sensibilizada que precisa de hidratação leve.",
+    "quando": "Dia e noite",
+    "ordem": "Aplique após o tônico e os séruns, espalhando suavemente no rosto.",
+    "cuidado": "Durante o dia, finalize com protetor solar.",
+    "fonteURL": "https://doctoraltheaglobal.com/products/345-relief-cream",
+    "fonteLabel": "Informações do fabricante"
   },
   "PDRN Pink Peptide Serum": {
-    serve:"Sérum hidratante que ajuda no viço, na aparência de firmeza e no tom irregular, deixando a pele com aspecto mais macio e luminoso.",
-    indicado:"Para pele seca, opaca ou com perda de firmeza e elasticidade.",
-    quando:"Dia e noite",
-    ordem:"Com a pele limpa e seca, aplique no rosto e pescoço antes do hidratante.",
-    cuidado:"De manhã, aplique o protetor solar depois do hidratante."
+    "oque": "Sérum facial com PDRN, peptídeos e niacinamida.",
+    "serve": "Hidrata e ajuda a melhorar a aparência de firmeza e do tom irregular, trazendo maciez e luminosidade.",
+    "indicado": "Pele opaca ou ressecada, com linhas finas e perda de viço.",
+    "quando": "Dia e noite",
+    "ordem": "Aplique na pele limpa, antes do hidratante, e espalhe com movimentos suaves.",
+    "cuidado": "Evite contato com os olhos. De manhã, finalize com protetor solar.",
+    "fonteURL": "https://medicube.us/products/rose-pdrn-pink-peptide-serum",
+    "fonteLabel": "Informações do fabricante"
   },
-  "No.9 NMN Retinol Lift Eye Cream": {
-    serve:"Creme para a área dos olhos com retinol, em embalagem com aplicador.",
-    indicado:"Para complementar o cuidado da região dos olhos.",
-    quando:"Conforme as instruções da embalagem",
-    ordem:"Aplique conforme as instruções do fabricante, evitando contato direto com os olhos.",
-    cuidado:"Uso externo. Suspenda o uso em caso de irritação."
+  "Retinal Shot Tightening Booster": {
+    "oque": "Concentrado facial com retinal a 0,1%.",
+    "serve": "Ajuda a suavizar a aparência de linhas, poros e textura irregular.",
+    "indicado": "Quem busca um cuidado gradual com textura e sinais de idade.",
+    "quando": "À noite",
+    "ordem": "Comece com uma pequena quantidade nas áreas desejadas, em noites alternadas durante as primeiras duas semanas. Depois aplique hidratante.",
+    "cuidado": "Reduza a frequência se houver irritação. Use protetor solar durante o dia e siga as restrições da embalagem.",
+    "fonteURL": "https://celimax.us/products/the-vita-a-retinal-shot-tightening-booster",
+    "fonteLabel": "Informações do fabricante"
+  },
+  "Zero Pore Pad": {
+    "oque": "Discos de tônico esfoliante com AHA e BHA.",
+    "serve": "Ajudam a remover células mortas e excesso de oleosidade, melhorando a aparência de poros e da textura.",
+    "indicado": "Pele com oleosidade, aspereza ou poros aparentes.",
+    "quando": "Dia ou noite, conforme tolerância",
+    "ordem": "Após a limpeza, passe o lado texturizado e depois o lado liso, sem esfregar. Continue com os demais cuidados.",
+    "cuidado": "Evite a área dos olhos e pele irritada. Introduza aos poucos e use protetor solar durante o dia.",
+    "fonteURL": "https://medicube.us/products/zero-pore-pad-1",
+    "fonteLabel": "Informações do fabricante"
   },
   "No.9 NAD+ Collagen Under Eye Patches": {
-    serve:"Patches refrescantes que ajudam a reduzir a aparência de inchaço, olheiras e linhas finas, deixando a região dos olhos mais hidratada.",
-    indicado:"Para a área dos olhos com aparência cansada, ressecada, inchada ou com linhas finas aparentes.",
-    quando:"Dia ou noite",
-    ordem:"Com a pele limpa, coloque um patch sob cada olho, deixe agir por cerca de 20 minutos e espalhe suavemente a essência restante.",
-    cuidado:"Produto de uso único. Retire imediatamente se houver desconforto ou irritação."
+    "oque": "Patches de hidrogel com NAD+ e colágeno para a região abaixo dos olhos.",
+    "serve": "Oferecem hidratação e sensação refrescante, ajudando na aparência de linhas finas e de cansaço.",
+    "indicado": "Área dos olhos ressecada ou com aparência cansada.",
+    "quando": "Dia ou noite",
+    "ordem": "Aplique sobre a pele limpa, abaixo dos olhos. Retire no tempo indicado na embalagem e espalhe suavemente a essência restante.",
+    "cuidado": "Uso único. Evite contato direto com os olhos e retire se sentir desconforto.",
+    "fonteURL": "https://us.numbuzin.com/products/no-9-nad-collagen-under-eye-patches-5ea",
+    "fonteLabel": "Informações do fabricante"
   },
   "No.9 NAD+ Retinal Volumetox Eye Cream": {
-    serve:"Creme com retinal e NAD+ que ajuda na aparência de firmeza, linhas, olheiras e tom irregular ao redor dos olhos.",
-    indicado:"Para quem busca um cuidado mais intenso para linhas finas, perda de firmeza e aparência cansada na região dos olhos.",
-    quando:"Preferencialmente à noite",
-    ordem:"Depois do sérum, aplique uma pequena quantidade ao redor dos olhos, sem encostar na linha d’água, e finalize com hidratante se necessário.",
-    cuidado:"Introduza aos poucos se a pele for sensível. Durante o dia, use protetor solar e reduza a frequência se houver irritação."
+    "oque": "Creme para a área dos olhos com retinal, NAD+ e niacinamida.",
+    "serve": "Ajuda a melhorar a aparência de linhas finas, firmeza e tom irregular ao redor dos olhos.",
+    "indicado": "Quem busca cuidado com linhas e perda de viço nessa região.",
+    "quando": "Preferencialmente à noite",
+    "ordem": "Aplique uma pequena quantidade ao redor dos olhos, conforme a embalagem, sem encostar na linha d’água.",
+    "cuidado": "Introduza gradualmente. Reduza a frequência se irritar e use protetor solar durante o dia.",
+    "fonteURL": "https://us.numbuzin.com/products/no-9-nad-retinal-volumetox-eye-cream",
+    "fonteLabel": "Informações do fabricante"
+  },
+  "Deep Vita C Capsule Cream": {
+    "oque": "Hidratante facial que combina cápsulas de vitamina C e base em gel.",
+    "serve": "Ajuda a hidratar e melhorar a aparência do tom desigual, deixando a pele com mais luminosidade.",
+    "indicado": "Pele opaca ou desidratada, com tom irregular.",
+    "quando": "Dia e noite",
+    "ordem": "Misture as cápsulas com o gel e aplique no rosto e no pescoço depois do sérum.",
+    "cuidado": "Durante o dia, finalize com protetor solar. Evite contato com os olhos.",
+    "fonteURL": "https://medicube.us/products/deep-vita-c-capsule-cream",
+    "fonteLabel": "Informações do fabricante"
+  },
+  "No.9 NMN Retinol Lift Eye Cream": {
+    "oque": "Creme de 10 ml para a área dos olhos, com NMN, retinol e aplicador.",
+    "serve": "Ajuda a hidratar e suavizar a aparência de linhas, promovendo um aspecto mais firme e iluminado.",
+    "indicado": "Área dos olhos com ressecamento, linhas finas ou perda de viço.",
+    "quando": "Conforme a embalagem; introdução gradual",
+    "ordem": "Use uma pequena quantidade na região dos olhos e espalhe delicadamente com o aplicador, seguindo as instruções da embalagem.",
+    "cuidado": "Evite contato direto com os olhos. Reduza o uso se irritar e use proteção solar durante o dia.",
+    "fonteURL": "https://prtimes.jp/main/html/rd/p/000000072.000035071.html",
+    "fonteLabel": "Informações do fabricante"
+  },
+  "Red Succinic Acid Peeling Pad": {
+    "oque": "Discos esfoliantes com ácido succínico, niacinamida e pantenol.",
+    "serve": "Ajudam a remover células mortas e excesso de oleosidade para uma textura mais suave.",
+    "indicado": "Pele com oleosidade ou textura irregular.",
+    "quando": "Dia ou noite, conforme tolerância",
+    "ordem": "Após lavar o rosto, passe um disco suavemente, evitando os olhos. Descarte após o uso e continue com sérum e hidratante.",
+    "cuidado": "Não esfregue nem aplique em pele irritada. Introduza aos poucos e use protetor solar durante o dia.",
+    "fonteURL": "https://www.ulta.com/p/red-succinic-acid-peeling-pad-pimprod2056603",
+    "fonteLabel": "Ficha do produto na Ulta"
+  },
+  "Deep Vita C Pad": {
+    "oque": "Discos de tônico com derivado de vitamina C e niacinamida.",
+    "serve": "Ajudam a hidratar e melhorar a luminosidade e a aparência de marcas e do tom desigual.",
+    "indicado": "Pele opaca ou com falta de uniformidade no tom.",
+    "quando": "Dia ou noite",
+    "ordem": "Após a limpeza, passe um disco suavemente pelo rosto, evitando os olhos. Descarte e continue a rotina.",
+    "cuidado": "Evite pele irritada. Na rotina diurna, finalize com protetor solar.",
+    "fonteURL": "https://medicube.us/products/deep-vita-c-pad",
+    "fonteLabel": "Informações do fabricante"
+  },
+  "PDRN Pink Collagen Gel Mask": {
+    "oque": "Máscara facial de hidrogel com PDRN e colágeno. Caixa com 4 máscaras.",
+    "serve": "Hidrata e ajuda a deixar a pele com aparência mais macia, luminosa e firme.",
+    "indicado": "Pele ressecada ou sem viço que precisa de um cuidado complementar.",
+    "quando": "Cuidado pontual, de dia ou à noite",
+    "ordem": "Após a limpeza e o tônico, ajuste as partes da máscara ao rosto. Respeite o tempo da embalagem; a marca orienta uso prolongado de 3 a 4 horas ou noturno.",
+    "cuidado": "Uso único. Retire se houver desconforto e evite contato com os olhos.",
+    "fonteURL": "https://medicube.us/products/pdrn-pink-collagen-gel-mask",
+    "fonteLabel": "Informações do fabricante"
+  },
+  "TXA Niacinamide Capsule Cream": {
+    "oque": "Hidratante facial em cápsulas e gel com ácido tranexâmico e niacinamida.",
+    "serve": "Ajuda a hidratar e melhorar a aparência de marcas e do tom irregular.",
+    "indicado": "Pele com tom desigual ou falta de luminosidade.",
+    "quando": "Dia e noite",
+    "ordem": "Misture as cápsulas com a base em gel e aplique no rosto e no pescoço após o sérum.",
+    "cuidado": "Evite contato com os olhos. Durante o dia, finalize com protetor solar.",
+    "fonteURL": "https://medicube.us/products/txa-niacinamide-capsule-cream",
+    "fonteLabel": "Informações do fabricante"
+  },
+  "Hyaluronic Moisturizing Capsule Cream": {
+    "oque": "Hidratante em cápsulas e gel com ácido hialurônico e pantenol.",
+    "serve": "Ajuda a reter hidratação e a deixar a pele mais macia e confortável, apoiando a barreira cutânea.",
+    "indicado": "Pele desidratada, ressecada ou com sensação de repuxamento.",
+    "quando": "Dia e noite",
+    "ordem": "Misture as cápsulas com o gel e aplique depois do sérum, espalhando suavemente.",
+    "cuidado": "Evite contato com os olhos. Na rotina da manhã, finalize com protetor solar.",
+    "fonteURL": "https://medicube.us/products/hyaluronic-acid-capsule-cream",
+    "fonteLabel": "Informações do fabricante"
+  },
+  "147 Barrier Cream": {
+    "oque": "Creme facial hidratante com ceramidas e ácido hialurônico.",
+    "serve": "Oferece hidratação e ajuda a manter a barreira da pele, trazendo conforto ao ressecamento.",
+    "indicado": "Pele seca ou desidratada que prefere um hidratante mais encorpado.",
+    "quando": "Dia e noite",
+    "ordem": "Aplique como etapa hidratante após os séruns. Durante o dia, use antes do protetor solar.",
+    "cuidado": "Evite contato com os olhos e suspenda se houver irritação.",
+    "fonteURL": "https://doctoraltheaglobal.com/products/dralthea-147_barrier_cream",
+    "fonteLabel": "Informações do fabricante"
+  },
+  "No.9 NAD+ Bio Lifting-sil Full Face Mask": {
+    "oque": "Máscara facial em duas partes com NAD+, colágeno e peptídeos. Caixa com 4 máscaras.",
+    "serve": "Hidrata e ajuda a melhorar a aparência de elasticidade e firmeza da pele.",
+    "indicado": "Pele desidratada ou com perda de viço.",
+    "quando": "Cuidado pontual, de dia ou à noite",
+    "ordem": "Com a pele limpa, ajuste a parte superior ao rosto e a inferior ao queixo, prendendo as alças confortavelmente nas orelhas. Deixe agir por pelo menos 20 minutos, conforme a embalagem.",
+    "cuidado": "Não aperte as alças. Uso único; retire se sentir desconforto.",
+    "fonteURL": "https://us.numbuzin.com/products/no-9-nad-bio-lifting-sil-full-face-mask",
+    "fonteLabel": "Informações do fabricante"
+  },
+  "Calcium Volume Eye Patch": {
+    "oque": "Patches de hidrogel para a área dos olhos, com complexo de cálcio da marca.",
+    "serve": "Hidratam e ajudam a suavizar a aparência de linhas finas, deixando a região com aspecto mais firme.",
+    "indicado": "Área dos olhos ressecada ou com linhas finas aparentes.",
+    "quando": "Dia ou noite",
+    "ordem": "Coloque os patches abaixo dos olhos sobre a pele limpa. Respeite o tempo indicado na embalagem e espalhe a essência restante após retirar.",
+    "cuidado": "Evite contato direto com os olhos. Descarte os patches usados e mantenha o pote fechado.",
+    "fonteURL": "https://drmelaxin.us/products/cemenrete-calcium-volume-eye-patch",
+    "fonteLabel": "Informações do fabricante"
+  },
+  "Collagen Night Wrapping Mask": {
+    "oque": "Máscara facial noturna que seca formando uma película, com colágeno e niacinamida.",
+    "serve": "Ajuda a manter a hidratação durante a noite e deixa a pele com aspecto mais macio e luminoso.",
+    "indicado": "Pele desidratada ou sem viço, como complemento da rotina noturna.",
+    "quando": "À noite",
+    "ordem": "Como último passo da rotina, espalhe uma camada fina, evitando olhos, sobrancelhas, boca e cabelo. Deixe secar e retire a película delicadamente pela manhã.",
+    "cuidado": "Não confundir com a máscara de hidrogel PDRN. Evite pele irritada e não puxe a película com força.",
+    "fonteURL": "https://medicube.us/products/collagen-night-wrapping-mask",
+    "fonteLabel": "Informações do fabricante"
   }
 };
 
@@ -2028,6 +2142,7 @@ skinQvWrap.innerHTML = `
         <h3 class="qv-name" id="skinQvName"></h3>
         <span class="skin-qv-time" id="skinQvTime"></span>
         <div class="skin-qv-explain">
+          <section><span>O que é</span><p id="skinQvOque"></p></section>
           <section><span>Para que serve</span><p id="skinQvServe"></p></section>
           <section><span>Quando é indicado</span><p id="skinQvIndicado"></p></section>
           <section><span>Como usar na rotina</span><p id="skinQvOrdem"></p></section>
@@ -2070,6 +2185,7 @@ function openSkinQuickView(card, sincronizarURL=true){
   document.getElementById("skinQvBrand").textContent = produto.marca;
   document.getElementById("skinQvName").textContent = produto.nome;
   document.getElementById("skinQvTime").textContent = guia.quando;
+  document.getElementById("skinQvOque").textContent = guia.oque;
   document.getElementById("skinQvServe").textContent = guia.serve;
   document.getElementById("skinQvIndicado").textContent = guia.indicado;
   document.getElementById("skinQvOrdem").textContent = guia.ordem;
@@ -2104,7 +2220,7 @@ document.querySelectorAll(".skin-card").forEach(card=>{
   const produto = produtoSkincareDoCard(card);
   if(!produto || !SKINCARE_GUIDE[produto.nome]) return;
   card.addEventListener("click", e=>{
-    if(e.target.closest(".skin-wa, .discovery-actions, .discovery-text-link")) return;
+    if(e.target.closest("a, .skin-wa, .discovery-actions")) return;
     openSkinQuickView(card);
   });
 });

@@ -117,7 +117,17 @@
     input.addEventListener('input',()=>{input.value=S.formatCEP(input.value);shippingCEP=S.validCEP(input.value)?input.value:'';error.textContent='';input.removeAttribute('aria-invalid');cartSend.href=waLink(msgPedido());});
     cartSend.addEventListener('click',e=>{if(input.value&&!S.validCEP(input.value)){e.preventDefault();delivery.open=true;error.textContent='Confira o CEP: ele precisa ter 8 números.';input.setAttribute('aria-invalid','true');input.focus();return;}cartSend.href=waLink(msgPedido());});
   }
-  document.querySelectorAll('.skin-card').forEach(card=>{const product=produtoSkincareDoCard(card);if(!product)return;(card.querySelector('.skin-photo')||card).insertAdjacentHTML('beforeend',`<div class="discovery-actions card-fav"><button type="button" class="fav-icon" data-favorite="${esc(product.nome)}" aria-pressed="false"></button></div>`);card.insertAdjacentHTML('beforeend',`<a class="discovery-text-link" href="${S.productURL(product)}">Ver página do produto →</a>`);});
+  document.querySelectorAll('.skin-card').forEach(card=>{
+    const product=produtoSkincareDoCard(card);if(!product)return;
+    const url=S.productURL(product),photo=card.querySelector('.skin-photo'),img=photo?.querySelector('img');
+    if(img){const link=document.createElement('a');link.href=url;link.className='skin-product-photo';img.replaceWith(link);link.append(img);}
+    const title=card.querySelector('h3');
+    if(title){const link=document.createElement('a');link.href=url;link.textContent=product.nome;title.replaceChildren(link);}
+    (photo||card).insertAdjacentHTML('beforeend',`<div class="discovery-actions card-fav"><button type="button" class="fav-icon" data-favorite="${esc(product.nome)}" aria-pressed="false"></button></div>`);
+    const price=card.querySelector('.skin-price');
+    if(price){price.hidden=true;price.insertAdjacentHTML('afterend',`<div class="skin-payment">${precoComPagamentoHTML(product.preco,product.disponivel)}</div>`);}
+    card.insertAdjacentHTML('beforeend',`<div class="skin-details-actions"><button type="button" class="skin-guide-button" aria-label="Guia de uso: ${esc(product.nome)}">Como usar</button><a class="discovery-text-link" href="${url}">Ver produto →</a></div>`);
+  });
 
   // Páginas pré-geradas têm conteúdo completo mesmo sem JavaScript.
   const productPage=document.querySelector('[data-product-page]');
