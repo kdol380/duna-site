@@ -2080,3 +2080,36 @@ header.nav.scrolled .nav-logo .nav-lockup, body.page-light .nav-logo .nav-lockup
   body.has-tabbar.no-scroll .wa-float{ display:none !important; }
 }
 @media (max-width:860px) and (prefers-reduced-motion:reduce){ .tabbar .tab-ind{ transition:none !important; } }
+
+/* Skincare usa a mesma grade, palco de foto e pagamento dos perfumes. */
+.skincare-page .skin-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+.skincare-page .skin-card{display:flex;flex-direction:column;min-width:0;padding:14px 14px 18px}
+.skincare-page .skin-photo{display:flex;align-items:center;justify-content:center;height:238px;flex:none;padding:18px;margin:0 0 16px;background:#fff;border:1px solid var(--areia);border-radius:12px;position:relative;overflow:hidden}
+.skin-product-photo{min-height:0;min-width:0;display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+.skincare-page .skin-photo img{width:100%;height:100%;object-fit:contain}
+.skincare-page .skin-brand{margin:0 0 5px;text-align:left}
+.skincare-page .skin-card h3{font-size:1.5rem;line-height:1.15;text-align:left;min-height:3.45em;margin:0 0 8px}
+.skin-card h3 a{color:inherit;text-decoration:none}
+.skincare-page .skin-card>p:not(.skin-brand){text-align:left;min-height:3em;margin:0 0 16px!important}
+.skin-price[hidden]{display:none}
+.skin-payment{margin-top:auto;margin-bottom:12px;min-height:80px}
+.skin-payment .card-payment{align-items:flex-start;text-align:left}
+.skincare-page .skin-wa{width:100%;min-height:44px;display:flex;align-items:center;justify-content:center;margin:0;border-radius:8px;text-align:center}
+.skin-details-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}
+.skin-guide-button,.skin-details-actions .discovery-text-link{font-family:var(--sans);font-size:.75rem;color:var(--ouro-fundo);padding:6px 0;margin:0;background:none;border:0;cursor:pointer}
+.skin-guide-button:hover,.skin-details-actions a:hover{text-decoration:underline}
+.skin-product-photo:focus-visible,.skin-card h3 a:focus-visible,.skin-guide-button:focus-visible{outline:2px solid var(--ouro-fundo);outline-offset:3px}
+.product-source{font-size:.8125rem;margin-top:12px;color:var(--ouro-fundo)}
+@media(max-width:620px){
+  .skincare-page .skin-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 10px}
+  .skincare-page .skin-card{padding:7px 7px 9px}
+  .skincare-page .skin-photo{height:154px;padding:10px;margin-bottom:12px}
+  .skincare-page .skin-brand{font-size:.625rem;letter-spacing:.08em}
+  .skincare-page .skin-card h3{font-size:1.125rem;min-height:4.6em;line-height:1.15;overflow-wrap:anywhere}
+  .skincare-page .skin-card>p:not(.skin-brand){font-size:.75rem!important;line-height:1.4!important;min-height:4.2em}
+  .skin-payment .card-pix-price strong{font-size:1.25rem}
+  .skin-payment .card-card-price,.skin-payment .card-installment{font-size:.625rem}
+  .skincare-page .skin-wa{font-size:.7rem;padding:8px 5px}
+  .skin-details-actions{flex-wrap:wrap;gap:0 6px}
+  .skin-guide-button,.skin-details-actions .discovery-text-link{font-size:.6875rem;min-height:36px}
+}

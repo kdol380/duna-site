@@ -101,3 +101,20 @@ test('textos fixos das páginas batem com as regras de shop-core.js',()=>{
   // cartão = Pix + 4%, sem erro de arredondamento
   assert.equal(S.cardPrice(100),104); assert.equal(S.cardPrice(279),290.16);
 });
+
+test('todos os skincare possuem guia completo, fonte e página com finalidade e uso',()=>{
+  const guide=vm.runInNewContext('('+source.match(/const SKINCARE_GUIDE = (\{[\s\S]*?\n\});/)[1]+')');
+  const sandbox={};vm.runInNewContext(fs.readFileSync(path.join(root,'skincare-data.js'),'utf8'),sandbox);
+  const products=sandbox.DUNA_SKINCARE;
+  assert.equal(products.length,17);
+  for(const p of products){
+    const g=guide[p.nome];assert.ok(g,p.nome);
+    for(const key of ['oque','serve','indicado','quando','ordem','cuidado','fonteURL'])assert.ok(g[key]?.length>5,`${p.nome}: ${key}`);
+    assert.equal(new URL(g.fonteURL).protocol,'https:');
+    const html=fs.readFileSync(path.join(root,S.productURL(p)),'utf8');
+    assert.ok(html.includes(S.escape(g.oque)));assert.ok(html.includes(S.escape(g.serve)));assert.ok(html.includes(S.escape(g.ordem)));assert.ok(html.includes(S.escape(g.fonteURL)));
+  }
+  for(const name of ['PDRN Pink Collagen Gel Mask','No.9 NAD+ Bio Lifting-sil Full Face Mask']){
+    const p=products.find(p=>p.nome===name);assert.match(p.tamanho,/4/);assert.match(guide[name].oque,/Caixa com 4/);
+  }
+});
