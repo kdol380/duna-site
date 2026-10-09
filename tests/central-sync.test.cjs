@@ -72,3 +72,24 @@ test('nomes da Central não alteram identidade, descrições nem fotos do site',
   payload.products.forEach(p=>{p.name='nome alterado';p.brand='outra marca';});
   assert.equal(synchronize(app,skin,links,payload).app,app);
 });
+
+test('cada perfume vinculado esgota e repõe, inclusive disponibilidade omitida, sem mudar vizinhos ou decants',async()=>{
+  const {synchronize,perfumeLiteral}=await lib;
+  const baseline=perfumeLiteral(app).products;
+  for(const link of links.filter(l=>l.tipo==='perfume')){
+    const payload=await fixture(),row=payload.products.find(p=>p.id===link.id);
+    const before=baseline.find(p=>p.nome===link.nome);
+    row.available=!(before.disponivel!==false);
+    const changed=synchronize(app,skin,links,payload);
+    const after=perfumeLiteral(changed.app).products;
+    for(let i=0;i<baseline.length;i++){
+      const expected=baseline[i].nome===link.nome?{...baseline[i],disponivel:row.available}:baseline[i];
+      assert.deepEqual(JSON.parse(JSON.stringify(after[i])),JSON.parse(JSON.stringify(expected)),link.nome);
+    }
+    assert.deepEqual(decants(changed.app),decants(app),link.nome);
+    assert.equal(synchronize(changed.app,skin,links,payload).app,changed.app);
+    row.available=before.disponivel!==false;
+    const restored=synchronize(changed.app,skin,links,payload);
+    assert.equal(perfumeLiteral(restored.app).products.find(p=>p.nome===link.nome).disponivel,row.available);
+  }
+});

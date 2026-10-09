@@ -40,13 +40,30 @@ export function synchronize(app, skin, links, payload) {
       if (p.preco === update.price && (p.disponivel !== false) === update.available) continue;
       const marker = `nome:${JSON.stringify(p.nome)}`;
       const start = nextApp.indexOf(marker);
-      const end = nextApp.indexOf('\n\n', start);
-      if (start < 0 || end < 0) throw Error('Formato do perfume mudou; revisar sincronizador');
+      // Delimita somente este objeto, inclusive quando não há linha em branco
+      // entre perfumes. Campos omitidos significam disponível no catálogo legado.
+      const objectStart = nextApp.lastIndexOf('{', start);
+      let end = -1, depth = 0, quote = null, escaped = false;
+      for (let i = objectStart; i < nextApp.length; i++) {
+        const c = nextApp[i];
+        if (quote) {
+          if (escaped) escaped = false;
+          else if (c === '\\') escaped = true;
+          else if (c === quote) quote = null;
+          continue;
+        }
+        if (c === '"' || c === "'" || c === '`') { quote = c; continue; }
+        if (c === '{') depth++;
+        if (c === '}' && --depth === 0) { end = i + 1; break; }
+      }
+      if (start < 0 || objectStart < 0 || end < 0) throw Error('Formato do perfume mudou; revisar sincronizador');
       const block = nextApp.slice(start,end);
-      if (!/\bpreco:\s*(?:null|\d+(?:\.\d+)?)/.test(block) || !/\bdisponivel:\s*(?:true|false)/.test(block))
-        throw Error('Campos comerciais do perfume ausentes');
-      const changed = block.replace(/\bpreco:\s*(?:null|\d+(?:\.\d+)?)/,`preco:${update.price}`)
-        .replace(/\bdisponivel:\s*(?:true|false)/,`disponivel:${update.available}`);
+      if (!/\bpreco:\s*(?:null|\d+(?:\.\d+)?)/.test(block))
+        throw Error(`Preço do perfume ausente: ${p.nome}`);
+      let changed = block.replace(/\bpreco:\s*(?:null|\d+(?:\.\d+)?)/,`preco:${update.price}`);
+      changed = /\bdisponivel:\s*(?:true|false)/.test(changed)
+        ? changed.replace(/\bdisponivel:\s*(?:true|false)/,`disponivel:${update.available}`)
+        : changed.replace(/\bpreco:/,`disponivel:${update.available}, preco:`);
       nextApp = nextApp.slice(0,start) + changed + nextApp.slice(end);
       changes.push({sku:link.sku, nome:link.nome, antes:{preco:p.preco,disponivel:p.disponivel!==false}, depois:{preco:update.price,disponivel:update.available}});
     } else {

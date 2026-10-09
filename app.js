@@ -74,7 +74,7 @@ const PERFUMES = [
     notas:{ topo:"Limão · Bergamota · Lavandin", coracao:"Cashmere · Canela · Mel", fundo:"Fava Tonka · Jasmim · Tabaco" },
     accent:"#b9944c", foto:"assets/p-maison-asrar-muharib.png", desc:"Limão, bergamota e lavandin na abertura. Mel, canela e cashmere compõem o coração, sobre um fundo de tonka, jasmim e tabaco." },
   { nome:"Hawas Diva", marca:"Rasasi", inspiracao:"lichia, rosa e baunilha", familia:"Floral", acorde:"Frutado", genero:"Feminino", periodo:"",
-    ocasiao:"", intensidade:"", preco:389, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"", intensidade:"", preco:389, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     precoDecantBase:389, disponivelDecant:true,
     notas:{ topo:"Frutas Vermelhas · Lichia · Ruibarbo", coracao:"Incenso · Rosa · Cedro", fundo:"Almíscar · Âmbar-gris · Baunilha" },
     accent:"#b9944c", foto:"assets/p-rasasi-hawas-diva.png", desc:"Frutas vermelhas, lichia e ruibarbo abrem um coração de incenso, rosa e cedro. Baunilha, almíscar e âmbar-gris completam a composição." },
@@ -428,7 +428,7 @@ const PERFUMES = [
     accent:"#b06a85", foto:"assets/p-delilah.jpg", desc:"Floral-frutado rosado e radiante: ruibarbo e lichia sobre rosa e baunilha. Feminino elogiadíssimo e versátil." },
 
   { nome:"Salvo", marca:"Maison Alhambra", inspiracao:"fresco especiado", familia:"Cítrico", acorde:"Especiado fresco", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"dia", intensidade:"marcante", preco:200, tamanho:"100 ml · EDP", selo:"Coringa",
+    ocasiao:"dia", intensidade:"marcante", disponivel:false, preco:200, tamanho:"100 ml · EDP", selo:"Coringa",
     precoDecantBase:200, disponivelDecant:true,
     notas:{ topo:"Bergamota", coracao:"Lavanda · Pimenta de Sichuan · Anis Estrelado · Noz-moscada", fundo:"Ambroxan · Baunilha" },
     accent:"#3a6a8a", foto:"assets/p-salvo.jpg", desc:"Fresco, picante e potente: bergamota e ambroxan no estilo coringa. Agrada todo mundo, do dia ao trabalho." },
