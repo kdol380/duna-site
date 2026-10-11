@@ -54,7 +54,7 @@ const PERFUMES = [
     notas:{ topo:"", coracao:"", fundo:"" },
     accent:"#b9944c", foto:"assets/p-rayhaan-nava-sol.webp", desc:"Uma composição frutada e floral. A apresentação da Rayhaan destaca doçura de frutas, flor de laranjeira e violeta." },
   { nome:"Glitch", marca:"Mykonos", inspiracao:"bergamota, abacaxi e patchouli", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"",
-    ocasiao:"", intensidade:"", preco:359, tamanho:"100 ml · Extrait de Parfum", selo:"Novo", disponivel:true,
+    ocasiao:"", intensidade:"", preco:359, tamanho:"100 ml · Extrait de Parfum", selo:"Novo", disponivel:false,
     precoDecantBase:359, disponivelDecant:true,
     notas:{ topo:"Bergamota · Abacaxi · Maçã", coracao:"Toranja · Lavanda · Artemísia · Lírio-do-vale · Pimenta Rosa · Baunilha · Jasmim", fundo:"Patchouli · Baunilha · Almíscar" },
     accent:"#b9944c", foto:"assets/p-mykonos-glitch.png", desc:"Fragrância cítrica com bergamota, abacaxi e maçã, notas aromáticas e florais e um fundo de patchouli, baunilha e almíscar." },
