@@ -7,7 +7,7 @@ import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ASSETS = ['styles.css', 'discovery.css', 'app.js', 'discovery.js', 'shop-core.js', 'skincare-data.js'];
+const ASSETS = ['styles.css', 'discovery.css', 'app.js', 'discovery.js', 'shop-core.js', 'skincare-data.js', 'consentimento.js'];
 
 const versao = {};
 for (const nome of ASSETS) {

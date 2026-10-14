@@ -35,8 +35,9 @@
 
 <link rel="stylesheet" href="styles.css?v=c295c9ef48" />
 <link rel="stylesheet" href="discovery.css?v=21b6904926" />
-<!-- Meta Pixel Code -->
+<!-- Meta Pixel Code (não carrega se a pessoa recusou os cookies; ver consentimento.js) -->
 <script>
+(function(){var r;try{r=localStorage.getItem('duna_cookies')}catch(e){}if(r==='recusado')return;
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -47,13 +48,11 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1629900201961215');
 fbq('track', 'PageView');
+})();
 </script>
 <!-- End Meta Pixel Code -->
 </head>
 <body class="page-light catalog-page">
-<noscript><img height="1" width="1" style="display:none" alt=""
-src="https://www.facebook.com/tr?id=1629900201961215&amp;ev=PageView&amp;noscript=1"
-/></noscript>
 
 <!-- ===================== BARRA DE ANÚNCIO ===================== -->
 <div class="announce" role="note">
@@ -232,7 +231,7 @@ src="https://www.facebook.com/tr?id=1629900201961215&amp;ev=PageView&amp;noscrip
       </div>
     </div>
     <div class="foot-bottom">
-      <p>© 2026 Duna Fragrâncias · Todos os direitos reservados.</p>
+      <p>© 2026 Duna Fragrâncias · Todos os direitos reservados. · <a href="privacidade.html">Privacidade e cookies</a></p>
       <div class="diamond"><i></i></div>
       <p>Curadoria honesta de fragrâncias · árabes, designer e nicho.</p>
     </div>
@@ -269,9 +268,10 @@ src="https://www.facebook.com/tr?id=1629900201961215&amp;ev=PageView&amp;noscrip
   <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.1-.5 0a6.5 6.5 0 01-1.9-1.2 7.3 7.3 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4a.4.4 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1A5 5 0 009 12.5a11 11 0 004.2 3.7c.6.2 1 .4 1.4.5a3.3 3.3 0 001.5.1c.5-.1 1.4-.6 1.6-1.1s.2-1 .1-1.1z"/></svg>
 </a>
 
+<script defer src="consentimento.js?v=8df215de4c"></script>
 <script defer src="shop-core.js?v=c2dd63542a"></script>
 <script defer src="skincare-data.js?v=bc09d058b1"></script>
-<script defer src="app.js?v=cac8e6a707"></script>
-<script defer src="discovery.js?v=bcc33493c2"></script>
+<script defer src="app.js?v=1932878148"></script>
+<script defer src="discovery.js?v=ceb075a2da"></script>
 </body>
 </html>

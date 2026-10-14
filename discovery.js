@@ -134,6 +134,7 @@
   if(productPage){
     const p=byName.get(productPage.dataset.productPage);
     if(p){
+      if(typeof metaTrack==="function") metaTrack("ViewContent",p);
       const actions=productPage.querySelector('[data-product-controls]');actions.innerHTML=controls(p);
       let selected=p;
       const purchase=productPage.querySelector('[data-product-add]'),price=productPage.querySelector('[data-product-price]'),direct=productPage.querySelector('[data-product-wa]');

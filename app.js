@@ -1446,7 +1446,27 @@ function mensagemProgressoDecants(qtd){
 }
 
 function bumpFloat(){ if(!cartFloat) return; cartFloat.classList.remove("bump"); void cartFloat.offsetWidth; cartFloat.classList.add("bump"); }
-function addToCart(nome){ if(!estaDisponivel(porNome[nome])) return; cart[nome]=(cart[nome]||0)+1; salvarCart(); renderCart(); bumpFloat(); showToast(nome); }
+/* Meta Pixel — eventos de compra. dunaTrack vem de consentimento.js e não envia nada se a pessoa recusou os cookies.
+   O ID segue o feed catalogo-meta.csv (perfume-… / skincare-…) para ligar eventos ao catálogo da Meta. */
+function metaId(p){
+  const slug = DunaShop.productURL(p).split("/").pop().replace(/\.html$/, "");
+  return `${p.tipo==="skincare" ? "skincare" : p.decant ? "decant" : "perfume"}-${slug}`;
+}
+function metaTrack(evento, p){
+  if(!p || typeof window.dunaTrack!=="function") return;
+  const dados = { content_ids:[metaId(p)], content_name:nomeCompleto(p), content_type:"product", currency:"BRL" };
+  if(temPreco(p)) dados.value = p.preco;
+  window.dunaTrack(evento, dados);
+}
+function addToCart(nome){ if(!estaDisponivel(porNome[nome])) return; cart[nome]=(cart[nome]||0)+1; salvarCart(); renderCart(); bumpFloat(); showToast(nome); metaTrack("AddToCart", porNome[nome]); }
+// "Finalizar no WhatsApp" é o evento mais próximo de uma venda que o site consegue ver
+cartSend?.addEventListener("click", ()=>{
+  if(typeof window.dunaTrack!=="function" || !totalItens()) return;
+  const itens = Object.keys(cart).map(n=>porNome[n]).filter(Boolean);
+  const dados = { content_ids:[...new Set(itens.map(metaId))], content_type:"product", num_items:totalItens(), currency:"BRL" };
+  if(!cartTemSemPreco()) dados.value = Number(totalPorPagamento().toFixed(2));
+  window.dunaTrack("InitiateCheckout", dados);
+});
 document.querySelectorAll("[data-skin-add]").forEach(btn=>btn.addEventListener("click", ()=>{
   const produto = produtoSkincareDoCard(btn.closest(".skin-card"));
   if(produto) addToCart(produto.nome);
@@ -1869,6 +1889,7 @@ function selecionarDecantQuickView(decant, volume){
 function openQuickView(nome, sincronizarURL=true){
   const p = porNome[nome];
   if(!p) return;
+  metaTrack("ViewContent", p);
   const decantBase = p.decant ? DECANTS.find(d=>d.base===p.base) : null;
   if(sincronizarURL) atualizarProdutoNaURL(p);
   const disponivel = estaDisponivel(p);
@@ -2170,6 +2191,7 @@ function openSkinQuickView(card, sincronizarURL=true){
   const produto = produtoSkincareDoCard(card);
   const guia = produto && SKINCARE_GUIDE[produto.nome];
   if(!produto || !guia) return;
+  metaTrack("ViewContent", produto);
   if(sincronizarURL) atualizarProdutoNaURL(produto);
   skinQvNome = produto.nome;
   skinQvLastFocus = document.activeElement;
@@ -2349,7 +2371,7 @@ function abrirBusca(){
         : `<p class="search-hint">Nada encontrado para “${DunaShop.escape(input.value.trim())}”. Tente outra nota ou marca, ou <a href="#" data-wa-busca>pergunte pra Duna no WhatsApp</a>.</p>`;
     };
     input.addEventListener("input", render);
-    out.addEventListener("click", e=>{ if(e.target.closest("[data-wa-busca]")){ e.preventDefault(); window.open(waLink(`Olá, Duna! Vocês têm ${input.value.trim()}?`),"_blank","noopener"); } });
+    out.addEventListener("click", e=>{ if(e.target.closest("[data-wa-busca]")){ e.preventDefault(); window.dunaTrack?.("Contact"); window.open(waLink(`Olá, Duna! Vocês têm ${input.value.trim()}?`),"_blank","noopener"); } });
     sheet.querySelector(".search-close").addEventListener("click", fecharBusca);
     sheet.addEventListener("click", e=>{ if(e.target===sheet) fecharBusca(); });
     document.addEventListener("keydown", e=>{ if(e.key==="Escape" && sheet.classList.contains("open")) fecharBusca(); });
