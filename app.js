@@ -236,7 +236,7 @@ const PERFUMES = [
     accent:"#b69a43", foto:"assets/p-queen-of-arabia.jpg", desc:"Coco com um toque salgado encontra heliotrópio, sândalo e baunilha. Feminino cremoso, sofisticado e envolvente, com apresentação luxuosa." },
 
   { nome:"Haya", marca:"Lattafa", inspiracao:"champanhe, morango e flores brancas", familia:"Floral", acorde:"Cítrico", genero:"Feminino", periodo:"Dia",
-    ocasiao:"dia", intensidade:"equilibrado", preco:239, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"dia", intensidade:"equilibrado", preco:239, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     precoDecantBase:239, disponivelDecant:true,
     notas:{ topo:"Champanhe · Morango · Tangerina · Laranja Sanguínea · Rosa", coracao:"Gardênia · Jasmim · Orquídea de Baunilha", fundo:"Âmbar · Sândalo · Castanha" },
     accent:"#d79aa6", foto:"assets/p-haya.jpg", desc:"Champanhe, morango e cítricos abrem um floral feminino alegre e luminoso. Gardênia, jasmim e baunilha deixam o perfume cremoso e elegante." },
