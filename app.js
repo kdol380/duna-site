@@ -422,7 +422,7 @@ const PERFUMES = [
     accent:"#8a5a2c", foto:"assets/p-zimaya-tiramisu.jpg", desc:"Sobremesa vestível: caramelo e mel com um toque de uísque sobre baunilha. Doce, cremoso e convidativo." },
 
   { nome:"Delilah", marca:"Maison Alhambra", inspiracao:"rosa e ruibarbo", familia:"Floral", acorde:"Rosa", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:250, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:true,
+    ocasiao:"especial", intensidade:"marcante", preco:250, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:false,
     precoDecantBase:250, disponivelDecant:true,
     notas:{ topo:"Ruibarbo · Lichia · Bergamota", coracao:"Rosa Turca · Peônia · Lírio", fundo:"Almíscar Branco · Cashmeran · Baunilha" },
     accent:"#b06a85", foto:"assets/p-delilah.jpg", desc:"Floral-frutado rosado e radiante: ruibarbo e lichia sobre rosa e baunilha. Feminino elogiadíssimo e versátil." },
