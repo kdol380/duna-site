@@ -67,7 +67,7 @@ globalThis.DUNA_SKINCARE = [
     "tamanho": "55 g",
     "foto": "assets/s-medicube-deep-vita-c.webp",
     "desc": "Hidratante facial que combina cápsulas de vitamina C e base em gel.",
-    "disponivel": true,
+    "disponivel": false,
     "tipo": "skincare"
   },
   {
