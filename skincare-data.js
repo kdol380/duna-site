@@ -7,7 +7,7 @@ globalThis.DUNA_SKINCARE = [
     "tamanho": "50 ml",
     "foto": "assets/s-dr-althea-345-relief-cream.jpg",
     "desc": "Creme facial hidratante de textura leve.",
-    "disponivel": true,
+    "disponivel": false,
     "tipo": "skincare"
   },
   {

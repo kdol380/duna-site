@@ -39,7 +39,7 @@ const PERFUMES = [
     notas:{ topo:"Maçã Golden Delicious · Mandarina", coracao:"Ylang-ylang · Jasmim · Flor de Laranjeira", fundo:"Baunilha · Almíscar · Musgo de Carvalho" },
     accent:"#b9944c", foto:"assets/p-lattafa-dalal.webp", desc:"Maçã e mandarina abrem uma composição floral com ylang-ylang, jasmim e flor de laranjeira. Baunilha, almíscar e musgo de carvalho completam o fundo." },
   { nome:"Supremacy Collector’s Edition", marca:"Afnan", inspiracao:"abacaxi, bétula e musgo", familia:"Amadeirado", acorde:"Frutado", genero:"Masculino", periodo:"",
-    ocasiao:"", intensidade:"", preco:549, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"", intensidade:"", preco:549, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     precoDecantBase:549, disponivelDecant:true,
     notas:{ topo:"Abacaxi · Bergamota · Maçã · Flores Brancas", coracao:"Flor de Laranjeira · Bétula · Âmbar", fundo:"Musgo de Carvalho · Almíscar · Âmbar-gris" },
     accent:"#b9944c", foto:"assets/p-afnan-supremacy-collectors-edition.webp", desc:"Abacaxi, bergamota, maçã e flores brancas na abertura. Flor de laranjeira, bétula e âmbar conduzem a um fundo de musgo de carvalho, almíscar e âmbar-gris." },
@@ -476,7 +476,7 @@ const PERFUMES = [
     accent:"#22364c", foto:"assets/p-nocturno.jpg", desc:"Bergamota, hortelã e especiarias sobre lavanda e madeiras secas. Limpo, moderno e fácil de usar do trabalho à noite." },
 
   { nome:"Attar Al Wesal", marca:"Al Wataniah", inspiracao:"aromático doce especiado", familia:"Gourmand", acorde:"Aromático", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:209, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"especial", intensidade:"marcante", disponivel:false, preco:209, tamanho:"100 ml · EDP", selo:"Novo",
     precoDecantBase:209, disponivelDecant:true,
     notas:{ topo:"Lavanda · Pera · Hortelã · Bergamota · Limão", coracao:"Canela · Sálvia Esclaréia · Cominho", fundo:"Baunilha Negra · Âmbar · Cedro · Patchouli" },
     accent:"#2c2a2c", foto:"assets/p-attar-al-wesal.jpg", desc:"Aromático adocicado com pera, lavanda e canela sobre baunilha escura. Envolvente, versátil e de excelente custo-benefício." },
