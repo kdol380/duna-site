@@ -326,7 +326,7 @@ const PERFUMES = [
     accent:"#b69773", foto:"assets/p-lintrude.jpg", desc:"Pera e bergamota iluminam um buquê intenso de tuberosa, flor de laranjeira e jasmim. Feminino marcante, cremoso e sofisticado." },
 
   { nome:"No. 2 Men", marca:"Maison Alhambra", inspiracao:"lavanda, especiarias e incenso", familia:"Amadeirado", acorde:"Especiado fresco", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"trabalho", intensidade:"marcante", preco:219, tamanho:"80 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"trabalho", intensidade:"marcante", preco:219, tamanho:"80 ml · EDP", selo:"Novo", disponivel:false,
     precoDecantBase:219, disponivelDecant:true,
     notas:{ topo:"Bergamota · Lavanda", coracao:"Gengibre · Cardamomo", fundo:"Vetiver · Incenso · Almíscar · Sândalo · Labdano · Madeira Guaiac" },
     accent:"#a8adb0", foto:"assets/p-no-2-men.jpg", desc:"Lavanda e bergamota ganham calor com gengibre e cardamomo, enquanto incenso, vetiver e madeiras criam uma base masculina elegante." },
