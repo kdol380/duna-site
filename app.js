@@ -542,7 +542,7 @@ const PERFUMES = [
     accent:"#1d6584", foto:"assets/p-rayhaan-azul.jpg", desc:"Limão e bergamota em uma construção limpa, aquática e amadeirada. Refrescante, direto e perfeito para calor intenso." },
 
   { nome:"Delilah Blanc", marca:"Maison Alhambra", inspiracao:"floral branco cremoso", familia:"Floral", acorde:"Cítrico", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"trabalho", intensidade:"equilibrado", preco:250, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"trabalho", intensidade:"equilibrado", disponivel:false, preco:250, tamanho:"100 ml · EDP", selo:"Novo",
     precoDecantBase:250, disponivelDecant:true,
     notas:{ topo:"Bergamota · Laranja · Pêssego", coracao:"Tuberosa · Jasmim · Néroli", fundo:"Baunilha · Almíscar Branco · Sândalo" },
     accent:"#d9d7d0", foto:"assets/p-delilah-blanc.webp", desc:"Floral branco limpo e cremoso, com cítricos suaves e fundo de baunilha, almíscar e sândalo. Elegante e confortável." },
