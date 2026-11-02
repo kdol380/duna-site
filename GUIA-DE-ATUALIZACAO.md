@@ -60,7 +60,8 @@ A página `https://dunafragrancias.com.br/lista` mostra perfumes, decants e skin
 
 - **Mandar o PDF pelo celular:** abra `/lista` e toque em **Enviar o PDF**. O compartilhamento do celular abre com o arquivo anexado; escolha o WhatsApp e o contato. No computador, use **Baixar PDF**.
 - **Mandar uma lista já filtrada:** envie o link com o filtro, por exemplo `dunafragrancias.com.br/lista?genero=Feminino` ou `dunafragrancias.com.br/lista?marca=Lattafa&disponiveis=1`.
-- **Sincronização:** a lista e o PDF são gerados a partir dos mesmos dados do site. Quando preço ou estoque mudam (pela Central ou por PR), a página muda junto e o PDF é refeito pela automação. A capa traz a data da última atualização. Um PDF já enviado não muda no celular do cliente; para valores atuais, mande de novo ou envie o link.
+- **Sincronização:** a lista e o PDF são gerados a partir dos mesmos dados do site. Quando um PR muda produtos, a página `/lista` muda no merge e o PDF é refeito pela automação “Atualizar PDF da lista de preços” poucos minutos depois (ela grava um commit “Atualiza PDF da lista de preços” na `main`, e a Cloudflare publica). Mudanças vindas da Central refazem o PDF na própria sincronização. A capa traz a data da última atualização. Um PDF já enviado não muda no celular do cliente; para valores atuais, mande de novo ou envie o link.
+- **Se o PDF não atualizar:** no GitHub, abra **Actions** → **Atualizar PDF da lista de preços** → **Run workflow** (branch `main`). Em seguida, confira a data na capa do PDF.
 - Os pedidos feitos pelo PDF chegam no WhatsApp com “Vi na lista de preços”, para identificar a origem.
 
 ## Como pedir uma alteração
