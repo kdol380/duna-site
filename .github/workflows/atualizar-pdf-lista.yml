@@ -1,0 +1,53 @@
+name: Atualizar PDF da lista de preços
+
+# Refaz duna-lista-de-precos.pdf logo depois que a lista muda na main (ex.: produtos novos por PR).
+# A sincronização da Central também refaz o PDF, mas o GitHub a executa com horas de intervalo.
+# Em Pull Request, só confere se o PDF gera (não grava nada).
+on:
+  push:
+    branches: [main]
+    paths:
+      - lista.html
+      - lista.css
+      - scripts/gerar-lista-pdf.mjs
+  pull_request:
+    paths:
+      - lista.html
+      - lista.css
+      - scripts/gerar-lista-pdf.mjs
+      - .github/workflows/atualizar-pdf-lista.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('pdf-lista-pr-{0}', github.event.number) || 'central-catalogo' }}
+  cancel-in-progress: false
+
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Conferir se a lista bate com os produtos
+        run: node --test tests/lista.test.cjs
+      - name: Gerar PDF
+        # Em PR força a geração para testar o Chrome do GitHub; na main só refaz se a lista mudou.
+        run: node scripts/gerar-lista-pdf.mjs --obrigatorio ${{ github.event_name == 'pull_request' && '--forcar' || '' }}
+      - name: Publicar o PDF
+        if: github.event_name != 'pull_request'
+        run: |
+          git add duna-lista-de-precos.pdf dados/lista-pdf.json
+          if git diff --cached --quiet; then echo "PDF já estava em dia."; exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Atualiza PDF da lista de preços'
+          # Sem force: se a main mudou no meio, falha e a próxima atualização refaz.
+          git push origin HEAD:main

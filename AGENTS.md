@@ -47,7 +47,7 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 | Aparência e responsividade | `styles.css` | Preserve desktop e celular |
 | Feed do catálogo Meta | `catalogo-meta.csv` | Gerado pelo script `scripts/gerar-catalogo-meta.mjs` |
 | Lista de preços (página `/lista`) | `lista.html`, `lista.css`, `lista.js` | `lista.html` é gerado por `scripts/gerar-lista-precos.mjs` (chamado por `gerar-paginas-produtos.mjs`). Não editar à mão |
-| Lista de preços em PDF | `duna-lista-de-precos.pdf` | Gerado por `scripts/gerar-lista-pdf.mjs` a partir de `lista.html`, com o Chrome instalado. A automação da `main` refaz o PDF quando a lista muda |
+| Lista de preços em PDF | `duna-lista-de-precos.pdf` | Gerado por `scripts/gerar-lista-pdf.mjs` a partir de `lista.html`, com o Chrome instalado. Na `main`, o workflow `atualizar-pdf-lista.yml` refaz o PDF minutos depois de qualquer mudança em `lista.html` (e a sincronização da Central também) |
 | Publicação | Cloudflare | Site estático publicado a partir da branch `main`; URLs sem `.html` |
 
 ## Integração com a Central
@@ -102,7 +102,7 @@ node --test tests/*.test.cjs              # testes
 ```
 
 - `gerar-paginas-produtos.mjs` já chama `scripts/versionar-assets.mjs`. Se só mudou CSS/JS, basta `node scripts/versionar-assets.mjs`.
-- Sem Chrome na máquina, `gerar-lista-pdf.mjs` só avisa; a automação da `main` gera o PDF no ciclo seguinte. Inclua `lista.html`, `duna-lista-de-precos.pdf` e `dados/lista-pdf.json` no commit quando mudarem.
+- Sem Chrome na máquina, `gerar-lista-pdf.mjs` só avisa; depois do merge, o workflow `atualizar-pdf-lista.yml` gera o PDF na `main` em poucos minutos. Inclua `lista.html`, `duna-lista-de-precos.pdf` e `dados/lista-pdf.json` no commit quando mudarem.
 - Abra o site no navegador em celular (≈390 px) e computador (≈1440 px): início, catálogo, decants, skincare, lista de preços e uma página de produto.
 - Teste também os endereços sem `.html` (ex.: `/catalogo`), como o site funciona no ar — a barra inferior deve marcar a aba certa.
 - Nenhum erro no console, nenhuma imagem quebrada, nada vazando para os lados no celular.
