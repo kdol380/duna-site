@@ -54,6 +54,15 @@ Com a sincronização ativada, altere o preço de venda e o estoque dos produtos
 
 Os exemplos manuais abaixo valem para produtos ainda não vinculados e mudanças editoriais. Para um produto vinculado, corrija o dado comercial na Central.
 
+## Lista de preços e PDF para enviar
+
+A página `https://dunafragrancias.com.br/lista` mostra perfumes, decants e skincare numa lista só, com busca e filtros por gênero, marca e disponibilidade. O PDF (`duna-lista-de-precos.pdf`) sai da mesma lista, em formato de celular, com índice clicável por gênero e faixa de preço.
+
+- **Mandar o PDF pelo celular:** abra `/lista` e toque em **Enviar o PDF**. O compartilhamento do celular abre com o arquivo anexado; escolha o WhatsApp e o contato. No computador, use **Baixar PDF**.
+- **Mandar uma lista já filtrada:** envie o link com o filtro, por exemplo `dunafragrancias.com.br/lista?genero=Feminino` ou `dunafragrancias.com.br/lista?marca=Lattafa&disponiveis=1`.
+- **Sincronização:** a lista e o PDF são gerados a partir dos mesmos dados do site. Quando preço ou estoque mudam (pela Central ou por PR), a página muda junto e o PDF é refeito pela automação. A capa traz a data da última atualização. Um PDF já enviado não muda no celular do cliente; para valores atuais, mande de novo ou envie o link.
+- Os pedidos feitos pelo PDF chegam no WhatsApp com “Vi na lista de preços”, para identificar a origem.
+
 ## Como pedir uma alteração
 
 Use uma solicitação objetiva:

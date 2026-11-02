@@ -46,6 +46,8 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 | Catálogo de perfumes | `catalogo.html` | Os cards são gerados a partir de `PERFUMES` |
 | Aparência e responsividade | `styles.css` | Preserve desktop e celular |
 | Feed do catálogo Meta | `catalogo-meta.csv` | Gerado pelo script `scripts/gerar-catalogo-meta.mjs` |
+| Lista de preços (página `/lista`) | `lista.html`, `lista.css`, `lista.js` | `lista.html` é gerado por `scripts/gerar-lista-precos.mjs` (chamado por `gerar-paginas-produtos.mjs`). Não editar à mão |
+| Lista de preços em PDF | `duna-lista-de-precos.pdf` | Gerado por `scripts/gerar-lista-pdf.mjs` a partir de `lista.html`, com o Chrome instalado. A automação da `main` refaz o PDF quando a lista muda |
 | Publicação | Cloudflare | Site estático publicado a partir da branch `main`; URLs sem `.html` |
 
 ## Integração com a Central
@@ -93,13 +95,15 @@ Este arquivo orienta qualquer assistente de código que trabalhe neste repositó
 Rode na raiz, nesta ordem, e inclua os arquivos gerados no mesmo commit:
 
 ```sh
-node scripts/gerar-paginas-produtos.mjs   # páginas de produtos, sitemap, skincare-data.js e ?v= dos CSS/JS
+node scripts/gerar-paginas-produtos.mjs   # páginas de produtos, lista.html, sitemap, skincare-data.js e ?v= dos CSS/JS
 node scripts/gerar-catalogo-meta.mjs      # feed catalogo-meta.csv
+node scripts/gerar-lista-pdf.mjs          # PDF da lista (só refaz se a lista mudou; precisa do Chrome)
 node --test tests/*.test.cjs              # testes
 ```
 
 - `gerar-paginas-produtos.mjs` já chama `scripts/versionar-assets.mjs`. Se só mudou CSS/JS, basta `node scripts/versionar-assets.mjs`.
-- Abra o site no navegador em celular (≈390 px) e computador (≈1440 px): início, catálogo, decants, skincare e uma página de produto.
+- Sem Chrome na máquina, `gerar-lista-pdf.mjs` só avisa; a automação da `main` gera o PDF no ciclo seguinte. Inclua `lista.html`, `duna-lista-de-precos.pdf` e `dados/lista-pdf.json` no commit quando mudarem.
+- Abra o site no navegador em celular (≈390 px) e computador (≈1440 px): início, catálogo, decants, skincare, lista de preços e uma página de produto.
 - Teste também os endereços sem `.html` (ex.: `/catalogo`), como o site funciona no ar — a barra inferior deve marcar a aba certa.
 - Nenhum erro no console, nenhuma imagem quebrada, nada vazando para os lados no celular.
 
