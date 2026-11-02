@@ -60,11 +60,13 @@
   });
   window.addEventListener('storage',e=>{if(e.key==='duna_favorites')favorites=readList('duna_favorites');if(e.key==='duna_compare')compared=new Set([...readList('duna_compare')].slice(0,3));hydrate();if(favDialog.el.open)renderFavorites();if(compareDialog.el.open)renderComparison();});
 
-  // Faixa de orçamento sempre visível, com base de pagamento explícita.
+  // Orçamento dentro do painel "Filtrar" (antes ficava fixo acima da grade e empurrava os produtos para fora da primeira tela).
+  // O valor ativo aparece no contador de resultados e no selo do botão Filtrar.
   if(filtersWrap){
     const budgetWrap=document.createElement('form');budgetWrap.className='budget-filter';budgetWrap.noValidate=true;
     budgetWrap.innerHTML=`<label for="budgetMax">Até quanto quer investir?<span>Preço por unidade, sem frete</span></label><div><span aria-hidden="true">R$</span><input id="budgetMax" type="number" min="1" step="0.01" inputmode="decimal" placeholder="Sem limite" value="${budgetMax||''}" aria-describedby="budgetError"><select id="budgetPayment" aria-label="Forma de pagamento para o orçamento"><option value="pix">no Pix</option><option value="cartao">no cartão (total)</option></select><button type="submit">Aplicar</button><button type="button" id="budgetClear" aria-label="Remover limite de orçamento">Limpar</button></div><p id="budgetError" role="status"></p>`;
-    document.querySelector('.cat-toolbar').after(budgetWrap);
+    const filterHead=filtersWrap.querySelector('.filter-mobile-head');
+    filterHead?filterHead.after(budgetWrap):filtersWrap.prepend(budgetWrap);
     const input=budgetWrap.querySelector('input'),payment=budgetWrap.querySelector('select');payment.value=budgetPayment;
     budgetWrap.addEventListener('submit',e=>{e.preventDefault();if(!input.checkValidity()){budgetWrap.querySelector('#budgetError').textContent='Informe um valor maior que zero.';input.focus();return;}budgetWrap.querySelector('#budgetError').textContent='';budgetMax=S.budget(input.value);budgetPayment=payment.value;paginaAtual=1;const url=new URL(location.href);budgetMax?url.searchParams.set('ate',budgetMax):url.searchParams.delete('ate');budgetMax?url.searchParams.set('pagamento',budgetPayment):url.searchParams.delete('pagamento');history.replaceState(null,'',url);renderGrid();});
     budgetWrap.querySelector('#budgetClear').addEventListener('click',()=>{input.value='';budgetWrap.requestSubmit();});

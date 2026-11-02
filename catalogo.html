@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="styles.css?v=c295c9ef48" />
+<link rel="stylesheet" href="styles.css?v=7ea508604c" />
 <link rel="stylesheet" href="discovery.css?v=21b6904926" />
 <!-- Meta Pixel Code (não carrega se a pessoa recusou os cookies; ver consentimento.js) -->
 <script>
@@ -93,6 +93,7 @@ fbq('track', 'PageView');
   <nav>
     <a href="catalogo.html" aria-current="page">Perfumes</a>
     <a href="skincare.html">Skincare</a>
+    <a href="lista.html">Lista de preços</a>
     <a href="index.html#quiz">Descubra seu perfume</a>
     <a href="index.html#essencia">A Duna</a>
     <a href="index.html#pedir">Como pedir</a>
@@ -111,6 +112,7 @@ fbq('track', 'PageView');
     <h1>Nossos <span class="gold">perfumes</span></h1>
     <p>Fragrâncias selecionadas, com notas, estilos e ocasiões para você encontrar sua próxima assinatura.</p>
     <span class="cat-count" id="catCount">—</span>
+    <a class="cat-lista-link" href="lista.html">Ver tudo em lista ou PDF →</a>
   </div>
 </section>
 
@@ -141,14 +143,6 @@ fbq('track', 'PageView');
           <small><span data-tab-count="decants"></span></small>
         </button>
       </div>
-      <div class="col-brands" id="colBrands">
-        <label class="col-brand-select" for="colBrandSelect">
-          <span>Marca</span>
-          <select id="colBrandSelect" aria-label="Filtrar por marca">
-            <option value="">Todas as marcas</option>
-          </select>
-        </label>
-      </div>
     </div>
 
     <section class="decant-offer" id="decantOffer" aria-label="Descontos progressivos em decants" hidden>
@@ -171,6 +165,14 @@ fbq('track', 'PageView');
         <input type="search" id="catSearch" placeholder="Buscar por nome, marca ou nota…" aria-label="Buscar perfume" autocomplete="off" />
       </div>
       <div class="cat-actions">
+        <div class="col-brands" id="colBrands">
+          <label class="col-brand-select" for="colBrandSelect">
+            <span>Marca</span>
+            <select id="colBrandSelect" aria-label="Filtrar por marca">
+              <option value="">Todas</option>
+            </select>
+          </label>
+        </div>
         <button class="cat-filter-toggle" id="catFilterToggle" type="button" aria-controls="filters" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M6 14v6" stroke-linecap="round"/></svg>
           <span>Filtrar</span>
@@ -213,6 +215,7 @@ fbq('track', 'PageView');
         <h5>Navegue</h5>
         <a href="catalogo.html">Perfumes</a>
         <a href="skincare.html">Skincare</a>
+        <a href="lista.html">Lista de preços</a>
         <a href="index.html#quiz">Descubra seu perfume</a>
         <a href="index.html#essencia">A Duna</a>
         <a href="index.html#pedir">Como pedir</a>
@@ -271,7 +274,7 @@ fbq('track', 'PageView');
 <script defer src="consentimento.js?v=8df215de4c"></script>
 <script defer src="shop-core.js?v=c2dd63542a"></script>
 <script defer src="skincare-data.js?v=94f47d17f0"></script>
-<script defer src="app.js?v=6cb9757389"></script>
-<script defer src="discovery.js?v=ceb075a2da"></script>
+<script defer src="app.js?v=d85d5711a3"></script>
+<script defer src="discovery.js?v=56a0e697b0"></script>
 </body>
 </html>

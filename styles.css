@@ -2113,3 +2113,64 @@ header.nav.scrolled .nav-logo .nav-lockup, body.page-light .nav-logo .nav-lockup
   .skin-details-actions{flex-wrap:wrap;gap:0 6px}
   .skin-guide-button,.skin-details-actions .discovery-text-link{font-size:.6875rem;min-height:36px}
 }
+
+/* =====================================================================
+   PRIMEIRA TELA COM PRODUTO (nov/2026)
+   Quem chega no catálogo pelo celular via só controles e nenhum perfume
+   (primeiro card a ~770 px; em Decants, ~1090 px). Aqui: orçamento foi
+   para dentro de "Filtrar", Marca entrou na linha de Filtrar/Ordenar,
+   cabeçalho e oferta de decants ficaram compactos no celular.
+   ===================================================================== */
+.cat-lista-link{ display:inline-block; margin:14px 0 0 12px; font:500 .8125rem/1.2 var(--sans); color:var(--ouro-fundo);
+  border-bottom:1px solid currentColor; }
+.cat-lista-link:hover{ color:var(--grafite); }
+.cat-actions .col-brands{ margin:0; }
+.cat-actions .col-brand-select{ gap:10px; }
+.cat-actions .col-brand-select select{ min-width:150px; padding:11px 34px 11px 16px; font-size:.86rem; }
+.cat-main .filters .budget-filter{ grid-column:1/-1; margin:0; }
+
+@media (max-width:620px){
+  .catalog-page .cat-header{ padding:108px 0 12px; }
+  .catalog-page .cat-header .wrap{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; }
+  .catalog-page .cat-header h1{ width:100%; font-size:2rem; }
+  .catalog-page .cat-header p{ display:none; }
+  .catalog-page .cat-count{ margin-top:0; padding:5px 11px; }
+  .cat-lista-link{ margin:0; font-size:.75rem; }
+  .catalog-page .cat-main{ padding-top:12px; }
+  .catalog-page .col-nav{ margin-bottom:10px; }
+
+  .catalog-page .cat-actions{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
+  .cat-actions .col-brands{ display:block; min-width:0; }
+  .cat-actions .col-brand-select{ position:relative; display:block; width:100%; min-height:46px; border:1px solid var(--areia);
+    border-radius:6px; background:var(--branco-puro); overflow:hidden; }
+  .cat-actions .col-brand-select span{ position:absolute; z-index:1; left:11px; top:6px; font-size:.75rem; font-weight:400;
+    letter-spacing:.1em; color:var(--grafite-45); pointer-events:none; }
+  .cat-actions .col-brand-select select{ width:100%; height:44px; min-width:0; margin:0; padding:16px 22px 4px 11px;
+    border:0; border-radius:0; background:transparent; font-size:.75rem; }
+  .catalog-page .cat-filter-toggle{ padding:10px 6px; gap:6px; }
+
+  /* decants: título, faixas de desconto, texto e botão numa caixa só, sem rolar para ver o primeiro decant */
+  .decant-offer{ display:flex; flex-direction:column; gap:8px; padding:12px; margin-bottom:12px; }
+  .decant-offer-copy{ display:contents; }
+  .decant-offer-copy .eyebrow{ display:none; }
+  .decant-offer-copy strong{ order:1; font-size:1.12rem; }
+  .decant-offer-tiers{ order:2; }
+  .decant-offer-copy p{ order:3; margin-top:0; font-size:.72rem; line-height:1.4; }
+  .decant-offer .decant-kit-btn{ order:4; align-self:flex-start; padding:10px 16px; font-size:.75rem; }
+  .decant-offer-tiers span{ min-height:0; padding:7px 4px; flex-direction:row; gap:6px; }
+  .decant-offer-tiers b{ font-size:.95rem; }
+  .decant-offer-tiers em{ margin-top:0; }
+}
+
+/* home: as novidades (produtos) vêm logo depois dos atalhos e já aparecem na primeira tela do celular */
+@media (max-width:620px){
+  .novidades.section-pad{ padding-top:24px; padding-bottom:40px; }
+  .novidades .nov-grid{ margin-top:14px; }
+  .novidades .nov-card.reveal{ opacity:1; transform:none; }  /* aparece já na borda da primeira tela, sinalizando que há mais abaixo */
+}
+
+/* página de produto (entrada pelos anúncios): botões empilhados no celular, texto numa linha só.
+   A regra antiga (.product-buy .btn{flex:1 1 100%}) perdia para discovery.css, carregado depois. */
+@media (max-width:620px){
+  .product-page-main .product-buy .btn{ flex:1 1 100%; min-width:0; justify-content:center; }
+}
