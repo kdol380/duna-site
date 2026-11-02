@@ -1175,9 +1175,10 @@ function renderGrid(){
   if(resultCountEl){
     const inicio = total ? (paginaAtual-1)*ITENS_POR_PAGINA+1 : 0;
     const fim = Math.min(paginaAtual*ITENS_POR_PAGINA, total);
-    resultCountEl.textContent = paginado && total>ITENS_POR_PAGINA
+    const faixaOrcamento = budgetMax ? ` · até ${moeda(budgetMax)} ${budgetPayment==="cartao" ? "no cartão" : "no Pix"}` : "";
+    resultCountEl.textContent = (paginado && total>ITENS_POR_PAGINA
       ? `${inicio}–${fim} de ${total} resultados`
-      : total + (total===1 ? " resultado" : " resultados");
+      : total + (total===1 ? " resultado" : " resultados")) + faixaOrcamento;
   }
   renderPaginacao(totalPaginas, total, paginado);
   const ativos = Object.values(sel).filter(v=>v!=="Todos" && v!=="Todas").length + Number(!!budgetMax);
