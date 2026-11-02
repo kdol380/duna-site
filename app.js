@@ -23,6 +23,15 @@ const compactMobile = window.matchMedia("(max-width: 620px)").matches;
 // preco: null  →  mostra "Sob consulta" (troque pelo valor, ex: preco:199, quando tiver os preços)
 // campo opcional: colecao:"arabes" | "nicho" | "designer"  → sem o campo, o perfume conta como "arabes"
 const PERFUMES = [
+  { nome:"Gris", marca:"Bidaya", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:509, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-bidaya-gris.png", desc:"Eau de Parfum masculino de perfil cítrico, aromático e amadeirado." },
+  { nome:"Hawas Kobra", marca:"Rasasi", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:339, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-hawas-kobra.png", desc:"Hawas Kobra, de Rasasi, em frasco de 100 ml." },
+  { nome:"Emir Noir", marca:"Rasasi", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:329, tamanho:"80 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-emir-noir.jpg", desc:"Perfume masculino com abertura cítrica e especiada, coração amadeirado e fundo de musgo, fava-tonca e couro." },
+  { nome:"Hawas Thunder", marca:"Rasasi", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:479, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-hawas-thunder.jpg", desc:"Hawas Thunder, de Rasasi, em frasco de 100 ml." },
+  { nome:"Club de Nuit Woman", marca:"Armaf", inspiracao:"", familia:"", acorde:"", genero:"Feminino", periodo:"", ocasiao:"", intensidade:"", preco:330, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-club-de-nuit-woman.jpg", desc:"Eau de Parfum feminino com notas cítricas e pêssego, coração floral e fundo de baunilha, almíscar, patchouli e vetiver." },
+  { nome:"La Vie Est Belle", marca:"Lancôme", inspiracao:"", familia:"", acorde:"", genero:"Feminino", periodo:"", ocasiao:"", intensidade:"", preco:799, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-la-vie-est-belle.jpg", desc:"La Vie Est Belle, de Lancôme, em frasco de 100 ml.", colecao:"designer" },
+  { nome:"Lady Million", marca:"Rabanne", inspiracao:"", familia:"", acorde:"", genero:"Feminino", periodo:"", ocasiao:"", intensidade:"", preco:629, tamanho:"80 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-lady-million.jpg", desc:"Lady Million, de Rabanne, em frasco de 80 ml.", colecao:"designer" },
+  { nome:"212 VIP Black", marca:"Carolina Herrera", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:629, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-212-vip-black.jpg", desc:"212 VIP Black, de Carolina Herrera, em frasco de 100 ml.", colecao:"designer" },
+  { nome:"Sauvage EDP", marca:"Dior", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:1099, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-dior-sauvage-edp.jpg", desc:"Sauvage EDP, de Dior, em frasco de 100 ml.", colecao:"designer" },
   { nome:"Divine", marca:"Rayhaan", inspiracao:"lichia, rosa e chocolate", familia:"Floral", acorde:"Frutado", genero:"Feminino", periodo:"",
     ocasiao:"", intensidade:"", preco:469, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:469, disponivelDecant:true,
@@ -39,7 +48,7 @@ const PERFUMES = [
     notas:{ topo:"Maçã Golden Delicious · Mandarina", coracao:"Ylang-ylang · Jasmim · Flor de Laranjeira", fundo:"Baunilha · Almíscar · Musgo de Carvalho" },
     accent:"#b9944c", foto:"assets/p-lattafa-dalal.webp", desc:"Maçã e mandarina abrem uma composição floral com ylang-ylang, jasmim e flor de laranjeira. Baunilha, almíscar e musgo de carvalho completam o fundo." },
   { nome:"Supremacy Collector’s Edition", marca:"Afnan", inspiracao:"abacaxi, bétula e musgo", familia:"Amadeirado", acorde:"Frutado", genero:"Masculino", periodo:"",
-    ocasiao:"", intensidade:"", preco:549, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
+    ocasiao:"", intensidade:"", preco:549, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:549, disponivelDecant:true,
     notas:{ topo:"Abacaxi · Bergamota · Maçã · Flores Brancas", coracao:"Flor de Laranjeira · Bétula · Âmbar", fundo:"Musgo de Carvalho · Almíscar · Âmbar-gris" },
     accent:"#b9944c", foto:"assets/p-afnan-supremacy-collectors-edition.webp", desc:"Abacaxi, bergamota, maçã e flores brancas na abertura. Flor de laranjeira, bétula e âmbar conduzem a um fundo de musgo de carvalho, almíscar e âmbar-gris." },
@@ -74,7 +83,7 @@ const PERFUMES = [
     notas:{ topo:"Limão · Bergamota · Lavandin", coracao:"Cashmere · Canela · Mel", fundo:"Fava Tonka · Jasmim · Tabaco" },
     accent:"#b9944c", foto:"assets/p-maison-asrar-muharib.png", desc:"Limão, bergamota e lavandin na abertura. Mel, canela e cashmere compõem o coração, sobre um fundo de tonka, jasmim e tabaco." },
   { nome:"Hawas Diva", marca:"Rasasi", inspiracao:"lichia, rosa e baunilha", familia:"Floral", acorde:"Frutado", genero:"Feminino", periodo:"",
-    ocasiao:"", intensidade:"", preco:389, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
+    ocasiao:"", intensidade:"", preco:359, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:389, disponivelDecant:true,
     notas:{ topo:"Frutas Vermelhas · Lichia · Ruibarbo", coracao:"Incenso · Rosa · Cedro", fundo:"Almíscar · Âmbar-gris · Baunilha" },
     accent:"#b9944c", foto:"assets/p-rasasi-hawas-diva.png", desc:"Frutas vermelhas, lichia e ruibarbo abrem um coração de incenso, rosa e cedro. Baunilha, almíscar e âmbar-gris completam a composição." },
@@ -98,13 +107,13 @@ const PERFUMES = [
     accent:"#cbc5b6", foto:"assets/p-maison-asrar-belgravia.jpg", desc:"Bergamota luminosa e cassis abrem uma composição amadeirada e almiscarada, com flores delicadas, sândalo, vetiver, cedro e musgo." },
 
   { nome:"Regent", marca:"Maison Asrar", inspiracao:"bergamota, gengibre e toranja", familia:"Amadeirado", acorde:"Cítrico", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:500, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"especial", intensidade:"marcante", preco:499, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:500, disponivelDecant:true,
     notas:{ topo:"Bergamota · Mandarina · Gengibre · Toranja", coracao:"Jasmim · Flor de Laranjeira · Íris", fundo:"Âmbar-gris · Cedro · Almíscar · Patchouli · Sândalo · Fava Tonka" },
     accent:"#183d31", foto:"assets/p-maison-asrar-regent.jpg", desc:"Cítricos e gengibre trazem energia à abertura, enquanto flores, íris, madeiras, âmbar-gris e tonka formam uma base quente, estruturada e elegante." },
 
   { nome:"Legacy", marca:"Maison Asrar", inspiracao:"pera, gengibre e bergamota", familia:"Amadeirado", acorde:"Floral branco", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:470, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"especial", intensidade:"marcante", preco:439, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:470, disponivelDecant:true,
     notas:{ topo:"Gengibre · Pera · Bergamota", coracao:"Flor de Laranjeira · Jasmim · Notas Amadeiradas", fundo:"Almíscar · Baunilha · Âmbar" },
     accent:"#24355d", foto:"assets/p-maison-asrar-legacy.jpg", desc:"Pera crocante, gengibre e bergamota abrem uma fragrância luminosa, com flores brancas, madeiras e um fundo envolvente de almíscar, baunilha e âmbar." },
@@ -422,7 +431,7 @@ const PERFUMES = [
     accent:"#8a5a2c", foto:"assets/p-zimaya-tiramisu.jpg", desc:"Sobremesa vestível: caramelo e mel com um toque de uísque sobre baunilha. Doce, cremoso e convidativo." },
 
   { nome:"Delilah", marca:"Maison Alhambra", inspiracao:"rosa e ruibarbo", familia:"Floral", acorde:"Rosa", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:250, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:false,
+    ocasiao:"especial", intensidade:"marcante", preco:269, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:true,
     precoDecantBase:250, disponivelDecant:true,
     notas:{ topo:"Ruibarbo · Lichia · Bergamota", coracao:"Rosa Turca · Peônia · Lírio", fundo:"Almíscar Branco · Cashmeran · Baunilha" },
     accent:"#b06a85", foto:"assets/p-delilah.jpg", desc:"Floral-frutado rosado e radiante: ruibarbo e lichia sobre rosa e baunilha. Feminino elogiadíssimo e versátil." },
@@ -530,7 +539,7 @@ const PERFUMES = [
     accent:"#201f21", foto:"assets/p-rayhaan-obsidian.jpg", desc:"Íris elegante e atalcada sobre couro, oud e madeiras cremosas. Sofisticado para encontros e ocasiões especiais." },
 
   { nome:"Aquatica", marca:"Rayhaan", inspiracao:"lima, coco e rum", familia:"Gourmand", acorde:"Cítrico", genero:"Masculino", periodo:"Dia",
-    ocasiao:"dia", intensidade:"equilibrado", preco:380, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
+    ocasiao:"dia", intensidade:"equilibrado", preco:319, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:380, disponivelDecant:true,
     notas:{ topo:"Lima · Leite de Coco · Bergamota · Tangerina", coracao:"Cana-de-açúcar · Jasmim · Hibisco · Gardênia", fundo:"Rum · Almíscar · Fava Tonka · Patchouli" },
     accent:"#40aeb6", foto:"assets/p-rayhaan-aquatica.webp", desc:"Lima vibrante e coco cremoso com cana-de-açúcar e rum. Tropical, diferente e feito para dias de sol." },
@@ -542,7 +551,7 @@ const PERFUMES = [
     accent:"#1d6584", foto:"assets/p-rayhaan-azul.jpg", desc:"Limão e bergamota em uma construção limpa, aquática e amadeirada. Refrescante, direto e perfeito para calor intenso." },
 
   { nome:"Delilah Blanc", marca:"Maison Alhambra", inspiracao:"floral branco cremoso", familia:"Floral", acorde:"Cítrico", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"trabalho", intensidade:"equilibrado", disponivel:false, preco:250, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"trabalho", intensidade:"equilibrado", disponivel:true, preco:250, tamanho:"100 ml · EDP", selo:"Novo",
     precoDecantBase:250, disponivelDecant:true,
     notas:{ topo:"Bergamota · Laranja · Pêssego", coracao:"Tuberosa · Jasmim · Néroli", fundo:"Baunilha · Almíscar Branco · Sândalo" },
     accent:"#d9d7d0", foto:"assets/p-delilah-blanc.webp", desc:"Floral branco limpo e cremoso, com cítricos suaves e fundo de baunilha, almíscar e sândalo. Elegante e confortável." },

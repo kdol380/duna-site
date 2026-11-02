@@ -8,7 +8,7 @@ const args = process.argv.slice(2);
 if (args.some(x=>x!=='--check')) throw Error('Uso: node scripts/sincronizar-central.mjs [--check]');
 const key = process.env.DUNA_SUPABASE_PUBLISHABLE_KEY;
 if (!key?.startsWith('sb_publishable_')) throw Error('Configure DUNA_SUPABASE_PUBLISHABLE_KEY; não use chave administrativa');
-const response = await fetch('https://pmvikxdddjqkrgqqmfyp.supabase.co/rest/v1/rpc/duna_catalog_prices_v1', {
+const response = await fetch('https://pmvikxdddjqkrgqqmfyp.supabase.co/rest/v1/rpc/duna_catalog_prices_v2', {
   method:'POST',headers:{apikey:key,'Content-Type':'application/json'},body:'{}',signal:AbortSignal.timeout(20000)
 });
 if (!response.ok) throw Error(`Central indisponível (HTTP ${response.status}); publicação preservada`);

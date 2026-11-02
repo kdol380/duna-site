@@ -3,11 +3,11 @@ globalThis.DUNA_SKINCARE = [
   {
     "nome": "345 Relief Cream",
     "marca": "Dr. Althea",
-    "preco": 330,
+    "preco": 329,
     "tamanho": "50 ml",
     "foto": "assets/s-dr-althea-345-relief-cream.jpg",
     "desc": "Creme facial hidratante de textura leve.",
-    "disponivel": false,
+    "disponivel": true,
     "tipo": "skincare"
   },
   {
@@ -67,7 +67,7 @@ globalThis.DUNA_SKINCARE = [
     "tamanho": "55 g",
     "foto": "assets/s-medicube-deep-vita-c.webp",
     "desc": "Hidratante facial que combina cápsulas de vitamina C e base em gel.",
-    "disponivel": false,
+    "disponivel": true,
     "tipo": "skincare"
   },
   {

@@ -2,9 +2,9 @@
 
 ## Funcionamento
 
-A Central é a fonte de preço de venda e disponibilidade dos 107 produtos vinculados em `dados/central-vinculos.json`. O vínculo usa o ID permanente do Supabase; mudar um nome na Central não troca o produto do site. Produto inativo ou estoque menor ou igual a zero aparece como esgotado. Quantidades, custos, clientes e vendas não são publicados.
+A Central é a fonte de preço de venda e disponibilidade dos 116 produtos vinculados em `dados/central-vinculos.json`. O vínculo usa o ID permanente do Supabase; mudar um nome na Central não troca o produto do site. Produto inativo ou estoque menor ou igual a zero aparece como esgotado. Quantidades, custos, clientes e vendas não são publicados.
 
-O workflow `.github/workflows/sincronizar-central.yml` consulta a projeção pública `duna_catalog_prices_v1`, atualiza os campos comerciais, regenera páginas e feed Meta, testa e grava somente os arquivos do catálogo em `main`. A Cloudflare publica essa alteração. Edições de layout, fotos, textos e novos produtos continuam pelo fluxo de branch e Pull Request. Antes de trabalhar, sincronize com a versão mais recente de `main`, pois a automação também gera commits.
+O workflow `.github/workflows/sincronizar-central.yml` consulta a projeção pública `duna_catalog_prices_v2`, atualiza os campos comerciais, regenera páginas e feed Meta, testa e grava somente os arquivos do catálogo em `main`. A Cloudflare publica essa alteração. Edições de layout, fotos, textos e novos produtos continuam pelo fluxo de branch e Pull Request. Antes de trabalhar, sincronize com a versão mais recente de `main`, pois a automação também gera commits.
 
 A consulta está programada a cada cinco minutos, mas não é instantânea: filas do GitHub e a publicação podem aumentar o prazo. Agendamentos podem atrasar ou ser descartados, e o GitHub pode desativá-los após 60 dias sem atividade no repositório público. O cliente precisa recarregar a página para ver a versão publicada. A Meta tem seu próprio intervalo de leitura do feed.
 
@@ -16,7 +16,7 @@ Continuam sob controle manual nesta fase. `precoDecantBase` e `disponivelDecant`
 
 ## Configuração e ativação
 
-1. Aplicar `supabase/20261007_catalog_prices.sql` no projeto correto. A função retorna somente ID, preço e disponibilidade da lista aprovada; não concede leitura das tabelas privadas.
+1. Aplicar `supabase/20261101_catalog_prices.sql` no projeto correto. A função retorna somente ID, preço e disponibilidade da lista aprovada; não concede leitura das tabelas privadas.
 2. Nas variáveis de Actions do repositório, configurar `DUNA_SUPABASE_PUBLISHABLE_KEY` com a chave publicável já usada pela Central. Nunca usar chave administrativa ou gravar chaves em arquivos do repositório.
 3. Integrar a implementação por Pull Request.
 4. Definir `DUNA_CENTRAL_SYNC_ENABLED` como `true` e executar manualmente o workflow na aba Actions.
@@ -46,3 +46,7 @@ node --test tests/*.test.cjs
 ```
 
 `--check` compara sem gravar. Os testes simulam preço, esgotamento, reposição e respostas inválidas, e verificam que os decants permanecem iguais.
+
+## Transição de novembro de 2026
+
+A consulta v2 inclui os nove produtos novos. A v1 permanece com a lista anterior, permitindo preparar a v2 sem interromper o site publicado antes deste lote. O formato de resposta segue version: 1.

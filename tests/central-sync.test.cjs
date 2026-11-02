@@ -25,10 +25,10 @@ function decants(source) {
   const code=source.slice(source.indexOf('const DECANT_FRASCO ='),source.indexOf('const colNav ='));
   return JSON.parse(JSON.stringify(vm.runInNewContext(code+';DECANTS.map(p=>({nome:p.nome,preco:p.preco,disponivel:p.disponivel,opcoes:p.opcoes}))',{DunaShop:S,PERFUMES:perfumes,ehBodySpray:p=>/body spray/i.test(p.nome)})));
 }
-test('vínculos cobrem 107 IDs únicos e lote sem mudanças não reescreve arquivos',async()=>{
+test('vínculos cobrem 116 IDs únicos e lote sem mudanças não reescreve arquivos',async()=>{
   const {synchronize}=await lib;
   const result=synchronize(app,skin,links,await fixture());
-  assert.equal(links.length,107);assert.equal(new Set(links.map(l=>l.id)).size,107);
+  assert.equal(links.length,116);assert.equal(new Set(links.map(l=>l.id)).size,116);
   assert.equal(result.app,app);assert.equal(result.skin,skin);assert.equal(result.changes.length,0);
 });
 test('preço com centavos e estoque zero alteram só dados comerciais; decants permanecem iguais',async()=>{
