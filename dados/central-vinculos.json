@@ -640,5 +640,59 @@
     "sku": "R-073",
     "nome": "Hawas Black",
     "tipo": "perfume"
+  },
+  {
+    "id": "bba6bc8b-419e-483f-8e96-47c5bcfb5f71",
+    "sku": "DUN-PAR-BID-108",
+    "nome": "Gris",
+    "tipo": "perfume"
+  },
+  {
+    "id": "905468db-2ee9-43f3-9aa0-573bfa0fcefb",
+    "sku": "DUN-PAR-RAS-109",
+    "nome": "Hawas Kobra",
+    "tipo": "perfume"
+  },
+  {
+    "id": "a6c63a9e-3051-4f8d-8dbd-fbabec122445",
+    "sku": "DUN-PAR-RAS-110",
+    "nome": "Emir Noir",
+    "tipo": "perfume"
+  },
+  {
+    "id": "bd03869c-75ea-4556-8d21-fa7f2ac1cf4e",
+    "sku": "DUN-PAR-RAS-111",
+    "nome": "Hawas Thunder",
+    "tipo": "perfume"
+  },
+  {
+    "id": "ead46806-eec5-46fa-a7ca-f22eecd4973f",
+    "sku": "DUN-PAR-ARM-116",
+    "nome": "Club de Nuit Woman",
+    "tipo": "perfume"
+  },
+  {
+    "id": "5bc8bdf6-0dde-4e4b-bd6c-46539c6a2a4b",
+    "sku": "DUN-PIM-LAN-112",
+    "nome": "La Vie Est Belle",
+    "tipo": "perfume"
+  },
+  {
+    "id": "734581bd-766e-4458-88d0-7c78f13171d8",
+    "sku": "DUN-PIM-RAB-113",
+    "nome": "Lady Million",
+    "tipo": "perfume"
+  },
+  {
+    "id": "89c53afd-bf3a-484b-9db8-20977844da2d",
+    "sku": "DUN-PIM-CHE-114",
+    "nome": "212 VIP Black",
+    "tipo": "perfume"
+  },
+  {
+    "id": "02d67c96-ef09-45d0-9a4a-711e3eed394e",
+    "sku": "DUN-PIM-DIO-115",
+    "nome": "Sauvage EDP",
+    "tipo": "perfume"
   }
 ]
