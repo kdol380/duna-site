@@ -47,7 +47,15 @@
         return {p,score,reasons};
       }).sort((a,b)=>b.score-a.score || (a.p.preco||Infinity)-(b.p.preco||Infinity) || a.p.nome.localeCompare(b.p.nome,"pt-BR"));
   }
-  const api={CARD_SURCHARGE_PCT,BOTTLE_PRICE,DECANT_TIERS,cardPrice,decantRate,normalize,slug,escape,money,budget,matchesBudget,cep,validCEP,formatCEP,productURL,orderSummary,rankProducts};
+  function promotion(p){
+    if(!p || p.disponivel===false || !(p.precoAnterior>p.preco) || !(p.preco>0) || Math.round(p.preco*100)!==Math.round(p.precoPromocional*100)) return null;
+    return {before:p.precoAnterior, percent:Math.floor((1-p.preco/p.precoAnterior)*100+1e-8)};
+  }
+  function promotionHTML(p){
+    const offer=promotion(p);
+    return offer ? `<span class="promo-line"><span class="promo-badge">${offer.percent}% OFF</span><s class="promo-before">${money(offer.before)}</s></span>` : "";
+  }
+  const api={promotion,promotionHTML,CARD_SURCHARGE_PCT,BOTTLE_PRICE,DECANT_TIERS,cardPrice,decantRate,normalize,slug,escape,money,budget,matchesBudget,cep,validCEP,formatCEP,productURL,orderSummary,rankProducts};
   root.DunaShop=api;
   if(typeof module!=="undefined") module.exports=api;
 })(typeof globalThis!=="undefined" ? globalThis : this);

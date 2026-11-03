@@ -38,7 +38,7 @@ const PERFUMES = [
     notas:{ topo:"Lichia · Gengibre · Bergamota", coracao:"Peônia · Rosa · Baunilha", fundo:"Patchouli · Chocolate" },
     accent:"#b9944c", foto:"assets/p-rayhaan-divine.png", desc:"Lichia, gengibre e bergamota na abertura, com peônia, rosa e baunilha no coração. O fundo combina patchouli e chocolate." },
   { nome:"Club de Nuit Elite", marca:"Armaf", inspiracao:"chá verde, pimentas e vetiver", familia:"Cítrico", acorde:"Cítrico", genero:"Unissex", periodo:"",
-    ocasiao:"", intensidade:"", preco:549, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"", intensidade:"", preco:439, precoAnterior:549, precoPromocional:439, descontoDecant:0.2, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:549, disponivelDecant:true,
     notas:{ topo:"Chá Verde · Bergamota · Maçã · Pimenta de Sichuan · Pimenta Rosa", coracao:"Rosa Centifolia · Gerânio · Cassis · Notas Aromáticas · Notas Terrosas", fundo:"Vetiver · Âmbar · Cedro · Almíscar · Cashmeran" },
     accent:"#b9944c", foto:"assets/p-armaf-club-de-nuit-elite.webp", desc:"Chá verde e bergamota encontram maçã e pimentas. O coração reúne notas florais e aromáticas, sobre um fundo de vetiver, cedro e almíscar." },
@@ -281,7 +281,7 @@ const PERFUMES = [
     accent:"#c39a45", foto:"assets/p-shaheen-gold.jpg", desc:"Abacaxi e toranja abrem uma fragrância masculina frutada, com figo, lavanda, baunilha e tonka. Doce, moderna e fácil de usar." },
 
   { nome:"Emeer", marca:"Lattafa", inspiracao:"chá branco, cítricos e madeiras", familia:"Amadeirado", acorde:"Aromático", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"trabalho", intensidade:"marcante", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"trabalho", intensidade:"marcante", preco:249, precoAnterior:309, precoPromocional:249, descontoDecant:0.2, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:309, disponivelDecant:true,
     notas:{ topo:"Limão · Bergamota · Sálvia Esclaréia · Zimbro", coracao:"Chá Branco · Sândalo · Cardamomo · Olíbano", fundo:"Âmbar-gris · Cedro · Cashmeran · Patchouli" },
     accent:"#b98b36", foto:"assets/p-emeer.jpg", desc:"Cítricos e ervas aromáticas encontram chá branco, cardamomo e madeiras elegantes. Masculino sofisticado, versátil e de presença marcante." },
@@ -317,13 +317,13 @@ const PERFUMES = [
     accent:"#343434", foto:"assets/p-jorge-di-profumo.webp?v=20260908-correct", desc:"Cítricos e pimenta-preta abrem um aromático masculino elegante, com lavanda, tabaco, vetiver e madeiras. Versátil e marcante sem perder o frescor." },
 
   { nome:"La Vivacité", marca:"Maison Alhambra", inspiracao:"frutado floral com baunilha", familia:"Floral", acorde:"Doce", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:239, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"especial", intensidade:"marcante", preco:209, precoAnterior:239, precoPromocional:209, descontoDecant:0.15, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:239, disponivelDecant:true,
     notas:{ topo:"Cassis · Pera", coracao:"Íris · Flor de Laranjeira · Jasmim", fundo:"Patchouli · Fava Tonka · Praliné · Baunilha" },
     accent:"#d39a79", foto:"assets/p-la-vivacite.jpg", desc:"Pera e cassis encontram íris, flores brancas, praliné e baunilha. Feminino doce, elegante e envolvente para ocasiões especiais." },
 
   { nome:"La Vivacité Intensa", marca:"Maison Alhambra", inspiracao:"pera, íris e praliné", familia:"Gourmand", acorde:"Doce", genero:"Feminino", periodo:"Noite",
-    ocasiao:"especial", intensidade:"marcante", preco:199, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"especial", intensidade:"marcante", preco:169, precoAnterior:199, precoPromocional:169, descontoDecant:0.15, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:199, disponivelDecant:true,
     notas:{ topo:"Pera · Cassis", coracao:"Íris · Jasmim · Flor de Laranjeira", fundo:"Praliné · Baunilha · Fava Tonka" },
     accent:"#bd7b5c", foto:"assets/p-la-vivacite-intensa.png", desc:"Pera e cassis dão brilho à íris e às flores brancas, sobre uma base cremosa de praliné, baunilha e tonka. Feminino doce e intenso." },
@@ -608,18 +608,18 @@ function waAvisoEstoque(nome){
 /* ---- Preço: trata "Sob consulta" quando preco é null/0 ---- */
 function temPreco(p){ return typeof p.preco === "number" && p.preco > 0; }
 // rótulo para o card/quick-view (com <small>R$</small>)
-function precoHTML(p){ return temPreco(p) ? `<small>R$</small> ${p.preco}` : `<span class="preco-consulta">Sob consulta</span>`; }
+function precoHTML(p){ return temPreco(p) ? `<small>R$</small> ${Number(p.preco).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2})}` : `<span class="preco-consulta">Sob consulta</span>`; }
 // texto puro para mensagens do WhatsApp
-function precoTxt(p){ return temPreco(p) ? `R$ ${p.preco}` : "valor a combinar"; }
+function precoTxt(p){ return temPreco(p) ? moeda(p.preco) : "valor a combinar"; }
 function moeda(valor){
   return Number(valor).toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
 }
 const precoCartao = valorPix => DunaShop.cardPrice(valorPix); // regra em shop-core.js
-function precoComPagamentoHTML(valorPix, disponivel=true, attrs=""){
+function precoComPagamentoHTML(valorPix, disponivel=true, attrs="", produto=null){
   if(!(typeof valorPix === "number" && valorPix > 0)) return `<span class="preco-consulta">Sob consulta</span>`;
   if(!disponivel) return `<span class="card-price card-price-soldout"><s>${moeda(valorPix)}</s></span>`;
   const cartao = precoCartao(valorPix);
-  return `<div class="card-payment" ${attrs}>
+  return `<div class="card-payment" ${attrs}>${DunaShop.promotionHTML(produto)}
     <span class="card-card-price">${moeda(cartao)}</span>
     <span class="card-pix-price"><strong>${moeda(valorPix)}</strong> <span>no Pix</span></span>
     <span class="card-installment">ou 3x de <b>${moeda(cartao/3)}</b> sem juros</span>
@@ -784,6 +784,16 @@ if(novGrid){
   }
 }
 
+const ofertasGrid = document.getElementById("ofertasGrid");
+if(ofertasGrid){
+  const ofertas = PERFUMES.filter(p=>DunaShop.promotion(p));
+  document.getElementById("ofertas").hidden = !ofertas.length;
+  ofertasGrid.innerHTML = ofertas.map(p=>`<a class="nov-card offer-card" href="${DunaShop.productURL(p)}">
+    <span class="nov-thumb">${frascoVisual(p)}</span>
+    <span class="nov-brand">${p.marca}</span><span class="nov-name">${p.nome}</span>
+    ${precoComPagamentoHTML(p.preco,true,"",p)}<span class="offer-link">Ver oferta →</span></a>`).join("");
+}
+
 /* barra de anúncio: some suavemente quando a página rola */
 if(document.querySelector(".announce")){
   const onScrollAnnounce = ()=> document.body.classList.toggle("past-top", window.scrollY > 24);
@@ -845,12 +855,16 @@ function opcaoDecant(perfume, volume){
   const cfg = DECANT_VOLUMES.find(v=>v.ml===Number(volume)) || DECANT_VOLUMES[0];
   const bruto = perfume.precoDecantBase * fatorMlDecant(perfume.precoDecantBase) * cfg.ml * (1-cfg.descontoVolume);
   const precoLiquido = Math.round(bruto);
+  const anterior = precoLiquido + DECANT_FRASCO;
+  const promocional = perfume.descontoDecant ? Math.round(anterior * (1-perfume.descontoDecant) * 100)/100 : anterior;
   return {
+    precoAnterior:perfume.descontoDecant ? anterior : null,
+    precoPromocional:perfume.descontoDecant ? promocional : null,
     ml:cfg.ml,
     descontoVolume:cfg.descontoVolume,
-    precoLiquido,
-    precoMl:precoLiquido/cfg.ml,
-    preco:precoLiquido + DECANT_FRASCO
+    precoLiquido:Math.round((promocional-DECANT_FRASCO)*100)/100,
+    precoMl:(promocional-DECANT_FRASCO)/cfg.ml,
+    preco:promocional
   };
 }
 
@@ -862,6 +876,7 @@ const DECANTS = PERFUMES.filter(podeDecant).map(p => {
     nome:`${p.nome} · Decant`,
     base:p.nome,
     preco:opcoes[0].preco,
+    precoAnterior:opcoes[0].precoAnterior, precoPromocional:opcoes[0].precoPromocional,
     tamanho:"Escolha 3, 5 ou 10 ml",
     selo:"Decant",
     decant:true,
@@ -875,6 +890,7 @@ const DECANT_VARIANTS = DECANTS.flatMap(d=>d.opcoes.map(opcao=>({
   nome:`${d.base} · Decant ${opcao.ml}ml`,
   tamanho:`${opcao.ml} ml · vidrinho de decant incluso`,
   preco:opcao.preco,
+  precoAnterior:opcao.precoAnterior, precoPromocional:opcao.precoPromocional,
   precoLiquido:opcao.precoLiquido,
   precoMl:opcao.precoMl,
   decantMl:opcao.ml,
@@ -1089,7 +1105,7 @@ function cardHTML(p,i){
     <div class="card-foot">
       <div class="card-meta">
         <span class="card-size" ${p.decant?"data-decant-unit":""}>${p.decant?`R$ ${dinheiroDecimal(opcaoDecantPadrao.precoMl)} por ml`:p.tamanho}</span>
-        ${precoComPagamentoHTML(p.decant?opcaoDecantPadrao.preco:p.preco, disponivel, p.decant?'data-decant-total=""':"")}
+        ${precoComPagamentoHTML(p.decant?opcaoDecantPadrao.preco:p.preco, disponivel, p.decant?'data-decant-total=""':"", p)}
         ${p.decant?`<span class="decant-bottle-note">inclui o vidrinho de decant (R$ ${DECANT_FRASCO})</span>`:""}
       </div>
       ${disponivel ? `<button class="card-wa" ${p.decant?`data-add-decant="${p.base}" data-volume="${opcaoDecantPadrao.ml}"`:`data-add="${p.nome}"`}>
@@ -1321,7 +1337,7 @@ if(grid){
         btn.setAttribute("aria-pressed", String(ativo));
       });
       card.querySelector("[data-decant-unit]").textContent = `R$ ${dinheiroDecimal(opcao.precoMl)} por ml`;
-      card.querySelector("[data-decant-total]").outerHTML = precoComPagamentoHTML(opcao.preco, true, 'data-decant-total=""');
+      card.querySelector("[data-decant-total]").outerHTML = precoComPagamentoHTML(opcao.preco, true, 'data-decant-total=""', {...decant,...opcao});
       card.querySelector("[data-add-decant]").dataset.volume = opcao.ml;
       return;
     }
@@ -1704,7 +1720,7 @@ if(steps.length){
     document.getElementById("rFam").textContent = (best.marca ? best.marca + " · " : "") + perfilOlfativo(best) + " · " + best.selo;
     document.getElementById("rName").textContent = best.nome;
     document.getElementById("rDesc").textContent = best.desc;
-    document.getElementById("rPrice").innerHTML = precoComPagamentoHTML(best.preco) + " · " + best.tamanho;
+    document.getElementById("rPrice").innerHTML = precoComPagamentoHTML(best.preco, true, "", best) + " · " + best.tamanho;
     document.getElementById("rWa").href = waLink(
       `Olá, Duna! Fiz o teste no site e o resultado foi o *${nomeCompleto(best)}* (${best.tamanho})${temPreco(best) ? " — R$ " + best.preco : ""}. Quero saber mais! 🌙`
     );
@@ -1919,7 +1935,7 @@ function openQuickView(nome, sincronizarURL=true){
   qvDecantPicker.hidden = !decantBase;
   qvDecantPicker.innerHTML = decantBase ? seletorDecantHTML(decantBase,"quick") : "";
   document.getElementById("qvSize").textContent = p.tamanho;
-  document.getElementById("qvPrice").innerHTML = disponivel ? precoHTML(p) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p));
+  document.getElementById("qvPrice").innerHTML = disponivel ? DunaShop.promotionHTML(p) + precoHTML(p) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p));
   const qvAdd = document.getElementById("qvAdd");
   qvAdd.disabled = !disponivel;
   qvAdd.setAttribute("aria-disabled", String(!disponivel));

@@ -140,7 +140,7 @@
       const actions=productPage.querySelector('[data-product-controls]');actions.innerHTML=controls(p);
       let selected=p;
       const purchase=productPage.querySelector('[data-product-add]'),price=productPage.querySelector('[data-product-price]'),direct=productPage.querySelector('[data-product-wa]');
-      function updateProduct(){if(price)price.innerHTML=precoComPagamentoHTML(selected.preco,estaDisponivel(selected));if(direct)direct.href=estaDisponivel(selected)?waProduto(selected):waAvisoEstoque(nomeCompleto(selected));}
+      function updateProduct(){if(price)price.innerHTML=precoComPagamentoHTML(selected.preco,estaDisponivel(selected),"",selected);if(direct)direct.href=estaDisponivel(selected)?waProduto(selected):waAvisoEstoque(nomeCompleto(selected));}
       if(p.decant){
         selected=decantPorBaseEVolume.get(`${p.base}|3`);
         productPage.querySelector('[data-product-volumes]').innerHTML=seletorDecantHTML(p,'page');

@@ -2174,3 +2174,6 @@ header.nav.scrolled .nav-logo .nav-lockup, body.page-light .nav-logo .nav-lockup
 @media (max-width:620px){
   .product-page-main .product-buy .btn{ flex:1 1 100%; min-width:0; justify-content:center; }
 }
+
+/* Ofertas autorizadas: valores anteriores e atuais na mesma condição (Pix). */
+.ofertas{background:#f4eee3}.offer-card{text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:10px;position:relative}.offer-card .card-payment{width:100%;align-items:center}.promo-line{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:6px}.promo-badge{display:inline-block;background:#6b3025;color:#fff;padding:6px 10px;border-radius:4px;font:700 13px/1.2 sans-serif;letter-spacing:.04em}.promo-before{color:#716454;font-size:14px}.offer-card .promo-badge{position:absolute;top:14px;left:14px;font-size:16px}.offer-link{font-size:13px;font-weight:600;margin-top:6px}.offer-card .card-pix-price strong{font-size:26px}
