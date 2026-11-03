@@ -55,7 +55,7 @@ test('CEP valida formato e rejeita entradas incompletas sem simular cotação',(
 
 test('páginas próprias têm conteúdo inicial, canonical, imagem e oferta coerentes',()=>{
   const names=fs.readdirSync(path.join(root,'produtos')).filter(n=>n.endsWith('.html'));
-  assert.equal(names.length,209);
+  assert.equal(names.length,214);
   const seen=new Set();
   for(const name of names){
     const html=fs.readFileSync(path.join(root,'produtos',name),'utf8');
@@ -123,7 +123,8 @@ test('todos os skincare possuem guia completo, fonte e página com finalidade e 
   const expected={'Gris':509,'Hawas Kobra':339,'Emir Noir':329,'Hawas Thunder':479,'Club de Nuit Woman':330,'La Vie Est Belle':799,'Lady Million':629,'212 VIP Black':629,'Sauvage EDP':1099};
   for(const [name,price] of Object.entries(expected)){
     const p=perfumes.find(p=>p.nome===name);assert.ok(p,name);
-    assert.equal(p.preco,price);assert.equal(p.disponivelDecant,false);assert.equal(p.selo,'Novo');
+    assert.equal(p.preco,price);assert.equal(p.disponivelDecant,p.colecao!=='designer');
+    if(p.colecao!=='designer') assert.equal(p.precoDecantBase,price);assert.equal(p.selo,'Novo');
     assert.ok(fs.existsSync(path.join(root,p.foto)));
   }
   for(const name of ['La Vie Est Belle','Lady Million','212 VIP Black','Sauvage EDP'])assert.equal(perfumes.find(p=>p.nome===name).colecao,'designer');

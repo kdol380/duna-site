@@ -23,11 +23,11 @@ const compactMobile = window.matchMedia("(max-width: 620px)").matches;
 // preco: null  →  mostra "Sob consulta" (troque pelo valor, ex: preco:199, quando tiver os preços)
 // campo opcional: colecao:"arabes" | "nicho" | "designer"  → sem o campo, o perfume conta como "arabes"
 const PERFUMES = [
-  { nome:"Gris", marca:"Bidaya", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:509, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-bidaya-gris.png", desc:"Eau de Parfum masculino de perfil cítrico, aromático e amadeirado." },
-  { nome:"Hawas Kobra", marca:"Rasasi", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:339, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-hawas-kobra.png", desc:"Hawas Kobra, de Rasasi, em frasco de 100 ml." },
-  { nome:"Emir Noir", marca:"Rasasi", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:329, tamanho:"80 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-emir-noir.jpg", desc:"Perfume masculino com abertura cítrica e especiada, coração amadeirado e fundo de musgo, fava-tonca e couro." },
-  { nome:"Hawas Thunder", marca:"Rasasi", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:479, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-hawas-thunder.jpg", desc:"Hawas Thunder, de Rasasi, em frasco de 100 ml." },
-  { nome:"Club de Nuit Woman", marca:"Armaf", inspiracao:"", familia:"", acorde:"", genero:"Feminino", periodo:"", ocasiao:"", intensidade:"", preco:330, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-club-de-nuit-woman.jpg", desc:"Eau de Parfum feminino com notas cítricas e pêssego, coração floral e fundo de baunilha, almíscar, patchouli e vetiver." },
+  { nome:"Gris", marca:"Bidaya", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:509, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, precoDecantBase:509, disponivelDecant:true, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-bidaya-gris.png", desc:"Eau de Parfum masculino de perfil cítrico, aromático e amadeirado." },
+  { nome:"Hawas Kobra", marca:"Rasasi", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:339, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, precoDecantBase:339, disponivelDecant:true, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-hawas-kobra.png", desc:"Hawas Kobra, de Rasasi, em frasco de 100 ml." },
+  { nome:"Emir Noir", marca:"Rasasi", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:329, tamanho:"80 ml · EDP", selo:"Novo", disponivel:true, precoDecantBase:329, disponivelDecant:true, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-emir-noir.jpg", desc:"Perfume masculino com abertura cítrica e especiada, coração amadeirado e fundo de musgo, fava-tonca e couro." },
+  { nome:"Hawas Thunder", marca:"Rasasi", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:479, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, precoDecantBase:479, disponivelDecant:true, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-hawas-thunder.jpg", desc:"Hawas Thunder, de Rasasi, em frasco de 100 ml." },
+  { nome:"Club de Nuit Woman", marca:"Armaf", inspiracao:"", familia:"", acorde:"", genero:"Feminino", periodo:"", ocasiao:"", intensidade:"", preco:330, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true, precoDecantBase:330, disponivelDecant:true, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-club-de-nuit-woman.jpg", desc:"Eau de Parfum feminino com notas cítricas e pêssego, coração floral e fundo de baunilha, almíscar, patchouli e vetiver." },
   { nome:"La Vie Est Belle", marca:"Lancôme", inspiracao:"", familia:"", acorde:"", genero:"Feminino", periodo:"", ocasiao:"", intensidade:"", preco:799, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-la-vie-est-belle.jpg", desc:"La Vie Est Belle, de Lancôme, em frasco de 100 ml.", colecao:"designer" },
   { nome:"Lady Million", marca:"Rabanne", inspiracao:"", familia:"", acorde:"", genero:"Feminino", periodo:"", ocasiao:"", intensidade:"", preco:629, tamanho:"80 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-lady-million.jpg", desc:"Lady Million, de Rabanne, em frasco de 80 ml.", colecao:"designer" },
   { nome:"212 VIP Black", marca:"Carolina Herrera", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:629, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-212-vip-black.jpg", desc:"212 VIP Black, de Carolina Herrera, em frasco de 100 ml.", colecao:"designer" },
@@ -743,7 +743,7 @@ const clearFiltersBtn = document.getElementById("catClearFilters");
    ===================================================================== */
 const COLECOES = {
   todos:    { label:"Toda a Coleção", kicker:"A curadoria completa" },
-  arabes:   { label:"Marcas Árabes",  kicker:"Lattafa · Armaf · Alhambra…" },
+  arabes:   { label:"Perfumes Árabes",  kicker:"Lattafa · Armaf · Alhambra…" },
   nicho:    { label:"Nicho",          kicker:"Casas autorais e raras" },
   designer: { label:"Designer",       kicker:"As grifes que você ama" }
 };
@@ -811,13 +811,14 @@ let shippingCEP = "";
 let paginaAtual = Math.max(1, Number(new URLSearchParams(location.search).get("pagina")) || 1);
 
 // seleção ativa do catálogo: coleção (todos|arabes|nicho|designer), marca ou body spray
-let colecaoAtiva = "todos";
+let colecaoAtiva = document.getElementById("colNav") ? "arabes" : "todos";
 let marcaAtiva = null;        // ex.: "Lattafa" (inclui "Lattafa Pride")
 let tipoAtivo = null;         // "bodyspray"
 {
   const q = new URLSearchParams(location.search);
   const c = q.get("colecao");
-  if(c && COLECOES[c] && c!=="todos") colecaoAtiva = c;
+  if(c && COLECOES[c]) colecaoAtiva = c;
+  if(q.get("tipo") || q.get("marca") || q.get("busca")) colecaoAtiva = "todos";
   if(q.get("marca")) marcaAtiva = q.get("marca");
   if(["bodyspray","decants"].includes(q.get("tipo"))) tipoAtivo = q.get("tipo");
 }
@@ -934,8 +935,8 @@ function setTipo(t, push=true){
 }
 
 if(colNav){
-  const nEl = colNav.querySelector('[data-tab-count="todos"]');
-  if(nEl){ const n = PERFUMES.length; nEl.textContent = `${n} ${n===1?"fragrância":"fragrâncias"}`; }
+  const nEl = colNav.querySelector('[data-tab-count="arabes"]');
+  if(nEl){ const n = contaColecao("arabes"); nEl.textContent = `${n} ${n===1?"fragrância":"fragrâncias"}`; }
   const dEl = colNav.querySelector('[data-tab-count="decants"]');
   if(dEl){ const n = DECANTS.length; dEl.textContent = `${n} ${n===1?"fragrância":"fragrâncias"} · 3, 5 ou 10 ml`; }
 
