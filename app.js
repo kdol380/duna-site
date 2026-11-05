@@ -179,7 +179,7 @@ const PERFUMES = [
     accent:"#c75f66", foto:"assets/p-aisha-princess.jpg", desc:"Floral gourmand feminino, com flores brancas, marshmallow e baunilha sobre um fundo de açúcar, caramelo e madeiras. Doce, delicado e envolvente." },
 
   { nome:"Ayat", marca:"Bidaya Parfums", inspiracao:"hibisco, rosa e baunilha", familia:"Floral", acorde:"Floral", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"especial", intensidade:"marcante", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     precoDecantBase:309, disponivelDecant:true,
     notas:{ topo:"Hibisco · Cassis · Hortelã-pimenta", coracao:"Rosa Damascena · Baunilha · Canela · Ambreta", fundo:"Âmbar · Couro" },
     accent:"#a83b4b", foto:"assets/p-bidaya-ayat.jpg", desc:"Hibisco e rosa ganham frescor com hortelã e cassis, enquanto baunilha, canela, âmbar e couro deixam a fragrância feminina mais quente e sofisticada." },
