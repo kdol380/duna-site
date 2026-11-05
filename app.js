@@ -557,7 +557,7 @@ const PERFUMES = [
     accent:"#d9d7d0", foto:"assets/p-delilah-blanc.webp", desc:"Floral branco limpo e cremoso, com cítricos suaves e fundo de baunilha, almíscar e sândalo. Elegante e confortável." },
 
   { nome:"Sabah Al Ward Sugar", marca:"Al Wataniah", inspiracao:"frutas vermelhas e baunilha", familia:"Gourmand", acorde:"Frutado", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:179, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"especial", intensidade:"marcante", disponivel:false, preco:179, tamanho:"100 ml · EDP", selo:"Novo",
     precoDecantBase:179, disponivelDecant:true,
     notas:{ topo:"Morango · Framboesa · Mirtilo · Cassis · Cereja", coracao:"Jasmim · Violeta", fundo:"Almíscar · Pétalas de Rosa · Baunilha · Musgo de Carvalho · Âmbar · Cashmeran · Patchouli" },
     accent:"#d98e9e", foto:"assets/p-sabah-sugar.webp", desc:"Um floral gourmand jovem e feminino, com um coquetel suculento de frutas vermelhas, flores delicadas e fundo cremoso de baunilha e almíscar." },
