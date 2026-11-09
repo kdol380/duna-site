@@ -107,7 +107,7 @@ const PERFUMES = [
     accent:"#cbc5b6", foto:"assets/p-maison-asrar-belgravia.jpg", desc:"Bergamota luminosa e cassis abrem uma composição amadeirada e almiscarada, com flores delicadas, sândalo, vetiver, cedro e musgo." },
 
   { nome:"Regent", marca:"Maison Asrar", inspiracao:"bergamota, gengibre e toranja", familia:"Amadeirado", acorde:"Cítrico", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:499, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"especial", intensidade:"marcante", preco:499, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     precoDecantBase:500, disponivelDecant:true,
     notas:{ topo:"Bergamota · Mandarina · Gengibre · Toranja", coracao:"Jasmim · Flor de Laranjeira · Íris", fundo:"Âmbar-gris · Cedro · Almíscar · Patchouli · Sândalo · Fava Tonka" },
     accent:"#183d31", foto:"assets/p-maison-asrar-regent.jpg", desc:"Cítricos e gengibre trazem energia à abertura, enquanto flores, íris, madeiras, âmbar-gris e tonka formam uma base quente, estruturada e elegante." },
