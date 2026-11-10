@@ -437,7 +437,7 @@ const PERFUMES = [
     accent:"#b06a85", foto:"assets/p-delilah.jpg", desc:"Floral-frutado rosado e radiante: ruibarbo e lichia sobre rosa e baunilha. Feminino elogiadíssimo e versátil." },
 
   { nome:"Salvo", marca:"Maison Alhambra", inspiracao:"fresco especiado", familia:"Cítrico", acorde:"Especiado fresco", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"dia", intensidade:"marcante", disponivel:false, preco:200, tamanho:"100 ml · EDP", selo:"Coringa",
+    ocasiao:"dia", intensidade:"marcante", disponivel:true, preco:259, tamanho:"100 ml · EDP", selo:"Coringa",
     precoDecantBase:200, disponivelDecant:true,
     notas:{ topo:"Bergamota", coracao:"Lavanda · Pimenta de Sichuan · Anis Estrelado · Noz-moscada", fundo:"Ambroxan · Baunilha" },
     accent:"#3a6a8a", foto:"assets/p-salvo.jpg", desc:"Fresco, picante e potente: bergamota e ambroxan no estilo coringa. Agrada todo mundo, do dia ao trabalho." },
@@ -485,7 +485,7 @@ const PERFUMES = [
     accent:"#22364c", foto:"assets/p-nocturno.jpg", desc:"Bergamota, hortelã e especiarias sobre lavanda e madeiras secas. Limpo, moderno e fácil de usar do trabalho à noite." },
 
   { nome:"Attar Al Wesal", marca:"Al Wataniah", inspiracao:"aromático doce especiado", familia:"Gourmand", acorde:"Aromático", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", disponivel:false, preco:209, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"especial", intensidade:"marcante", disponivel:true, preco:249, tamanho:"100 ml · EDP", selo:"Novo",
     precoDecantBase:209, disponivelDecant:true,
     notas:{ topo:"Lavanda · Pera · Hortelã · Bergamota · Limão", coracao:"Canela · Sálvia Esclaréia · Cominho", fundo:"Baunilha Negra · Âmbar · Cedro · Patchouli" },
     accent:"#2c2a2c", foto:"assets/p-attar-al-wesal.jpg", desc:"Aromático adocicado com pera, lavanda e canela sobre baunilha escura. Envolvente, versátil e de excelente custo-benefício." },
@@ -503,7 +503,7 @@ const PERFUMES = [
     accent:"#d8d4c9", foto:"assets/p-maahir-honor.jpg", desc:"Cítricos, hortelã e ervas aromáticas com acabamento limpo de almíscar, cedro e âmbar. Refinado e muito fresco." },
 
   { nome:"Sabah Al Ward", marca:"Al Wataniah", inspiracao:"floral gourmand com cacau", familia:"Floral", acorde:"Baunilha", genero:"Feminino", periodo:"Noite",
-    ocasiao:"especial", intensidade:"marcante", preco:199, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
+    ocasiao:"especial", intensidade:"marcante", preco:249, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:199, disponivelDecant:true,
     notas:{ topo:"Pimenta Rosa · Tangerina", coracao:"Cacau · Flor de Laranjeira · Jasmim Sambac", fundo:"Baunilha · Fava Tonka · Patchouli" },
     accent:"#8b2448", foto:"assets/p-sabah-al-ward.jpg", desc:"Jasmim e flor de laranjeira ganham profundidade com cacau, baunilha e tonka. Feminino, doce e marcante." },
