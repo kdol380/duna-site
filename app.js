@@ -395,7 +395,7 @@ const PERFUMES = [
     accent:"#2d6c8c", foto:"assets/p-turathi-electric.jpg", desc:"Fresco com brilho doce: pera e toranja sobre flor de laranjeira. Jovem, sofisticado e fácil de usar." },
 
   { nome:"Vulcan Feu", marca:"French Avenue", inspiracao:"frutado cremoso", familia:"Gourmand", acorde:"Tropical", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"potente", preco:375, tamanho:"100 ml · EDP", selo:"Frutado",
+    ocasiao:"especial", intensidade:"potente", disponivel:false, preco:375, tamanho:"100 ml · EDP", selo:"Frutado",
     precoDecantBase:375, disponivelDecant:true,
     notas:{ topo:"Manga · Limão · Ruibarbo · Gengibre", coracao:"Pimenta Rosa · Jasmim · Praliné", fundo:"Fava Tonka · Cedro · Musgo · Ambargris" },
     accent:"#8a3b1e", foto:"assets/p-vulcan-feu.jpg", desc:"Frutado intenso e cremoso: manga e ruibarbo sobre praliné e fava tonka. Doce, marcante e viciante — extrait de alta projeção." },
