@@ -28,7 +28,7 @@ test('lista de preços tem decants e skincare, e as regras de pagamento vêm de 
   assert.equal((skincare.match(/<li class="li/g)||[]).length,17);
   const decants=perfumes.filter(p=>p.disponivelDecant===true&&p.precoDecantBase>0&&!/body spray/i.test(p.nome));
   for(const p of decants) assert.ok(linha(S.productURL({...p,decant:true,base:p.nome})),`decant de ${p.nome} fora da lista`);
-  assert.ok(lista.includes(`acréscimo de ${S.CARD_SURCHARGE_PCT}%`));
+  assert.ok(lista.includes(`${S.PIX_DISCOUNT_PCT}% OFF`));
   assert.ok(lista.includes(S.money(S.BOTTLE_PRICE)));
   for(const t of S.DECANT_TIERS) assert.ok(lista.includes(`${Math.round(t.rate*100)}% OFF`));
 });

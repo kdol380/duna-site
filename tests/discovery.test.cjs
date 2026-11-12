@@ -11,7 +11,7 @@ const perfumes=vm.runInNewContext('('+source.match(/const PERFUMES = (\[[\s\S]*?
 test('orçamento distingue Pix e total no cartão, incluindo o limite exato',()=>{
   assert.equal(S.matchesBudget({preco:100},100),true);
   assert.equal(S.matchesBudget({preco:100},100,'cartao'),false);
-  assert.equal(S.matchesBudget({preco:100},104,'cartao'),true);
+  assert.equal(S.matchesBudget({preco:100},106,'cartao'),true);
   assert.equal(S.matchesBudget({preco:null},250),false);
   assert.equal(S.matchesBudget({preco:500},null),true);
   assert.equal(S.budget('Infinity'),null);
@@ -67,7 +67,7 @@ test('páginas próprias têm conteúdo inicial, canonical, imagem e oferta coer
     assert.ok(html.includes('rel="canonical" href="'+data.url+'"'));
     assert.ok(fs.existsSync(path.join(root,new URL(data.image[0]).pathname)));
     const original=perfumes.find(p=>data.name===p.marca+' '+p.nome);
-    if(original){assert.equal(Number(data.offers.price),original.preco);assert.equal(data.offers.availability.endsWith('OutOfStock'),original.disponivel===false);}
+    if(original){assert.equal(Number(data.offers.price),S.cardPrice(original.preco));assert.equal(data.offers.availability.endsWith('OutOfStock'),original.disponivel===false);}
   }
   const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
   for(const url of seen)assert.ok(sitemap.includes(url));
@@ -98,8 +98,8 @@ test('textos fixos das páginas batem com as regras de shop-core.js',()=>{
   const cards=(skincare.match(/class="skin-card/g)||[]).length;
   assert.match(skincare,new RegExp(`>${cards} produtos de skincare<`),'contagem em skincare.html');
   assert.match(source,new RegExp(`"${cards} produtos de skincare"`),'contagem de skincare em app.js');
-  // cartão = Pix + 4%, sem erro de arredondamento
-  assert.equal(S.cardPrice(100),104); assert.equal(S.cardPrice(279),290.16);
+  // cartão = Pix / 0,95, arredondado ao real superior
+  assert.equal(S.cardPrice(100),106); assert.equal(S.cardPrice(279),294);
 });
 
 test('todos os skincare possuem guia completo, fonte e página com finalidade e uso',()=>{
@@ -128,4 +128,20 @@ test('todos os skincare possuem guia completo, fonte e página com finalidade e 
     assert.ok(fs.existsSync(path.join(root,p.foto)));
   }
   for(const name of ['La Vie Est Belle','Lady Million','212 VIP Black','Sauvage EDP'])assert.equal(perfumes.find(p=>p.nome===name).colecao,'designer');
+});
+
+test('cartão arredonda por unidade e garante pelo menos 5% de benefício no Pix',()=>{
+  assert.equal(S.cardPrice(339),357);
+  assert.equal(S.cardPrice(76.076),81);
+  assert.equal(S.cardPrice(95),100);
+  for(let cents=1;cents<=150000;cents+=137){
+    const pix=cents/100,card=S.cardPrice(pix);
+    assert.ok(Number.isInteger(card));assert.ok(card*.95+1e-8>=pix);
+    assert.ok((card-1)*.95<pix);
+  }
+  assert.equal(S.orderSummary([{product:{preco:339},quantity:2}]).totalCartao,714);
+  for(const quantity of [1,3,5,10]){
+    const r=S.orderSummary([{product:{preco:29,precoLiquido:21,decant:true},quantity},{product:{preco:339},quantity:2}]);
+    assert.ok(r.totalCartao*.95+1e-8>=r.total);
+  }
 });

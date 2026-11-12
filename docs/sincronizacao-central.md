@@ -50,3 +50,9 @@ node --test tests/*.test.cjs
 ## Transição de novembro de 2026
 
 A consulta v2 inclui os nove produtos novos. A v1 permanece com a lista anterior, permitindo preparar a v2 sem interromper o site publicado antes deste lote. O formato de resposta segue version: 1.
+
+## Regra de preços aprovada em 12/11/2026
+
+O preço de venda da Central é sempre o preço no Pix. A sincronização não aplica taxas ao valor importado. O site calcula o cartão por unidade como `ceil(Pix / 0.95)` e o destaca; o Pix oferece pelo menos 5% de desconto devido ao arredondamento. Carrinhos somam os valores de cartão por unidade; descontos de kits são convertidos para cartão sem reduzir o benefício mínimo de 5% do Pix.
+
+Decants de 3 e 5 ml: aumento de 10% sobre o preço Pix anterior (após eventual promoção), arredondado para cima. Decants de 10 ml preservam o preço Pix. O vidrinho permanece R$ 8; o aumento fica na parcela de fragrância. Não alterar `precoDecantBase` para aplicar esse reajuste novamente.

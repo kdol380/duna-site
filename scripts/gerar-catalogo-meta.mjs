@@ -93,7 +93,7 @@ function feedRow(product, kind) {
     description: product.desc || product.descricao || product.inspiracao || `${name} disponível na Duna Fragrâncias.`,
     availability: product.disponivel === false ? "out of stock" : "in stock",
     condition: "new",
-    price: `${Number(product.preco).toFixed(2)} BRL`,
+    price: `${globalThis.DunaShop.cardPrice(product.preco).toFixed(2)} BRL`,
     link: `${siteBase}/produtos/${productSlug}.html`,
     image_link: `${siteBase}/${product.foto}`,
     brand: product.marca,

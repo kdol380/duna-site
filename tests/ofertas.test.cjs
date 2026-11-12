@@ -7,9 +7,9 @@ test('ofertas têm os quatro valores aprovados e percentuais conservadores',()=>
  assert.equal(perfumes.filter(S.promotion).length,4);
  for(const [name,price,percent] of expected){const p=perfumes.find(x=>x.nome===name);assert.equal(p.preco,price);assert.equal(S.promotion(p).percent,percent);assert.equal(S.promotion({...p,preco:price+1}),null);assert.equal(S.promotion({...p,disponivel:false}),null);}
 });
-test('os três tamanhos recebem o desconto exato, sem descontar duas vezes no carrinho',()=>{
- for(const d of decants){const p=perfumes.find(p=>p.nome===d.base);const cfg={3:0,5:.05,10:.1};const factor=p.precoDecantBase>=500?.014:p.precoDecantBase>=400?.015:.0165;const old=Math.round(p.precoDecantBase*factor*d.decantMl*(1-cfg[d.decantMl]))+8;const expected=Math.round(old*(1-(p.descontoDecant||0))*100)/100;
+test('reajuste de 3/5 ml preserva promoções, 10 ml e desconto único no carrinho',()=>{
+ for(const d of decants){const p=perfumes.find(p=>p.nome===d.base);const cfg={3:0,5:.05,10:.1};const factor=p.precoDecantBase>=500?.014:p.precoDecantBase>=400?.015:.0165;const old=Math.round(p.precoDecantBase*factor*d.decantMl*(1-cfg[d.decantMl]))+8;const previous=Math.round(old*(1-(p.descontoDecant||0))*100)/100;const expected=d.decantMl===10?previous:Math.ceil(Math.round(previous*100)*110/10000);
  assert.equal(d.preco,expected);assert.ok(Math.abs(d.precoLiquido+8-d.preco)<1e-8);assert.equal(S.orderSummary([{product:d,quantity:1}]).total,expected);
- if(p.descontoDecant)assert.equal(S.promotion(d).percent,p.descontoDecant*100);else assert.equal(S.promotion(d),null);
+ if(p.descontoDecant)assert.equal(S.promotion(d).percent,Math.floor((1-d.preco/d.precoAnterior)*100+1e-8));else assert.equal(S.promotion(d),null);
  }
 });

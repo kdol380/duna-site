@@ -620,9 +620,8 @@ function precoComPagamentoHTML(valorPix, disponivel=true, attrs="", produto=null
   if(!disponivel) return `<span class="card-price card-price-soldout"><s>${moeda(valorPix)}</s></span>`;
   const cartao = precoCartao(valorPix);
   return `<div class="card-payment" ${attrs}>${DunaShop.promotionHTML(produto)}
-    <span class="card-card-price">${moeda(cartao)}</span>
-    <span class="card-pix-price"><strong>${moeda(valorPix)}</strong> <span>no Pix</span></span>
-    <span class="card-installment">ou 3x de <b>${moeda(cartao/3)}</b> sem juros</span>
+    <span class="card-card-price">${moeda(cartao)} <small>no cartão</small></span>
+    <span class="card-pix-price"><strong>${moeda(valorPix)}</strong> <span>no Pix · 5% OFF</span></span>
   </div>`;
 }
 // nome com marca, para mensagens
@@ -672,7 +671,7 @@ function piramideHTML(p){
 }
 
 function waProduto(p){
-  return waLink(`Olá, Duna! Tenho interesse no ${nomeCompleto(p)} (${p.tamanho}) — ${precoTxt(p)}. Ainda está disponível?`);
+  return waLink(`Olá, Duna! Tenho interesse no ${nomeCompleto(p)} (${p.tamanho}) — ${temPreco(p) ? moeda(precoCartao(p.preco))+" no cartão" : "valor a combinar"}. Ainda está disponível?`);
 }
 // liga os botões fixos de WhatsApp (só os que existirem na página)
 ["waNav","waHero","waBottom","waFloat","waFoot1","waFoot2","waMobile"].forEach(id=>{
@@ -771,7 +770,7 @@ if(novGrid){
         <span class="nov-thumb">${frascoVisual(p)}</span>
         ${p.marca ? `<span class="nov-brand">${p.marca}</span>` : ""}
         <span class="nov-name">${p.nome}</span>
-        <span class="nov-price">${precoTxt(p)}</span>
+        ${precoComPagamentoHTML(p.preco,estaDisponivel(p),"",p)}
       </button>`).join("");
     novGrid.querySelectorAll(".reveal").forEach(el=>observeReveal(el));
     novGrid.addEventListener("click", e=>{
@@ -855,8 +854,10 @@ function opcaoDecant(perfume, volume){
   const cfg = DECANT_VOLUMES.find(v=>v.ml===Number(volume)) || DECANT_VOLUMES[0];
   const bruto = perfume.precoDecantBase * fatorMlDecant(perfume.precoDecantBase) * cfg.ml * (1-cfg.descontoVolume);
   const precoLiquido = Math.round(bruto);
-  const anterior = precoLiquido + DECANT_FRASCO;
-  const promocional = perfume.descontoDecant ? Math.round(anterior * (1-perfume.descontoDecant) * 100)/100 : anterior;
+  const baseAnterior = precoLiquido + DECANT_FRASCO;
+  const anterior = cfg.ml === 10 ? baseAnterior : Math.ceil(baseAnterior*110/100);
+  const basePromocional = perfume.descontoDecant ? Math.round(baseAnterior * (1-perfume.descontoDecant) * 100)/100 : baseAnterior;
+  const promocional = cfg.ml === 10 ? basePromocional : Math.ceil(Math.round(basePromocional*100)*110/10000);
   return {
     precoAnterior:perfume.descontoDecant ? anterior : null,
     precoPromocional:perfume.descontoDecant ? promocional : null,
@@ -1431,9 +1432,9 @@ const cartTemSemPreco = ()=> Object.keys(cart).some(n=> porNome[n] && !temPreco(
 
 const cartTotalRow = cartTotalEl?.closest(".cart-total");
 const cartTotalLabelEl = cartTotalRow?.querySelector("span");
-let formaPagamento = "pix";
-try{ formaPagamento = localStorage.getItem("duna_payment_method") || "pix"; }catch(e){ formaPagamento="pix"; }
-if(!["pix","cartao"].includes(formaPagamento)) formaPagamento="pix";
+let formaPagamento = "cartao";
+try{ formaPagamento = localStorage.getItem("duna_payment_method") || "cartao"; }catch(e){ formaPagamento="cartao"; }
+if(!["pix","cartao"].includes(formaPagamento)) formaPagamento="cartao";
 const cartDealEl = document.createElement("div");
 cartDealEl.className = "cart-decant-deal";
 cartDealEl.hidden = true;
@@ -1445,7 +1446,7 @@ cartPaymentEl.className = "cart-payment-method";
 cartPaymentEl.innerHTML = `<legend>Forma de pagamento</legend>
   <div class="cart-payment-options">
     <label><input type="radio" name="payment-method" value="pix" ${formaPagamento==="pix"?"checked":""}><span><b>Pix</b><small data-payment-pix>pagamento à vista</small></span></label>
-    <label><input type="radio" name="payment-method" value="cartao" ${formaPagamento==="cartao"?"checked":""}><span><b>Cartão</b><small data-payment-card>até 3x sem juros</small></span></label>
+    <label><input type="radio" name="payment-method" value="cartao" ${formaPagamento==="cartao"?"checked":""}><span><b>Cartão</b><small data-payment-card>preço no cartão</small></span></label>
   </div>`;
 const cartSavingsEl = document.createElement("p");
 cartSavingsEl.className = "cart-payment-savings";
@@ -1504,7 +1505,7 @@ function abrirCart(){ if(!cartEl) return; cartEl.classList.add("open"); cartOver
 function fecharCart(){ if(!cartEl) return; cartEl.classList.remove("open"); cartOverlay.classList.remove("open"); document.body.classList.remove("no-scroll"); }
 
 function totalPorPagamento(resumo=resumoCarrinho()){
-  return formaPagamento==="cartao" ? precoCartao(resumo.total) : resumo.total;
+  return formaPagamento==="cartao" ? resumo.totalCartao : resumo.total;
 }
 function precoItemCarrinho(p){
   if(!temPreco(p)) return `<span class="preco-consulta">Sob consulta</span>`;
@@ -1512,11 +1513,11 @@ function precoItemCarrinho(p){
   return `${moeda(valor)} <small>${formaPagamento==="cartao"?"no cartão":"no Pix"}</small>`;
 }
 function atualizarValoresPagamento(totalPix){
-  const totalCartao = precoCartao(totalPix);
+  const totalCartao = resumoCarrinho().totalCartao;
   const pixEl = cartPaymentEl.querySelector("[data-payment-pix]");
   const cardEl = cartPaymentEl.querySelector("[data-payment-card]");
   if(pixEl) pixEl.textContent = `${moeda(totalPix)} à vista`;
-  if(cardEl) cardEl.textContent = `${moeda(totalCartao)} · 3x de ${moeda(totalCartao/3)}`;
+  if(cardEl) cardEl.textContent = `${moeda(totalCartao)}`;
   const economia = totalCartao-totalPix;
   cartSavingsEl.textContent = formaPagamento==="cartao"
     ? `Economize ${moeda(economia)} pagando pelo Pix`
@@ -1527,24 +1528,18 @@ function atualizarValoresPagamento(totalPix){
 function msgPedido(){
   const linhas = Object.entries(cart).filter(([n])=>porNome[n]).map(([n,q])=>{
     const p = porNome[n];
-    const preco = p.decant && Number.isFinite(p.precoLiquido)
-      ? `R$ ${p.preco} cada (R$ ${p.precoLiquido} fragrância + R$ ${DECANT_FRASCO} vidrinho de decant)`
-      : `${precoTxt(p)}${q>1&&temPreco(p)?" cada":""}`;
+    const preco = temPreco(p) ? `${moeda(formaPagamento==="cartao" ? precoCartao(p.preco) : p.preco)} cada` : "valor a combinar";
     return `• ${q}x ${nomeCompleto(p)} (${p.tamanho}) — ${preco}`;
   });
   const resumo = resumoCarrinho();
   const descontoLinha = resumo.descontoDecants
-    ? `\nDesconto do kit decant (${Math.round(resumo.taxa*100)}% sobre a fragrância): - R$ ${resumo.descontoDecants}`
+    ? `\nDesconto do kit decant (${Math.round(resumo.taxa*100)}% sobre a fragrância): - ${moeda(formaPagamento==="cartao" ? Math.floor(resumo.descontoDecants/0.95) : resumo.descontoDecants)}`
     : "";
   const totalSelecionado = totalPorPagamento(resumo);
-  const acrescimoCartao = formaPagamento==="cartao"
-    ? `\nAcréscimo do cartão (4%): ${moeda(totalSelecionado-resumo.total)}`
-    : "";
   const totalLinha = cartTemSemPreco()
     ? "Total: a combinar no atendimento"
     : `Total estimado ${formaPagamento==="cartao"?"no cartão":"no Pix"}: ${moeda(totalSelecionado)}`;
-  const pagamentoLinha = formaPagamento==="cartao" ? "Forma de pagamento: Cartão (até 3x sem juros)" : "Forma de pagamento: Pix";
-  return `Olá, Duna! Quero fazer um pedido:\n\n${linhas.join("\n")}${descontoLinha}${acrescimoCartao}\n\n${totalLinha}\n${pagamentoLinha}\n\nPode confirmar a disponibilidade e o frete?${shippingCEP ? "\nCEP de entrega: "+DunaShop.formatCEP(shippingCEP) : ""}\nFrete e prazo a confirmar no atendimento.`;
+  return `Olá, Duna! Quero fazer um pedido:\n\n${linhas.join("\n")}${descontoLinha}\n\n${totalLinha}\n\nPode confirmar a disponibilidade e o frete?${shippingCEP ? "\nCEP de entrega: "+DunaShop.formatCEP(shippingCEP) : ""}\nFrete e prazo a confirmar no atendimento.`;
 }
 
 function renderCart(){
@@ -1601,7 +1596,7 @@ function renderCart(){
     linhasResumo.push(`<div><span>Fragrância · ${resumo.qtdDecants} ${resumo.qtdDecants===1?"decant":"decants"}</span><strong>R$ ${resumo.liquidoDecants}</strong></div>`);
     linhasResumo.push(`<div><span>Vidrinhos de decant · ${resumo.qtdDecants} × R$ ${DECANT_FRASCO}</span><strong>R$ ${resumo.frascosDecants}</strong></div>`);
     if(resumo.descontoDecants) linhasResumo.push(`<div class="is-discount"><span>Desconto decants · ${pct}%</span><strong>− R$ ${resumo.descontoDecants}</strong></div>`);
-    if(formaPagamento==="cartao") linhasResumo.push(`<div class="is-card-adjustment"><span>Cartão · acréscimo de 4%</span><strong>+ ${moeda(totalPorPagamento(resumo)-resumo.total)}</strong></div>`);
+    if(formaPagamento==="cartao") linhasResumo.push(`<div class="is-card-adjustment"><span>Diferença para cartão</span><strong>+ ${moeda(totalPorPagamento(resumo)-resumo.total)}</strong></div>`);
     cartBreakdownEl.hidden = false;
     cartBreakdownEl.innerHTML = linhasResumo.join("");
   }else{
@@ -1735,7 +1730,7 @@ if(steps.length){
             <span class="r-alt-info">
               ${p.marca ? `<span class="r-alt-brand">${p.marca}</span>` : ""}
               <span class="r-alt-name">${p.nome}</span>
-              <span class="r-alt-price">${precoTxt(p)}</span>
+              <span class="r-alt-price">${moeda(precoCartao(p.preco))} no cartão</span>
             </span>
           </button>`).join("") + `</div>`;
     }
@@ -1908,7 +1903,7 @@ function selecionarDecantQuickView(decant, volume){
     btn.setAttribute("aria-pressed", String(ativo));
   });
   document.getElementById("qvSize").textContent = `${variante.decantMl} ml · vidrinho de decant (R$ ${DECANT_FRASCO}) incluso`;
-  document.getElementById("qvPrice").innerHTML = `<small>R$</small> ${variante.preco}<em>R$ ${dinheiroDecimal(variante.precoMl)} por ml</em>`;
+  document.getElementById("qvPrice").innerHTML = precoComPagamentoHTML(variante.preco,true,"",variante);
   const qvWa = document.getElementById("qvWa");
   qvWa.href = waProduto(variante);
 }
@@ -1935,7 +1930,7 @@ function openQuickView(nome, sincronizarURL=true){
   qvDecantPicker.hidden = !decantBase;
   qvDecantPicker.innerHTML = decantBase ? seletorDecantHTML(decantBase,"quick") : "";
   document.getElementById("qvSize").textContent = p.tamanho;
-  document.getElementById("qvPrice").innerHTML = disponivel ? DunaShop.promotionHTML(p) + precoHTML(p) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p));
+  document.getElementById("qvPrice").innerHTML = disponivel ? precoComPagamentoHTML(p.preco,true,"",p) : (temPreco(p) ? `<small><s>R$</s></small> <s>${p.preco}</s>` : precoHTML(p));
   const qvAdd = document.getElementById("qvAdd");
   qvAdd.disabled = !disponivel;
   qvAdd.setAttribute("aria-disabled", String(!disponivel));
@@ -1961,7 +1956,7 @@ function openQuickView(nome, sincronizarURL=true){
       <button type="button" class="qv-rel-card" data-qv="${r.nome}" aria-label="Ver detalhes de ${r.nome}">
         <span class="qv-rel-thumb">${frascoVisual(r)}</span>
         <span class="qv-rel-name">${r.nome}</span>
-        <span class="qv-rel-price">${estaDisponivel(r) ? precoTxt(r) : "Esgotado"}</span>
+        <span class="qv-rel-price">${estaDisponivel(r) ? moeda(precoCartao(r.preco))+" no cartão" : "Esgotado"}</span>
       </button>`).join("")}
     </div>` : "";
 
@@ -2393,7 +2388,7 @@ function abrirBusca(){
         return t.split(/\s+/).every(x=>alvo.includes(x));
       }).sort((a,b)=>Number(estaDisponivel(b))-Number(estaDisponivel(a)));
       out.innerHTML = achados.length
-        ? achados.slice(0,6).map(p=>`<a class="search-item" href="${DunaShop.productURL(p)}"><img src="${p.foto}" alt="" loading="lazy"><span><small>${p.marca||""}</small><b>${p.nome}</b></span><em>${estaDisponivel(p)?precoTxt(p):"Esgotado"}</em></a>`).join("")
+        ? achados.slice(0,6).map(p=>`<a class="search-item" href="${DunaShop.productURL(p)}"><img src="${p.foto}" alt="" loading="lazy"><span><small>${p.marca||""}</small><b>${p.nome}</b></span><em>${estaDisponivel(p)?moeda(precoCartao(p.preco))+" no cartão":"Esgotado"}</em></a>`).join("")
           + `<a class="search-all" href="catalogo.html?q=${encodeURIComponent(input.value.trim())}">Ver ${achados.length} ${achados.length===1?"resultado":"resultados"} no catálogo →</a>`
         : `<p class="search-hint">Nada encontrado para “${DunaShop.escape(input.value.trim())}”. Tente outra nota ou marca, ou <a href="#" data-wa-busca>pergunte pra Duna no WhatsApp</a>.</p>`;
     };
