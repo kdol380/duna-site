@@ -77,7 +77,7 @@ globalThis.DUNA_SKINCARE = [
     "tamanho": "10 ml",
     "foto": "assets/s-numbuzin-no9-essence.jpg",
     "desc": "Creme de 10 ml para a área dos olhos, com NMN, retinol e aplicador.",
-    "disponivel": true,
+    "disponivel": false,
     "tipo": "skincare"
   },
   {
