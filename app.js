@@ -149,7 +149,7 @@ const PERFUMES = [
     accent:"#aeb5ba", foto:"assets/p-club-sillage.jpg", desc:"Fresco e gelado, combina uma abertura cítrica vibrante com flores elegantes e um fundo limpo de ambroxan, almíscar e madeiras. Masculino segundo a votação da comunidade." },
 
   { nome:"Club de Nuit Sillage Body Spray", marca:"Armaf", inspiracao:"cítrico metálico e almiscarado", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"Dia",
-    ocasiao:"dia", intensidade:"suave", preco:89, tamanho:"125 ml · Body Spray", selo:"Novo", disponivel:true,
+    ocasiao:"dia", intensidade:"suave", preco:89, tamanho:"125 ml · Body Spray", selo:"Novo", disponivel:false,
     precoDecantBase:89, disponivelDecant:true,
     notas:{ topo:"Bergamota · Limão · Lima · Cassis · Folha de Violeta · Gengibre", coracao:"Rosa · Íris · Jasmim", fundo:"Ambroxan · Almíscar · Sândalo · Cedro" },
     accent:"#b8bec2", foto:"assets/p-club-sillage-body-spray.webp", desc:"A fragrância fresca e elegante do Club de Nuit Sillage em uma versão corporal mais leve e prática. Ideal para reaplicar durante o dia e prolongar a sensação de frescor." },
