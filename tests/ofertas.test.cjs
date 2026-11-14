@@ -4,8 +4,10 @@ const perfumes=vm.runInNewContext('('+source.match(/const PERFUMES = (\[[\s\S]*?
 const decants=vm.runInNewContext(source.slice(source.indexOf('const DECANT_FRASCO ='),source.indexOf('const colNav ='))+';DECANT_VARIANTS',{DunaShop:S,PERFUMES:perfumes,ehBodySpray:p=>/body spray/i.test(p.nome)});
 test('ofertas têm os quatro valores aprovados e percentuais conservadores',()=>{
  const expected=[['Club de Nuit Elite',439,20],['Emeer',249,19],['La Vivacité',209,12],['La Vivacité Intensa',169,15]];
- assert.equal(perfumes.filter(S.promotion).length,4);
- for(const [name,price,percent] of expected){const p=perfumes.find(x=>x.nome===name);assert.equal(p.preco,price);assert.equal(S.promotion(p).percent,percent);assert.equal(S.promotion({...p,preco:price+1}),null);assert.equal(S.promotion({...p,disponivel:false}),null);}
+ // A Central pode esgotar ou reprecificar um perfume em oferta. Isso só suspende o destaque dele; não pode travar a sincronização.
+ const ativa=([name,price])=>{const p=perfumes.find(x=>x.nome===name);return p.disponivel!==false&&p.preco===price;};
+ assert.equal(perfumes.filter(S.promotion).map(p=>p.nome).sort().join(' | '),expected.filter(ativa).map(([name])=>name).sort().join(' | '));
+ for(const [name,price,percent] of expected){const p=perfumes.find(x=>x.nome===name);assert.equal(p.precoPromocional,price);assert.equal(S.promotion({...p,preco:price,disponivel:true}).percent,percent);assert.equal(S.promotion({...p,preco:price+1}),null);assert.equal(S.promotion({...p,disponivel:false}),null);}
 });
 test('reajuste de 3/5 ml preserva promoções, 10 ml e desconto único no carrinho',()=>{
  for(const d of decants){const p=perfumes.find(p=>p.nome===d.base);const cfg={3:0,5:.05,10:.1};const factor=p.precoDecantBase>=500?.014:p.precoDecantBase>=400?.015:.0165;const old=Math.round(p.precoDecantBase*factor*d.decantMl*(1-cfg[d.decantMl]))+8;const previous=Math.round(old*(1-(p.descontoDecant||0))*100)/100;const expected=d.decantMl===10?previous:Math.ceil(Math.round(previous*100)*110/10000);
