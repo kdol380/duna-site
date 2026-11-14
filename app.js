@@ -119,7 +119,7 @@ const PERFUMES = [
     accent:"#24355d", foto:"assets/p-maison-asrar-legacy.jpg", desc:"Pera crocante, gengibre e bergamota abrem uma fragrância luminosa, com flores brancas, madeiras e um fundo envolvente de almíscar, baunilha e âmbar." },
 
   { nome:"Club de Nuit Intense Man", marca:"Armaf", inspiracao:"frutado esfumado", familia:"Amadeirado", acorde:"Cítrico", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"potente", preco:279, tamanho:"105 ml · EDT", selo:"Ícone", disponivel:true,
+    ocasiao:"especial", intensidade:"potente", preco:279, tamanho:"105 ml · EDT", selo:"Ícone", disponivel:false,
     precoDecantBase:279, disponivelDecant:true,
     notas:{ topo:"Abacaxi · Limão · Cassis · Maçã", coracao:"Bétula · Jasmim · Rosa", fundo:"Almíscar · Ambargris · Patchouli · Baunilha" },
     accent:"#5a5238", foto:"assets/p-club-intense-new.jpg", desc:"O fenômeno árabe: abacaxi esfumado sobre bétula e madeiras. Projeção e fixação enormes — presença que rende elogios o dia inteiro." },
@@ -281,7 +281,7 @@ const PERFUMES = [
     accent:"#c39a45", foto:"assets/p-shaheen-gold.jpg", desc:"Abacaxi e toranja abrem uma fragrância masculina frutada, com figo, lavanda, baunilha e tonka. Doce, moderna e fácil de usar." },
 
   { nome:"Emeer", marca:"Lattafa", inspiracao:"chá branco, cítricos e madeiras", familia:"Amadeirado", acorde:"Aromático", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"trabalho", intensidade:"marcante", preco:249, precoAnterior:309, precoPromocional:249, descontoDecant:0.2, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"trabalho", intensidade:"marcante", preco:249, precoAnterior:309, precoPromocional:249, descontoDecant:0.2, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     precoDecantBase:309, disponivelDecant:true,
     notas:{ topo:"Limão · Bergamota · Sálvia Esclaréia · Zimbro", coracao:"Chá Branco · Sândalo · Cardamomo · Olíbano", fundo:"Âmbar-gris · Cedro · Cashmeran · Patchouli" },
     accent:"#b98b36", foto:"assets/p-emeer.jpg", desc:"Cítricos e ervas aromáticas encontram chá branco, cardamomo e madeiras elegantes. Masculino sofisticado, versátil e de presença marcante." },
