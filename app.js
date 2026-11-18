@@ -329,7 +329,7 @@ const PERFUMES = [
     accent:"#bd7b5c", foto:"assets/p-la-vivacite-intensa.png", desc:"Pera e cassis dão brilho à íris e às flores brancas, sobre uma base cremosa de praliné, baunilha e tonka. Feminino doce e intenso." },
 
   { nome:"L'Intrude", marca:"Maison Alhambra", inspiracao:"flores brancas e baunilha", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:189, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"especial", intensidade:"marcante", preco:189, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     precoDecantBase:189, disponivelDecant:true,
     notas:{ topo:"Pera · Bergamota", coracao:"Tuberosa · Flor de Laranjeira · Jasmim Sambac", fundo:"Patchouli · Ambroxan · Baunilha · Vetiver" },
     accent:"#b69773", foto:"assets/p-lintrude.jpg", desc:"Pera e bergamota iluminam um buquê intenso de tuberosa, flor de laranjeira e jasmim. Feminino marcante, cremoso e sofisticado." },
