@@ -27,7 +27,7 @@ globalThis.DUNA_SKINCARE = [
     "tamanho": "15 ml",
     "foto": "assets/s-celimax-retinal-shot.jpg",
     "desc": "Concentrado facial com retinal a 0,1%.",
-    "disponivel": true,
+    "disponivel": false,
     "tipo": "skincare"
   },
   {
