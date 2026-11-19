@@ -575,7 +575,7 @@ const PERFUMES = [
     accent:"#d5a33e", foto:"assets/p-tharwah-gold.jpg", desc:"Doce floral sofisticado, com lavanda e bergamota sobre flores brancas e uma base quente de baunilha, âmbar e vetiver." },
 
   { nome:"B.A.D Femme", marca:"Maison Alhambra", inspiracao:"café, flores brancas e praliné", familia:"Gourmand", acorde:"Floral branco", genero:"Feminino", periodo:"Noite",
-    ocasiao:"especial", intensidade:"potente", preco:170, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"especial", intensidade:"potente", disponivel:false, preco:170, tamanho:"100 ml · EDP", selo:"Novo",
     precoDecantBase:170, disponivelDecant:true,
     notas:{ topo:"Bergamota · Amêndoa · Café · Limão", coracao:"Tuberosa · Flor de Laranjeira · Jasmim Sambac · Rosa Búlgara · Íris", fundo:"Fava Tonka · Baunilha · Almíscar · Cacau · Praliné · Sândalo · Cashmeran · Âmbar · Patchouli · Cedro · Canela" },
     accent:"#42321f", foto:"assets/p-bad-femme.webp", desc:"Gourmand floral intenso: café e amêndoa abrem caminho para flores brancas, praliné, cacau e baunilha. Sensual e marcante para a noite." },
