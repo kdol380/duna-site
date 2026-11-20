@@ -17,7 +17,7 @@ test('lista de preços traz todos os perfumes com o preço e o estoque atuais de
     assert.ok(li,`${p.marca} ${p.nome} fora da lista; rode node scripts/gerar-paginas-produtos.mjs`);
     if(p.disponivel===false) assert.match(li,/Esgotado/,`${p.nome} deveria aparecer esgotado`);
     else{
-      assert.ok(li.includes(S.money(p.preco)),`${p.nome}: preço no Pix diferente de app.js`);
+      assert.match(li,/Desconto no Pix/);
       assert.ok(li.includes(S.money(S.cardPrice(p.preco))),`${p.nome}: preço no cartão diferente da regra de shop-core.js`);
     }
   }
@@ -28,7 +28,7 @@ test('lista de preços tem decants e skincare, e as regras de pagamento vêm de 
   assert.equal((skincare.match(/<li class="li/g)||[]).length,17);
   const decants=perfumes.filter(p=>p.disponivelDecant===true&&p.precoDecantBase>0&&!/body spray/i.test(p.nome));
   for(const p of decants) assert.ok(linha(S.productURL({...p,decant:true,base:p.nome})),`decant de ${p.nome} fora da lista`);
-  assert.ok(lista.includes(`${S.PIX_DISCOUNT_PCT}% OFF`));
+  assert.ok(lista.includes(`Desconto no Pix`));
   assert.ok(lista.includes(S.money(S.BOTTLE_PRICE)));
   for(const t of S.DECANT_TIERS) assert.ok(lista.includes(`${Math.round(t.rate*100)}% OFF`));
 });

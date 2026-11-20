@@ -5,10 +5,10 @@
   const escape = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const money = value => Number(value).toLocaleString("pt-BR", {style:"currency",currency:"BRL"});
   // Regras comerciais: fonte única. app.js, gerador de páginas e testes leem daqui.
-  const PIX_DISCOUNT_PCT = 5;              // Pix da Central; cartão arredondado para cima
+  const CARD_MARKUP_PCT = 5;              // Preço padrão = base da Central + 5%
   const BOTTLE_PRICE = 8;                  // vidrinho de decant, qualquer volume
   const DECANT_TIERS = [{min:10,rate:.15},{min:5,rate:.10},{min:3,rate:.05}]; // desconto no líquido por qtd de decants
-  const cardPrice = value => Math.ceil(Math.round(Number(value)*100)/(100-PIX_DISCOUNT_PCT));
+  const cardPrice = value => Math.round(Number(value)*(1+CARD_MARKUP_PCT/100));
   const decantRate = qty => (DECANT_TIERS.find(t=>qty>=t.min)||{rate:0}).rate;
   const budget = value => Number.isFinite(Number(value)) && Number(value)>0 ? Number(value) : null;
   const matchesBudget = (product, max, payment="pix") => !budget(max) || (typeof product.preco==="number" && product.preco>0 && (payment==="cartao" ? cardPrice(product.preco) : product.preco)<=budget(max));
@@ -30,7 +30,7 @@
     }
     const taxa = decantRate(qtdDecants);
     const descontoDecants=Math.round(liquidoDecants*taxa);
-    return {outros,liquidoDecants,frascosDecants,qtdDecants,taxa,descontoDecants,totalCartao:subtotalCartao-Math.floor(descontoDecants*100/(100-PIX_DISCOUNT_PCT)),total:outros+liquidoDecants+frascosDecants-descontoDecants};
+    return {outros,liquidoDecants,frascosDecants,qtdDecants,taxa,descontoDecants,totalCartao:Math.round((subtotalCartao-cardPrice(descontoDecants))*100)/100,total:outros+liquidoDecants+frascosDecants-descontoDecants};
   }
   function rankProducts(products, answers){
     const scale=["suave","equilibrado","marcante","potente"];
@@ -56,7 +56,7 @@
     const offer=promotion(p);
     return offer ? `<span class="promo-line"><span class="promo-badge">${Math.floor((1-cardPrice(p.preco)/cardPrice(offer.before))*100+1e-8)}% OFF</span><s class="promo-before">${money(cardPrice(offer.before))}</s></span>` : "";
   }
-  const api={promotion,promotionHTML,PIX_DISCOUNT_PCT,BOTTLE_PRICE,DECANT_TIERS,cardPrice,decantRate,normalize,slug,escape,money,budget,matchesBudget,cep,validCEP,formatCEP,productURL,orderSummary,rankProducts};
+  const api={promotion,promotionHTML,CARD_MARKUP_PCT,BOTTLE_PRICE,DECANT_TIERS,cardPrice,decantRate,normalize,slug,escape,money,budget,matchesBudget,cep,validCEP,formatCEP,productURL,orderSummary,rankProducts};
   root.DunaShop=api;
   if(typeof module!=="undefined") module.exports=api;
 })(typeof globalThis!=="undefined" ? globalThis : this);

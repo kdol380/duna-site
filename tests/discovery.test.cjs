@@ -98,8 +98,8 @@ test('textos fixos das páginas batem com as regras de shop-core.js',()=>{
   const cards=(skincare.match(/class="skin-card/g)||[]).length;
   assert.match(skincare,new RegExp(`>${cards} produtos de skincare<`),'contagem em skincare.html');
   assert.match(source,new RegExp(`"${cards} produtos de skincare"`),'contagem de skincare em app.js');
-  // cartão = Pix / 0,95, arredondado ao real superior
-  assert.equal(S.cardPrice(100),106); assert.equal(S.cardPrice(279),294);
+  // Preço padrão = base + 5%, arredondado ao real mais próximo
+  assert.equal(S.cardPrice(100),105); assert.equal(S.cardPrice(279),293);
 });
 
 test('todos os skincare possuem guia completo, fonte e página com finalidade e uso',()=>{
@@ -130,18 +130,14 @@ test('todos os skincare possuem guia completo, fonte e página com finalidade e 
   for(const name of ['La Vie Est Belle','Lady Million','212 VIP Black','Sauvage EDP'])assert.equal(perfumes.find(p=>p.nome===name).colecao,'designer');
 });
 
-test('cartão arredonda por unidade e garante pelo menos 5% de benefício no Pix',()=>{
-  assert.equal(S.cardPrice(339),357);
-  assert.equal(S.cardPrice(76.076),81);
+test('preço padrão aplica 5% à base, arredondado ao real mais próximo, inclusive nos kits',()=>{
+  assert.equal(S.cardPrice(339),356);
+  assert.equal(S.cardPrice(76.076),80);
   assert.equal(S.cardPrice(95),100);
-  for(let cents=1;cents<=150000;cents+=137){
-    const pix=cents/100,card=S.cardPrice(pix);
-    assert.ok(Number.isInteger(card));assert.ok(card*.95+1e-8>=pix);
-    assert.ok((card-1)*.95<pix);
-  }
-  assert.equal(S.orderSummary([{product:{preco:339},quantity:2}]).totalCartao,714);
+  assert.equal(S.cardPrice(0.10),0);
+  assert.equal(S.orderSummary([{product:{preco:339},quantity:2}]).totalCartao,712);
   for(const quantity of [1,3,5,10]){
     const r=S.orderSummary([{product:{preco:29,precoLiquido:21,decant:true},quantity},{product:{preco:339},quantity:2}]);
-    assert.ok(r.totalCartao*.95+1e-8>=r.total);
+    assert.equal(r.totalCartao,Math.round((S.cardPrice(29)*quantity+712-S.cardPrice(r.descontoDecants))*100)/100);
   }
 });

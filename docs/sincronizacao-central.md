@@ -51,8 +51,12 @@ node --test tests/*.test.cjs
 
 A consulta v2 inclui os nove produtos novos. A v1 permanece com a lista anterior, permitindo preparar a v2 sem interromper o site publicado antes deste lote. O formato de resposta segue version: 1.
 
-## Regra de preços aprovada em 12/11/2026
+## Regra de preços aprovada em 19/11/2026
 
-O preço de venda da Central é sempre o preço no Pix. A sincronização não aplica taxas ao valor importado. O site calcula o cartão por unidade como `ceil(Pix / 0.95)` e o destaca; o Pix oferece pelo menos 5% de desconto devido ao arredondamento. Carrinhos somam os valores de cartão por unidade; descontos de kits são convertidos para cartão sem reduzir o benefício mínimo de 5% do Pix.
+O preço de venda da Central continua sendo a base no Pix, sem taxa aplicada na importação. O preço padrão do site é `round(base * 1.05)`, arredondado ao real mais próximo por autorização do proprietário. Abaixo do preço aparece apenas “Desconto no Pix”, sem percentual prometido. A regra vale para perfumes, skincare e o total de cada volumetria de decant, incluindo o vidrinho, uma única vez. Os reajustes anteriores já incorporados à base dos decants são preservados.
 
-Decants de 3 e 5 ml: aumento de 10% sobre o preço Pix anterior (após eventual promoção), arredondado para cima. Decants de 10 ml preservam o preço Pix. O vidrinho permanece R$ 8; o aumento fica na parcela de fragrância. Não alterar `precoDecantBase` para aplicar esse reajuste novamente.
+Carrinhos somam os preços padrão por unidade e convertem o desconto de kit pela mesma regra. A escolha de pagamento no fechamento continua mostrando o total correspondente.
+
+### Conferência de 19/11/2026
+
+Consulta direta à tela Estoque da Central (nuvem atualizada): 117 produtos, 239 unidades. Cruzados por SKU os 116 vínculos existentes; oito mudanças de preço/disponibilidade aplicadas localmente. Não foi possível verificar o workflow remoto por falha de DNS. O Delilah Viola, SKU DUN-PAR-MAL-117, foi confirmado com base R$ 369 e cinco unidades; volume de 100 ml e decants foram autorizados. Cadastro preparado em `dados/pendentes/delilah-viola.json`; inclusão efetiva e novo vínculo aguardam arquivo de foto utilizável e ID permanente.
