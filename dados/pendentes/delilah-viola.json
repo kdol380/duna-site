@@ -1,0 +1,26 @@
+{
+  "status": "incluído no catálogo; vínculo automático com a Central pendente",
+  "skuCentral": "DUN-PAR-MAL-117",
+  "imagemLibraryId": "libfile_0f601c910fcc81918b64a4150ea4ee9e",
+  "produto": {
+    "nome": "Delilah Viola",
+    "marca": "Maison Alhambra",
+    "preco": 369,
+    "tamanho": "100 ml · EDP",
+    "disponivel": true,
+    "precoDecantBase": 369,
+    "disponivelDecant": true,
+    "selo": "Novo",
+    "foto": "assets/p-delilah-viola.png"
+  },
+  "autorizacao": "Volume de 100 ml e inclusão em decants confirmados pelo proprietário em 19/11/2026. Aplicar regra vigente de 3/5/10 ml e preço padrão arredondado.",
+  "precosPadrao": {
+    "frasco100ml": 387,
+    "decant3ml": 30,
+    "decant5ml": 43,
+    "decant10ml": 66
+  },
+  "pendencias": [
+    "Obter ID permanente para vínculo e atualizar projeção SQL coordenadamente."
+  ]
+}

@@ -60,3 +60,11 @@ Carrinhos somam os preços padrão por unidade e convertem o desconto de kit pel
 ### Conferência de 19/11/2026
 
 Consulta direta à tela Estoque da Central (nuvem atualizada): 117 produtos, 239 unidades. Cruzados por SKU os 116 vínculos existentes; oito mudanças de preço/disponibilidade aplicadas localmente. Não foi possível verificar o workflow remoto por falha de DNS. O Delilah Viola, SKU DUN-PAR-MAL-117, foi confirmado com base R$ 369 e cinco unidades; volume de 100 ml e decants foram autorizados. Cadastro preparado em `dados/pendentes/delilah-viola.json`; inclusão efetiva e novo vínculo aguardam arquivo de foto utilizável e ID permanente.
+
+### Inclusão do Delilah Viola — 20/11/2026
+
+Frasco 100 ml e decants 3/5/10 ml autorizados pelo proprietário; foto original incorporada. Base de preço R$ 369, preço padrão R$ 387; decants R$ 30/43/66. Cadastro incluído manualmente sem alterar os 116 vínculos da projeção v2. Vinculação automática deste produto permanece pendente do ID permanente e da atualização coordenada da projeção; a sincronização dos demais itens continua protegida.
+
+Referências editoriais para família, gênero e notas: https://www.fragrantica.com/perfume/Maison-Alhambra/Delilah-Viola-136600.html e https://www.panvel.com/panvel/perfume-arabe-unissex-delilah-viola-maison-alhambra-eau-de-parfum-100ml/p-10084661 . Não foram atribuídas intensidade, ocasião ou performance.
+
+Apresentação solicitada em 20/11: preço padrão seguido de “até 3x sem juros” e, abaixo, “5% de desconto no Pix”. Nenhum cálculo foi alterado nesta revisão de texto. Publicação aguarda aprovação do proprietário.

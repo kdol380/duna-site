@@ -23,6 +23,12 @@ const compactMobile = window.matchMedia("(max-width: 620px)").matches;
 // preco: null  →  mostra "Sob consulta" (troque pelo valor, ex: preco:199, quando tiver os preços)
 // campo opcional: colecao:"arabes" | "nicho" | "designer"  → sem o campo, o perfume conta como "arabes"
 const PERFUMES = [
+  { nome:"Delilah Viola", marca:"Maison Alhambra", inspiracao:"pera, violeta e baunilha", familia:"Floral", acorde:"Frutado", genero:"Unissex", periodo:"",
+    ocasiao:"", intensidade:"", preco:369, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    precoDecantBase:369, disponivelDecant:true,
+    notas:{ topo:"Pera · Mandarina · Bergamota · Pêssego", coracao:"Lilás · Violeta · Lírio-do-vale · Lavanda", fundo:"Almíscar Branco · Creme · Sândalo · Patchouli · Baunilha" },
+    accent:"#8b167c", foto:"assets/p-delilah-viola.png", desc:"Frutas na abertura, um coração de violeta, lilás e lavanda e um fundo de almíscar, sândalo e baunilha. Fragrância floral frutada compartilhável." },
+
   { nome:"Gris", marca:"Bidaya", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:509, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, precoDecantBase:509, disponivelDecant:true, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-bidaya-gris.png", desc:"Eau de Parfum masculino de perfil cítrico, aromático e amadeirado." },
   { nome:"Hawas Kobra", marca:"Rasasi", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:339, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, precoDecantBase:339, disponivelDecant:true, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-hawas-kobra.png", desc:"Hawas Kobra, de Rasasi, em frasco de 100 ml." },
   { nome:"Emir Noir", marca:"Rasasi", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:329, tamanho:"80 ml · EDP", selo:"Novo", disponivel:true, precoDecantBase:329, disponivelDecant:true, notas:{"topo":"","coracao":"","fundo":""}, accent:"#b9944c", foto:"assets/p-emir-noir.jpg", desc:"Perfume masculino com abertura cítrica e especiada, coração amadeirado e fundo de musgo, fava-tonca e couro." },
@@ -620,8 +626,8 @@ function precoComPagamentoHTML(valorPix, disponivel=true, attrs="", produto=null
   if(!disponivel) return `<span class="card-price card-price-soldout"><s>${moeda(precoCartao(valorPix))}</s></span>`;
   const cartao = precoCartao(valorPix);
   return `<div class="card-payment" ${attrs}>${DunaShop.promotionHTML(produto)}
-    <span class="card-card-price">${moeda(cartao)}</span>
-    <span class="card-pix-price"><span>Desconto no Pix</span></span>
+    <span class="card-card-price">${moeda(cartao)} <small>até 3x sem juros</small></span>
+    <span class="card-pix-price"><span>5% de desconto no Pix</span></span>
   </div>`;
 }
 // nome com marca, para mensagens

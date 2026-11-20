@@ -28,7 +28,7 @@ for (const p of [...perfumes, ...skincare]) {
 
 function precoHTML(p) {
   if (!disponivel(p)) return '<div class="li-preco is-esgotado"><strong>Esgotado</strong></div>';
-  return `<div class="li-preco"><strong>${money(S.cardPrice(p.preco))}</strong><small>Desconto no Pix</small></div>`;
+  return `<div class="li-preco"><strong>${money(S.cardPrice(p.preco))}</strong><small>até 3x sem juros</small><small>5% de desconto no Pix</small></div>`;
 }
 function pedirHTML(p, msg) {
   const href = disponivel(p) ? waLink(msg) : waLink(`Olá, Duna! Gostaria de saber sobre a disponibilidade do ${nomeCompleto(p)}, avise-me quando o produto voltar ao estoque !`);
@@ -48,7 +48,7 @@ function itemDecant(d) {
   const msg = `Olá, Duna! Vi na lista de preços e tenho interesse no decant de ${nomeCompleto(d)}. Pode confirmar disponibilidade, frete e prazo?`;
   return `<li class="li li-decant" data-g="${esc(d.genero || '')}" data-m="${esc(marcaBase(d))}" data-d="1" data-q="${esc(q)}">`
     + `<div class="li-info"><a class="li-nome" href="${S.productURL(d)}"><span class="li-marca">${esc(d.marca)}</span> ${esc(d.base)}</a><span class="li-meta">${esc(perfilOlfativo(d))}</span></div>`
-    + `<div class="li-ml">${d.opcoes.map(o => `<span><b>${o.ml} ml</b>${money(S.cardPrice(o.preco))}<small>Desconto no Pix</small></span>`).join('')}</div>`
+    + `<div class="li-ml">${d.opcoes.map(o => `<span><b>${o.ml} ml</b>${money(S.cardPrice(o.preco))}<small>até 3x sem juros</small><small>5% de desconto no Pix</small></span>`).join('')}</div>`
     + pedirHTML(d, msg) + '</li>';
 }
 const lista = itens => `<ul class="lista-itens">${itens.join('')}</ul>`;
@@ -103,12 +103,12 @@ const main = `<main class="lista-main" id="conteudo">
 <img class="lista-logo so-pdf" src="assets/logo-assinatura.png" alt="Duna Fragrâncias" width="472" height="112">
 <p class="lista-eyebrow so-pdf">Perfumes · Decants · Skincare</p>
 <h1>Lista de <span class="gold">preços</span></h1>
-<p class="lista-lead">Perfumes, decants e skincare da Duna numa página só. Preço por unidade, sem frete. Desconto no Pix.</p>
+<p class="lista-lead">Perfumes, decants e skincare da Duna numa página só. Preço por unidade, sem frete. 5% de desconto no Pix.</p>
 <p class="lista-data so-pdf" data-lista-data>Lista atualizada em <time></time>. A versão mais recente fica em dunafragrancias.com.br/lista.</p>
 <div class="lista-acoes so-web"><a class="btn btn-gold" href="${PDF_ARQUIVO}?v=${versaoPDF}" download="Duna-Lista-de-Precos.pdf" data-lista-pdf>Baixar PDF</a><button type="button" class="btn btn-line-dark" data-lista-enviar hidden>Enviar o PDF</button></div>
 <ul class="lista-regras so-pdf">
 <li>Preço por unidade, sem frete. Frete e prazo a confirmar no atendimento.</li>
-<li>Preço padrão em destaque. Desconto no Pix.</li>
+<li>Preço padrão em destaque. 5% de desconto no Pix.</li>
 <li>Toque no nome para ver notas e detalhes. Em “Pedir”, a mensagem vai pronta para o WhatsApp.</li>
 </ul>
 ${indice}
