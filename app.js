@@ -305,7 +305,7 @@ const PERFUMES = [
     accent:"#c9a266", foto:"assets/p-musamam-white-intense.jpg", desc:"Coco cremoso, ylang-ylang e especiarias repousam sobre sândalo, almíscar e benjoim. Feminino intenso, elegante e envolvente." },
 
   { nome:"Athena", marca:"Maison Alhambra", inspiracao:"flores brancas e baunilha", familia:"Floral", acorde:"Baunilha", genero:"Feminino", periodo:"Dia",
-    ocasiao:"dia", intensidade:"equilibrado", preco:249, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"dia", intensidade:"equilibrado", preco:249, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
     precoDecantBase:249, disponivelDecant:true,
     notas:{ topo:"Tangerina · Pimenta Rosa · Bergamota", coracao:"Jasmim Sambac · Ylang-Ylang · Lírio-do-Vale", fundo:"Baunilha · Sândalo · Patchouli" },
     accent:"#d6aa72", foto:"assets/p-athena.jpg", desc:"Cítricos e pimenta rosa iluminam um buquê de jasmim, ylang-ylang e lírio-do-vale. Feminino floral, cremoso e elegante para o dia." },
