@@ -461,7 +461,7 @@ const PERFUMES = [
     accent:"#7a3a2a", foto:"assets/p-rayhaan-elixir.jpg", desc:"Lavanda e baunilha cremosa com mel de benjoim — doce, aromático e potente. Assinatura marcante para a noite." },
 
   { nome:"Hawas Black", marca:"Rasasi", inspiracao:"cítrico escuro e amadeirado", familia:"Amadeirado", acorde:"Amadeirado", genero:"Masculino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"potente", preco:300, tamanho:"100 ml · EDP", selo:"Novo",
+    ocasiao:"especial", intensidade:"potente", disponivel:false, preco:300, tamanho:"100 ml · EDP", selo:"Novo",
     precoDecantBase:300, disponivelDecant:true,
     notas:{ topo:"Bergamota · Abacaxi · Toranja", coracao:"Patchouli · Cedro · Jasmim", fundo:"Musgo de Carvalho · Notas Amadeiradas · Âmbar" },
     accent:"#25221f", foto:"assets/p-hawas-black.jpg", desc:"Cítricos e abacaxi sobre uma base escura de musgo, âmbar e madeiras. Masculino elegante, intenso e de longa presença." },
@@ -515,7 +515,7 @@ const PERFUMES = [
     accent:"#8b2448", foto:"assets/p-sabah-al-ward.jpg", desc:"Jasmim e flor de laranjeira ganham profundidade com cacau, baunilha e tonka. Feminino, doce e marcante." },
 
   { nome:"Ameerati", marca:"Al Wataniah", inspiracao:"atalcado, almiscarado e verde", familia:"Amadeirado", acorde:"Atalcado", genero:"Feminino", periodo:"Dia",
-    ocasiao:"dia", intensidade:"equilibrado", preco:199, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"dia", intensidade:"equilibrado", preco:219, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:199, disponivelDecant:true,
     notas:{ topo:"Almíscar · Notas Verdes · Cítricos", coracao:"Notas Herbais · Notas Amadeiradas", fundo:"Notas Atalcadas · Notas Especiadas" },
     accent:"#b78945", foto:"assets/p-ameerati.jpg", desc:"Almíscar, notas verdes e cítricos abrem a fragrância, que evolui para nuances herbais e amadeiradas sobre um fundo atalcado e especiado. Feminino fresco e elegante para o dia a dia." },
