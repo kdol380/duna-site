@@ -9,9 +9,17 @@ test('ofertas têm os quatro valores aprovados e percentuais conservadores',()=>
  assert.equal(perfumes.filter(S.promotion).map(p=>p.nome).sort().join(' | '),expected.filter(ativa).map(([name])=>name).sort().join(' | '));
  for(const [name,price,percent] of expected){const p=perfumes.find(x=>x.nome===name);assert.equal(p.precoPromocional,price);assert.equal(S.promotion({...p,preco:price,disponivel:true}).percent,percent);assert.equal(S.promotion({...p,preco:price+1}),null);assert.equal(S.promotion({...p,disponivel:false}),null);}
 });
-test('reajuste de 3/5 ml preserva promoções, 10 ml e desconto único no carrinho',()=>{
- for(const d of decants){const p=perfumes.find(p=>p.nome===d.base);const cfg={3:0,5:.05,10:.1};const factor=p.precoDecantBase>=500?.014:p.precoDecantBase>=400?.015:.0165;const old=Math.round(p.precoDecantBase*factor*d.decantMl*(1-cfg[d.decantMl]))+8;const previous=Math.round(old*(1-(p.descontoDecant||0))*100)/100;const expected=d.decantMl===10?previous:Math.ceil(Math.round(previous*100)*110/10000);
+test('régua de decants: preço por ml do frasco, ml mais caro nos tamanhos menores, promoções e desconto único preservados',()=>{
+ const pesos={3:1.5,5:1.25,10:1};
+ const ml=p=>{const m=String(p.tamanho||'').match(/(\d+(?:[.,]\d+)?)\s*ml/i);return m?Number(m[1].replace(',','.')):100;};
+ const mult=v=>v<=3.5?1.8:v>=6?1.4:1.8-.16*(v-3.5);
+ for(const d of decants){const p=perfumes.find(p=>p.nome===d.base);const v=p.precoDecantBase/ml(p);const cheio=Math.round(v*mult(v)*pesos[d.decantMl]*d.decantMl)+8;const expected=p.descontoDecant?Math.round(cheio*(1-p.descontoDecant)):cheio;
  assert.equal(d.preco,expected);assert.ok(Math.abs(d.precoLiquido+8-d.preco)<1e-8);assert.equal(S.orderSummary([{product:d,quantity:1}]).total,expected);
  if(p.descontoDecant)assert.equal(S.promotion(d).percent,Math.floor((1-d.preco/d.precoAnterior)*100+1e-8));else assert.equal(S.promotion(d),null);
  }
+ // Quanto menor o decant, mais caro o ml: o 5 ml custa mais que metade do 10 ml, e o 3 ml mais que 3/10 dele.
+ const porBase=new Map();for(const d of decants){if(!porBase.has(d.base))porBase.set(d.base,{});porBase.get(d.base)[d.decantMl]=d.precoLiquido;}
+ for(const [base,v] of porBase){assert.ok(v[5]/5>v[10]/10,base+' 5 ml');assert.ok(v[3]/3>v[5]/5,base+' 3 ml');}
+ // Frasco mais caro por ml nunca gera decant mais barato.
+ for(let x=1;x<12;x+=.01)assert.ok((x+.01)*mult(x+.01)>=x*mult(x)-1e-9);
 });
