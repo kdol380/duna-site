@@ -847,17 +847,17 @@ const marcaBase = p => (p.marca||"").replace(/\s*Pride$/i,"").trim();   // Latta
    com multiplicador maior nos tamanhos menores. O vidrinho custa R$ 8.
    ===================================================================== */
 const DECANT_FRASCO = DunaShop.BOTTLE_PRICE; // regra em shop-core.js
-// Régua de decants (24/11/2026): preço por ml do frasco × multiplicador do tamanho, mais o vidrinho.
-// No 10 ml o multiplicador é 1,8 até R$ 3,50 por ml do frasco e cai aos poucos até 1,4 a partir de R$ 6 por ml.
-// O 5 ml usa 1,25 vez e o 3 ml usa 1,5 vez esse multiplicador: quanto menor o decant, mais caro o ml.
+// Régua de decants (meio-termo, 24/11/2026): preço por ml do frasco × multiplicador do tamanho, mais o vidrinho.
+// No 10 ml o multiplicador é 1,6 até R$ 3,50 por ml do frasco e cai aos poucos até 1,3 a partir de R$ 6 por ml.
+// O 5 ml usa 1,2 vez e o 3 ml usa 1,4 vez esse multiplicador: quanto menor o decant, mais caro o ml.
 const DECANT_VOLUMES = [
-  { ml:3,  pesoTamanho:1.5 },
-  { ml:5,  pesoTamanho:1.25 },
+  { ml:3,  pesoTamanho:1.4 },
+  { ml:5,  pesoTamanho:1.2 },
   { ml:10, pesoTamanho:1 }
 ];
 const podeDecant = p => p.disponivelDecant === true && p.precoDecantBase > 0 && !ehBodySpray(p);
 const mlDoFrasco = p => { const m = String(p.tamanho || "").match(/(\d+(?:[.,]\d+)?)\s*ml/i); return m ? Number(m[1].replace(",", ".")) : 100; };
-const multiplicador10ml = precoMl => precoMl <= 3.5 ? 1.8 : (precoMl >= 6 ? 1.4 : 1.8 - .16 * (precoMl - 3.5));
+const multiplicador10ml = precoMl => precoMl <= 3.5 ? 1.6 : (precoMl >= 6 ? 1.3 : 1.6 - .12 * (precoMl - 3.5));
 const dinheiroDecimal = valor => valor.toLocaleString("pt-BR", { minimumFractionDigits:2, maximumFractionDigits:2 });
 
 function opcaoDecant(perfume, volume){

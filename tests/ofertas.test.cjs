@@ -10,9 +10,9 @@ test('ofertas têm os quatro valores aprovados e percentuais conservadores',()=>
  for(const [name,price,percent] of expected){const p=perfumes.find(x=>x.nome===name);assert.equal(p.precoPromocional,price);assert.equal(S.promotion({...p,preco:price,disponivel:true}).percent,percent);assert.equal(S.promotion({...p,preco:price+1}),null);assert.equal(S.promotion({...p,disponivel:false}),null);}
 });
 test('régua de decants: preço por ml do frasco, ml mais caro nos tamanhos menores, promoções e desconto único preservados',()=>{
- const pesos={3:1.5,5:1.25,10:1};
+ const pesos={3:1.4,5:1.2,10:1};
  const ml=p=>{const m=String(p.tamanho||'').match(/(\d+(?:[.,]\d+)?)\s*ml/i);return m?Number(m[1].replace(',','.')):100;};
- const mult=v=>v<=3.5?1.8:v>=6?1.4:1.8-.16*(v-3.5);
+ const mult=v=>v<=3.5?1.6:v>=6?1.3:1.6-.12*(v-3.5);
  for(const d of decants){const p=perfumes.find(p=>p.nome===d.base);const v=p.precoDecantBase/ml(p);const cheio=Math.round(v*mult(v)*pesos[d.decantMl]*d.decantMl)+8;const expected=p.descontoDecant?Math.round(cheio*(1-p.descontoDecant)):cheio;
  assert.equal(d.preco,expected);assert.ok(Math.abs(d.precoLiquido+8-d.preco)<1e-8);assert.equal(S.orderSummary([{product:d,quantity:1}]).total,expected);
  if(p.descontoDecant)assert.equal(S.promotion(d).percent,Math.floor((1-d.preco/d.precoAnterior)*100+1e-8));else assert.equal(S.promotion(d),null);
