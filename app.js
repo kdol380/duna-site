@@ -70,12 +70,12 @@ const PERFUMES = [
     accent:"#b9944c", foto:"assets/p-rayhaan-nava-sol.webp", desc:"Uma composição frutada e floral. A apresentação da Rayhaan destaca doçura de frutas, flor de laranjeira e violeta." },
   { nome:"Glitch", marca:"Mykonos", inspiracao:"bergamota, abacaxi e patchouli", familia:"Cítrico", acorde:"Cítrico", genero:"Masculino", periodo:"",
     ocasiao:"", intensidade:"", preco:369, tamanho:"100 ml · Extrait de Parfum", selo:"Novo", disponivel:true,
-    precoDecantBase:359, disponivelDecant:true,
+    precoDecantBase:369, disponivelDecant:true,
     notas:{ topo:"Bergamota · Abacaxi · Maçã", coracao:"Toranja · Lavanda · Artemísia · Lírio-do-vale · Pimenta Rosa · Baunilha · Jasmim", fundo:"Patchouli · Baunilha · Almíscar" },
     accent:"#b9944c", foto:"assets/p-mykonos-glitch.png", desc:"Fragrância cítrica com bergamota, abacaxi e maçã, notas aromáticas e florais e um fundo de patchouli, baunilha e almíscar." },
   { nome:"Reflection", marca:"Mykonos", inspiracao:"toranja, gengibre e notas marinhas", familia:"Cítrico", acorde:"Aquático", genero:"Unissex", periodo:"",
     ocasiao:"", intensidade:"", preco:369, tamanho:"100 ml · Extrait de Parfum", selo:"Novo", disponivel:true,
-    precoDecantBase:359, disponivelDecant:true,
+    precoDecantBase:369, disponivelDecant:true,
     notas:{ topo:"Toranja · Gengibre · Bergamota", coracao:"Notas Marinhas · Cardamomo · Lírio-do-vale", fundo:"Almíscar · Patchouli · Âmbar · Ambroxan" },
     accent:"#b9944c", foto:"assets/p-mykonos-reflection.png", desc:"Toranja, gengibre e bergamota abrem uma composição com notas marinhas e cardamomo. Almíscar, patchouli, âmbar e ambroxan formam o fundo." },
   { nome:"Léonie", marca:"Maison Alhambra", inspiracao:"lavanda, flor de laranjeira e baunilha", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"",
@@ -90,7 +90,7 @@ const PERFUMES = [
     accent:"#b9944c", foto:"assets/p-maison-asrar-muharib.png", desc:"Limão, bergamota e lavandin na abertura. Mel, canela e cashmere compõem o coração, sobre um fundo de tonka, jasmim e tabaco." },
   { nome:"Hawas Diva", marca:"Rasasi", inspiracao:"lichia, rosa e baunilha", familia:"Floral", acorde:"Frutado", genero:"Feminino", periodo:"",
     ocasiao:"", intensidade:"", preco:359, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
-    precoDecantBase:389, disponivelDecant:true,
+    precoDecantBase:359, disponivelDecant:true,
     notas:{ topo:"Frutas Vermelhas · Lichia · Ruibarbo", coracao:"Incenso · Rosa · Cedro", fundo:"Almíscar · Âmbar-gris · Baunilha" },
     accent:"#b9944c", foto:"assets/p-rasasi-hawas-diva.png", desc:"Frutas vermelhas, lichia e ruibarbo abrem um coração de incenso, rosa e cedro. Baunilha, almíscar e âmbar-gris completam a composição." },
 
@@ -114,19 +114,19 @@ const PERFUMES = [
 
   { nome:"Regent", marca:"Maison Asrar", inspiracao:"bergamota, gengibre e toranja", familia:"Amadeirado", acorde:"Cítrico", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:499, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
-    precoDecantBase:500, disponivelDecant:true,
+    precoDecantBase:499, disponivelDecant:true,
     notas:{ topo:"Bergamota · Mandarina · Gengibre · Toranja", coracao:"Jasmim · Flor de Laranjeira · Íris", fundo:"Âmbar-gris · Cedro · Almíscar · Patchouli · Sândalo · Fava Tonka" },
     accent:"#183d31", foto:"assets/p-maison-asrar-regent.jpg", desc:"Cítricos e gengibre trazem energia à abertura, enquanto flores, íris, madeiras, âmbar-gris e tonka formam uma base quente, estruturada e elegante." },
 
   { nome:"Legacy", marca:"Maison Asrar", inspiracao:"pera, gengibre e bergamota", familia:"Amadeirado", acorde:"Floral branco", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:439, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
-    precoDecantBase:470, disponivelDecant:true,
+    precoDecantBase:439, disponivelDecant:true,
     notas:{ topo:"Gengibre · Pera · Bergamota", coracao:"Flor de Laranjeira · Jasmim · Notas Amadeiradas", fundo:"Almíscar · Baunilha · Âmbar" },
     accent:"#24355d", foto:"assets/p-maison-asrar-legacy.jpg", desc:"Pera crocante, gengibre e bergamota abrem uma fragrância luminosa, com flores brancas, madeiras e um fundo envolvente de almíscar, baunilha e âmbar." },
 
   { nome:"Club de Nuit Intense Man", marca:"Armaf", inspiracao:"frutado esfumado", familia:"Amadeirado", acorde:"Cítrico", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"potente", preco:299, tamanho:"105 ml · EDT", selo:"Ícone", disponivel:true,
-    precoDecantBase:279, disponivelDecant:true,
+    precoDecantBase:299, disponivelDecant:true,
     notas:{ topo:"Abacaxi · Limão · Cassis · Maçã", coracao:"Bétula · Jasmim · Rosa", fundo:"Almíscar · Ambargris · Patchouli · Baunilha" },
     accent:"#5a5238", foto:"assets/p-club-intense-new.jpg", desc:"O fenômeno árabe: abacaxi esfumado sobre bétula e madeiras. Projeção e fixação enormes — presença que rende elogios o dia inteiro." },
 
@@ -306,7 +306,7 @@ const PERFUMES = [
 
   { nome:"Musamam White Intense", marca:"Lattafa", inspiracao:"coco, flores e sândalo", familia:"Floral", acorde:"Amadeirado", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"potente", preco:409, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
-    precoDecantBase:399, disponivelDecant:true,
+    precoDecantBase:409, disponivelDecant:true,
     notas:{ topo:"Especiarias · Bergamota · Laranja", coracao:"Coco · Ylang-Ylang · Ambroxan · Mahonial", fundo:"Sândalo · Almíscar · Benjoim" },
     accent:"#c9a266", foto:"assets/p-musamam-white-intense.jpg", desc:"Coco cremoso, ylang-ylang e especiarias repousam sobre sândalo, almíscar e benjoim. Feminino intenso, elegante e envolvente." },
 
@@ -414,13 +414,13 @@ const PERFUMES = [
 
   { nome:"Fakhar (Rose)", marca:"Lattafa", inspiracao:"tuberosa amadeirada", familia:"Floral", acorde:"Floral branco", genero:"Feminino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", preco:299, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:true,
-    precoDecantBase:265, disponivelDecant:true,
+    precoDecantBase:299, disponivelDecant:true,
     notas:{ topo:"Tuberosa · Notas Salinas", coracao:"Âmbar · Fava Tonka · Cashmeran", fundo:"Cedro · Vetiver · Labdano" },
     accent:"#c2a24e", foto:"assets/p-fakhar-gold-new.webp", desc:"Tuberosa cremosa com toque salino sobre âmbar e madeiras. Feminino moderno, macio e sofisticado." },
 
   { nome:"Fakhar (Black)", marca:"Lattafa", inspiracao:"aromático fresco", familia:"Amadeirado", acorde:"Aromático", genero:"Masculino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"marcante", preco:269, tamanho:"100 ml · EDP", selo:"Para ele", disponivel:true,
-    precoDecantBase:220, disponivelDecant:true,
+    precoDecantBase:269, disponivelDecant:true,
     notas:{ topo:"Maçã · Bergamota · Gengibre", coracao:"Lavanda · Sálvia · Gerânio", fundo:"Fava Tonka · Cedro · Âmbar" },
     accent:"#3a322a", foto:"assets/p-fakhar-black-new.webp", desc:"Maçã e ervas aromáticas sobre madeiras âmbar — fresco-amadeirado, moderno e elegante. Coringa masculino de ótimo custo." },
 
@@ -438,13 +438,13 @@ const PERFUMES = [
 
   { nome:"Delilah", marca:"Maison Alhambra", inspiracao:"rosa e ruibarbo", familia:"Floral", acorde:"Rosa", genero:"Feminino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", preco:279, tamanho:"100 ml · EDP", selo:"Para ela", disponivel:true,
-    precoDecantBase:250, disponivelDecant:true,
+    precoDecantBase:279, disponivelDecant:true,
     notas:{ topo:"Ruibarbo · Lichia · Bergamota", coracao:"Rosa Turca · Peônia · Lírio", fundo:"Almíscar Branco · Cashmeran · Baunilha" },
     accent:"#b06a85", foto:"assets/p-delilah.jpg", desc:"Floral-frutado rosado e radiante: ruibarbo e lichia sobre rosa e baunilha. Feminino elogiadíssimo e versátil." },
 
   { nome:"Salvo", marca:"Maison Alhambra", inspiracao:"fresco especiado", familia:"Cítrico", acorde:"Especiado fresco", genero:"Masculino", periodo:"Versátil",
     ocasiao:"dia", intensidade:"marcante", disponivel:true, preco:259, tamanho:"100 ml · EDP", selo:"Coringa",
-    precoDecantBase:200, disponivelDecant:true,
+    precoDecantBase:259, disponivelDecant:true,
     notas:{ topo:"Bergamota", coracao:"Lavanda · Pimenta de Sichuan · Anis Estrelado · Noz-moscada", fundo:"Ambroxan · Baunilha" },
     accent:"#3a6a8a", foto:"assets/p-salvo.jpg", desc:"Fresco, picante e potente: bergamota e ambroxan no estilo coringa. Agrada todo mundo, do dia ao trabalho." },
 
@@ -492,7 +492,7 @@ const PERFUMES = [
 
   { nome:"Attar Al Wesal", marca:"Al Wataniah", inspiracao:"aromático doce especiado", familia:"Gourmand", acorde:"Aromático", genero:"Masculino", periodo:"Versátil",
     ocasiao:"especial", intensidade:"marcante", disponivel:true, preco:249, tamanho:"100 ml · EDP", selo:"Novo",
-    precoDecantBase:209, disponivelDecant:true,
+    precoDecantBase:249, disponivelDecant:true,
     notas:{ topo:"Lavanda · Pera · Hortelã · Bergamota · Limão", coracao:"Canela · Sálvia Esclaréia · Cominho", fundo:"Baunilha Negra · Âmbar · Cedro · Patchouli" },
     accent:"#2c2a2c", foto:"assets/p-attar-al-wesal.jpg", desc:"Aromático adocicado com pera, lavanda e canela sobre baunilha escura. Envolvente, versátil e de excelente custo-benefício." },
 
@@ -510,13 +510,13 @@ const PERFUMES = [
 
   { nome:"Sabah Al Ward", marca:"Al Wataniah", inspiracao:"floral gourmand com cacau", familia:"Floral", acorde:"Baunilha", genero:"Feminino", periodo:"Noite",
     ocasiao:"especial", intensidade:"marcante", preco:249, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
-    precoDecantBase:199, disponivelDecant:true,
+    precoDecantBase:249, disponivelDecant:true,
     notas:{ topo:"Pimenta Rosa · Tangerina", coracao:"Cacau · Flor de Laranjeira · Jasmim Sambac", fundo:"Baunilha · Fava Tonka · Patchouli" },
     accent:"#8b2448", foto:"assets/p-sabah-al-ward.jpg", desc:"Jasmim e flor de laranjeira ganham profundidade com cacau, baunilha e tonka. Feminino, doce e marcante." },
 
   { nome:"Ameerati", marca:"Al Wataniah", inspiracao:"atalcado, almiscarado e verde", familia:"Amadeirado", acorde:"Atalcado", genero:"Feminino", periodo:"Dia",
     ocasiao:"dia", intensidade:"equilibrado", preco:219, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
-    precoDecantBase:199, disponivelDecant:true,
+    precoDecantBase:219, disponivelDecant:true,
     notas:{ topo:"Almíscar · Notas Verdes · Cítricos", coracao:"Notas Herbais · Notas Amadeiradas", fundo:"Notas Atalcadas · Notas Especiadas" },
     accent:"#b78945", foto:"assets/p-ameerati.jpg", desc:"Almíscar, notas verdes e cítricos abrem a fragrância, que evolui para nuances herbais e amadeiradas sobre um fundo atalcado e especiado. Feminino fresco e elegante para o dia a dia." },
 
@@ -546,7 +546,7 @@ const PERFUMES = [
 
   { nome:"Aquatica", marca:"Rayhaan", inspiracao:"lima, coco e rum", familia:"Gourmand", acorde:"Cítrico", genero:"Masculino", periodo:"Dia",
     ocasiao:"dia", intensidade:"equilibrado", preco:319, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
-    precoDecantBase:380, disponivelDecant:true,
+    precoDecantBase:319, disponivelDecant:true,
     notas:{ topo:"Lima · Leite de Coco · Bergamota · Tangerina", coracao:"Cana-de-açúcar · Jasmim · Hibisco · Gardênia", fundo:"Rum · Almíscar · Fava Tonka · Patchouli" },
     accent:"#40aeb6", foto:"assets/p-rayhaan-aquatica.webp", desc:"Lima vibrante e coco cremoso com cana-de-açúcar e rum. Tropical, diferente e feito para dias de sol." },
 
@@ -558,7 +558,7 @@ const PERFUMES = [
 
   { nome:"Delilah Blanc", marca:"Maison Alhambra", inspiracao:"floral branco cremoso", familia:"Floral", acorde:"Cítrico", genero:"Feminino", periodo:"Versátil",
     ocasiao:"trabalho", intensidade:"equilibrado", disponivel:true, preco:269, tamanho:"100 ml · EDP", selo:"Novo",
-    precoDecantBase:250, disponivelDecant:true,
+    precoDecantBase:269, disponivelDecant:true,
     notas:{ topo:"Bergamota · Laranja · Pêssego", coracao:"Tuberosa · Jasmim · Néroli", fundo:"Baunilha · Almíscar Branco · Sândalo" },
     accent:"#d9d7d0", foto:"assets/p-delilah-blanc.webp", desc:"Floral branco limpo e cremoso, com cítricos suaves e fundo de baunilha, almíscar e sândalo. Elegante e confortável." },
 
@@ -843,33 +843,34 @@ const marcaBase = p => (p.marca||"").replace(/\s*Pride$/i,"").trim();   // Latta
 
 /* =====================================================================
    🧪  DECANTS — gerados automaticamente a partir do catálogo
-   O valor por ml diminui conforme a faixa de preço do perfume e o
-   volume escolhido. O frasco split custa R$ 8 em qualquer tamanho.
+   O preço sai do preço por ml do frasco (precoDecantBase ÷ ml do frasco),
+   com multiplicador maior nos tamanhos menores. O vidrinho custa R$ 8.
    ===================================================================== */
 const DECANT_FRASCO = DunaShop.BOTTLE_PRICE; // regra em shop-core.js
+// Régua de decants (24/11/2026): preço por ml do frasco × multiplicador do tamanho, mais o vidrinho.
+// No 10 ml o multiplicador é 1,8 até R$ 3,50 por ml do frasco e cai aos poucos até 1,4 a partir de R$ 6 por ml.
+// O 5 ml usa 1,25 vez e o 3 ml usa 1,5 vez esse multiplicador: quanto menor o decant, mais caro o ml.
 const DECANT_VOLUMES = [
-  { ml:3,  descontoVolume:0 },
-  { ml:5,  descontoVolume:.05 },
-  { ml:10, descontoVolume:.10 }
+  { ml:3,  pesoTamanho:1.5 },
+  { ml:5,  pesoTamanho:1.25 },
+  { ml:10, pesoTamanho:1 }
 ];
 const podeDecant = p => p.disponivelDecant === true && p.precoDecantBase > 0 && !ehBodySpray(p);
-const fatorMlDecant = preco => preco >= 500 ? .014 : (preco >= 400 ? .015 : .0165);
+const mlDoFrasco = p => { const m = String(p.tamanho || "").match(/(\d+(?:[.,]\d+)?)\s*ml/i); return m ? Number(m[1].replace(",", ".")) : 100; };
+const multiplicador10ml = precoMl => precoMl <= 3.5 ? 1.8 : (precoMl >= 6 ? 1.4 : 1.8 - .16 * (precoMl - 3.5));
 const dinheiroDecimal = valor => valor.toLocaleString("pt-BR", { minimumFractionDigits:2, maximumFractionDigits:2 });
 
 function opcaoDecant(perfume, volume){
   const cfg = DECANT_VOLUMES.find(v=>v.ml===Number(volume)) || DECANT_VOLUMES[0];
-  const bruto = perfume.precoDecantBase * fatorMlDecant(perfume.precoDecantBase) * cfg.ml * (1-cfg.descontoVolume);
-  const precoLiquido = Math.round(bruto);
-  const baseAnterior = precoLiquido + DECANT_FRASCO;
-  const anterior = cfg.ml === 10 ? baseAnterior : Math.ceil(baseAnterior*110/100);
-  const basePromocional = perfume.descontoDecant ? Math.round(baseAnterior * (1-perfume.descontoDecant) * 100)/100 : baseAnterior;
-  const promocional = cfg.ml === 10 ? basePromocional : Math.ceil(Math.round(basePromocional*100)*110/10000);
+  const precoMlFrasco = perfume.precoDecantBase / mlDoFrasco(perfume);
+  const liquido = Math.round(precoMlFrasco * multiplicador10ml(precoMlFrasco) * cfg.pesoTamanho * cfg.ml);
+  const anterior = liquido + DECANT_FRASCO;
+  const promocional = perfume.descontoDecant ? Math.round(anterior * (1-perfume.descontoDecant)) : anterior;
   return {
     precoAnterior:perfume.descontoDecant ? anterior : null,
     precoPromocional:perfume.descontoDecant ? promocional : null,
     ml:cfg.ml,
-    descontoVolume:cfg.descontoVolume,
-    precoLiquido:Math.round((promocional-DECANT_FRASCO)*100)/100,
+    precoLiquido:promocional-DECANT_FRASCO,
     precoMl:(promocional-DECANT_FRASCO)/cfg.ml,
     preco:promocional
   };
