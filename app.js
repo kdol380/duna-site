@@ -161,7 +161,7 @@ const PERFUMES = [
     accent:"#b8bec2", foto:"assets/p-club-sillage-body-spray.webp", desc:"A fragrância fresca e elegante do Club de Nuit Sillage em uma versão corporal mais leve e prática. Ideal para reaplicar durante o dia e prolongar a sensação de frescor." },
 
   { nome:"Club de Nuit Untold", marca:"Armaf", inspiracao:"açafrão ambarado e amadeirado", familia:"Amadeirado", acorde:"Amadeirado", genero:"Unissex", periodo:"Noite",
-    ocasiao:"especial", intensidade:"potente", preco:369, tamanho:"105 ml · EDP", selo:"Novo", disponivel:false,
+    ocasiao:"especial", intensidade:"potente", preco:369, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:369, disponivelDecant:true,
     notas:{ topo:"Açafrão · Jasmim", coracao:"Amberwood · Âmbar-gris", fundo:"Resina de Abeto · Cedro" },
     accent:"#d4a52c", foto:"assets/p-club-untold.jpg", desc:"Açafrão e jasmim formam uma aura doce e metálica sobre âmbar e madeiras. Intenso, envolvente e versátil para diferentes estilos." },

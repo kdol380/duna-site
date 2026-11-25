@@ -17,7 +17,7 @@ globalThis.DUNA_SKINCARE = [
     "tamanho": "30 ml",
     "foto": "assets/s-medicube-pdrn-pink-serum.jpg",
     "desc": "Sérum facial com PDRN, peptídeos e niacinamida.",
-    "disponivel": false,
+    "disponivel": true,
     "tipo": "skincare"
   },
   {
