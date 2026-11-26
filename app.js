@@ -179,13 +179,13 @@ const PERFUMES = [
     accent:"#e77f2f", foto:"assets/p-odyssey-mandarin-sky.jpg", desc:"Mandarina vibrante e especiarias encontram um coração cremoso de caramelo e fava tonka. Masculino doce, moderno e marcante para a noite." },
 
   { nome:"Aisha Princess", marca:"Bidaya Parfums", inspiracao:"floral doce com marshmallow", familia:"Gourmand", acorde:"Doce", genero:"Feminino", periodo:"Noite",
-    ocasiao:"especial", intensidade:"marcante", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"especial", intensidade:"marcante", preco:319, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:309, disponivelDecant:true,
     notas:{ topo:"Néroli · Frutas Vermelhas · Coentro", coracao:"Flor de Laranjeira · Baunilha · Marshmallow · Jasmim · Lavanda · Íris", fundo:"Açúcar · Caramelo · Notas Amadeiradas · Sândalo · Âmbar" },
     accent:"#c75f66", foto:"assets/p-aisha-princess.jpg", desc:"Floral gourmand feminino, com flores brancas, marshmallow e baunilha sobre um fundo de açúcar, caramelo e madeiras. Doce, delicado e envolvente." },
 
   { nome:"Ayat", marca:"Bidaya Parfums", inspiracao:"hibisco, rosa e baunilha", familia:"Floral", acorde:"Floral", genero:"Feminino", periodo:"Versátil",
-    ocasiao:"especial", intensidade:"marcante", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:false,
+    ocasiao:"especial", intensidade:"marcante", preco:319, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:309, disponivelDecant:true,
     notas:{ topo:"Hibisco · Cassis · Hortelã-pimenta", coracao:"Rosa Damascena · Baunilha · Canela · Ambreta", fundo:"Âmbar · Couro" },
     accent:"#a83b4b", foto:"assets/p-bidaya-ayat.jpg", desc:"Hibisco e rosa ganham frescor com hortelã e cassis, enquanto baunilha, canela, âmbar e couro deixam a fragrância feminina mais quente e sofisticada." },
@@ -197,7 +197,7 @@ const PERFUMES = [
     accent:"#841f2a", foto:"assets/p-blind-ecstasy.jpg", desc:"Conhaque e frutas vermelhas abrem uma fragrância masculina intensa, cercada por especiarias, baunilha, âmbar e madeiras. Quente e ideal para ocasiões especiais." },
 
   { nome:"Elliur", marca:"Bidaya Parfums", inspiracao:"cassis, cítricos e figo", familia:"Cítrico", acorde:"Frutado", genero:"Masculino", periodo:"Dia",
-    ocasiao:"dia", intensidade:"equilibrado", preco:309, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"dia", intensidade:"equilibrado", preco:339, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:309, disponivelDecant:true,
     notas:{ topo:"Cassis · Hortelã · Laranja · Limão · Cidra", coracao:"Coentro · Rosa de Maio · Damasco · Manjericão", fundo:"Figo · Ambreta · Tâmara · Cenoura" },
     accent:"#159d82", foto:"assets/p-bidaya-elliur.jpg", desc:"Cítricos, cassis e hortelã criam uma abertura fresca e vibrante, seguida por figo, damasco e ervas aromáticas. Masculino leve, diferente e ótimo para o dia." },
@@ -263,7 +263,7 @@ const PERFUMES = [
     accent:"#4b4b4b", foto:"assets/p-art-of-arabia-i.webp", desc:"Bergamota e hortelã encontram chá preto, gengibre e lavanda sobre ambroxan e incenso. Masculino elegante, aromático e versátil." },
 
   { nome:"Maahir Legacy", marca:"Lattafa", inspiracao:"cítrico aromático e refrescante", familia:"Cítrico", acorde:"Aromático", genero:"Masculino", periodo:"Dia",
-    ocasiao:"trabalho", intensidade:"equilibrado", preco:269, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
+    ocasiao:"trabalho", intensidade:"equilibrado", preco:295, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:269, disponivelDecant:true,
     notas:{ topo:"Lima · Hortelã · Toranja · Lavanda · Abacaxi", coracao:"Pimenta-preta · Alecrim · Zimbro · Gerânio · Olíbano", fundo:"Ambroxan · Vetiver · Musgo de Carvalho · Cashmeran · Fava Tonka" },
     accent:"#a7adb0", foto:"assets/p-maahir-legacy.jpg", desc:"Cítricos, hortelã e abacaxi criam um frescor aromático sobre especiarias, ambroxan e vetiver. Masculino limpo e ótimo para o dia a dia." },
