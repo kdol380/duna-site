@@ -23,6 +23,9 @@ const compactMobile = window.matchMedia("(max-width: 620px)").matches;
 // preco: null  →  mostra "Sob consulta" (troque pelo valor, ex: preco:199, quando tiver os preços)
 // campo opcional: colecao:"arabes" | "nicho" | "designer"  → sem o campo, o perfume conta como "arabes"
 const PERFUMES = [
+  { nome:"Shagaf Al Ward", marca:"Al Wataniah", inspiracao:"", familia:"", acorde:"", genero:"Feminino", periodo:"", ocasiao:"", intensidade:"", preco:259, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{topo:"", coracao:"", fundo:""}, accent:"#b9944c", foto:"assets/p-shagaf-al-ward.png", desc:"Shagaf Al Ward, de Al Wataniah, em frasco de 100 ml." },
+  { nome:"Shagaf Al Ward Gardenia", marca:"Al Wataniah", inspiracao:"", familia:"", acorde:"", genero:"Feminino", periodo:"", ocasiao:"", intensidade:"", preco:399, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{topo:"", coracao:"", fundo:""}, accent:"#b9944c", foto:"assets/p-shagaf-al-ward-gardenia.png", desc:"Shagaf Al Ward Gardenia, de Al Wataniah, em frasco de 100 ml." },
+  { nome:"Club de Nuit Iconic", marca:"Armaf", inspiracao:"", familia:"", acorde:"", genero:"Masculino", periodo:"", ocasiao:"", intensidade:"", preco:389, tamanho:"105 ml · EDP", selo:"Novo", disponivel:true, disponivelDecant:false, notas:{topo:"", coracao:"", fundo:""}, accent:"#b9944c", foto:"assets/p-club-de-nuit-iconic.png", desc:"Club de Nuit Iconic, de Armaf, em frasco de 105 ml." },
   { nome:"Delilah Viola", marca:"Maison Alhambra", inspiracao:"pera, violeta e baunilha", familia:"Floral", acorde:"Frutado", genero:"Unissex", periodo:"",
     ocasiao:"", intensidade:"", preco:369, tamanho:"100 ml · EDP", selo:"Novo", disponivel:true,
     precoDecantBase:369, disponivelDecant:true,
